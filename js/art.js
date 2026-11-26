@@ -1,4 +1,4 @@
-// Ilustraciones originales del equipo (copiado de espeletia-ai/js/art.js), estilo risografía a dos tintas.
+// Ilustraciones originales en estilo risografía: dos tintas (verde y amarillo) con leve corrimiento.
 // Cada dibujo: { g: tinta verde, y: tinta amarilla, p: papel (reservas blancas) } en un lienzo de 100×100.
 // Clase "l" = línea (trazo) en vez de relleno.
 
@@ -16,6 +16,11 @@ const A = {
   e3: {
     y: '<circle cx="22" cy="56" r="4"/><circle cx="48" cy="62" r="4"/><circle cx="76" cy="54" r="4"/><circle cx="62" cy="76" r="5"/><circle cx="30" cy="80" r="5"/>',
     g: '<path d="M0 60 Q25 48 50 58 T100 52 V100 H0Z"/><path class="l" d="M22 56 V48 M48 62 V52 M76 54 V46 M62 76 V64 M30 80 V68"/>',
+  },
+  lunares: {
+    y: '<circle cx="76" cy="22" r="12"/><path d="M0 86 Q40 78 100 84 V100 H0Z"/>',
+    g: '<path d="M6 86 L22 58 L40 64 L52 46 L70 60 L94 86Z"/><path class="l" d="M52 46 L48 60 L54 70 M40 64 L36 76 M70 60 L74 74"/>',
+    p: '<circle cx="80" cy="18" r="9"/><path class="l" d="M22 58 L26 70 M48 60 L42 66"/>',
   },
   tumbas: {
     y: '<circle cx="50" cy="20" r="7"/><circle cx="60" cy="12" r="5"/><circle cx="42" cy="10" r="4"/><path d="M0 88 H100 V100 H0Z"/>',
@@ -73,10 +78,10 @@ const A = {
     g: '<path d="M50 40 C38 26 22 22 4 30 C18 32 26 36 32 44 C22 44 14 48 8 54 C26 50 40 52 48 54Z M50 40 C62 26 78 22 96 30 C82 32 74 36 68 44 C78 44 86 48 92 54 C74 50 60 52 52 54Z"/><circle cx="50" cy="34" r="6"/>',
     p: '<path d="M43 44 Q50 48 57 44 Q54 40 50 40 Q46 40 43 44Z"/>',
   },
-  oso: {
-    y: '<circle cx="40" cy="38" r="7"/><circle cx="56" cy="38" r="7"/><path d="M0 88 H100 V100 H0Z"/>',
-    g: '<path d="M20 88 Q16 60 30 50 Q24 40 30 30 Q36 20 48 22 Q62 20 66 32 Q70 42 64 50 Q84 56 82 88Z"/><circle cx="32" cy="24" r="6"/><circle cx="62" cy="24" r="6"/>',
-    p: '<circle cx="40" cy="38" r="2.4"/><circle cx="56" cy="38" r="2.4"/>',
+  puma: {
+    y: '<circle cx="78" cy="22" r="10"/><path d="M0 86 Q50 78 100 86 V100 H0Z"/>',
+    g: '<path d="M14 80 Q12 62 30 58 L64 56 Q74 46 80 50 L84 44 L86 52 Q92 58 86 66 L80 70 L80 82 L72 82 L72 72 L40 72 L38 82 L30 82 L30 72 Q22 76 22 82Z"/><path class="l" d="M14 78 Q2 70 8 56"/>',
+    p: '<circle cx="82" cy="56" r="1.8"/>',
   },
   danta: {
     y: '<path d="M0 86 H100 V100 H0Z"/><circle cx="76" cy="22" r="8"/>',
@@ -102,18 +107,20 @@ const A = {
     g: '<path class="l" d="M50 72 Q40 84 22 92 M50 72 Q50 84 48 96 M50 72 Q62 84 80 90 M50 72 Q70 76 94 74"/>',
     p: '<path d="M42 44 Q44 36 48 32 Q44 42 46 50Z"/>',
   },
-  volcanes: {
-    y: '<circle cx="50" cy="16" r="8"/>',
-    g: '<path d="M0 88 L22 48 L44 88Z"/><path d="M28 88 L52 34 L76 88Z"/><path d="M58 88 L80 52 L100 88Z"/>',
-    p: '<path d="M52 34 L58 47 L52 44 L46 47Z M22 48 L26 56 L22 54 L18 56Z M80 52 L84 60 L80 58 L76 60Z"/>',
+  armero: {
+    y: '<path class="l" d="M50 34 Q40 56 30 70 T14 96 M50 34 Q60 58 70 72 T88 96 M50 34 Q50 64 52 96"/>',
+    g: '<path d="M6 92 L40 32 H60 L94 92Z"/>',
+    p: '<path d="M40 32 H60 L56 40 Q50 36 44 40Z"/>',
   },
-  huella: {
-    y: '<path class="l" d="M10 94 Q40 70 30 50 T60 10"/>',
-    g: '<ellipse cx="34" cy="74" rx="7" ry="11" transform="rotate(-20 34 74)"/><ellipse cx="54" cy="52" rx="7" ry="11" transform="rotate(-10 54 52)"/><ellipse cx="44" cy="28" rx="7" ry="11" transform="rotate(10 44 28)"/>',
+  esqui: {
+    y: '<circle cx="24" cy="22" r="10"/>',
+    g: '<path d="M0 96 L60 30 L100 70 V100 H0Z"/><circle cx="64" cy="52" r="4"/><path class="l" d="M64 56 L58 68 M58 68 L66 76 M60 62 L70 60 M50 80 L74 70"/>',
+    p: '<path d="M60 30 L72 42 L66 40 L60 46 L54 38Z"/><path class="l" d="M30 92 Q40 84 36 76 T46 62"/>',
   },
-  sombrilla: {
-    y: '<path d="M14 40 Q50 0 86 40Z"/><path class="l" d="M50 40 V60"/>',
-    g: '<circle cx="34" cy="74" r="6"/><circle cx="26" cy="64" r="2.6"/><circle cx="32" cy="60" r="2.6"/><circle cx="39" cy="61" r="2.6"/><circle cx="43" cy="67" r="2.6"/><circle cx="64" cy="84" r="6"/><circle cx="56" cy="74" r="2.6"/><circle cx="62" cy="70" r="2.6"/><circle cx="69" cy="71" r="2.6"/><circle cx="73" cy="77" r="2.6"/>',
+  nombres: {
+    y: '<path d="M54 22 H92 Q96 22 96 26 V44 Q96 48 92 48 H70 L62 56 L64 48 H54 Q50 48 50 44 V26 Q50 22 54 22Z"/>',
+    g: '<path d="M8 40 H46 Q50 40 50 44 V64 Q50 68 46 68 H26 L16 78 L18 68 H8 Q4 68 4 64 V44 Q4 40 8 40Z"/><path d="M0 90 H100 V100 H0Z"/>',
+    p: '<circle cx="16" cy="54" r="3"/><circle cx="27" cy="54" r="3"/><circle cx="38" cy="54" r="3"/>',
   },
 };
 

@@ -1,201 +1,166 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Fray · guía del páramo</title>
-  <meta name="description" content="Asistente de las estaciones del sector norte del PNN Los Nevados. Funciona sin internet y responde con los guiones oficiales.">
-  <meta name="theme-color" content="#2f6b4f">
+  <title>Álbum del Páramo</title>
+  <meta name="description" content="Álbum de cromos sin internet para visitantes del PNN Los Nevados.">
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icons/icon-192.png">
+  <meta name="theme-color" content="#e3e9e5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#16212c" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Páramo">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="preload" href="fonts/bricolage-grotesque-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="album.css">
 </head>
 <body>
-  <!-- Barra superior: estado y ajustes -->
-  <header class="barra">
-    <button class="btn-icono" id="btn-volver" hidden aria-label="Estaciones"></button>
-    <p class="barra-titulo" id="barra-titulo"></p>
-    <span class="insignia" id="insignia-ejemplo" hidden></span>
-    <button class="btn-icono" id="btn-ajustes" aria-label="Ajustes"></button>
-  </header>
+  <a class="saltar" href="#principal" data-t="a11y.saltar">Ir al contenido</a>
+  <p id="rol-banda" class="rol-banda" role="status"><span class="rol-guia" data-t="rol.guiaBanda">Modo guía: este teléfono muestra los códigos del guía</span><span class="rol-equipo" data-t="rol.equipoBanda">Modo equipo: ajustes del parque</span></p>
+  <main id="principal" tabindex="-1">
+  <h1 class="sr-only" data-t="titulo">Álbum del Páramo</h1>
+  <!-- ÁLBUM -->
+  <section id="v-album" class="vista vista-papel" aria-labelledby="album-titulo">
+    <header class="cabezote">
+      <div class="cabezote-txt">
+        <h1 id="album-titulo" data-t="titulo">Álbum del Páramo</h1>
+        <p id="album-dueno" class="dueno"></p>
+      </div>
+      <p class="contador" aria-live="polite"><b id="cuenta-n">0</b><span>/</span><span id="cuenta-t">24</span></p>
+    </header>
+    <div class="barra-progreso" aria-hidden="true"><span id="barra"></span></div>
 
-  <main>
-    <!-- Vigencia del contenido (contrato §7): «Disponible hasta las HH:MM» y aviso 1 h antes -->
-    <p class="vigencia" id="vigencia" role="status" hidden></p>
+    <button id="btn-sobres" class="sobres-pendientes" hidden>
+      <span class="sobres-pila" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span id="sobres-txt"></span>
+      <span class="sobres-abrir" data-t="album.abrirSobres">Abrir</span>
+    </button>
+    <p id="pista" class="pista"></p>
 
-    <!-- 2. Escanear QR de estación -->
-    <section class="vista" id="vista-qr" hidden>
-      <h2 class="titulo-seccion" data-t="qr.titulo"></h2>
-      <div class="camara"><video id="video" playsinline muted></video><div class="mira"></div></div>
-      <p class="mensaje" id="qr-mensaje" role="status"></p>
-      <button class="btn btn-linea btn-grande btn-ancho" id="btn-qr-cancelar" data-t="qr.cancelar"></button>
-    </section>
+    <div class="libro">
+      <div id="paginas" class="paginas" aria-live="polite"></div>
+      <nav id="indice" class="indice" data-t="album.indice" data-t-attr="aria-label"></nav>
+    </div>
+  </section>
 
-    <!-- 3. Chat de la estación -->
-    <section class="vista vista-chat" id="vista-chat" hidden>
-      <div class="cab-estacion">
-        <div class="fray fray-mini" id="fray-chat"></div>
-        <div>
-          <h1 id="chat-estacion"></h1>
-          <p class="altitud" id="chat-altitud"></p>
+  <!-- LENTE -->
+  <section id="v-lente" class="vista vista-campo" aria-label="Lente" hidden>
+    <div class="lente-marco">
+      <video id="video" playsinline muted></video>
+      <svg class="mira" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M2 18 V2 H18"/><path d="M82 2 H98 V18"/><path d="M98 82 V98 H82"/><path d="M18 98 H2 V82"/>
+      </svg>
+      <div class="lente-modo" role="tablist">
+        <button role="tab" data-modo="reconocer" aria-selected="true" data-t="lente.reconocer">Reconocer</button>
+        <button role="tab" data-modo="qr" aria-selected="false" data-t="lente.qr">Leer QR</button>
+      </div>
+      <div id="lente-foto-barra" class="lente-foto-barra" hidden>
+        <button id="foto-cancelar" class="btn btn-claro" data-t="lente.cancelar">Cancelar</button>
+        <button id="foto-girar" class="btn btn-claro" data-t="lente.girar">Cambiar cámara</button>
+      </div>
+      <p id="lente-chip" class="lente-chip" aria-live="polite" hidden></p>
+      <div id="lente-apagada" class="lente-apagada" hidden>
+        <p id="lente-apagada-txt" data-t="lente.apagada"></p>
+        <button id="lente-encender" class="btn btn-flor" data-t="lente.encender">Encender</button>
+      </div>
+      <button id="disparar" class="disparador" data-t="lente.disparar" data-t-attr="aria-label" hidden><span></span></button>
+    </div>
+    <div class="lente-guia">
+      <div id="pj" class="pj" aria-hidden="true"></div>
+      <div class="globo">
+        <p id="lente-msg" aria-live="polite"></p>
+        <div class="acciones">
+          <button id="lente-abrir" class="btn btn-flor" hidden data-t="lente.abrirSobre">Abrir sobre</button>
+          <button id="lente-preguntar" class="btn btn-linea btn-cuadro" hidden data-t="lente.preguntar" data-t-attr="aria-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-4 4v-4H4z"/><path d="M10 9.2a2 2 0 1 1 2.6 1.9c-.4.2-.6.5-.6 1V12.5"/><circle cx="12" cy="14.6" r=".4"/></svg></button>
+          <button id="lente-escuchar" class="btn btn-linea btn-cuadro" hidden data-t="det.escuchar" data-t-attr="aria-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="onda" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/></svg></button>
         </div>
       </div>
-      <!-- La estación es solo un contexto opcional: mejora la búsqueda. Se fija con el QR o se cambia con un toque. -->
-      <button type="button" class="chip-estacion" id="chip-estacion"></button>
-      <!-- Resumen del álbum (lo pinta js/album-app.js): progreso, sobres por abrir y próximo cromo -->
-      <div class="resumen-album" id="resumen-album"></div>
-      <p class="estado" id="estado-carga" data-t="estado.preparando"></p>
-      <div class="avisos" id="avisos" role="status" hidden></div>
-      <p class="burbuja-fray" id="chat-hola"></p>
-      <div class="sugerencias" id="sugerencias">
-        <p class="etiqueta-sug" data-t="chat.sugerencias"></p>
-        <div class="chips" id="chips-sug"></div>
-      </div>
-      <div class="conversacion" id="conversacion" aria-live="polite"></div>
-      <p class="nota-guia" data-t="inicio.guia"></p>
-      <p class="pie"><a class="enlace-apk" id="enlace-apk" href="descargas/fray-paramo-arm64.apk" download hidden>Descargar app Android con IA local</a></p>
-    </section>
+    </div>
+    <p class="lente-nunca" data-t="lente.nunca"></p>
+  </section>
 
-    <!-- 4. Contenido vencido (contrato §7): solo queda el carril de seguridad -->
-    <section class="vista" id="vista-vencido" hidden>
-      <div class="saludo">
-        <div class="fray" id="fray-vencido"></div>
-        <div><h1 id="vencido-titulo"></h1></div>
-      </div>
-      <p class="estado" data-t="vencido.texto"></p>
-      <p class="mensaje" id="vencido-estado" role="status"></p>
-      <button class="btn btn-flor btn-grande btn-ancho" id="btn-renovar" data-t="vencido.renovar"></button>
-      <p class="nota-guia" data-t="vencido.seguridad"></p>
-      <div class="conversacion" id="conv-vencido" aria-live="polite"></div>
-    </section>
+  <!-- MAPA -->
+  <section id="v-mapa" class="vista vista-campo" aria-labelledby="mapa-titulo" hidden>
+    <header class="campo-cab">
+      <h2 id="mapa-titulo" data-t="mapa.titulo">El sendero</h2>
+      <span class="mapa-cab-der">
+        <span id="mapa-modo" class="segmentos-mini" role="group" hidden><button type="button" data-m="plano" aria-pressed="true" data-t="mapa.plano">Plano</button><button type="button" data-m="3d" aria-pressed="false">3D</button></span>
+        <span id="gps-chip" class="chip"></span>
+      </span>
+    </header>
+    <div id="gps-ayuda" class="gps-ayuda" role="status" hidden></div>
+    <div class="pliego"><svg id="mapa" viewBox="0 0 360 440" role="img" data-t="mapa.alt" data-t-attr="aria-label" aria-label="Mapa del sendero"></svg>
+      <div id="vista3d" class="vista3d" hidden><canvas id="mapa3d" aria-hidden="true"></canvas><canvas id="mapa3d-capa" role="img" data-t="mapa.alt3d" data-t-attr="aria-label" aria-label="Relieve en 3D del sector"></canvas><p class="ayuda3d" data-t="mapa.ayuda3d"></p></div></div>
+    <p id="mapa-fuente" class="mapa-fuente"></p>
+    <section id="bitacora" class="bitacora" aria-live="polite" hidden></section>
+    <p class="ayuda" data-t="mapa.ayuda"></p>
+    <ol id="estaciones" class="estaciones"></ol>
+    <p id="estaciones-nota" class="estaciones-nota"></p>
+  </section>
 
-    <!-- 5. Álbum del Páramo (js/album-app.js) -->
-    <section class="vista vista-album" id="vista-album" hidden aria-labelledby="album-titulo">
-      <header class="cabezote">
-        <div class="cabezote-txt">
-          <h1 id="album-titulo">Álbum del Páramo</h1>
-          <p id="album-dueno" class="dueno"></p>
-        </div>
-        <p class="contador" aria-live="polite"><b id="cuenta-n">0</b><span>/</span><span id="cuenta-t">0</span></p>
-      </header>
-      <div class="barra-progreso" aria-hidden="true"><span id="barra-album"></span></div>
-      <button id="btn-sobres" class="sobres-pendientes" hidden>
-        <span class="sobres-pila" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span id="sobres-txt"></span>
-        <span class="sobres-abrir">Abrir</span>
+
+  <!-- PREGUNTAR (chat sin internet) -->
+  <section id="v-chat" class="vista vista-papel vista-chat" aria-labelledby="chat-titulo" hidden>
+    <header class="chat-cab">
+      <div id="chat-pj" class="chat-pj" aria-hidden="true"></div>
+      <div>
+        <h1 id="chat-titulo" data-t="chat.titulo">Pregúntale a Fray</h1>
+        <p class="chat-sub" data-t="chat.sub"></p>
+      </div>
+    </header>
+    <p id="chat-estado" class="chat-estado" role="status" hidden></p>
+    <div id="chat-log" class="chat-log" aria-live="polite"></div>
+    <div id="chat-sug" class="chat-sug"></div>
+    <form id="chat-form" class="chat-form" autocomplete="off">
+      <div id="chat-tema" class="chat-tema" hidden><span class="chat-tema-txt"></span><button type="button" id="chat-tema-x" class="chat-tema-x" data-t="chat.quitarTema" data-t-attr="aria-label" aria-label="Quitar tema">×</button></div>
+      <button type="button" id="chat-foto" class="chat-foto btn-cuadro btn-linea" data-t="chat.foto" data-t-attr="aria-label" aria-label="¿Qué es esto? Toma una foto">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.6"/></svg>
       </button>
-      <p id="pista" class="pista"></p>
-      <div class="libro">
-        <div id="paginas" class="paginas" aria-live="polite"></div>
-        <nav id="indice" class="indice" aria-label="Capítulos del álbum"></nav>
-      </div>
-      <button class="btn btn-linea btn-grande btn-ancho btn-pdf">Descargar mi álbum (PDF)</button>
-      <p class="nota-pdf">El PDF guarda tus cromos y tu recorrido.</p>
-    </section>
+      <input id="chat-foto-in" type="file" accept="image/*" capture="environment" hidden>
+      <input id="chat-in" enterkeyhint="send" maxlength="200" data-t="chat.placeholder" data-t-attr="placeholder" aria-labelledby="chat-titulo">
+      <button id="chat-enviar" class="btn btn-flor chat-enviar" aria-describedby="chat-enviar-ayuda" data-t="chat.enviar">Enviar</button>
+      <span id="chat-enviar-ayuda" class="sr-only" data-t="dic.ayuda">Mantén presionado para hablarle a Fray</span>
+    </form>
+  </section>
 
-    <!-- 6. Mapa del sendero -->
-    <section class="vista vista-mapa" id="vista-mapa" hidden></section>
+  <!-- EQUIPO -->
+  <section id="v-equipo" class="vista vista-campo" aria-labelledby="eq-titulo" hidden></section>
+  <section id="v-guia" class="vista vista-campo" aria-labelledby="guia-titulo" hidden></section>
 
-    <!-- 7. Modo guía (con PIN) -->
-    <section class="vista vista-guia" id="vista-guia" hidden></section>
   </main>
 
-  <!-- Caja de pregunta (solo en el chat) -->
-  <form class="caja-pregunta" id="form-pregunta" hidden>
-    <label class="oculto" for="pregunta" data-t="chat.placeholder"></label>
-    <textarea id="pregunta" rows="2" maxlength="300" data-t-ph="chat.placeholder" enterkeyhint="send"></textarea>
-    <button class="btn btn-flor btn-enviar" type="submit"><span class="ico" id="ico-enviar"></span><span data-t="chat.preguntar"></span></button>
-  </form>
-
-  <!-- Ajustes: letra, contraste, idioma -->
-  <dialog id="dlg-ajustes" class="dialogo">
-    <h2 data-t="ajustes.titulo"></h2>
-    <fieldset>
-      <legend data-t="ajustes.letra"></legend>
-      <div class="segmentado" id="opc-letra">
-        <button type="button" data-letra="1" aria-label="A normal">A</button>
-        <button type="button" data-letra="2" aria-label="A grande">A+</button>
-        <button type="button" data-letra="3" aria-label="A muy grande">A++</button>
-      </div>
-    </fieldset>
-    <label class="interruptor"><input type="checkbox" id="opc-contraste"> <span data-t="ajustes.contraste"></span></label>
-    <fieldset>
-      <legend data-t="ajustes.idioma"></legend>
-      <div class="segmentado" id="opc-idioma">
-        <button type="button" data-idioma="es">Español</button>
-        <button type="button" data-idioma="en">English</button>
-      </div>
-    </fieldset>
-    <fieldset>
-      <legend>Mi álbum</legend>
-      <label class="campo-inicio"><span>Tu nombre (opcional)</span>
-        <input class="campo-nombre" maxlength="24" autocomplete="given-name" enterkeyhint="done" placeholder="Tu nombre para el álbum"></label>
-      <p class="sub">Sale en tu álbum y en el certificado. Solo se guarda en este teléfono.</p>
-      <button type="button" class="btn btn-linea btn-ancho btn-pdf">Descargar mi álbum (PDF)</button>
-      <p class="nota-pdf">El PDF guarda tus cromos y tu recorrido.</p>
-    </fieldset>
-    <div class="ajustes-mas">
-      <button type="button" class="btn btn-linea btn-mini" id="btn-guia">Modo guía</button>
-      <button type="button" class="btn btn-peligro btn-mini" id="btn-borrar-album">Borrar mi álbum</button>
-    </div>
-    <div class="ajustes-mas">
-      <button type="button" class="btn btn-linea btn-mini" id="btn-exportar-registro">Exportar registro de la prueba</button>
-      <a class="btn btn-linea btn-mini enlace-apk" href="descargas/fray-paramo-arm64.apk" download hidden>Descargar app Android con IA local</a>
-    </div>
-    <p class="mensaje" id="registro-msg" role="status"></p>
-    <form method="dialog"><button class="btn btn-flor btn-ancho" data-t="ajustes.cerrar"></button></form>
-  </dialog>
-
-  <!-- Elegir estación (contexto opcional del chat) -->
-  <dialog id="dlg-estacion" class="dialogo">
-    <h2 data-t="inicio.elige"></h2>
-    <button type="button" class="btn btn-flor btn-grande btn-ancho" id="btn-qr"><span class="ico" id="ico-qr"></span><span data-t="inicio.qr"></span></button>
-    <ol class="estaciones" id="lista-estaciones"></ol>
-    <div class="acciones">
-      <button type="button" class="btn btn-linea btn-ancho" id="btn-sin-estacion">No estoy en una estación</button>
-      <button type="button" class="btn btn-linea btn-ancho" id="btn-estacion-cerrar" data-t="ajustes.cerrar"></button>
-    </div>
-    <p class="pie"><a href="panel.html" data-t="pie.panel"></a></p>
-  </dialog>
-
-  <!-- PIN del modo guía: uno por dispositivo, solo su hash PBKDF2 en este teléfono (js/panel-pin.js) -->
-  <dialog id="dlg-pin" class="dialogo">
-    <h2>Modo guía</h2>
-    <form id="form-pin">
-      <p id="pin-txt"></p>
-      <input id="pin-in" class="pin-in" type="password" inputmode="numeric" pattern="[0-9]*" minlength="6" maxlength="12" autocomplete="off" aria-label="PIN del guía">
-      <p class="mensaje" id="pin-msg" role="status"></p>
-      <div class="acciones"><button class="btn btn-flor">Entrar</button><button type="button" class="btn btn-linea" id="pin-cancelar">Cancelar</button></div>
-    </form>
-  </dialog>
-
-  <!-- Barra inferior: pocas opciones grandes -->
+  <!-- MUELLE DE NAVEGACIÓN -->
   <nav class="muelle" aria-label="Secciones">
-    <button data-ir="fray" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><span>Fray</span></button>
-    <a href="#/album" data-ir="album"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7a2 2 0 0 1 1 1v15a2 2 0 0 0-1-1H4z M20 4h-7a2 2 0 0 0-1 1v15a2 2 0 0 1 1-1h7z"/></svg><span>Álbum</span><b id="muelle-badge" class="muelle-badge" hidden></b></a>
-    <a href="#/mapa" data-ir="mapa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z M9 4v14 M15 6v14"/></svg><span>Mapa</span></a>
-    <button data-ir="ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>Ajustes</span></button>
+    <button data-vista="album" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7a2 2 0 0 1 1 1v15a2 2 0 0 0-1-1H4z M20 4h-7a2 2 0 0 0-1 1v15a2 2 0 0 1 1-1h7z"/></svg><span data-t="nav.album">Álbum</span><b id="muelle-badge" class="badge" hidden></b></button>
+    <button data-vista="mapa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z M9 4v14 M15 6v14"/></svg><span data-t="nav.mapa">Mapa</span></button>
+    <button data-vista="lente" class="muelle-lente"><span class="lente-ojo" aria-hidden="true"><i></i></span><span data-t="nav.lente">Lente</span></button>
+    <button data-vista="chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><span data-t="nav.chat">Preguntar</span></button>
+    <button data-accion="ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span data-t="nav.ajustes">Ajustes</span></button>
   </nav>
 
-  <!-- Capas del álbum -->
+  <!-- CAPAS -->
   <div id="capa-detalle" class="capa" hidden role="dialog" aria-modal="true"></div>
   <div id="capa-sobre" class="capa capa-sobre" hidden role="dialog" aria-modal="true"></div>
-  <div id="capa-pausa" class="capa capa-pausa" hidden role="dialog" aria-modal="true">
-    <p class="pausa-tit">Mirada larga</p>
+  <div id="capa-ajustes" class="capa capa-hoja" hidden role="dialog" aria-modal="true" aria-labelledby="aj-titulo"></div>
+  <div id="capa-estacion" class="capa capa-hoja" hidden role="dialog" aria-modal="true" aria-labelledby="est-titulo"></div>
+  <div id="capa-pausa" class="capa capa-pausa" hidden role="dialog" aria-modal="true" aria-labelledby="pausa-tit">
+    <p class="pausa-tit" id="pausa-tit" data-t="pausa.titulo"></p>
     <svg viewBox="0 0 120 120" class="anillo" aria-hidden="true"><circle cx="60" cy="60" r="52" class="pista-anillo"/><circle cx="60" cy="60" r="52" class="avance" id="pausa-avance"/></svg>
     <p id="pausa-tiempo" class="pausa-tiempo">2:00</p>
-    <p class="pausa-txt">Deja el teléfono quieto y mira el páramo.</p>
-    <p id="pausa-estado" class="pausa-estado"></p>
-    <button id="pausa-salir" class="btn btn-linea">Salir</button>
+    <p class="pausa-txt" data-t="pausa.txt"></p>
+    <p id="pausa-estado" class="pausa-estado" data-t="pausa.regla"></p>
+    <button id="pausa-salir" class="btn btn-linea" data-t="pausa.salir">Salir</button>
   </div>
-  <canvas id="album-confeti" class="confeti" aria-hidden="true"></canvas>
-  <div id="album-aviso" class="album-aviso" role="status" aria-live="polite"></div>
+  <div id="capa-portada" class="capa capa-portada" hidden role="dialog" aria-modal="true" aria-label="Álbum del Páramo" data-t="titulo" data-t-attr="aria-label"></div>
+  <canvas id="confeti" class="confeti" aria-hidden="true"></canvas>
+
+  <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
 
   <script src="lib/jsQR.js" defer></script>
   <script src="lib/qrcode.js" defer></script>
-  <script type="module" src="js/ui.js"></script>
-  <script type="module" src="js/cromos.js"></script>
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>

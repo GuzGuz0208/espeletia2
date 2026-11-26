@@ -1,5 +1,5 @@
-// Celebraciones cortas (copiado de espeletia-ai/js/celebrar.js): chispas para cromos brillantes y lluvia de hojas al completar.
-import { reducido } from './album-util.js';
+// Celebraciones cortas: chispas para cromos brillantes y lluvia de hojas de frailejón al completar.
+import { reducido } from './util.js';
 
 export function chispas(el) {
   if (reducido()) return;
@@ -19,7 +19,7 @@ export function chispas(el) {
 // Hojas de frailejón (verde y amarillo) que caen. Dura ~3 s y se apaga sola.
 export function lluvia(ms = 3200) {
   if (reducido()) return;
-  const cv = document.getElementById('album-confeti');
+  const cv = document.getElementById('confeti');
   const ctx = cv.getContext('2d');
   const dpr = Math.min(2, devicePixelRatio || 1);
   cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; cv.style.display = 'block';
