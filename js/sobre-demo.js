@@ -9,7 +9,7 @@ const LIBRO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2H6a2 2 
 export const reducido = () => document.documentElement.dataset.movimiento === 'reducido'
   || matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Tono por estación para los cromos por descubrir: [sombra, medio, luz, brillo]. Cada foto se posteriza en estos 4 tonos.
+// Tres tonos para la foto y un cuarto color para los destellos y el texto.
 export const TONOS = {
   brisas: ['#13263a', '#2f5d86', '#7fb0d6', '#e4f1fb'],
   aguacerales: ['#0e2b2d', '#286c6f', '#7cc1bf', '#e3f5f1'],
