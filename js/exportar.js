@@ -448,9 +448,16 @@ async function creditos(n) {
   for (const id of Object.keys(E.album || {})) {
     const c = getCromo(id);
     const fp = c && !E.album[id]?.foto ? await fotoParque(c) : null;
-    if (fp) fotosC.push([`${num(c.n)} ${texto(c).nombre}`, `${fp.autor} · ${fp.licencia} · Wikimedia Commons`]);
+    if (fp) fotosC.push([c.n, `${num(c.n)} ${texto(c).nombre}: ${fp.autor} · ${fp.licencia} · Wikimedia Commons`]);
   }
-  if (fotosC.length) bloque(t('pdf.fotosTit'), fotosC);
+  // Una línea por foto, en orden, y sin pasar del pie de página
+  fotosC.sort((a, b) => a[0] - b[0]);
+  if (fotosC.length) {
+    ctx.fillStyle = C.verde; ctx.font = '800 38px "Bricolage Grotesque"'; ctx.fillText(t('pdf.fotosTit'), MARGEN, y); y += 46; p.textos.push(t('pdf.fotosTit'));
+    ctx.fillStyle = C.gris; ctx.font = '400 20px "Atkinson Hyperlegible"';
+    for (const [, linea] of fotosC) { if (y > PH - 150) break; ctx.fillText(linea, MARGEN, y); p.textos.push(linea); y += 28; }
+    y += 24;
+  }
   bloque(t('pdf.hecho'), [[t('pdf.ilustraciones'), ''], [t('pdf.privado'), '']]);
   pie(p, n);
   return p;
@@ -505,7 +512,8 @@ export function armarPDF(paginas, { titulo = '' } = {}) {
 
 // Genera el PDF completo. alAvanzar(f) recibe el avance (0–1) para mostrarlo.
 // Cede el turno hasta que la pantalla se redibuje (con setTimeout(0) el WebView no pintaba el porcentaje)
-const respirar = () => new Promise((ok) => requestAnimationFrame(() => setTimeout(ok, 0)));
+// (con tope de 80 ms: con la pantalla apagada no hay cuadros y no debe quedarse esperando)
+const respirar = () => new Promise((ok) => { const fin = () => { clearTimeout(r); ok(); }; const r = setTimeout(fin, 80); requestAnimationFrame(() => setTimeout(fin, 0)); });
 export async function albumPDF({ alAvanzar = () => {} } = {}) {
   alAvanzar(0); await respirar();
   await fuentes();
