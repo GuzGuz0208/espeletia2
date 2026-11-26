@@ -126,7 +126,7 @@ function deDescargas() {
   const ultimo = lista.split(/\r?\n/).map((x) => x.trim()).find((x) => x.endsWith('.json'));
   if (!ultimo) { log('Download: no hay fray-registro-*.json'); return []; }
   // El nombre viene del teléfono: se valida (sin rutas ni «..») y se comprueba que quede dentro de pruebas/registros/
-  const nombre = ultimo.split(/[\/]/).pop();
+  const nombre = ultimo.split(/[\\/]/).pop();
   if (!/^fray-registro-[\w.-]+\.json$/.test(nombre) || nombre.includes('..')) { log('nombre de archivo no válido:', nombre); return []; }
   const local = join(SALIDA, nombre);
   if (!resolve(local).startsWith(resolve(SALIDA) + sep)) { log('ruta fuera de pruebas/registros:', local); return []; }
