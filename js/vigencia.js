@@ -223,6 +223,14 @@ export async function renovar() {
   } catch (e) {
     return { ok: false, motivo: `sin señal (${e?.message || e})` };
   }
+  return renovarCon(paquete);
+}
+
+/**
+ * Reinicia la vigencia con un paquete que acaba de llegar por red y ya fue verificado (js/sync.js: firma y sha256).
+ * Es la misma renovación que renovar(), sin volver a descargar: cada descarga correcta cuenta 24 h desde ese momento.
+ */
+export function renovarCon(paquete) {
   if (!paquete || typeof paquete.version !== 'string' || !Array.isArray(paquete.fichas)) return { ok: false, motivo: 'paquete inválido' };
   const e = iniciarVigencia(paquete.vigenciaHoras);
   return { ok: true, version: paquete.version, venceEn: e.venceEn };

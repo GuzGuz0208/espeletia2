@@ -1,21 +1,42 @@
-// Configuración de la sincronización con la base (contrato §5) para la interfaz y el Panel.
-// Sin urlBase (por defecto, la demo en modo avión) js/sync.js no hace ninguna petición de red: queda solo el modo USB.
-// urlBase se guarda en este dispositivo desde el Panel (p. ej. http://192.168.4.1:8090, la base de Brisas).
+// Configuración de la sincronización (contrato §5, decisión 12) para la interfaz y el Panel.
+// Por defecto, urlBase es la publicación estática del propio despliegue: `{origen}/publicado` (manifest.json, paquete.json y
+// avisos.json firmados en la base de Brisas y subidos con herramientas/publicar.ps1). Mismo origen: no se toca otro servidor.
+// Desde el Panel se puede cambiar por el servidor de la base (p. ej. http://192.168.4.1:8090, servidor/sync_base.py).
+// urlSubida: dónde subir las preguntas sin respuesta (POST /sin-respuesta). Un despliegue estático no recibe POST: sin
+// urlSubida las preguntas esperan en el teléfono. Si se configuró un servidor de la base como urlBase, se usa ese.
+// Sin señal (navigator.onLine === false) js/sync.js no intenta nada.
 
 import * as sync from './sync.js';
 
 const CLAVE_URL = 'fray.sync.urlBase';
+const CLAVE_SUBIDA = 'fray.sync.urlSubida';
 
-export function urlBase() {
-  try { return localStorage.getItem(CLAVE_URL) || null; } catch { return null; }
+const leer = (k) => { try { return localStorage.getItem(k) || null; } catch { return null; } };
+
+/** Lo publicado en este mismo despliegue (null si la página no se sirve por http/https, p. ej. file://). */
+export function urlPorDefecto() {
+  try { return /^https?:$/.test(location.protocol) ? `${location.origin}/publicado` : null; } catch { return null; }
 }
 
-export function guardarUrlBase(url) {
+/** Dirección guardada en el Panel (o null si se usa la de por defecto). */
+export function urlBaseGuardada() { return leer(CLAVE_URL); }
+
+/** Dirección efectiva de donde se bajan las actualizaciones. */
+export function urlBase() { return urlBaseGuardada() || urlPorDefecto(); }
+
+/** Dónde se suben las preguntas sin respuesta, o null (se quedan en cola). */
+export function urlSubida() { return leer(CLAVE_SUBIDA) || urlBaseGuardada() || null; }
+
+function guardar(k, url) {
   const limpia = String(url || '').trim().replace(/\/+$/, '');
   if (limpia && !/^https?:\/\/[^\s/]+/.test(limpia)) throw new Error('La dirección debe empezar por http:// o https://');
-  try { if (limpia) localStorage.setItem(CLAVE_URL, limpia); else localStorage.removeItem(CLAVE_URL); } catch { /* nada */ }
+  try { if (limpia) localStorage.setItem(k, limpia); else localStorage.removeItem(k); } catch { /* nada */ }
   return limpia || null;
 }
+
+/** Vacío: vuelve a la publicación del despliegue. */
+export function guardarUrlBase(url) { return guardar(CLAVE_URL, url); }
+export function guardarUrlSubida(url) { return guardar(CLAVE_SUBIDA, url); }
 
 let clave = null;
 async function clavePublica() {
@@ -29,7 +50,10 @@ async function clavePublica() {
 
 /** Arranca js/sync.js con la configuración del dispositivo. */
 export async function arrancarSync({ versionLocal, alPaqueteNuevo, alAvisos }) {
-  return sync.iniciarSync({ urlBase: urlBase(), clavePublicaJwk: await clavePublica(), versionLocal, alPaqueteNuevo, alAvisos });
+  return sync.iniciarSync({
+    urlBase: urlBase(), urlSubida: urlSubida(), clavePublicaJwk: await clavePublica(),
+    versionLocal, alPaqueteNuevo, alAvisos,
+  });
 }
 
 export { sync };

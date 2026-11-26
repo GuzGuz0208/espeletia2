@@ -14,7 +14,7 @@ import * as ml from './ml.js';
 import { iniciarChatUI, entrarChat, retraducirChat, abrirConTema, temaDeCromo, conectarMapa, ofrecerLugar } from './chatui.js';
 import * as vig from './vigencia.js';
 import * as frayChat from './fray-chat.js';
-import { arrancarSync } from './ui-sync.js';
+import { iniciarActualizaciones } from './actualizar.js';
 import { iniciarGuia, entrarGuia, salirGuia, textoGuia, leerQR, aplicar as aplicarGuia, codigoDe, mostrarParada, horaRegreso } from './guia.js';
 
 let vista = null;
@@ -214,8 +214,12 @@ function iniciarVigencia() {
   addEventListener('online', () => { if (vig.estadoVigencia().estado === 'vencido') renovar(); });
   document.addEventListener('paramo-renovar', async (e) => { const ok = await renovar(); e.detail?.alTerminar?.(ok); });
   // Paquetes firmados de la base (contrato §5). Sin urlBase configurada no usa la red.
-  arrancarSync({ versionLocal: E.guiones?.version, alPaqueteNuevo: () => alCambiarContenido(), alAvisos: () => {} }).catch((e) => console.warn('Sync:', e));
-  // Actualizaciones obligatorias (módulo de otro agente, si ya existe): una sola llamada de inicio
+  // Actualizaciones obligatorias y automáticas (contrato §5.8): contenido firmado y código nuevo, sin preguntar
+  iniciarActualizaciones({
+    versionLocal: E.guiones?.version, cajaTexto: '#chat-in', alAvisos: () => {},
+    alPaqueteNuevo: () => alCambiarContenido(),
+    textoActualizado: (v) => t('sync.actualizado', { version: v }),
+  }).catch((e) => console.warn('Actualizaciones:', e));
   import('./actualizaciones.js').then((m) => m.iniciar?.()).catch(() => {});
 }
 

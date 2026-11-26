@@ -10,10 +10,10 @@
 //   va solo por red y no se guarda. Nunca se guarda descargas/ (la APK).
 // Nunca se toca otro origen (el servidor local del modelo en 127.0.0.1:8080 no pasa por aquí).
 // Al cambiar archivos de la app, sube VERSION.
-const VERSION = 'fray-album-v2-2026-11-26';
+const VERSION = 'fray-album-v3-2026-11-26';
 const CACHE = `album-paramo-${VERSION}`;
 const CONTENIDO = /\/(contenido|ejemplo)\//;
-const NUNCA = /\/descargas\//;
+const NUNCA = /\/(descargas|publicado)\//; // publicado/: actualizaciones firmadas, siempre por red (decisión 12)
 
 const APP = [
   './', 'index.html', 'styles.css', 'manifest.json', 'paquete.json', 'panel.html', 'panel.css',
@@ -23,7 +23,7 @@ const APP = [
   'js/recorrido.js', 'js/relieve.js', 'js/mapa3d.js',
   // Fray: motor, carril de seguridad, IA local opcional, vigencia, sincronización, Panel y QR de estación
   'js/fray.js', 'js/fray-worker.js', 'js/nucleo.js', 'js/conversacion.js', 'js/registro.js', 'js/carril.js', 'js/generador.js', 'js/verificador.js', 'js/vigencia.js',
-  'js/sync.js', 'js/ui-sync.js', 'js/ui-paquete.js', 'js/ui-motor.js', 'js/qr-estacion.js', 'js/fray-mock.js', 'js/generador-mock.js',
+  'js/sync.js', 'js/ui-sync.js', 'js/actualizar.js', 'js/ui-paquete.js', 'js/ui-motor.js', 'js/qr-estacion.js', 'js/fray-mock.js', 'js/generador-mock.js',
   'js/panel.js', 'js/panel-config.js', 'js/panel-pin.js',
   'lib/ort.wasm.min.js', 'lib/ort-wasm-simd-threaded.js', 'lib/jsQR.js', 'lib/qrcode.js', 'lib/tokenizers.min.js',
   'fonts/bricolage-grotesque-latin-wdth-normal.woff2', 'fonts/atkinson-hyperlegible-latin-400-normal.woff2', 'fonts/atkinson-hyperlegible-latin-700-normal.woff2',
