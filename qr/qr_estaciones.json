@@ -1,0 +1,27 @@
+[
+ {
+  "estacion": "brisas",
+  "nombre": "Brisas",
+  "texto": "FRAY1|brisas|0c4afa7a"
+ },
+ {
+  "estacion": "aguacerales",
+  "nombre": "Aguacerales",
+  "texto": "FRAY1|aguacerales|21666f93"
+ },
+ {
+  "estacion": "arenales",
+  "nombre": "Arenales",
+  "texto": "FRAY1|arenales|d30ec104"
+ },
+ {
+  "estacion": "lunares",
+  "nombre": "Lunares (Valle Lunar)",
+  "texto": "FRAY1|lunares|2742a796"
+ },
+ {
+  "estacion": "tumbas",
+  "nombre": "Valle de las Tumbas",
+  "texto": "FRAY1|tumbas|12587c02"
+ }
+]

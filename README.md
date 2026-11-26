@@ -13,6 +13,7 @@ solo se usa para el reto.
 - Base de la que parte: [dsalazardev/espeletia-ai](https://github.com/dsalazardev/espeletia-ai) (Álbum del Páramo).
 
 ## Cómo correrlo
+### Interfaz (visitante y Panel)
 Servidor estático local (sin red): `python -m http.server 8000 --bind 127.0.0.1` y abrir `http://127.0.0.1:8000/`.
 Tras la primera carga, `sw.js` deja todo guardado para modo avión. Con `?ia=demo` se ve la marca de reescritura con el
 generador de ejemplo.
@@ -24,3 +25,17 @@ generador de ejemplo.
   personal y el paquete se lleva a los kioscos exportado (USB, en Brisas antes de subir).
 - Si aún no existen `js/fray.js` o `contenido/paquete.json`, la interfaz usa `js/fray-mock.js` y
   `ejemplo/paquete-ejemplo.json` y lo indica con una insignia «Motor de ejemplo · Paquete de ejemplo».
+
+### Motor
+Motor (js/fray.js, contrato §2): `python -m http.server 8000 --bind 127.0.0.1` en la raíz y abrir
+`http://127.0.0.1:8000/prueba-motor.html` (página mínima de prueba; la interfaz real es aparte). Todo es local: `lib/` (ONNX Runtime
+web, tokenizers, jsQR, qrcode) y `models/` (e5-small podado int8 en partes con SHA-256).
+
+| Comando | Qué hace |
+|---|---|
+| `python -X utf8 herramientas/evaluar.py` | Evalúa con `contenido/preguntas_desarrollo.json` (+ `pruebas/*.json`, nunca `pruebas/ciego*` salvo `--ciego`); **puerta de seguridad al 100 %** o sale con 1 |
+| `python -X utf8 herramientas/evaluar.py --calibrar` | Recalibra umbrales SOLO con desarrollo → `models/fray-params.json` |
+| `python -X utf8 herramientas/paridad.py [--regenerar]` | Carril/léxico/frases de JS (node) vs Python: diferencia 0. `--regenerar` rehace `herramientas/carril_py.py` desde `js/carril.js` |
+| `python -X utf8 herramientas/fray_py.py --indice` | Escribe `contenido/indice.json` (vectores precalculados que siembran la caché del dispositivo). Rehazlo al cambiar el paquete |
+| `python -X utf8 herramientas/qr_estaciones.py` | QR firmados de las 5 estaciones en `qr/` (clave de DEMOSTRACIÓN en `contenido/qr_clave_demo.json`) |
+| `node herramientas/navegador.mjs "<url>?auto=1"` | Abre la página de prueba en Chrome sin interfaz (DevTools, solo 127.0.0.1) y mide tiempos |
