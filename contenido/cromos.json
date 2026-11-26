@@ -1,0 +1,89 @@
+{
+ "nota": "Cromos de la demo. Cada dato es texto literal de un guion con su página (PDF). Si se edita, debe seguir siendo literal y citado.",
+ "fuentes": {
+  "UTON2024": "Guion Ecoturístico UTON 2024",
+  "NORTE": "Guión turístico (zona norte)"
+ },
+ "cromos": [
+  {
+   "id": "brisas-agua",
+   "estacion": "brisas",
+   "nombre": "Brisas, puerta del agua",
+   "tipo": "ciencia",
+   "dato": "Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+   "cita": { "guion": "NORTE", "pagina": 5 }
+  },
+  {
+   "id": "aguacerales-frailejon",
+   "estacion": "aguacerales",
+   "nombre": "Frailejón",
+   "tipo": "ciencia",
+   "dato": "Existen más de 100 especies de frailejones, en Colombia se tienen cerca de 60 de estas especies y para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana.",
+   "cita": { "guion": "UTON2024", "pagina": 5 }
+  },
+  {
+   "id": "aguacerales-condensacion",
+   "estacion": "aguacerales",
+   "nombre": "El agua que se atrapa",
+   "tipo": "ciencia",
+   "dato": "Este fenómeno de condensación se da durante las 24 horas del día, todos los días del año, durante las noches frías, los hilos de agua se congelan y forman carámbanos.",
+   "cita": { "guion": "UTON2024", "pagina": 5 }
+  },
+  {
+   "id": "arenales-dunas",
+   "estacion": "arenales",
+   "nombre": "Dunas de arena",
+   "tipo": "ciencia",
+   "dato": "Las dunas entran en las zonas de carácter intangible del PNNN, es parte del patrimonio geológico, debido a que estas dunas en algunas ocasiones tienen una alta carga de humedad, si son pisadas, la huellas pueden perdurar meses.",
+   "cita": { "guion": "UTON2024", "pagina": 7 }
+  },
+  {
+   "id": "arenales-esqui",
+   "estacion": "arenales",
+   "nombre": "Memoria del esquí",
+   "tipo": "ciencia",
+   "dato": "La actual cabaña exhibe pendones sobre la historia del esquí en el nevado del Ruiz en los años 50 y 60, cuando se realizaron campeonatos sudamericanos que llevaron a la creación del Club de Ski de Manizales.",
+   "cita": { "guion": "UTON2024", "pagina": 7 }
+  },
+  {
+   "id": "lunares-gelifraccion",
+   "estacion": "lunares",
+   "nombre": "Gelifracción",
+   "tipo": "ciencia",
+   "dato": "El agua tiene la propiedad de aumentar su volumen al congelarse, si el agua esta confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen, por esta razón las rocas están llenas de grietas.",
+   "cita": { "guion": "UTON2024", "pagina": 8 }
+  },
+  {
+   "id": "lunares-loricaria",
+   "estacion": "lunares",
+   "nombre": "Coral de páramo",
+   "tipo": "ciencia",
+   "dato": "Las loricarias, son llamadas cacho de venado, o coral de paramo.",
+   "cita": { "guion": "UTON2024", "pagina": 9 }
+  },
+  {
+   "id": "tumbas-nombre",
+   "estacion": "tumbas",
+   "nombre": "Valle de las Tumbas",
+   "tipo": "ciencia",
+   "dato": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes.",
+   "cita": { "guion": "UTON2024", "pagina": 9 }
+  },
+  {
+   "id": "tumbas-kumanday",
+   "estacion": "tumbas",
+   "nombre": "Kumanday",
+   "tipo": "relato",
+   "dato": "Si bien es conocido el nombre indígena de Kumandai, Kumanday o Cumanday, para referirse al Volcán Nevado del Ruiz, no existe la suficiente investigación para delimitar la procedencia de la palabra.",
+   "cita": { "guion": "UTON2024", "pagina": 34 }
+  },
+  {
+   "id": "condor",
+   "estacion": null,
+   "nombre": "Cóndor de los Andes",
+   "tipo": "ciencia",
+   "dato": "Somos el territorio del Cóndor de los Andes, el ave que utiliza las corrientes térmicas generadas por el calor del volcán para planear sin esfuerzo.",
+   "cita": { "guion": "NORTE", "pagina": 2 }
+  }
+ ]
+}
