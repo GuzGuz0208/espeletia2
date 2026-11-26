@@ -6,6 +6,7 @@ import { ilustracion } from './art.js';
 import { cromoEl, activarBrillo, num } from './cromo.js';
 import { cromoPNG, descargar } from './exportar.js';
 import { formCodigo } from './guia.js';
+import { preguntasDeFicha } from './fray-chat.js';
 import * as sendero from './sendero.js';
 
 let pagina = 0;            // índice del capítulo visible
@@ -205,6 +206,13 @@ export async function abrirDetalle(id) {
       ${['gps', 'qr', 'guia', 'contemplacion', 'aclimatacion', 'camara'].includes(c.tipo) ? `<button class="btn btn-linea" data-a="foto">${esc(t('det.foto'))}</button>` : ''}
     </div>`);
     caja.appendChild(acc);
+    // Preguntas de la ficha del cromo: un toque y Fray la responde (con su cita)
+    const qs = preguntasDeFicha(c.guion?.ficha || c.ficha);
+    if (qs.length) {
+      const bx = h(`<div class="cromo-preguntas"><p class="cromo-preguntas-tit">${esc(t('det.preguntale'))}</p></div>`);
+      for (const q of qs) { const b = h(`<button class="chip" type="button">${esc(q)}</button>`); b.onclick = () => { cerrarDetalle(); accionesExtra.preguntar(id, { pregunta: q }); }; bx.appendChild(b); }
+      caja.appendChild(bx);
+    }
     acc.querySelector('[data-a="guardar"]').onclick = async () => { descargar(await cromoPNG(id), `cromo-${num(c.n)}-${id}.png`); aviso(t('det.guardado')); };
     acc.querySelector('[data-a="compartir"]').onclick = () => compartir(id);
     acc.querySelector('[data-a="escuchar"]').onclick = () => escuchar({ texto: `${tx.nombre}. ${tx.dato}`, textoAudio: tx.dato, lang: E.lang, tipo: 'cromo', id: c.id });

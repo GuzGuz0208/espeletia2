@@ -48,10 +48,12 @@ function ponerTema(nuevo) {
 
 // Abrir el chat hablando de algo (desde la Lente, un sobre, un cromo o una foto): muestra la ficha del guion
 // de ese cromo con su cita y sugiere otras preguntas de la ficha. Si no hay ficha, se le pregunta a Fray por el tema.
-export async function abrirConTema(nuevo, { intro = null } = {}) {
+export async function abrirConTema(nuevo, { intro = null, pregunta = null } = {}) {
   if (!nuevo) return;
   if (!iniciado) { iniciado = true; bienvenida(); }
   ponerTema(nuevo);
+  // Pregunta tocada en el cromo: se hace directamente (Fray responde con su cita)
+  if (pregunta) { $('#chat-sug').hidden = true; await enviar(pregunta); return; }
   const f = fray.fichaPorId(nuevo.ficha);
   if (!f) { await enviar(nuevo[E.lang] || nuevo.es); return; }
   agregar(h(`<article class="msg fray tema-intro"><p>${esc(intro || t('chat.temaHola', { tema: nuevo[E.lang] || nuevo.es }))}</p></article>`));

@@ -5,6 +5,7 @@ import { $, h, esc, animar, esperar, vibrar, hablar, reducido, atraparFoco, escu
 import { cromoEl, activarBrillo } from './cromo.js';
 import { irPagina, paginaDe, ranuraDe, esperarPintado } from './album.js';
 import { chispas } from './celebrar.js';
+import { preguntasDeFicha } from './fray-chat.js';
 
 let abriendo = false;
 let nav = () => {};
@@ -20,7 +21,7 @@ export async function abrirSobres() {
       const id = pendientes()[0];
       const seguir = await revelar(id, pendientes().length - 1);
       // «Pregúntale a Fray»: el cromo ya quedó pegado; los demás sobres esperan en el álbum
-      if (seguir === 'preguntar') { abriendo = false; await preguntar(id); break; }
+      if (seguir?.preguntar) { abriendo = false; await preguntar(id, { pregunta: seguir.pregunta }); break; }
       if (!seguir) break;
     }
   } finally { abriendo = false; }
@@ -52,6 +53,7 @@ async function revelar(id, quedan) {
         <button class="btn btn-claro" data-a="escuchar">${esc(t('det.escuchar'))}</button>
         ${c.ficha ? `<button class="btn btn-claro" data-a="preguntar">${esc(t('sobre.preguntar'))}</button>` : ''}
       </div>
+      <div class="cromo-preguntas" hidden></div>
       <p class="sobre-quedan">${quedan > 0 ? esc(t('sobre.quedan', { n: quedan })) : ''}</p>
     </div>`);
   capa.appendChild(escena);
@@ -114,7 +116,15 @@ async function revelar(id, quedan) {
   const eleccion = await new Promise((ok) => {
     acc.querySelector('[data-a="pegar"]').onclick = () => ok('pegar');
     const pr = acc.querySelector('[data-a="preguntar"]');
-    if (pr) pr.onclick = () => ok('preguntar');
+    if (pr) pr.onclick = () => ok({ preguntar: true });
+    // Preguntas de la ficha del cromo: un toque y Fray la responde (con su cita)
+    const qs = preguntasDeFicha(c.guion?.ficha || c.ficha);
+    const caja = $('.cromo-preguntas', escena);
+    if (qs.length) {
+      caja.hidden = false;
+      caja.appendChild(h(`<p class="cromo-preguntas-tit">${esc(t('det.preguntale'))}</p>`));
+      for (const q of qs) { const b = h(`<button class="chip" type="button">${esc(q)}</button>`); b.onclick = () => ok({ preguntar: true, pregunta: q }); caja.appendChild(b); }
+    }
   });
   quitarBrillo();
   card.classList.remove('volteado');
@@ -125,7 +135,7 @@ async function revelar(id, quedan) {
   soltar();
   capa.hidden = true;
   capa.innerHTML = '';
-  return eleccion === 'preguntar' ? 'preguntar' : true;
+  return eleccion?.preguntar ? eleccion : true;
 }
 
 async function pegarEnAlbum(id, card, capa) {
