@@ -8,6 +8,7 @@
 // esperar al modelo: una pregunta de seguridad se responde al instante aunque el índice aún esté cargando.
 import { carril } from './carril.js';
 import { ABSTENCION } from './nucleo.js';
+import { verificarVigencia } from './vigencia.js';
 
 export { carril, categoriaCarril, MENSAJES as MENSAJES_SEGURIDAD } from './carril.js';
 
@@ -57,6 +58,8 @@ export function cargar(paquete, { alAvance, params } = {}) {
 export async function preguntar(texto, { estacion = null } = {}) {
   const seg = carril(texto);
   if (seg) return seg;
+  // Vigencia (contrato §7): con el contenido vencido no se responde con fichas (el carril de arriba sí sigue)
+  if (verificarVigencia().estado === 'vencido') { descargar(); return { ...RESP_VENCIDO }; }
   if (!cargaP) throw new Error('llama a fray.cargar(paquete) antes de preguntar');
   await cargaP;
   const r = await pedir({ tipo: 'preguntar', texto, opciones: { estacion } });
@@ -73,6 +76,17 @@ export async function similitud(textos, fichaId) {
 }
 
 export const estado = () => info;
+
+// Respuesta cuando venció la vigencia del contenido. La interfaz la muestra con su propio texto (i18n).
+export const RESP_VENCIDO = Object.freeze({ tipo: 'vencido', breve: '', ampliar: null, citas: [], fichas: [], alternativas: [], aviso: null });
+
+/** Suelta el índice de la memoria (al vencer la vigencia): termina el worker; hay que volver a llamar a cargar(). */
+export function descargar() {
+  try { w?.terminate(); } catch (e) { /* nada */ }
+  for (const p of pend.values()) p.no(new Error('contenido vencido'));
+  pend.clear();
+  w = null; local = null; cargaP = null; info = null;
+}
 export const ABSTENCION_TEXTO = ABSTENCION;
 
 // ---------- Preguntas sin respuesta (para que el personal cree fichas) ----------
