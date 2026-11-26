@@ -9,6 +9,8 @@ MENSAJES = {
   'animales': 'No toques, persigas ni alimentes a los animales, y no toques ni arranques las plantas: obsérvalos a distancia y en silencio. Si tienes dudas, pregúntale a tu guía.',
   'volcan': 'El estado y el nivel de alerta del volcán cambian y yo no los conozco. Pregúntale al personal del parque o a tu guía; la fuente oficial es el Servicio Geológico Colombiano.',
   'condiciones': 'El clima, el acceso, los horarios y los cierres de hoy cambian y yo no los conozco. Pregúntale al personal del parque o a tu guía.',
+  'servicios': 'Los guiones oficiales no tienen información sobre servicios (comida, baños, conexión u hospedaje). Pregúntale a tu guía o al personal del parque.',
+  'premisa': 'Los guiones oficiales no dicen que eso se pueda hacer aquí. Antes de cualquier actividad, pregúntale a tu guía o al personal del parque y sigue siempre su indicación.',
 }
 # Palabras de apoyo (texto ya normalizado: sin tildes, minúsculas)
 PERSONA = '(?:nino|nina|ninos|ninas|hijo|hija|hijos|persona|alguien|amig[oa]s?|companer[oa]s?|turista|visitante|senor|senora|papa|mama|abuel[oa]|herman[oa]|espos[oa]|novi[oa]|guia|bebe)'
@@ -115,6 +117,9 @@ REGLAS = [
       '\\b(caida|lluvia|nube) de ceniza', '\\bceniza(s)? (hoy|ahora)\\b', '\\b(hubo|hay|habra|senti|sentimos|se sintio|se siente) (un |una )?(sismo|temblor|temblores|sismos)\\b', '\\besta temblando',
       '\\b(peligro|riesgo|peligroso|peligrosa)\\b.*\\b' + VOLCAN, '\\b' + VOLCAN + '\\b.*\\b(peligro|riesgo|peligroso|peligrosa)\\b',
       '\\bis the volcano (erupting|safe|dangerous)', '\\bvolcano (alert|status)', '\\b(alert level|eruption (today|now|soon))',
+      # «¿cuál es el estado del volcán?» sin «hoy» también es ESTADO (hallado en la prueba de interfaz del 26-nov)
+      '\\b(estado|situacion|status)\\b.*\\b' + VOLCAN + '\\b', '\\b' + VOLCAN + '\\b.*\\b(estado|situacion|status)\\b',
+      '\\bcomo (esta|sigue|anda|se encuentra) (el |la )?' + VOLCAN + '\\b',
     ],
     # Datos históricos o conceptuales del volcán NO son estado: van al guion (salvo que pregunten por hoy, alerta o lo próximo)
     'salvo': [
@@ -142,6 +147,23 @@ REGLAS = [
     # Servicios (restaurante, baños, wifi, tarifas) no son información de seguridad: van a la abstención normal
     'salvo': ['^(?!.*\\b(hoy|ahora|clima|via|carretera|acceso|parque|sendero|nevado|volcan)\\b).*\\b(restaurante|cafeteria|tienda|almuerzo|bano|banos|wifi|parqueadero|hotel|cajero)\\b'],
   },
+  # Las dos siguientes NO son seguridad: devuelven ABSTENCIÓN (los guiones no hablan de eso) y quedan en la bandeja del personal.
+  {
+    'id': 'servicios',
+    'si': [
+      '\\b(restaurante|restaurantes|cafeteria|cafeterias|tienda|tiendas|almuerzo|almorzar|bano|banos|sanitario|sanitarios|wifi|internet|cobertura|parqueadero|parqueo|hotel|hoteles|hospedaje|alojamiento|cajero|cajeros|datafono|souvenir|souvenirs|restaurant|bathroom|toilet|parking)\\b',
+      '\\b(venden|compro|comprar|consigo) (comida|agua|cafe|bebidas|algo de comer)\\b',
+    ],
+    'salvo': [],
+  },
+  {
+    'id': 'premisa',
+    'si': [
+      '\\b(puedo|podemos|se puede|se pueden|esta permitido|esta prohibido|dejan|me dejan|nos dejan|can i|can we|is it allowed)\\b.*\\b(banar|banarme|banarnos|banarse|nadar|zambullir|zambullirme|acampar|pescar|cazar|patinar|dron|drones|drone|fogata|fogatas|hacer fuego|prender fuego|asado|fumar|swim|camp|fish|hunt)\\b',
+      '\\b(donde|en que parte) (me puedo|nos podemos|se puede) (banar|nadar|acampar|pescar)\\b',
+    ],
+    'salvo': [],
+  },
 ]
 
 
@@ -168,5 +190,6 @@ def carril(texto):
     c = categoria(texto)
     if not c:
         return None
-    return {'tipo': 'seguridad', 'categoria': c, 'breve': MENSAJES[c], 'ampliar': None, 'citas': [], 'fichas': [],
+    tipo = 'abstencion' if c in ('servicios', 'premisa') else 'seguridad'
+    return {'tipo': tipo, 'categoria': c, 'breve': MENSAJES[c], 'ampliar': None, 'citas': [], 'fichas': [],
             'tipoContenido': 'norma', 'alternativas': [], 'aviso': None}
