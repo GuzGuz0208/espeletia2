@@ -77,6 +77,18 @@ export async function calentar() {
   } catch { return false; }
 }
 
+// «Sí, antes se llamaba…» → «Sí, según la tradición oral, antes se llamaba…». La primera palabra pasa a minúscula salvo que
+// sea un nombre propio (aparece con mayúscula a mitad de frase en el texto del guion).
+export function conTradicion(texto, ctx = '') {
+  const m = texto.match(/^((?:S[ií]|No)[,.]\s*)?(.*)$/s);
+  const pre = m[1] ? m[1].replace(/\.\s*$/, ',').trim() + ' ' : '';
+  let resto = m[2];
+  const w = (resto.match(/^[\p{L}-]+/u) || [''])[0];
+  const propio = w && new RegExp(`[\\p{Ll},;]\\s+${w}\\b`, 'u').test(ctx);
+  if (w && !propio) resto = resto[0].toLowerCase() + resto.slice(1);
+  return (pre ? pre + 'según' : 'Según') + ' la tradición oral, ' + resto;
+}
+
 const limpiar = (s) => s.replace(/<think>[\s\S]*?(<\/think>|$)/g, '').trim().replace(/^["«“']+|["»”']+$/g, '').trim();
 
 // reescribir(r, pregunta, { timeoutMs, alTrozo, contexto }) → { texto, ok, fallas, ms, tokens? }
@@ -125,10 +137,7 @@ export async function reescribir(r, pregunta, { timeoutMs = 6000, alTrozo = null
   texto = limpiar(texto);
   // El relato siempre se presenta como tradición oral (se antepone de forma determinista; no se le pide al modelo porque
   // entonces lo escribe también en respuestas de ciencia).
-  if (relato && texto && !/tradici[oó]n oral/i.test(texto) && !/no tengo esa informaci/i.test(texto)) {
-    const comun = /^(El|La|Los|Las|Lo|Un|Una|Unos|Unas|Se|Es|Este|Esta|Estos|Estas|Ese|Esa|En|Para|Su|Sus|Significa|Dicen|Cuentan)\b/.test(texto);
-    texto = 'Según la tradición oral, ' + (comun ? texto[0].toLowerCase() + texto.slice(1) : texto);
-  }
+  if (relato && texto && !/tradici[oó]n oral/i.test(texto) && !/no tengo esa informaci/i.test(texto)) texto = conTradicion(texto, ctx);
   const v = verificar(texto, ctx, pregunta, { relato });
   return { texto, ok: v.ok, fallas: v.fallas, ms: ms(), primeraMs: primera };
 }

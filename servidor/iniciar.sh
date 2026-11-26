@@ -77,7 +77,7 @@ s="$(servidor_bin)"
 if [ "${SIN_VERIFICAR:-0}" != 1 ]; then echo "Verificando SHA-256…"; echo "$sha  $gguf" | sha256sum -c - >/dev/null; fi
 
 if [ -z "${HILOS:-}" ]; then  # núcleos físicos (en la Pi = nproc; en x86 con hyperthreading, la mitad)
-  HILOS=$(lscpu -p=CORE,SOCKET 2>/dev/null | grep -v '^#' | sort -u | wc -l)
+  HILOS=$(lscpu -p=CORE,SOCKET 2>/dev/null | awk '!/^#/' | sort -u | wc -l || true)
   [ "$HILOS" -ge 1 ] 2>/dev/null || HILOS=$(nproc)
 fi
 extra=(--no-webui)

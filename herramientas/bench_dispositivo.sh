@@ -28,7 +28,7 @@ ram() { free -m | awk 'NR<=2'; }
 
 bench="$(buscar llama-bench)"; server="$(buscar llama-server)"
 export LD_LIBRARY_PATH="$(dirname "${server:-/x}"):${LD_LIBRARY_PATH:-}"
-HILOS="${HILOS:-$(lscpu -p=CORE,SOCKET 2>/dev/null | grep -v '^#' | sort -u | wc -l)}"; [ "$HILOS" -ge 1 ] 2>/dev/null || HILOS=$(nproc)
+HILOS="${HILOS:-$(lscpu -p=CORE,SOCKET 2>/dev/null | awk '!/^#/' | sort -u | wc -l || true)}"; [ "$HILOS" -ge 1 ] 2>/dev/null || HILOS=$(nproc)
 
 echo "=== Fray · bench del dispositivo · $(date -Iseconds) ==="
 echo "host: $(hostname) · $(uname -srm)"
