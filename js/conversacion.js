@@ -86,6 +86,19 @@ export function intencion(texto) {
   return INTENCIONES[Math.min(...vistas)].id;
 }
 
+// «hola fray, ¿qué es la gelifracción?» → «¿qué es la gelifracción?»: quita el saludo o el agradecimiento del principio
+// (y «fray») antes de buscar, para que no diluya la búsqueda léxica. Si no queda nada, devuelve el texto igual.
+const RE_PREFIJO = new RegExp('^(?:(?:' + INTENCIONES.filter((it) => it.id === 'saludo' || it.id === 'gracias')
+  .flatMap((it) => it.p).concat('fray').sort((a, b) => b.length - a.length || (a < b ? -1 : 1)).join('|') + ')(?: |$))+');
+export function sinCharla(texto) {
+  const t = normalizarCarril(texto).trim();
+  const m = t.match(RE_PREFIJO);
+  if (!m) return texto;
+  const n = m[0].trim().split(' ').length;
+  const resto = String(texto).replace(new RegExp('^(?:[^\\p{L}\\p{N}]*[\\p{L}\\p{N}]+){' + n + '}[^\\p{L}\\p{N}¿¡]*', 'u'), '');
+  return /[\p{L}\p{N}]/u.test(resto) ? resto : texto;
+}
+
 // Textos fijos de Fray (sin datos del parque, sin cifras). La interfaz puede traducirlos por `intencion`.
 export const TEXTOS = {
   saludo: '¡Hola! Soy Fray, tu compañero de ruta en el páramo. Pregúntame lo que veas; te respondo con los guiones oficiales del parque. Por ejemplo:',
