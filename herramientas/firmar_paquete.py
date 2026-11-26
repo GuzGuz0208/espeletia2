@@ -8,7 +8,8 @@ Qué hace:
      FRAY_CLAVES; por omisión C:/Users/danna/espeletia-llm/claves). La pública (JWK) va a contenido/clave_publica.json.
   2. Valida el paquete con herramientas/validar_paquete.py (si hay errores, no firma).
   3. Valida los avisos: solo `tipo: "operativo"`; rechaza cualquier aviso sobre el volcán, alertas o salud.
-  4. Escribe en --salida (por omisión ./publicado, fuera de git): manifest.json, paquete.json, avisos.json y
+  4. Escribe en --salida (por omisión ./publicado; manifest, paquete y avisos van en git y se despliegan, decisión 12;
+     publicar: herramientas/Publicar.cmd): manifest.json, paquete.json, avisos.json y
      fray-paquete-usb.json (los tres juntos, para copiar por USB).
 
 Firma: ECDSA P-256 con SHA-256, base64 del formato r||s (64 bytes, el que usa WebCrypto), sobre el texto

@@ -11,7 +11,11 @@ venv/
 build/
 .dart_tool/
 .cache_emb.npz
-publicado/
+# publicado/: solo los 3 archivos firmados que bajan los teléfonos (decisión 12). Nunca la clave privada.
+publicado/*
+!publicado/manifest.json
+!publicado/paquete.json
+!publicado/avisos.json
 datos/
 
 # APK de la app Android con IA local (solo si pesa < 95 MB; ver nativo/README.md)
