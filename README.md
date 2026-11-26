@@ -9,6 +9,15 @@ abstiene y remite al guía**. No reemplaza al guía: le ayuda a llegar a todos.
 Reto «Guía de páramo sin señal» · UTON / ACOPI Caldas / Universidad de Caldas · Hackathon Innova Generaciones · 26-nov-2026.
 Repo privado: el contenido oficial solo se usa para el reto.
 
+## Entregables
+| | |
+|---|---|
+| 🎬 **Video** (funcionamiento de la app y pitch) | [Ver en Google Drive](https://drive.google.com/file/d/1g6NtGIxz7ijwzamrqxvLunwMnoYD95J3/view?usp=sharing) |
+| 📘 **Manual de usuario** (visitante, guía, personal del parque y cómo cumple la rúbrica, 26 págs.) | [docs/manual-usuario.pdf](docs/manual-usuario.pdf) |
+| 📄 **Ficha técnica** (una hoja: problema, arquitectura, modelos, consumo, costo por estación, réplica, roadmap) | [docs/ficha-tecnica.pdf](docs/ficha-tecnica.pdf) · [fuente HTML](docs/ficha-tecnica.html) |
+| 📱 **App** | https://espeletia2.vercel.app · APK Android: botón en la primera pantalla |
+| 🎤 **Pitch (3 min)** · **Demo** · **Rúbrica** | [docs/pitch.md](docs/pitch.md) · [docs/demo.md](docs/demo.md) · [docs/rubrica.md](docs/rubrica.md) |
+
 ## Usarlo
 | Quién | Cómo |
 |---|---|
