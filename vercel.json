@@ -76,7 +76,16 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-cache"
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/ejemplo/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
     },
