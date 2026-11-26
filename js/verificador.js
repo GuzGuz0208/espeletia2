@@ -109,8 +109,12 @@ export function verificar(resp, fuenteTxt, pregunta, opciones = {}) {
 // contenido de la frase generada (raíz de 5 letras) presentes en una sola frase fuente. Las palabras que vienen de la pregunta no
 // cuentan como afirmación nueva (se quitan del denominador). Además, cada cifra de la frase generada debe estar en su frase de
 // respaldo y no puede perder su cuantificador («3 de los 6 glaciares» ≠ «6 glaciares»).
-export const UMBRAL_LEXICO = 0.5;   // calibrado con pruebas/casos_respaldo.json: atrapa 12/15 errores, descarta 11/61 correctas (ver pruebas/resultados-generador.md)
+// Revisado el 26-nov con la medida del REDMI: con 0,5 atrapa 10/15 errores y descarta 12/61 correctas; bajarlo a 0,40 (la
+// paráfrasis de las dunas) dejaría pasar 3 inventos reales («100 especies en Colombia», «pelitos que atrapan agua», el origen
+// del nombre Aguacerales). Se queda en 0,5: un falso rechazo solo cuesta tono (queda el texto del guion).
+export const UMBRAL_LEXICO = 0.5;
 export const UMBRAL_E5 = 0.85;      // PENDIENTE de calibrar con el motor (e5-small en el navegador)
+export const UMBRAL_VECINA = 0.7;   // respaldo mínimo para aceptar una cifra de la frase vecina (casos 4.160 msnm del REDMI)
 
 const VACIAS = new Set(('que los las del por con una uno unos unas para como mas pero sus este esta estos estas ese esa eso esto ' +
   'son fue ser era han hay muy tambien cual cuales donde cuando porque pues asi sobre entre desde hasta sin ante bajo tras ' +
@@ -137,9 +141,12 @@ export function respaldoLexico(frasesGen, frasesFuente, { pregunta = '', ventana
     if (!W.length) return { frase, mejor: -1, sim: 1, fraseFuente: null };
     let mejor = -1; let sim = 0;
     fuentes.forEach((S, i) => { const s = W.filter((w) => S.has(w)).length / W.length; if (s > sim + 1e-9) { sim = s; mejor = i; } });
-    return { frase, mejor, sim: Math.round(sim * 100) / 100, fraseFuente: mejor >= 0 ? vent[mejor] : null };
+    return { frase, mejor, sim: Math.round(sim * 100) / 100, fraseFuente: mejor >= 0 ? vent[mejor] : null, vecinas: vecinas(vent, mejor) };
   });
 }
+// Frases vecinas (anterior y siguiente) de la frase de respaldo: una cifra puede venir de la frase de al lado («Altura: 4.160
+// msnm aproximadamente. Ubicación: flanco occidental…» → «Estamos a 4.160 msnm, en el flanco occidental…»; medido en el REDMI).
+const vecinas = (lista, i) => (i < 0 ? '' : [lista[i - 1] || '', lista[i + 1] || ''].join(' '));
 
 const coseno = (a, b) => { let p = 0, na = 0, nb = 0; for (let i = 0; i < a.length; i++) { p += a[i] * b[i]; na += a[i] * a[i]; nb += b[i] * b[i]; } return p / Math.sqrt(na * nb || 1); };
 
@@ -151,7 +158,7 @@ export async function respaldo(frasesGen, frasesFuente, { embeber = null, pregun
   return frasesGen.map((frase, i) => {
     let mejor = -1; let sim = -1;
     vs.forEach((v, j) => { const s = coseno(vg[i], v); if (s > sim) { sim = s; mejor = j; } });
-    return { frase, mejor, sim: Math.round(sim * 1000) / 1000, fraseFuente: mejor >= 0 ? frasesFuente[mejor] : null };
+    return { frase, mejor, sim: Math.round(sim * 1000) / 1000, fraseFuente: mejor >= 0 ? frasesFuente[mejor] : null, vecinas: vecinas(frasesFuente, mejor) };
   });
 }
 
@@ -159,6 +166,11 @@ export async function respaldo(frasesGen, frasesFuente, { embeber = null, pregun
 // perdido, y polaridad: si la frase del guion niega y la generada no («estas rocas NO fueron arrojadas por el volcán» → «sí, las
 // dejó el volcán»), o al revés.
 const NIEGA = /(^|[^a-z])(no|nunca|jamas|ningun|ninguna|ninguno|tampoco)(?![a-z])/;
+// Desaparición: si la frase del guion dice que algo desapareció o se extinguió y la generada no («han desaparecido de muchos
+// páramos, como el venado de cola blanca» → «hay venados de cola blanca en el páramo»), la generada invierte el sentido.
+const DESAPARECE = /(^|[^a-z])(desaparec|extint|extingu|ya no (hay|existe|se ve))/;
+// Cifras comparables: «4.160» = «4,160» = «4 160» = «4160»; «2,24» = «2.24». Se quitan separadores de miles y decimales.
+export const cifras = (s) => (String(s).replace(/(\d)[   ](?=\d{3}(?!\d))/g, '$1').match(/\d+(?:[.,:]\d+)*/g) || []).map((n) => n.replace(/[.,:]/g, ''));
 export function fallasRespaldo(res, { umbral = UMBRAL_LEXICO, pregunta = '' } = {}) {
   const fallas = [];
   for (const r of res) {
@@ -167,8 +179,11 @@ export function fallasRespaldo(res, { umbral = UMBRAL_LEXICO, pregunta = '' } = 
     const g = norm(guiones(r.frase)); const f = norm(guiones(r.fraseFuente));
     if (NIEGA.test(f) && !NIEGA.test(g)) fallas.push(`pierde una negación del guion: «${r.frase.slice(0, 60)}»`);
     if (!NIEGA.test(f) && NIEGA.test(g)) fallas.push(`añade una negación que el guion no tiene: «${r.frase.slice(0, 60)}»`);
-    const nf = new Set([...numeros(f), ...numeros(norm(pregunta))]);
-    for (const n of numeros(g)) if (!nf.has(n)) fallas.push(`cifra ${n} no está en su frase de respaldo`);
+    if (DESAPARECE.test(f) && !DESAPARECE.test(g)) fallas.push(`omite que el guion dice que desapareció: «${r.frase.slice(0, 60)}»`);
+    // La cifra debe estar en su frase de respaldo; o en una vecina si la frase está muy bien respaldada (≥ UMBRAL_VECINA = 0,7: une
+    // dos frases de datos seguidas). Con respaldo flojo no basta la vecina: «23,000 personas» pegado a otro sujeto se atrapa.
+    const nf = new Set([...cifras(f), ...(r.sim >= UMBRAL_VECINA ? cifras(norm(r.vecinas || '')) : []), ...cifras(norm(pregunta))]);
+    for (const n of cifras(g)) if (!nf.has(n)) fallas.push(`cifra ${n} no está en su frase de respaldo`);
     for (const m of f.matchAll(/(\d+(?:[.,]\d+)*)\s+de\s+(?:los|las)\s+(\d+(?:[.,]\d+)*)/g)) {
       const total = m[2].replace(/[.,]/g, '');
       const enGen = [...g.matchAll(/(\d+(?:[.,]\d+)*)(?=\s|$|[^\d])/g)].some((x) => x[1].replace(/[.,]/g, '') === total &&
