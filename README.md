@@ -13,6 +13,26 @@ solo se usa para el reto.
 - Base de la que parte: [dsalazardev/espeletia-ai](https://github.com/dsalazardev/espeletia-ai) (Álbum del Páramo).
 
 ## Cómo correrlo
+### Interfaz (visitante y Panel)
+Servidor estático local (sin red): `python -m http.server 8000 --bind 127.0.0.1` y abrir `http://127.0.0.1:8000/`.
+Tras la primera carga, `sw.js` deja todo guardado para modo avión. Con `?ia=demo` se ve la marca de reescritura con el
+generador de ejemplo.
+
+- `index.html` · pantalla del visitante: estación (o QR firmado) → pregunta → respuesta breve, «Ampliar» y cita.
+- `panel.html` · Panel del parque: fichas, importar/exportar, preguntas sin respuesta, versiones y QR de estación.
+  El PIN se define en el primer uso **en cada dispositivo** y solo se guarda su hash PBKDF2 en ese dispositivo.
+  **En producción, `panel.html` no se instala en los kioscos de los visitantes**: el Panel se usa en el dispositivo del
+  personal y el paquete se lleva a los kioscos exportado (USB, en Brisas antes de subir).
+- Si aún no existen `js/fray.js` o `contenido/paquete.json`, la interfaz usa `js/fray-mock.js` y
+  `ejemplo/paquete-ejemplo.json` y lo indica con una insignia «Motor de ejemplo · Paquete de ejemplo».
+
+- **Vercel** (sitio estático, sin build): `vercel.json` pone `no-cache` a `index.html`, `panel.html`, `sw.js`, `manifest.json` y
+  `contenido/`, `application/wasm` a los `.wasm`, caché inmutable a `models/partes/` y `X-Robots-Tag: noindex`. No hacen falta
+  COOP/COEP: ONNX Runtime corre con 1 hilo (`numThreads = 1`), y con COEP el generador no podría hablar con 127.0.0.1:8080.
+  `.vercelignore` deja fuera fuentes/, docs/, herramientas/, pruebas/, servidor/, legado/, qr/ y ejemplo/. El repo es privado y
+  el despliegue debe ir **con protección de acceso** (el paquete lleva texto de los guiones).
+
+### Motor
 Motor (js/fray.js, contrato §2): `python -m http.server 8000 --bind 127.0.0.1` en la raíz y abrir
 `http://127.0.0.1:8000/prueba-motor.html` (página mínima de prueba; la interfaz real es aparte). Todo es local: `lib/` (ONNX Runtime
 web, tokenizers, jsQR, qrcode) y `models/` (e5-small podado int8 en partes con SHA-256).
