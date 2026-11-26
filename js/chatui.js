@@ -11,6 +11,8 @@ import { personajes } from './art.js';
 import { sync } from './ui-sync.js';
 
 let iniciado = false;
+// Tope de espera de la IA local (desde que se envía la pregunta): si no termina a tiempo, se muestra el texto del guion
+const TOPE_MS = 4500;
 let tema = null; // { id, ficha, es, en }: de qué se está hablando (Lente, cromo o foto)
 let verEnMapa = null;  // (lugar) => abre el mapa en ese lugar (lo conecta app.js)
 let pendiente = null;  // { tema, intro }: al llegar a una estación, se ofrece hablar de ella la próxima vez que se abra el chat
@@ -89,9 +91,7 @@ async function queEsEsto(archivo) {
     const nuevo = c && temaDeCromo(c.id);
     if (nuevo) {
       await abrirConTema(nuevo, { intro: t('chat.fotoEs', { cosa: nombreClase(r.clase).toLowerCase(), p: Math.round(r.certeza * 100) }) });
-      // Cola para la base (contrato §5.2): sin datos personales, solo texto, estación y día
-  if (r.tipo === 'abstencion') sync.registrarSinRespuesta(texto, fray.estacionActual()).catch(() => {});
-  window.__ultimoChat = { foto: true, clase: r.clase, tema: nuevo.id };
+      window.__ultimoChat = { foto: true, clase: r.clase, tema: nuevo.id };
       return;
     }
   }
@@ -143,8 +143,29 @@ function bienvenida() {
   const log = $('#chat-log');
   log.innerHTML = '';
   agregar(h(`<article class="msg fray bienvenida"><p>${esc(t('chat.hola'))}</p><p class="msg-nota">${esc(t('chat.reglas'))}</p></article>`));
-  pintarSugerencias();
+  const hist = leerHistorial();
+  for (const m of hist) {
+    log.appendChild(h(`<div class="msg yo"><p>${esc(m.q)}</p></div>`));
+    log.appendChild(tarjeta(m.r, { pregunta: m.q, ia: m.ia }));
+  }
+  if (hist.length) requestAnimationFrame(() => log.lastElementChild?.scrollIntoView({ block: 'end' }));
+  else pintarSugerencias();
 }
+
+// Historial del chat: sobrevive si la app se cierra o el sistema la saca de memoria. Lleva texto de los guiones, así que
+// vence con el contenido (24 h, contrato §7): si la vigencia venció no se muestra y se borra.
+const LS_HIST = 'fray-chat-historial', MAX_HIST = 40;
+function leerHistorial() {
+  try {
+    if (fray.vencido()) { localStorage.removeItem(LS_HIST); return []; }
+    const x = JSON.parse(localStorage.getItem(LS_HIST) || '[]');
+    return Array.isArray(x) ? x.filter((m) => m && m.q && m.r) : [];
+  } catch { return []; }
+}
+function guardarHistorial(m) {
+  try { localStorage.setItem(LS_HIST, JSON.stringify([...leerHistorial(), m].slice(-MAX_HIST))); } catch { /* sin almacenamiento */ }
+}
+export function borrarHistorial() { try { localStorage.removeItem(LS_HIST); } catch { /* */ } }
 
 function pintarSugerencias() {
   const box = $('#chat-sug');
@@ -174,7 +195,7 @@ function citaTxt(c) {
 const ICONO_ESCUCHAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="onda" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/></svg>';
 
 // Burbuja de Fray con la respuesta del motor (contrato §2). Mismo estilo que las fichas del álbum original.
-function tarjeta(r, { pregunta = '' } = {}) {
+function tarjeta(r, { pregunta = '', ia = null } = {}) {
   const lang = E.lang;
   const seg = r.tipo === 'seguridad';
   const card = h(`<article class="msg fray ${r.tipo === 'abstencion' || r.tipo === 'vencido' ? 'nose' : 'ficha'}${seg ? ' urgente' : ''}" lang="es"></article>`);
@@ -196,14 +217,38 @@ function tarjeta(r, { pregunta = '' } = {}) {
   if (r.tipo === 'abstencion') card.appendChild(h(`<p class="msg-nota">${esc(t('chat.abstencion'))}</p>`));
   let ampliado = null;
   if (r.ampliar && r.ampliar !== r.breve && r.tipo !== 'charla') { ampliado = h(`<p class="ficha-ampliado" hidden>${esc(r.ampliar)}</p>`); card.appendChild(ampliado); }
-  for (const c of r.citas || []) card.appendChild(h(`<p class="ficha-fuente">${esc(citaTxt(c))}</p>`));
+  // Texto del guion (si lo redactó la IA) y fuente: a un toque, no encima de la respuesta
+  let delGuion = null, fuente = null;
+  if (ia) {
+    p.textContent = ia;
+    card.appendChild(h(`<p class="marca-ia">${esc(t('chat.ia'))}</p>`));
+    delGuion = h(`<p class="ficha-original" hidden><b>${esc(t('chat.delGuion'))}</b> ${esc(txt)}</p>`); card.appendChild(delGuion);
+  }
+  if ((r.citas || []).length) {
+    // Cita corta siempre visible (el jurado verifica «respuesta + página citada»); el detalle completo, a un toque
+    const c0 = r.citas[0], otras = r.citas.length - 1;
+    card.appendChild(h(`<p class="ficha-cita-corta">📖 ${esc(fray.fuentes()[c0.guion]?.titulo || c0.guion)} · p. ${esc(String(c0.pagina))}${otras > 0 ? ` (+${otras})` : ''}</p>`));
+    fuente = h(`<div class="ficha-fuentes" hidden>${r.citas.map((c) => `<p class="ficha-fuente">${esc(citaTxt(c))}</p>`).join('')}</div>`);
+    card.appendChild(fuente);
+  }
   const acc = h('<div class="ficha-acc"></div>');
+  const alternar = (el, b, a, z) => () => { el.hidden = !el.hidden; b.textContent = el.hidden ? a : z; b.setAttribute('aria-expanded', String(!el.hidden)); };
   const be = h(`<button class="btn-cuadro btn-linea btn-mini-cuadro" aria-label="${esc(t('det.escuchar'))}">${ICONO_ESCUCHAR}</button>`);
   be.onclick = () => escuchar({ texto: ampliado && !ampliado.hidden ? ampliado.textContent : p.textContent, lang: 'es' });
   if (txt) acc.appendChild(be);
   if (ampliado) {
     const b = h(`<button class="chip chip-mini" type="button" aria-expanded="false">${esc(t('chat.ampliar'))}</button>`);
-    b.onclick = () => { ampliado.hidden = !ampliado.hidden; b.textContent = ampliado.hidden ? t('chat.ampliar') : t('chat.menos'); b.setAttribute('aria-expanded', String(!ampliado.hidden)); };
+    b.onclick = alternar(ampliado, b, t('chat.ampliar'), t('chat.menos'));
+    acc.appendChild(b);
+  }
+  if (fuente) {
+    const b = h(`<button class="chip chip-mini" type="button" aria-expanded="false">${esc(t('chat.verFuente'))}</button>`);
+    b.onclick = alternar(fuente, b, t('chat.verFuente'), t('chat.ocultarFuente'));
+    acc.appendChild(b);
+  }
+  if (delGuion) {
+    const b = h(`<button class="chip chip-mini" type="button" aria-expanded="false">${esc(t('chat.verGuion'))}</button>`);
+    b.onclick = alternar(delGuion, b, t('chat.verGuion'), t('chat.ocultarGuion'));
     acc.appendChild(b);
   }
   // Duda: alternativas; charla: sugerencias para seguir (las dos preguntan a Fray con un toque)
@@ -222,27 +267,28 @@ function tarjeta(r, { pregunta = '' } = {}) {
 async function enviar(texto) {
   $('#chat-sug').hidden = true; // las sugerencias solo ayudan a empezar
   agregar(h(`<div class="msg yo"><p>${esc(texto)}</p></div>`));
-  const pensando = agregar(h(`<div class="msg fray pensando" aria-label="${esc(t('chat.buscando'))}"><span></span><span></span><span></span></div>`));
+  // «Pensando»: Fray con puntos y una frase que cambia; una sola respuesta al final (sin reemplazar texto a la vista)
+  const pensando = agregar(h(`<div class="msg fray pensando" role="status" aria-live="polite"><span class="pens-puntos"><span></span><span></span><span></span></span><span class="pens-txt">${esc(t('chat.pensando1'))}</span></div>`));
+  const frases = [t('chat.pensando2'), t('chat.pensando3')];
+  const relevo = setInterval(() => { const e = $('.pens-txt', pensando); if (e && frases.length) e.textContent = frases.shift(); }, 1400);
+  const t0 = performance.now();
   // El tema (cromo o Lente) ayuda a la búsqueda: «¿cuántos años vive?» hablando del frailejón
   const consulta = tema && texto.split(/\s+/).length <= 6 ? `${texto} (${tema.es})` : texto;
-  let r;
+  let r, ia = null;
   try { r = await fray.preguntar(consulta); } catch (e) { console.error(e); r = { tipo: 'abstencion', breve: t('chat.nose'), citas: [] }; }
-  await new Promise((ok) => setTimeout(ok, 250)); // que el "pensando" no parpadee
+  // IA local: redacta la respuesta del guion; solo se usa si pasa el verificador y llega antes del tope (si no, el guion)
+  if (r.tipo === 'respuesta') ia = await fray.reescribir(r, texto, { timeoutMs: Math.max(1500, TOPE_MS - (performance.now() - t0)) });
+  const espera = 350 - (performance.now() - t0);
+  if (espera > 0) await new Promise((ok) => setTimeout(ok, espera)); // que el "pensando" no parpadee
+  clearInterval(relevo);
   pensando.remove();
   pintarVencido();
-  const card = agregar(tarjeta(r, { pregunta: texto }));
+  agregar(tarjeta(r, { pregunta: texto, ia }));
+  guardarHistorial({ q: texto, r, ia });
+  // Cola para la base (contrato §5.2): sin datos personales, solo texto, estación y día
+  if (r.tipo === 'abstencion') sync.registrarSinRespuesta(texto, fray.estacionActual()).catch(() => {});
   document.dispatchEvent(new CustomEvent('fray:respuesta', { detail: { texto, tipo: r.tipo, fichas: r.fichas || [], estacion: fray.estacionActual() } }));
-  window.__ultimoChat = { texto, tipo: r.tipo, fichas: r.fichas || [], citas: r.citas || [], tema: tema?.id || null };
-  // IA local: reescribe; solo se muestra si pasa el verificador. La frase del guion queda debajo.
-  if (r.tipo === 'respuesta') {
-    const nuevo = await fray.reescribir(r, texto);
-    if (nuevo && card.isConnected) {
-      const p = card.querySelector('.ficha-txt');
-      const original = p.textContent;
-      p.textContent = nuevo;
-      p.after(h(`<p class="marca-ia">${esc(t('chat.ia'))}</p>`), h(`<p class="ficha-original"><b>${esc(t('chat.delGuion'))}</b> ${esc(original)}</p>`));
-    }
-  }
+  window.__ultimoChat = { texto, tipo: r.tipo, fichas: r.fichas || [], citas: r.citas || [], tema: tema?.id || null, ia: !!ia };
 }
 
 // ======================================================================================================
@@ -251,6 +297,9 @@ async function enviar(texto) {
 const IDIOMAS_DICTADO = { es: ['es-CO', 'es-ES'], en: ['en-US', 'en-GB'] };
 
 async function reconocimientoLocal(lang) {
+  // Dentro del WebView de Android (APK Fray o cualquier «; wv)»), SpeechRecognition.available() tumba el proceso de la
+  // página y la app se cierra (probado el 26-nov en Ajustes, WebView 157): ahí no se ofrece el dictado.
+  if (window.FrayNativo || /; wv\)/.test(navigator.userAgent)) return null;
   const API = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!API?.available || !('processLocally' in API.prototype)) return null;
   for (const idioma of IDIOMAS_DICTADO[lang] || []) {

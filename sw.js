@@ -10,7 +10,7 @@
 //   va solo por red y no se guarda. Nunca se guarda descargas/ (la APK).
 // Nunca se toca otro origen (el servidor local del modelo en 127.0.0.1:8080 no pasa por aquí).
 // Al cambiar archivos de la app, sube VERSION.
-const VERSION = 'fray-album-v7-2026-11-26';
+const VERSION = 'fray-album-v9-2026-11-26';
 const CACHE = `album-paramo-${VERSION}`;
 const CONTENIDO = /\/(contenido|ejemplo)\//;
 const NUNCA = /\/(descargas|publicado)\//; // publicado/: actualizaciones firmadas, siempre por red (decisión 12)

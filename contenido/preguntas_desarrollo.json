@@ -599,7 +599,7 @@
    "p": "¿Me puedo bañar en la laguna?",
    "estacion": "tumbas",
    "esperado": {
-    "tipo": "abstencion",
+    "tipo": "seguridad",
     "fichas": null,
     "citas": null
    }
@@ -713,6 +713,24 @@
   {
    "p": "¿Puedo ir a la nieve?",
    "estacion": "tumbas",
+   "esperado": {
+    "tipo": "seguridad",
+    "fichas": null,
+    "citas": null
+   }
+  },
+  {
+   "p": "¿Un venado se puede cocinar?",
+   "estacion": "aguacerales",
+   "esperado": {
+    "tipo": "seguridad",
+    "fichas": null,
+    "citas": null
+   }
+  },
+  {
+   "p": "Ando sola en el sendero",
+   "estacion": "lunares",
    "esperado": {
     "tipo": "seguridad",
     "fichas": null,
