@@ -4,6 +4,12 @@ Cómo vemos a Fray a futuro. Tres horizontes; las fechas se acuerdan con UTON (P
 (Álbum del Páramo, repo `espeletia-ai`, 24-25 nov) se marca **[ya existe]** cuando hay código o medición, y **[propuesta]**
 cuando es solo diseño. Lo que no está medido, no se promete.
 
+## Próximo paso (el que presentamos en el video)
+1. **Paquetes de voces en varios idiomas**: Fray lee las respuestas en voz alta sin conexión, con voces descargables por idioma.
+2. **Traducción en vivo** para visitantes extranjeros que no dominan el español (live speech), también sin red.
+3. **Lente que identifique fauna**: hoy la Lente reconoce flora y paisaje; ampliar a animales del páramo.
+4. **Estaciones complementarias** para una experiencia más inmersiva a lo largo del sendero.
+
 ## Horizonte 0 · Hackatón (26-nov-2026)
 - Asistente por estación en el dispositivo del parque: recuperar → citar → (reescribir) → verificar; carril crítico; abstención;
   conflictos visibles; panel para actualizar sin código; QR de estación firmados.
