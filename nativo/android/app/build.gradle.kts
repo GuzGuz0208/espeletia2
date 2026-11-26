@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "co.espeletia.album_paramo"
+    namespace = "co.fray.paramo"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "co.espeletia.album_paramo"
+        applicationId = "co.fray.paramo"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -40,6 +40,9 @@ android {
 if (gradle.startParameter.taskNames.any { it.contains("Release", ignoreCase = true) }) {
     android.packaging.jniLibs.excludes += setOf("lib/x86_64/**", "lib/armeabi-v7a/**", "lib/x86/**")
 }
+// Bibliotecas nativas comprimidas dentro del APK (se extraen al instalar): el APK pesa ~la mitad y se puede servir desde
+// Vercel (límite de 95 MB que nos pusimos). A cambio ocupa un poco más en el teléfono una vez instalado.
+android.packaging.jniLibs.useLegacyPackaging = true
 
 kotlin {
     compilerOptions {

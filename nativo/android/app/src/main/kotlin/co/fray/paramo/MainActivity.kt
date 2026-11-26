@@ -1,4 +1,4 @@
-package co.espeletia.album_paramo
+package co.fray.paramo
 
 import io.flutter.embedding.android.FlutterActivity
 
