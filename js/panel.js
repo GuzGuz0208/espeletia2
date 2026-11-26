@@ -7,6 +7,7 @@ import { cargarPaquete, paqueteBase, guardarVersion, versiones, avisarCambio } f
 import { urlBase, guardarUrlBase, arrancarSync, sync } from './ui-sync.js';
 import { fray as cargarFray, claveQR } from './ui-motor.js';
 import { generarQR } from './qr-estacion.js';
+import { asegurarVigencia, estadoVigencia } from './vigencia.js';
 
 const $ = (s) => document.querySelector(s);
 const P = { paquete: null, origen: null, motor: null, editando: null /* id o null si es nueva */ };
@@ -587,7 +588,16 @@ async function entrar() {
   $('#panel').hidden = false;
   if (iniciado) return; // volver tras una sesión caducada: no se recarga ni se duplican eventos
   iniciado = true;
-  const { paquete, origen, incluido } = await cargarPaquete();
+  // Vigencia (contrato §7, decisión 11): el Panel vence igual que la app del visitante y se renueva igual (con señal).
+  const vig = await asegurarVigencia().catch(() => estadoVigencia());
+  let carga = null;
+  if (vig.estado !== 'vencido') carga = await cargarPaquete().catch((e) => { if (e?.vencido) return null; throw e; });
+  if (!carga) {
+    iniciado = false;
+    mostrarLogin('El contenido del parque en este dispositivo venció (24 h) y se borró. Conéctate a internet y vuelve a entrar para renovarlo.');
+    return;
+  }
+  const { paquete, origen, incluido } = carga;
   P.paquete = paquete;
   P.origen = origen;
   P.incluido = incluido;
