@@ -175,3 +175,24 @@ export function atraparFoco(cont) {
   cont.addEventListener('keydown', onKey);
   return () => cont.removeEventListener('keydown', onKey);
 }
+
+// Hojas (Ajustes, créditos, PIN…): arrastrar hacia abajo desde el asa o la franja de arriba las cierra, igual que tocar
+// el fondo (cada hoja cierra con `capa.onclick` cuando el clic es en la capa).
+addEventListener('pointerdown', (e) => {
+  const hoja = e.target.closest?.('.hoja');
+  if (!hoja) return;
+  const r = hoja.getBoundingClientRect();
+  if (!e.target.closest('.hoja-asa') && e.clientY - r.top > 44) return;
+  if (e.target.closest('button, a, input, select, textarea')) return;
+  const y0 = e.clientY;
+  let dy = 0;
+  hoja.style.transition = 'none';
+  const mover = (m) => { dy = Math.max(0, m.clientY - y0); hoja.style.transform = `translateY(${dy}px)`; };
+  const soltar = () => {
+    removeEventListener('pointermove', mover); removeEventListener('pointerup', soltar); removeEventListener('pointercancel', soltar);
+    hoja.style.transition = 'transform .2s ease-out';
+    if (dy > 90) { hoja.style.transform = 'translateY(100%)'; setTimeout(() => hoja.parentElement?.click(), 160); }
+    else hoja.style.transform = '';
+  };
+  addEventListener('pointermove', mover, { passive: true }); addEventListener('pointerup', soltar); addEventListener('pointercancel', soltar);
+}, { passive: true });

@@ -11,6 +11,7 @@ import 'dart:async';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -45,6 +46,9 @@ class ControladorWeb {
 
 class _PantallaAppState extends State<PantallaApp> {
   WebViewController? _web;
+  DateTime? _ultimoAtras;
+  // Cierra la capa u hoja visible de la página (Ajustes, sobre, ficha…) tocando su fondo; true si cerró algo.
+  static const _cerrarAbierto = "(()=>{const c=[...document.querySelectorAll('.capa:not([hidden])')].pop();if(!c||!c.onclick)return false;c.click();return true;})()";
   String? _error;
   bool _sinPagina = false;
 
@@ -148,7 +152,21 @@ class _PantallaAppState extends State<PantallaApp> {
       canPop: false,
       onPopInvokedWithResult: (didPop, _) async {
         if (didPop) return;
-        if (await web.canGoBack()) await web.goBack();
+        // 1) cerrar lo abierto en la página (hoja, capa) o volver atrás en su historial
+        final cerro = await web.runJavaScriptReturningResult(_cerrarAbierto).catchError((_) => false);
+        if (cerro == true || cerro.toString() == 'true') return;
+        if (await web.canGoBack()) { await web.goBack(); return; }
+        // 2) salir con un segundo «atrás» antes de 2 s (no se sale de un solo toque por error)
+        final ahora = DateTime.now();
+        if (_ultimoAtras != null && ahora.difference(_ultimoAtras!) < const Duration(seconds: 2)) {
+          SystemNavigator.pop();
+          return;
+        }
+        _ultimoAtras = ahora;
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Toca «atrás» otra vez para salir'), duration: Duration(seconds: 2)));
+        }
       },
       child: Stack(children: [
         // Android: hybrid composition (el WebView es una vista nativa). Con la composición por textura (por defecto),

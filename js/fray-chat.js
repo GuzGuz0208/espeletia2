@@ -73,3 +73,10 @@ export function sugerencias(n = 4) {
   const bonita = (q) => q.replace(/^(¿?\s*)(\p{L})/u, (_, a, b) => a + b.toUpperCase());
   return [...new Set([...propias, ...generales].map((f) => bonita(f.preguntas[0])))].slice(0, n);
 }
+
+/** Preguntas de ejemplo de la ficha de un cromo (para ofrecerlas al abrirlo): «¿Por qué se fracturan las rocas?». */
+export function preguntasDeFicha(fichaId, n = 2) {
+  const f = fichaPorId(fichaId);
+  const bonita = (q) => q.replace(/^(¿?\s*)(\p{L})/u, (_, a, b) => a + b.toUpperCase());
+  return [...new Set((f?.preguntas || []).map(bonita))].slice(0, n);
+}

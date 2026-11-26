@@ -137,12 +137,18 @@ class _InicioState extends State<Inicio> {
 
   Timer? _relojTeclado;
   double _tecladoAvisado = 0;
+  // Cada cuadro de la animación del teclado: solo --tecladoVivo (la casilla del chat se mueve con transform, sin
+  // redimensionar nada). Al terminar: --teclado (relleno para poder desplazar hasta abajo).
   void _avisarTeclado(double alto) {
-    _relojTeclado?.cancel();
-    _relojTeclado = Timer(const Duration(milliseconds: 140), () {
-      if ((alto - _tecladoAvisado).abs() < 1) return;
+    final px = alto.round();
+    if ((alto - _tecladoAvisado).abs() >= 1) {
+      final abriendo = _tecladoAvisado < 1 && px > 0;
       _tecladoAvisado = alto;
-      final px = alto.round();
+      _web.web?.runJavaScript("document.documentElement.style.setProperty('--tecladoVivo','${px}px');"
+          "${abriendo ? "document.documentElement.classList.add('con-teclado');" : ''}");
+    }
+    _relojTeclado?.cancel();
+    _relojTeclado = Timer(const Duration(milliseconds: 120), () {
       _web.web?.runJavaScript("document.documentElement.style.setProperty('--teclado','${px}px');"
           "document.documentElement.classList.toggle('con-teclado',$px>0);"
           "if($px>0){const a=document.activeElement;if(a&&a.scrollIntoView)a.scrollIntoView({block:'nearest'});}");

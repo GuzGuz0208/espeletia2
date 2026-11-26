@@ -252,7 +252,7 @@ async function iniciar() {
     await abrirConTema(tema, opc);
   }
   const acciones = {
-    preguntar: (id) => preguntarSobre(id),
+    preguntar: (id, opc) => preguntarSobre(id, opc),
     abrirSobres: () => abrirSobres(),
     abrirLente: (m) => irA('lente', { modo: m, forzar: vista === 'lente' }),
     pedirFoto: (id, msg) => { lente.pedirFoto(id, msg); irA('lente', { modo: 'foto', forzar: true }); },
@@ -261,11 +261,11 @@ async function iniciar() {
   };
   iniciarAlbum({ irA, acciones });
   iniciarGuia({ irA });
-  iniciarSobres({ irA, preguntar: (id) => preguntarSobre(id) });
+  iniciarSobres({ irA, preguntar: (id, opc) => preguntarSobre(id, opc) });
   lente.iniciarLente({ onGanar: despuesDeGanar, onPreguntar: (id, { clase, confianza }) => preguntarSobre(id, { intro: t('chat.lenteVe', { cosa: est.nombreClase(clase).toLowerCase(), p: Math.round(confianza * 100) }) }) });
   mapa.iniciarMapa({
     llegada: async (id, { simulado }) => { pintarCabezote(); if (simulado && vista === 'album') abrirSobres(); },
-    preguntar: (id) => preguntarSobre(id),
+    preguntar: (id, opc) => preguntarSobre(id, opc),
     // Abrir el chat sobre una ficha que no es de un cromo (p. ej. el mal de altura desde la bitácora)
     preguntarFicha: (abrirFichaChat = async (ficha) => {
       const temas = { mal_altura: { es: 'el mal de altura', en: 'altitude sickness' } };

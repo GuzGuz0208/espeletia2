@@ -781,5 +781,13 @@ body[data-vista="equipo"] .rol-equipo { display: inline; }
 /* Teclado dentro de la APK: Flutter ya no redimensiona el WebView; avisa la altura una vez (--teclado, .con-teclado) */
 .con-teclado body { padding-bottom: var(--teclado, 0px); }
 .con-teclado .muelle { display: none; }
-.con-teclado .chat-form { bottom: var(--teclado, 0px); }
+.con-teclado .chat-form { position: fixed; left: 0; right: 0; bottom: 0; z-index: 31; max-width: 560px; margin: 0 auto; padding: 8px 16px; background: var(--papel); transform: translateY(calc(-1 * var(--tecladoVivo, 0px))); will-change: transform; }
+.con-teclado .vista-chat { padding-bottom: 76px; }
 .con-teclado .vista-chat { min-height: calc(100dvh - var(--teclado, 0px) - env(safe-area-inset-top)); }
+
+/* Preguntas del cromo (ficha y sobre) */
+.cromo-preguntas { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; justify-content: center; }
+.cromo-preguntas-tit { width: 100%; margin: 0; text-align: center; font-size: .9rem; opacity: .85; }
+
+/* Asa de las hojas: área de toque grande y sin scroll del navegador al arrastrar */
+.hoja-asa { touch-action: none; padding: 10px 0; margin: -10px auto 0; background-clip: content-box; cursor: grab; }
