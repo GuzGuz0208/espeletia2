@@ -53,15 +53,15 @@ async function conDevtools(fn) {
   if (!pid) { log(`${APP} no está corriendo: ábrela para leer IndexedDB`); return null; }
   adb('forward', `tcp:${PUERTO}`, `localabstract:webview_devtools_remote_${pid}`);
   try {
-    const paginas = await (await fetch(`http://127.0.0.1:${PUERTO}/json`)).json();
+    const paginas = await (await fetch(`http://127.0.0.1:${PUERTO}/json`, { signal: AbortSignal.timeout(8000) })).json();
     const p = paginas.find((x) => x.type === 'page' && /espeletia|fray|127\.0\.0\.1|localhost/.test(x.url)) || paginas.find((x) => x.type === 'page');
     if (!p) { log('DevTools: no hay página'); return null; }
     const ws = new WebSocket(p.webSocketDebuggerUrl);
-    await new Promise((si, no) => { ws.onopen = si; ws.onerror = () => no(new Error('no se pudo abrir el WebSocket de DevTools')); });
+    await new Promise((si, no) => { ws.onopen = si; ws.onerror = () => no(new Error('no se pudo abrir el WebSocket de DevTools')); setTimeout(() => no(new Error('el WebSocket de DevTools no abrió (¿pantalla apagada?)')), 10000); });
     let n = 0; const pend = new Map();
     ws.onmessage = (ev) => { const m = JSON.parse(ev.data); if (m.id && pend.has(m.id)) { pend.get(m.id)(m); pend.delete(m.id); } };
-    const evaluar = (expression, ms = 60000) => new Promise((si, no) => {
-      const id = ++n; const t = setTimeout(() => { pend.delete(id); no(new Error('DevTools: tiempo agotado')); }, ms);
+    const evaluar = (expression, ms = 20000) => new Promise((si, no) => {
+      const id = ++n; const t = setTimeout(() => { pend.delete(id); no(new Error('DevTools: tiempo agotado (desbloquea la pantalla y deja la app abierta)')); }, ms);
       pend.set(id, (m) => { clearTimeout(t); if (m.result?.exceptionDetails) no(new Error(JSON.stringify(m.result.exceptionDetails).slice(0, 400))); else si(m.result?.result?.value); });
       ws.send(JSON.stringify({ id, method: 'Runtime.evaluate', params: { expression, awaitPromise: true, returnByValue: true } }));
     });
@@ -141,6 +141,10 @@ for (const e of [...idx, ...ex, ...lc]) {
   if (vistos.has(k)) continue; vistos.add(k); entradas.push(e);
 }
 entradas.sort((a, b) => String(a.fecha).localeCompare(String(b.fecha)));
+if (!entradas.length) {
+  log('no hay entradas: desbloquea el teléfono, abre la app (Fray) y vuelve a correrlo. No se escribió nada.');
+  process.exit(1);
+}
 let modelo = '';
 try { modelo = adb('shell', 'getprop', 'ro.product.model').trim(); } catch { /* nada */ }
 const datos = { formato: 'fray-registro/1', juntado: ahora.toISOString(), telefono: modelo, app: APP,
