@@ -6,7 +6,7 @@
   "da": 0.02,
   "ds": 0.02,
   "beta": 0.02,
-  "D": 0.01,
+  "D": 0.0,
   "L": 0.65,
   "LD": 0.0,
   "bonoBreve": 0.02,
@@ -16,5 +16,5 @@
  },
  "calibrado_con": "contenido/preguntas_desarrollo.json",
  "paquete": "2026-11-26.3",
- "fecha": "2026-11-26 10:22"
+ "fecha": "2026-11-26 10:28"
 }

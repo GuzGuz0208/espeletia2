@@ -48,12 +48,14 @@ if (url.searchParams.get('auto')) {
     const t = performance.now();
     const est = preguntas ? preguntas[res.length].estacion : url.searchParams.get('estacion');
     const r = await fray.preguntar(q, { estacion: est || null });
-    res.push({ q, ms: Math.round(performance.now() - t), tipo: r.tipo, fichas: r.fichas, breve: r.breve.slice(0, 90), diag: r._diag });
+    res.push({ q, ms: Math.round(performance.now() - t), tipo: r.tipo, fichas: r.fichas, breve: r.breve.slice(0, 90), fraseRespaldo: r.fraseRespaldo ? r.fraseRespaldo.slice(0, 60) : undefined, diag: r._diag });
   }
+  const primera = res.find((x) => x.tipo === 'respuesta');
+  const sim = primera ? await fray.similitud([primera.breve, 'El volcán está en alerta verde y se puede subir.'], primera.fichas[0]) : null;
   // segunda carga: debe salir de la caché de IndexedDB
   const t1 = performance.now();
   const info2 = await fray.cargar(paquete);
-  $('salida').textContent = 'RESULTADO ' + JSON.stringify({ msCargar, info, msCargar2: Math.round(performance.now() - t1), info2, res });
+  $('salida').textContent = 'RESULTADO ' + JSON.stringify({ msCargar, info, msCargar2: Math.round(performance.now() - t1), info2, res, sim: sim && { ficha: primera.fichas[0], frases: sim.frases.length, max: sim.sim && sim.sim.map((f) => Math.max(...f).toFixed(3)) } });
 }
 </script>
 </body>

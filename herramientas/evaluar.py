@@ -214,7 +214,7 @@ def calibrar(motor, banco):
     o1, P, n1 = buscar(base, {'T': np.arange(0.80, 0.925, 0.005), 'M': [-0.04, -0.02, 0.0, 0.01, 0.02, 0.03, 0.04, 0.06],
                               'w': [0.0, 0.05, 0.1, 0.15, 0.2], 'D': [0.0, 0.005, 0.01], 'beta': [0.0, 0.01, 0.02, 0.04], 'G': [0, 1]}, suavizar=True)
     o2, P, n2 = buscar(P, {'da': [0.0, 0.02, 0.04], 'ds': [0.0, 0.02, 0.04, 0.06], 'Tc': np.arange(0.80, 0.97, 0.01)})
-    o3, P, n3 = buscar(P, {'T': np.arange(0.80, 0.925, 0.005), 'M': [-0.04, -0.02, 0.0, 0.01, 0.02, 0.03, 0.04, 0.06]}, suavizar=True)
+    o3, P, n3 = buscar(P, {'T': np.arange(0.80, 0.925, 0.005), 'M': [-0.04, -0.02, 0.0, 0.01, 0.02, 0.03, 0.04, 0.06], 'D': [0.0, 0.005, 0.01], 'G': [0, 1]}, suavizar=True)
     print(f'calibración semántica: {n1 + n2 + n3} combinaciones en {time.time() - t0:.0f} s; objetivo {o1} -> {o2} -> {o3}')
     # modo solo léxico: L y Lc
     lexm = MotorEval(motor.paquete, solo_lexico=True)
