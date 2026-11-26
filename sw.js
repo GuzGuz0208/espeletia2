@@ -10,7 +10,7 @@
 //   va solo por red y no se guarda. Nunca se guarda descargas/ (la APK).
 // Nunca se toca otro origen (el servidor local del modelo en 127.0.0.1:8080 no pasa por aquí).
 // Al cambiar archivos de la app, sube VERSION.
-const VERSION = 'fray-album-v10-2026-11-26';
+const VERSION = 'fray-album-v11-2026-11-26';
 const CACHE = `album-paramo-${VERSION}`;
 const CONTENIDO = /\/(contenido|ejemplo)\//;
 const NUNCA = /\/(descargas|publicado)\//; // publicado/: actualizaciones firmadas, siempre por red (decisión 12)
@@ -30,6 +30,8 @@ const APP = [
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png',
   'models/e5_tokenizer.json', 'models/e5_tokenizer_config.json', 'models/fray-params.json', 'models/partes.json', 'models/parque.json',
   'models/relieve.json', 'models/relieve.bin', 'models/relieve.webp',
+  // Fotos reales de los cromos (Wikimedia Commons, créditos en img/cromos/creditos.json)
+  'img/cromos/creditos.json', 'img/cromos/aguacerales-condensacion.jpg', 'img/cromos/aguacerales-frailejon.jpg', 'img/cromos/arenales-dunas.jpg', 'img/cromos/arenales-esqui.jpg', 'img/cromos/brisas-agua.jpg', 'img/cromos/condor.jpg', 'img/cromos/lunares-gelifraccion.jpg', 'img/cromos/lunares-loricaria.jpg', 'img/cromos/tumbas-kumanday.jpg', 'img/cromos/tumbas-nombre.jpg',
 ];
 const WASM = 'lib/ort-wasm-simd-threaded.wasm';
 // Contenido del parque: se guarda si la vigencia no venció

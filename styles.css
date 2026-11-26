@@ -791,3 +791,6 @@ body[data-vista="equipo"] .rol-equipo { display: inline; }
 
 /* Asa de las hojas: área de toque grande y sin scroll del navegador al arrastrar */
 .hoja-asa { touch-action: none; box-sizing: content-box; padding: 10px 0; margin: -10px auto 0; background-clip: content-box; cursor: grab; }
+
+/* Fotos reales en el cromo (créditos en el dorso) */
+.dorso-foto { margin: 0; font-size: 3.2cqw; color: #586a63; font-style: italic; }
