@@ -11,6 +11,7 @@ MENSAJES = {
   'volcan': 'El estado y el nivel de alerta del volcán cambian y yo no los conozco. Pregúntale al personal del parque o a tu guía; la fuente oficial es el Servicio Geológico Colombiano.',
   'condiciones': 'El clima, el acceso, los horarios y los cierres de hoy cambian y yo no los conozco. Pregúntale al personal del parque o a tu guía.',
   'servicios': 'Los guiones oficiales no tienen información sobre servicios (comida, baños, conexión u hospedaje). Pregúntale a tu guía o al personal del parque.',
+  'llevar': 'Qué bonito querer un recuerdo del páramo, pero aquí no se lleva nada: ni piedras, ni plantas, ni plumas; todo cumple una función en el ecosistema. Llévate fotos y tu álbum de cromos. Si tienes dudas, pregúntale a tu guía.',
   'agua': 'No te bañes ni te metas a las lagunas, ríos o quebradas del páramo: por tu seguridad y la del páramo, el agua se observa desde el sendero. Sigue siempre la indicación de tu guía.',
   'premisa': 'Los guiones oficiales no dicen que eso se pueda hacer aquí. Antes de cualquier actividad, pregúntale a tu guía o al personal del parque y sigue siempre su indicación.',
 }
@@ -43,6 +44,8 @@ REGLAS = [
       '\\b(me|nos) (separe|separamos|aleje|alejamos|adelante|adelantamos|atrase|atrasamos|desvie|desviamos)\\b',
       '\\b(me|nos) (quede|quedamos) (atras|solo|sola|solos|solas|sin el grupo|sin guia)\\b',
       '\\bno (veo|vemos|encuentro|encontramos|oigo|escucho) (al|a mi|a nuestro|a la|a el|el|la|mi) (guia|grupo)\\b',
+      # Alguien se comió o se tragó algo (prueba del 26-nov: «mi hijo se comió una hoja» quedaba sin respuesta)
+      '\\b(se|me|nos|te) (comio|comieron|trago|tragaron|bebio|bebieron|comi|comimos|trague|bebi|tome|tomo) (una|un|unas|unos|el|la|los|las|algo|esa|ese|eso|esta|este|agua|hojas?|plantas?|hongos?|frutos?|bayas?|moras?|flor|flores)\\b',
       '\\b(me|nos) (dejaron|dejo|abandonaron|abandono) (solo|sola|solos|solas|atras)\\b',
       '\\b(estoy|estamos|quede|quedamos|me quede|nos quedamos|ando|andamos) (solo|sola|solos|solas|sin nadie|sin el grupo|sin guia)\\b',
       '\\bsin nadie\\b', '\\b(no hay|no veo a|no encuentro a) nadie\\b', '\\b(i am|im|i m) (alone|by myself)\\b',
@@ -57,6 +60,8 @@ REGLAS = [
   {
     'id': 'salud',
     'si': [
+      # Frío y temblor del cuerpo: es salud (hipotermia), no el volcán («tengo mucho frío y me tiembla todo»)
+      '\\b(tengo|tiene|tenemos|tienen|siento|sentimos) (mucho |muchisimo |demasiado |tanto )?frio\\b', '\\b(me|le|nos|les) (tiembla|tiemblan|tirita|tiritan)\\b', '\\btiritand', '\\bestoy (congelad|helad|entumid)',
       '\\bmal de (altura|montana|paramo|la altura|la montana|paramo)', '\\b(enfermedad|enfermedades) de (la )?(altura|montana)',
       '\\bsoroch', '\\bapunad', '\\bapunamiento', '\\bmare(o|os|ad[oa]s?|a|an|arse|arme|ar)\\b', '\\bmareand', '\\bme maree\\b', '\\bvomit', '\\bvomi',
       '\\bnausea', '\\bganas de vomitar', '\\bdolor de (cabeza|estomago|oido|oidos|barriga|pecho)', '\\bjaqueca', '\\bmigrana',
@@ -177,6 +182,17 @@ REGLAS = [
     'si': [
       '\\b(restaurante|restaurantes|cafeteria|cafeterias|tienda|tiendas|almuerzo|almorzar|bano|banos|sanitario|sanitarios|wifi|internet|cobertura|parqueadero|parqueo|hotel|hoteles|hospedaje|alojamiento|cajero|cajeros|datafono|souvenir|souvenirs|restaurant|bathroom|toilet|parking)\\b',
       '\\b(venden|compro|comprar|consigo) (comida|agua|cafe|bebidas|algo de comer)\\b',
+      # Señal y precios (prueba del 26-nov: «¿hay señal en Arenales?» respondía con una ficha que no habla de eso)
+      '\\b(senal|senales|datos moviles|celular funciona|funciona el celular|hay red)\\b', '\\b(cuanto (cuesta|vale|valen|cuestan)|precio|precios|tarifa|tarifas|cobran)\\b',
+      '\\b(hamburguesa|hamburguesas|pizza|perro caliente|empanada|empanadas|gaseosa|cerveza|helado|dulces|mecato|snack|hambre|antojo)\\b',
+    ],
+    'salvo': [],
+  },
+  {
+    # Llevarse algo del páramo de recuerdo (prueba del 26-nov: «¿me puedo llevar una piedrita?» quedaba sin respuesta)
+    'id': 'llevar',
+    'si': [
+      '\\b(puedo|podemos|se puede|se pueden|me puedo|nos podemos|dejan|me dejan|esta permitido|can i|can we)\\b.*\\b(llevar|llevarme|llevarnos|llevarla|llevarlo|sacar|recoger|coger|guardar|take)\\b.*\\b(piedra|piedras|piedrita|piedritas|roca|rocas|planta|plantas|flor|flores|pluma|plumas|semilla|semillas|arena|recuerdo|hueso|huesos|frailejon|frailejones|musgo|hoja|hojas|rock|rocks|stone|plant)',
     ],
     'salvo': [],
   },
