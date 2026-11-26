@@ -266,6 +266,10 @@ const T = {
     'cerrar': 'Cerrar',
     // Instalación y arreglos de iPhone (spec arreglos-iphone)
     "ins.titulo": "Instala tu álbum para usarlo sin señal",
+    "apk.boton": "Descargar la app Fray para Android",
+    "apk.nota": "Recomendada: trae la IA local que conversa sin señal. Ábrela una vez con wifi para que baje el modelo (unos 530 MB).",
+    "apk.oWeb": "O usa el álbum en el navegador (sin la IA que conversa):",
+    "apk.corta": "con IA local, sin señal",
     "ins.hola": "¡Hola, {nombre}!",
     "ins.porque": "En el páramo casi no hay señal. Instalado, el álbum guarda todo en tu celular (unos 95 MB) y funciona en modo avión.",
     "ins.instalar": "Instalar el álbum",
@@ -701,6 +705,10 @@ const T = {
     'cerrar': 'Close',
     // Instalación y arreglos de iPhone (spec arreglos-iphone)
     "ins.titulo": "Install your album to use it with no signal",
+    "apk.boton": "Download the Fray app for Android",
+    "apk.nota": "Recommended: it brings the local AI that chats with no signal. Open it once on wifi to download the model (about 530 MB).",
+    "apk.oWeb": "Or use the album in the browser (without the chatting AI):",
+    "apk.corta": "with local AI, no signal",
     "ins.hola": "Hi, {nombre}!",
     "ins.porque": "There is almost no signal on the páramo. Once installed, the album saves everything on your phone (about 95 MB) and works in airplane mode.",
     "ins.instalar": "Install the album",
