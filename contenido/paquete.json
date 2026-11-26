@@ -1,5 +1,5 @@
 {
- "version": "2026-11-26.1",
+ "version": "2026-11-26.2",
  "actualizado": "2026-11-26",
  "fuentes": {
   "UTON2024": {
@@ -16,7 +16,16 @@
    "id": "brisas",
    "nombre": "Brisas",
    "orden": 0,
-   "altitud": null
+   "altitud": {
+    "m": 4110,
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 44
+     }
+    ],
+    "nota": "Altitud de la estación meteorológica Brisas según el guion UTON 2024 (p. 44)."
+   }
   },
   {
    "id": "aguacerales",
@@ -2238,7 +2247,1952 @@
    "bloqueada": false,
    "motivo": null,
    "estado": "validado"
+  },
+  {
+   "id": "uton-cvnr-definicion",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "El Complejo Volcánico Nevado del Ruiz",
+   "texto": "El Complejo Volcánico Nevado del Ruiz se define como una serie de estructuras y depósitos volcánicos genéticamente relacionados con el desarrollo del Volcán Nevado del Ruiz. El NRV es un volcán compuesto activo que alcanza un máximo de 5321 msnm y está coronado por el Cráter Arenas (aproximadamente 750 m de diámetro y 200 m de profundidad). El VNR se ubica en la sección media de la Cordillera Central de Colombia entre los departamentos de Caldas y Tolima, y aproximadamente a 140 km al NO de Bogotá, capital de Colombia, y 28 km al SE de Manizales, Caldas. \"Actualmente tiene una cubierta glaciar de 9,3 km²\" (Ceballos–Hernández et al., 2020).",
+   "breve": "El NRV es un volcán compuesto activo que alcanza un máximo de 5321 msnm y está coronado por el Cráter Arenas (aproximadamente 750 m de diámetro y 200 m de profundidad).",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 15
+    }
+   ],
+   "preguntas": [
+    "¿qué tan alto es el Nevado del Ruiz?",
+    "¿cuánto mide el cráter Arenas?",
+    "¿qué tan profundo es el cráter?",
+    "¿dónde queda el volcán?",
+    "¿a qué distancia está Manizales?",
+    "how high is Nevado del Ruiz?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-subduccion",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Por qué hay volcanes aquí: la subducción",
+   "texto": "El CVNR está ubicado en la sección más septentrional de la Zona Volcánica Norte del cinturón volcánico andino definida por Gansser (1973). Tectónicamente, esta zona se corresponde con la subducción de la Placa de Nazca bajo la Placa Sudamericana, que ocurre a un ritmo de 5.5 cm/año y un azimut de 88° y a 5.3 cm/año y un azimut de 86°, según datos del proyecto Geodesia: Red de Estudios de Deformación (GeoRED) del SGC (Mora et al., 2016). Esta subducción crea un arco volcánico muy estrecho (Trenkamp et al., 2002) sobre el área sismogénica de Benioff, que define el área donde la placa oceánica subducida desciende a 45° (Bourdon et al., 2003).",
+   "breve": "Tectónicamente, esta zona se corresponde con la subducción de la Placa de Nazca bajo la Placa Sudamericana, que ocurre a un ritmo de 5.5 cm/año",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 16
+    }
+   ],
+   "preguntas": [
+    "¿por qué hay volcanes en Colombia?",
+    "¿cómo se formó el volcán?",
+    "¿qué es la subducción?",
+    "¿qué placas hay aquí?",
+    "why are there volcanoes here?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-periodos-eruptivos",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Las cuatro «versiones» del Ruiz",
+   "texto": "El complejo volcánico Nevado del Ruiz ha experimentado múltiples fases eruptivas desde hace aproximadamente 1.8 millones de años. 1. Pre-Ruiz: desde 1.8 Ma hasta 0.97 Ma; actividad efusiva y construcción del volcán \"Ancestral Ruiz\". 2. Primer Periodo Eruptivo: comenzó antes de 0.97 Ma y finalizó aproximadamente a 95.43 ± 0.7 ka; dominado por volcanismo efusivo inicialmente, seguido por un periodo destructivo altamente explosivo que culminó en la formación de una caldera. 3. Periodo Eruptivo Intermedio: desde 95.43 ± 0.7 ka hasta 66.3 ± 5.6 ka; incluye la construcción del volcán La Olleta y otros centros eruptivos menores como los volcanes Nereidas y Piraña. 4. Segundo Periodo Eruptivo: comenzó hace 66.3 ± 5.6 ka y continúa hasta el presente; corresponde al actual volcán Nevado del Ruiz (VNR) y ha estado caracterizado por una actividad explosiva predominante en los últimos 13 ka, incluyendo múltiples pulsos eruptivos y lahares.",
+   "breve": "El complejo volcánico Nevado del Ruiz ha experimentado múltiples fases eruptivas desde hace aproximadamente 1.8 millones de años.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 16
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 17
+    }
+   ],
+   "preguntas": [
+    "¿qué edad tiene el volcán?",
+    "¿cuántos años tiene el Ruiz?",
+    "¿cómo se formó el Nevado del Ruiz?",
+    "¿qué es el Ruiz ancestral?",
+    "¿cuándo nació el volcán actual?",
+    "how old is the volcano?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-olleta-nereidas-pirana",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "La Olleta, Nereidas y Piraña",
+   "texto": "Notas: 1. La Olleta: volcán que comenzó su formación hace 107,000 años, ubicado en el área cercana al actual VNR. 2. Nereidas: situado 2 km al suroeste del VNR, con una altitud de 5000 msnm aprox., tiene aproximadamente 66,000 años. 3. Piraña: ubicado a 3.8 km al este del Arenas Crater, con formaciones geológicas irregulares. Se formó en un contexto eruptivo que data de hace 66,000 años.",
+   "breve": "Nereidas: situado 2 km al suroeste del VNR, con una altitud de 5000 msnm aprox., tiene aproximadamente 66,000 años.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 17
+    }
+   ],
+   "preguntas": [
+    "¿qué edad tiene Nereidas?",
+    "¿dónde queda La Olleta?",
+    "¿qué es Piraña?",
+    "¿cuántos años tiene La Olleta?",
+    "¿qué tan alto es Nereidas?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-gases-volcanicos",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Qué gases emite el volcán",
+   "texto": "Los gases volcánicos son una mezcla de varios componentes que se liberan durante las erupciones y la actividad volcánica. Los principales gases presentes incluyen: 1. Dióxido de carbono (CO2): componente mayoritario en muchas erupciones. 2. Dióxido de azufre (SO2): conocido por su papel en la formación de lluvia ácida. 3. Vapor de agua (H2O): uno de los gases más abundantes, que puede afectar la dinámica de la erupción. 4. Monóxido de carbono (CO): típicamente en menor proporción. 5. Hidrocarburos: gases orgánicos que pueden ser liberados en erupciones. 6. Ácido clorhídrico (HCl): presente en pequeñas cantidades. 7. Otros gases: como el ácido fluorhídrico (HF) y el metano (CH4).",
+   "breve": "Los gases volcánicos son una mezcla de varios componentes que se liberan durante las erupciones y la actividad volcánica.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 17
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 18
+    }
+   ],
+   "preguntas": [
+    "¿qué gases salen del volcán?",
+    "¿qué es ese humo del cráter?",
+    "¿el volcán echa azufre?",
+    "¿qué es el SO2?",
+    "what gases does the volcano emit?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-gases-impacto",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Para qué sirve medir los gases",
+   "texto": "Impacto del volumen de gases: 1. Cambio climático: los gases, especialmente el CO2 y el SO2, pueden influir en el clima local y global. 2. Calidad del aire: la emisión de SO2 puede contribuir a problemas de salud pública debido a la formación de partículas finas. 3. Indicadores de actividad volcánica: cambios en el volumen y la composición de los gases pueden predecir erupciones inminentes. 4. Interacción con el medio ambiente: los gases pueden afectar la vegetación y los ecosistemas locales. Estos datos son esenciales para la comprensión y predicción de la actividad volcánica del Nevado del Ruiz, así como para la gestión del riesgo en las comunidades circundantes.",
+   "breve": "Indicadores de actividad volcánica: cambios en el volumen y la composición de los gases pueden predecir erupciones inminentes.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 18
+    }
+   ],
+   "preguntas": [
+    "¿por qué miden los gases del volcán?",
+    "¿los gases avisan una erupción?",
+    "¿los gases afectan el clima?",
+    "¿para qué sirve medir el SO2?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-gases-hallazgos",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Hallazgos sobre el origen de la actividad (bloqueada)",
+   "texto": "Hallazgos: Hay aumento de componentes hidrotermales en los vapores relacionados a los cambios de actividad; sus gases son ricos en azufre, indicando un sistema magmático estancado. Hay presencia de aguas ácidas y cloruro-bicarbonato, sugiriendo dos sistemas de circulación distintos. Conclusión: la actividad volcánica se debe a la acumulación de gases de magma antiguo, no a nuevos aportes magmáticos.",
+   "breve": "Conclusión: la actividad volcánica se debe a la acumulación de gases de magma antiguo, no a nuevos aportes magmáticos.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 18
+    }
+   ],
+   "preguntas": [
+    "¿por qué está activo el volcán?",
+    "¿hay magma nuevo?"
+   ],
+   "bloqueada": true,
+   "motivo": "Interpreta el estado de actividad del volcán; puede leerse como información vigente. El estado del volcán lo informan el Servicio Geológico Colombiano y el personal del parque.",
+   "estado": "validado"
+  },
+  {
+   "id": "uton-domo-lava",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "El domo de lava de 2015-2021",
+   "texto": "El crecimiento del domo de lava del Nevado del Ruiz entre 2015 y 2021 se caracterizó por: volumen total: se estimó un volumen total de lava extruida de 1.7 millones de m³. Crecimiento de la morfología: El domo alcanzó un diámetro de aproximadamente 130 m y una altura máxima de alrededor de 60 m. Tipo de domo: clasificado como un domo de lava de tipo bajo, según la clasificación morfológica. Relación con la deformación: hubo una correlación fuerte entre el crecimiento del domo y la deformación del summit. El volumen del domo aumentó de ~0.1 × 10^6 m³ en noviembre de 2015 a ~1.1 × 10^6 m³ en diciembre de 2019.",
+   "breve": "El domo alcanzó un diámetro de aproximadamente 130 m y una altura máxima de alrededor de 60 m.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 19
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 20
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 21
+    }
+   ],
+   "preguntas": [
+    "¿qué es el domo de lava?",
+    "¿hay lava dentro del cráter?",
+    "¿qué tan grande es el domo?",
+    "¿cuándo creció el domo?",
+    "what is the lava dome?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-efusivo-explosivo",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Erupciones efusivas y explosivas",
+   "texto": "Las erupciones en el Nevado del Ruiz son el resultado de interacciones complejas entre procesos efusivos y explosivos: 1. Vulcanismo compuesto: El volcán presenta un comportamiento tanto efusivo (extrusión de lava) como explosivo (emisiones piroclásticas). 2. Efectos de la extrusión de lava: la formación del domo de lava ha estado acompañada de episodios explosivos menores, que han ayudado a liberar la presión del sistema. 3. Sismicidad: aumentos en la actividad sísmica han precedido y coincidido con ambos tipos de erupciones, indicando movimiento de magma. 4. Influencia de la glaciación: la dinámica del glaciar en la cumbre también juega un papel en la actividad eruptiva, afectando la presión y la temperatura del magma.",
+   "breve": "El volcán presenta un comportamiento tanto efusivo (extrusión de lava) como explosivo (emisiones piroclásticas).",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 19
+    }
+   ],
+   "preguntas": [
+    "¿qué tipo de erupciones tiene el Ruiz?",
+    "¿qué diferencia hay entre erupción efusiva y explosiva?",
+    "¿los temblores anuncian erupciones?",
+    "¿el glaciar influye en el volcán?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-monitoreo",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Cómo se vigila el volcán",
+   "texto": "Se implementaron diversos métodos para monitorear el Nevado del Ruiz: 1. Redes geodésicas: se utilizó GNSS y redes de inclinómetros para medir la deformación del terreno. 2. Monitoreo sísmico: se registraron eventos sísmicos volcánicos para evaluar la actividad interna. 3. Geoquímica: se realizaron análisis de gases, especialmente SO2, para detectar cambios en la actividad magmática. 4. Webcams y fotogrametría: se usaron cámaras web y fotogrametría para observar cambios en la morfología del domo. 5. Infrasonido: se implementaron estaciones de infrasonido para captar sonidos de erupciones y explosiones. 6. Modelos digitales de elevación: se crearon DEMs para evaluar la evolución del domo y su impacto en la topografía.",
+   "breve": "Se implementaron diversos métodos para monitorear el Nevado del Ruiz",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 19
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 20
+    }
+   ],
+   "preguntas": [
+    "¿cómo vigilan el volcán?",
+    "¿cómo se monitorea el Ruiz?",
+    "¿qué instrumentos miden el volcán?",
+    "¿cómo saben si va a hacer erupción?",
+    "how is the volcano monitored?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-glaciar-importancia-estudio",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "Por qué se estudia el glaciar de la cumbre",
+   "texto": "El glaciar en la cumbre del Nevado del Ruiz es crucial para el estudio del volcán por varias razones: 1. Indicador de cambios climáticos: su comportamiento refleja cambios en el clima y en la actividad volcánica. 2. Impacto en la actividad volcánica: la interacción del glaciar con el magma puede influir en la presión y la temperatura, afectando el tipo y la intensidad de las erupciones. 3. Estudio de riesgos: el monitoreo del glaciar es vital para entender los riesgos de lahares y flujos de escombros durante erupciones. 4. Recursos hídricos: el glaciar proporciona agua a las comunidades cercanas, lo que lo convierte en un recurso importante en la región.",
+   "breve": "Estudio de riesgos: el monitoreo del glaciar es vital para entender los riesgos de lahares y flujos de escombros durante erupciones.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 20
+    }
+   ],
+   "preguntas": [
+    "¿por qué es peligroso el glaciar en una erupción?",
+    "¿qué relación hay entre el glaciar y los lahares?",
+    "¿por qué estudian el glaciar?",
+    "¿el glaciar da agua?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-erupcion-1985-ceniza",
+   "estacion": "tumbas",
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "La erupción de 1985: ceniza y gases",
+   "texto": "Durante la erupción del Nevado del Ruiz el 13 de noviembre de 1985 se produjeron importantes emisiones de ceniza, gases y materiales piroclásticos. La erupción comenzó a las 15:05 HL y generó una nube de gases y ceniza que alcanzó más de 5,000 metros sobre el cráter. El material piroclástico se dispersó hacia el oriente debido a los vientos predominantes en las capas superiores, cubriendo extensas áreas del Tolima, incluyendo Armero, Mariquita y Honda. El dióxido de azufre (SO2) emitido durante la erupción alcanzó la estratósfera, lo que permitió su dispersión a largas distancias, incluso hasta la Sierra Nevada del Cocuy y Cali. Se estima que la erupción emitió cerca de 700,000 toneladas de SO2, siendo una de las emisiones más altas registradas a nivel mundial.",
+   "breve": "La erupción comenzó a las 15:05 HL y generó una nube de gases y ceniza que alcanzó más de 5,000 metros sobre el cráter.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 22
+    }
+   ],
+   "preguntas": [
+    "¿a qué hora fue la erupción de 1985?",
+    "¿hasta dónde llegó la ceniza en 1985?",
+    "¿qué tan alta fue la columna de ceniza?",
+    "¿cuánto azufre echó el volcán en 1985?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-provincia-volcanica",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Volcanes vecinos: la provincia San Diego-Cerro Machín",
+   "texto": "El CVNR está ubicado en el centro del SCVTP (provincia vulcano-tectónica San Diego-Cerro Machín) y es parte del segmento norte de volcanes activos en Colombia. El SCVTP está compuesto por complejos volcánicos, una cadena volcánica poligenética y campos volcánicos monogenéticos: San Diego Maar, Volcán El Escondido, Volcán Romeral, Volcán Cerro Bravo, Campo Volcánico Monogenético Villamaría–Termales, CVNR, Domo de lava Cisne–Morro Negro, Complejo Domo Santa Isabel, Complejo Volcánico Paramillo de Santa Rosa, Volcán Cerro España, el Volcán Paramillo del Quindío, el Volcán Nevado del Tolima, el Volcán Cerro Machín y los centros volcánicos Guacharacos y Tabor.",
+   "breve": "El CVNR está ubicado en el centro del SCVTP (provincia vulcano-tectónica San Diego-Cerro Machín) y es parte del segmento norte de volcanes activos en Colombia.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 23
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 24
+    }
+   ],
+   "preguntas": [
+    "¿qué otros volcanes hay cerca?",
+    "¿el Nevado del Tolima es volcán?",
+    "¿el Cerro Machín está cerca?",
+    "¿qué volcanes hay en la región?",
+    "¿Santa Isabel es un volcán?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-pre-ruiz",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "El período Pre-Ruiz",
+   "texto": "Período Pre-Ruiz (1.8 - 0.97 millones de años atrás). Actividad volcánica: Este período fue dominado por el volcanismo efusivo que resultó en la construcción del volcán \"Ancestral Ruiz\". Depósitos: se caracterizó por flujos de lava andesítica extensos y homogéneos que forman colinas alargadas y erosionadas con alturas de hasta 200 m y longitudes de hasta 30 km. Composición: los depósitos están compuestos por andesitas porfiríticas con minerales como plagioclasa, ortopiroxeno, clinopiroxeno, minerales opacos, anfíbol y biotita. Edificios volcánicos: durante este período se formaron estructuras como las colinas de Gualí y Recreo, localizadas al norte del VNR actual.",
+   "breve": "Este período fue dominado por el volcanismo efusivo que resultó en la construcción del volcán \"Ancestral Ruiz\".",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 25
+    }
+   ],
+   "preguntas": [
+    "¿qué es el Pre-Ruiz?",
+    "¿qué es el Ruiz ancestral?",
+    "¿cómo se formaron las colinas de Gualí?",
+    "¿cuál fue el primer volcán?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-older-ruiz",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "El «Ruiz Antiguo» y su caldera",
+   "texto": "Primer Período Eruptivo Ruiz (menos de 0.97 - 95 mil años atrás). Fase constructiva: se construyó el volcán \"Older Ruiz\" principalmente a través de flujos de lava andesítica. Estas lavas cubren un área de aproximadamente 120 km². La actividad efusiva comenzó hace menos de 0.97 millones de años y culminó con la formación de una caldera hace unos 95 mil años. Volcán La Olleta: la construcción del Volcán La Olleta comenzó al final de este período, alrededor de 107 ka. Fase destructiva: se caracterizó por una actividad explosiva que resultó en la formación de depósitos de corrientes de densidad piroclástica (PDC) y caídas piroclásticas. Ignimbritas de Río Claro: estas ignimbritas son un indicativo de la caldera formada por la destrucción del \"Older Ruiz\". Colapso del flanco: se produjo un colapso del flanco que generó depósitos de avalanchas de escombros, como el depósito de avalancha de Líbano, fechado en 0.165 Ma.",
+   "breve": "La actividad efusiva comenzó hace menos de 0.97 millones de años y culminó con la formación de una caldera hace unos 95 mil años.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 25
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 26
+    }
+   ],
+   "preguntas": [
+    "¿qué es el Ruiz antiguo?",
+    "¿el Ruiz tuvo una caldera?",
+    "¿qué es una ignimbrita?",
+    "¿cuándo se formó la caldera?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-segundo-periodo",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "El volcán actual: Segundo Período Eruptivo",
+   "texto": "Período Eruptivo Intermedio Ruiz: surgieron nuevos volcanes como Piraña y Nereidas, y continuó la construcción del Volcán La Olleta. Segundo Período Eruptivo Ruiz (66 mil años atrás hasta el presente): Este período comenzó hace aproximadamente 66 ka con la construcción del volcán actual. La actividad eruptiva durante este período ha sido predominantemente explosiva, con al menos catorce pulsos y fases eruptivas en los últimos 13,000 años. Entre los eventos más destacados se encuentra la erupción freatomagmática de 1985, que tuvo un Índice de Explosividad Volcánica (VEI) de 3, y causó la muerte de más de 25,000 personas debido a la generación de lahares que afectaron a las localidades de Armero, Villamaría y Chinchiná.",
+   "breve": "Este período comenzó hace aproximadamente 66 ka con la construcción del volcán actual.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 26
+    }
+   ],
+   "preguntas": [
+    "¿cuándo se formó el volcán actual?",
+    "¿cuántas erupciones ha tenido el Ruiz?",
+    "¿qué tan fuerte fue la erupción de 1985?",
+    "¿qué es el índice de explosividad?",
+    "¿cuántas personas murieron en 1985?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-avalancha-libano",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "La avalancha de El Líbano",
+   "texto": "El depósito de avalanchas de escombros de origen no eruptivo de El Líbano ocurre en el flanco E de la NRVC. Este depósito resultó del colapso de flanco del volcán \"Ruiz Mayor\", cubre un área de 86 km², y tiene una geomorfología de grandes montículos, sobre los cuales actualmente se ubican los poblados de Murillo y El Líbano. Esta avalancha recorrió aproximadamente 28 km desde su origen y tuvo un volumen estimado de 6 km³. Thouret et al. (1990) fecharon un bloque de andesita de este depósito en 0,165 Ma.",
+   "breve": "Este depósito resultó del colapso de flanco del volcán \"Ruiz Mayor\", cubre un área de 86 km², y tiene una geomorfología de grandes montículos, sobre los cuales actualmente se ubican los poblados de Murillo y El Líbano.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 27
+    }
+   ],
+   "preguntas": [
+    "¿qué es la avalancha de El Líbano?",
+    "¿Murillo está sobre una avalancha?",
+    "¿el volcán se ha derrumbado?",
+    "¿qué tan grande fue la avalancha?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-erupcion-unidades",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Cuánto dura una erupción",
+   "texto": "Una erupción volcánica se puede subdividir en unidades de actividad volcánica que incluyen: (1) un pulso eruptivo que puede durar unos pocos segundos a minutos, (2) una fase eruptiva que puede durar unas pocas horas a días y constar de numerosos pulsos eruptivos, y (3) una única erupción, compuesta de varias fases, que puede durar unos pocos días a meses, o en algunos volcanes basálticos, unos pocos años. Varias erupciones se agrupan en una época eruptiva (que corresponde a un período de tiempo de decenas, cientos o miles de años), y varias épocas eruptivas forman un período eruptivo (que puede durar de miles a millones de años).",
+   "breve": "(1) un pulso eruptivo que puede durar unos pocos segundos a minutos, (2) una fase eruptiva que puede durar unas pocas horas a días y constar de numerosos pulsos eruptivos",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 16
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 27
+    }
+   ],
+   "preguntas": [
+    "¿cuánto dura una erupción?",
+    "¿qué es un pulso eruptivo?",
+    "¿qué es un período eruptivo?",
+    "¿una erupción puede durar años?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-aguas-termales",
+   "estacion": null,
+   "tema": "agua",
+   "tipo": "ciencia",
+   "titulo": "Aguas termales del Ruiz",
+   "texto": "El Nevado del Ruiz es un volcán activo con manifestaciones termales significativas, como manantiales y fumarolas. Se identificaron dos sistemas de circulación de fluidos independientes en el macizo volcánico: uno al norte del volcán, asociado con aguas sulfatadas, y otro al oeste, con aguas cloruradas neutras. Las aguas geotérmicas provienen de un yacimiento con una temperatura mínima estimada de 235°C. La mezcla de estas aguas con aguas superficiales da lugar a manantiales de alta temperatura, como los de Botero Londoño. El estudio sugiere que las zonas de Botero Londoño y Las Nereidas tienen buen potencial para exploraciones geotérmicas. La composición de las aguas termales es generalmente baja en salinidad, con un máximo de 4700 mg/l en Thermal La Gruta, y se caracteriza por un bajo pH y altos contenidos de sulfato.",
+   "breve": "Las aguas geotérmicas provienen de un yacimiento con una temperatura mínima estimada de 235°C.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 27
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 28
+    }
+   ],
+   "preguntas": [
+    "¿hay aguas termales?",
+    "¿por qué el agua sale caliente?",
+    "¿qué es Botero Londoño?",
+    "¿qué tan caliente está el agua del volcán?",
+    "are there hot springs?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-fumarola-nereidas-rios",
+   "estacion": null,
+   "tema": "agua",
+   "tipo": "ciencia",
+   "titulo": "Fumarola de Nereidas y gases en los ríos",
+   "texto": "Se realizaron muestreos en varios puntos clave, incluyendo: Nereidas: fumarola a 80°C, con una composición de gases que incluye 70% de vapor de agua, 25% de CO2 y 30,200 µmol/mol de CH4. Agua Calientes y Botero Londoño: estas áreas mostraron concentraciones significativas de CO, que son comparables a los niveles de CH4, sugiriendo una interacción entre gases volcánicos y aguas termales. Las muestras de ríos, como el Azufral, Gualí, Lagunillas y Molinos, mostraron una casi saturación de gases atmosféricos, lo que indica una fuerte influencia de la actividad volcánica en la calidad del agua.",
+   "breve": "Nereidas: fumarola a 80°C, con una composición de gases que incluye 70% de vapor de agua, 25% de CO2",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 28
+    }
+   ],
+   "preguntas": [
+    "¿qué es la fumarola de Nereidas?",
+    "¿qué tan caliente es la fumarola?",
+    "¿el volcán afecta el agua de los ríos?",
+    "¿los ríos tienen gases?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-glaciar-ruiz-2022",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "Área del glaciar del Ruiz en 2022",
+   "texto": "El volcán Nevado del Ruiz es el glaciar más icónico de la región Andina central. Está compuesto por una única masa de hielo, cuya área, para el 2022, se calculó en 7,68 ±0,26 km², que, comparada con la del 2021 (7,96 ±0,29 km²), muestra una reducción de 0,28 km² (3.5 %). La característica destacada de este volcán nevado ha sido la emisión de ceniza volcánica y su acumulación sobre parte o la totalidad del glaciar, lo que generó, dependiendo del espesor acumulado, un incremento en el derretimiento (depósitos de ceniza de pocos centímetros) o un aislamiento térmico del glaciar (depósitos de ceniza mayores a 15 cm aprox.). Durante el fenómeno climático extremo La Niña, fue común que la nieve cubriera los depósitos de ceniza (tomado de Informe del estado de los glaciares colombianos 2022).",
+   "breve": "Está compuesto por una única masa de hielo, cuya área, para el 2022, se calculó en 7,68 ±0,26 km², que, comparada con la del 2021 (7,96 ±0,29 km²), muestra una reducción de 0,28 km² (3.5 %).",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 29
+    }
+   ],
+   "preguntas": [
+    "¿qué tan grande es el glaciar del Ruiz?",
+    "¿cuánto glaciar queda?",
+    "¿cuánto se ha reducido el glaciar?",
+    "¿la ceniza derrite el glaciar?",
+    "¿cuántos kilómetros mide el glaciar?",
+    "how big is the glacier?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-glaciar-formacion-era",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "Cómo se forma un glaciar y la última era glacial",
+   "texto": "Algunos datos de interés: Era glacial: última era glaciar 110.000 años, en 3 fases, el máximo glaciar hace unos 28.000 años aproximadamente. Cómo se forma un glaciar: precipitación constante de granizo o nieve, durante mucho tiempo, el cual se aglomera y se compacta formando una masa de hielo; esta masa de hielo de grandes dimensiones es conocida como glaciar (un glaciar es considerado una roca metamórfica) y el hielo es considerado un mineral. Calentamiento: periodo interglaciar, época de \"calentamiento\"; estos están asociados con los ciclos de Milankovich, que no son más que una serie de movimientos astronómicos.",
+   "breve": "un glaciar es considerado una roca metamórfica) y el hielo es considerado un mineral.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 29
+    }
+   ],
+   "preguntas": [
+    "¿el hielo es un mineral?",
+    "¿un glaciar es una roca?",
+    "¿cuándo fue la última era glacial?",
+    "¿qué son los ciclos de Milankovich?",
+    "¿cómo se forma un glaciar?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-ultima-glaciacion",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "La última glaciación en Colombia",
+   "texto": "Hace 70.000 años aproximadamente ocurrió un descenso térmico pronunciado que generó sobre las cimas de las montañas colombianas un fuerte crecimiento en la zona glaciar. Éste fue el inicio de la última glaciación sobre el territorio colombiano (Flórez, 1992). El período de máxima extensión glaciar se denomina Pleniglacial. Según Van der Hammen et al. (1980), ocurre entre los 48.000 y 30.000 años antes del presente y se denomina Pleniglacial Medio. Durante este período, los glaciares en Colombia ocuparon áreas por encima de los 3.000 (± 200) metros sobre el nivel del mar, cubriendo una superficie de 17.109 km² (Flórez, 1992). Para aquel tiempo, el altiplano de Bogotá tenía vegetación de páramo. Durante los 11.000 y 10.000 años ap, período denominado Tardiglacial, la humedad y temperatura aumentan, y se inicia la retirada glaciar, por lo que se conoce esta época como el fin de la última glaciación y el comienzo del Interglacial o época actual.",
+   "breve": "Hace 70.000 años aproximadamente ocurrió un descenso térmico pronunciado que generó sobre las cimas de las montañas colombianas un fuerte crecimiento en la zona glaciar.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 29
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 30
+    }
+   ],
+   "preguntas": [
+    "¿cuándo empezó la última glaciación?",
+    "¿hasta dónde llegaban los glaciares?",
+    "¿Bogotá era páramo?",
+    "¿qué es el Pleniglacial?",
+    "¿cuándo terminó la era de hielo?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-pequena-edad-hielo",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "La Pequeña Edad de Hielo y la pérdida de glaciares",
+   "texto": "El antepenúltimo gran cambio climático en el planeta ocurrió alrededor del siglo XV hasta mediados del XIX de nuestra era, período de menores temperaturas conocido como la Pequeña Edad de Hielo (PEH) o Neoglaciación, durante la cual la temperatura en la alta montaña colombiana debió ser algunos grados centígrados más baja que la actual y los glaciares aumentaron su área llegando a ocupar 374 km² (Flórez, 1992). El límite de hielo descendió hasta los 4.200 m en el sur del país, 4.400 m (±100 m) en la parte central de los Andes colombianos, en tanto que al norte, en la Sierra Nevada de Santa Marta, el límite se mantuvo a 4.600 m (±100 m). Desde aquella época los glaciares se han reducido en casi 84% en los últimos 150 años.",
+   "breve": "Desde aquella época los glaciares se han reducido en casi 84% en los últimos 150 años.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 30
+    }
+   ],
+   "preguntas": [
+    "¿qué fue la Pequeña Edad de Hielo?",
+    "¿cuánto glaciar se ha perdido?",
+    "¿hasta dónde bajaba el hielo antes?",
+    "¿cuánto han retrocedido los glaciares en Colombia?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-deshielo-siglo-xx",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "Deshielo desde el siglo XIX: 19 nevados",
+   "texto": "Desde la segunda mitad del siglo XIX hay, en general, un ascenso térmico (con pequeñas fluctuaciones) que se caracteriza por un continuo derretimiento de los glaciares, el cual se ha intensificado en las tres últimas décadas y está relacionado, según la comunidad científica, con el aumento térmico de la atmósfera asociado a la acumulación de gases de efecto invernadero. Para finales del siglo XIX en Colombia se contaban aproximadamente 19 nevados, de los cuales cuatro se conocían como nevados temporales, ya que su cubierta de nieve sólo era evidente en la época de lluvias. Se observan tres períodos marcados: el primero entre las décadas de 1940 y 1950, donde se presenta a nivel general una rápida pérdida de área; el segundo entre 1960 a 1980, donde la pérdida disminuye, y el tercero desde la década de 1980 hasta el presente, cuando nuevamente se incrementa el proceso de fusión glaciar (tomado de Ceballos y Tobón, 2007).",
+   "breve": "Para finales del siglo XIX en Colombia se contaban aproximadamente 19 nevados, de los cuales cuatro se conocían como nevados temporales",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 30
+    }
+   ],
+   "preguntas": [
+    "¿cuántos nevados había en Colombia?",
+    "¿cuántos glaciares quedan en Colombia?",
+    "¿desde cuándo se derriten los glaciares?",
+    "¿qué es un nevado temporal?",
+    "¿por qué se derriten los glaciares?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-glaciacion-resumen",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "Resumen: Pleniglacial, Interglacial y Pequeña Edad de Hielo",
+   "texto": "Pleniglacial: período de máxima extensión glaciar entre 48.000 y 14.000 años AP. Se divide en tres subperiodos: Pleniglacial Medio (48.000 - 30.000 AP): los glaciares cubrían 17.109 km². Pleniglacial Máximo (24.500 - 20.400 AP): clima frío y seco. Tardiglacial (21.000 - 14.000 AP): reducción de los glaciares. Interglacial y Pequeña Edad de Hielo: entre 14.000 y 150 años AP, la temperatura aumentó (Interglacial). Entre 1500 y 1850 d.C., la temperatura disminuyó (Pequeña Edad de Hielo); los glaciares aumentaron a 374 km²; el límite de hielo descendió a 4.200 m en el sur, 4.400 m en el centro y 4.600 m en la Sierra Nevada de Santa Marta.",
+   "breve": "Pleniglacial: período de máxima extensión glaciar entre 48.000 y 14.000 años AP.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 31
+    }
+   ],
+   "preguntas": [
+    "¿cuáles fueron las etapas de la glaciación?",
+    "¿qué es el Tardiglacial?",
+    "¿cuándo fue el máximo glaciar?",
+    "¿qué es el Interglacial?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-retirada-glaciar-actual",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "Retirada glaciar actual: tendencia a la extinción",
+   "texto": "Retirada glaciar actual: desde 1850, los glaciares han retrocedido en más de un 84%. El derretimiento se ha intensificado en las últimas 3 décadas debido al calentamiento global. Entre 19 y 20 nevados existían en Colombia a finales del siglo XIX. Los glaciares colombianos son restos de la última glaciación, con tendencia a la extinción y presentan un acelerado deterioro en las últimas décadas que ha sido asociado al efecto invernadero. Según los datos disponibles la pérdida de área anual es de 1 a 3%. El retroceso lineal del borde inferior glaciar está entre 15 y 20 metros por año y, aunque la dinámica glaciar es compleja y por conocer, se estima que en algunas décadas existiría muy poco de los nevados colombianos si continúan las actuales condiciones climáticas.",
+   "breve": "Los glaciares colombianos son restos de la última glaciación, con tendencia a la extinción y presentan un acelerado deterioro en las últimas décadas que ha sido asociado al efecto invernadero.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 31
+    }
+   ],
+   "preguntas": [
+    "¿van a desaparecer los glaciares?",
+    "¿cuánto retrocede el glaciar cada año?",
+    "¿cuánto glaciar se pierde al año?",
+    "¿cuándo se acabará el nevado?",
+    "¿por qué se derrite el nevado?",
+    "will the glaciers disappear?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-retroceso-causas",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "De qué depende el retroceso glaciar",
+   "texto": "El retroceso glaciar es un proceso que depende de muchas variables, siendo las climáticas las más importantes. Otras como el sustrato rocoso, la topografía y la ubicación geográfica y altitudinal actúan secundariamente. Por ahora se establece que, de acuerdo con la relación de asociación entre glaciar y clima, es el brillo solar el que incide en un alto porcentaje en el proceso de fusión del glaciar en la vertiente occidental del volcán nevado Santa Isabel. Los glaciares colombianos son un registro de los cambios climáticos del pasado. La actual pérdida de glaciares es alarmante y está relacionada con el calentamiento global; es necesario tomar medidas para mitigar y adaptar al cambio climático.",
+   "breve": "El retroceso glaciar es un proceso que depende de muchas variables, siendo las climáticas las más importantes.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 31
+    }
+   ],
+   "preguntas": [
+    "¿qué causa el retroceso del glaciar?",
+    "¿el sol derrite el glaciar?",
+    "¿por qué se derrite el Santa Isabel?",
+    "¿qué podemos hacer por los glaciares?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-glaciar-o-glacial",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "¿Glaciar o glacial?",
+   "texto": "Con frecuencia se suele confundir el uso de las palabras \"glaciar\" y \"glacial\" para referirse a los cuerpos de hielo que cubren distintas partes de las superficies del planeta. Tratar como sinónimos esas dos palabras es un error conceptual notable. La palabra glaciar hace referencia a los cuerpos de hielo, mientras que el concepto glacial se debe utilizar para describir los períodos más fríos en la historia geológica del planeta así como las geoformas y procesos que producen los glaciares (geoformas glaciales).",
+   "breve": "La palabra glaciar hace referencia a los cuerpos de hielo, mientras que el concepto glacial se debe utilizar para describir los períodos más fríos en la historia geológica del planeta así como las geoformas y procesos que producen los glaciares",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 32
+    }
+   ],
+   "preguntas": [
+    "¿se dice glaciar o glacial?",
+    "¿qué diferencia hay entre glaciar y glacial?",
+    "¿glacial es lo mismo que glaciar?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-circo-glacial",
+   "estacion": "tumbas",
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "Geomorfología glacial y circo glacial",
+   "texto": "La geomorfología glacial es la rama de la geomorfología que estudia las formas del relieve y los procesos asociados a los glaciares. Se enfoca en cómo el hielo y los glaciares moldean la superficie terrestre a través de procesos de erosión, transporte y deposición de materiales. Un circo glacial es una depresión en forma de anfiteatro producida por la erosión glaciar en las paredes montañosas o en el nacimiento de los valles. Es la zona de acumulación del glaciar donde la masa de nieve comprimida se mueve por deslizamiento, formando una concavidad rocosa circular o semicircular.",
+   "breve": "Un circo glacial es una depresión en forma de anfiteatro producida por la erosión glaciar en las paredes montañosas o en el nacimiento de los valles.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 32
+    }
+   ],
+   "preguntas": [
+    "¿qué es un circo glacial?",
+    "¿qué es la geomorfología glacial?",
+    "¿cómo moldea el hielo la montaña?",
+    "what is a glacial cirque?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-morrena",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "Qué es una morrena",
+   "texto": "Una morrena es una acumulación de sedimentos transportados por un glaciar, que puede incluir bloques, cantos y arena. Existen varios tipos de morrenas según su ubicación en relación con el glaciar: morrena de fondo: se sitúa bajo el hielo, en contacto con el lecho. Morrena lateral: los derrubios se sitúan en los laterales del lecho glacial. Morrena central: formada por la unión de morrenas laterales en la confluencia de dos glaciares. Morrena frontal o terminal: depósitos de derrubios en la zona de deshielo del glaciar.",
+   "breve": "Una morrena es una acumulación de sedimentos transportados por un glaciar, que puede incluir bloques, cantos y arena.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 32
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 33
+    }
+   ],
+   "preguntas": [
+    "¿qué es una morrena?",
+    "¿qué tipos de morrena hay?",
+    "¿qué deja el glaciar cuando se retira?",
+    "what is a moraine?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-valle-en-u",
+   "estacion": "aguacerales",
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "Qué es un valle en U",
+   "texto": "Un valle en U es una formación geológica caracterizada por lados altos y empinados y un fondo de valle redondeado o plano. Estos valles son el resultado de la erosión glacial, que transforma valles preexistentes en forma de V en valles más anchos y profundos con forma de U.",
+   "breve": "Un valle en U es una formación geológica caracterizada por lados altos y empinados y un fondo de valle redondeado o plano.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 33
+    }
+   ],
+   "preguntas": [
+    "¿qué es un valle en U?",
+    "¿por qué el valle tiene forma de U?",
+    "¿cómo se forma un valle glaciar?",
+    "what is a U-shaped valley?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-paramo-socioecosistema",
+   "estacion": null,
+   "tema": "cultura",
+   "tipo": "ciencia",
+   "titulo": "El páramo, un socioecosistema",
+   "texto": "Los páramos han sido habitados desde hace unos 10.000 años, aproximadamente. Las zonas interiores de las cordilleras también se encontraban pobladas; las diferentes comunidades se asentaban cerca de los ríos y construían terrazas en las laderas con el fin de construir sus viviendas. La forma de habitar se daba a través de un movimiento vertical y horizontal en la cordillera. Si bien existían los asentamientos, las comunidades prehispánicas se desplazaban a lo largo y ancho para obtener plantas medicinales, frutos y cazar animales. Las planicies de los páramos fueron utilizadas para llevar a pastar a los animales, pero su principal significado se encuentra relacionado con los rituales de peregrinación, y en los páramos habitan diferentes seres, sobre todo en las lagunas, volcanes y nevados.",
+   "breve": "Las planicies de los páramos fueron utilizadas para llevar a pastar a los animales, pero su principal significado se encuentra relacionado con los rituales de peregrinación",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 33
+    }
+   ],
+   "preguntas": [
+    "¿los indígenas vivían en el páramo?",
+    "¿para qué usaban el páramo los indígenas?",
+    "¿qué es un socioecosistema?",
+    "¿desde cuándo hay gente en los páramos?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-arqueologia-paramo",
+   "estacion": null,
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "Pocos hallazgos arqueológicos en el páramo",
+   "texto": "En la región que hoy conocemos como el \"Páramo del Ruiz\" o \"Complejo Páramo del Ruiz\" se han realizado pocas investigaciones que den cuenta de hallazgos arqueológicos. Sin embargo, es poco probable que en las zonas de páramo se puedan encontrar amplios registros, esto debido a que eran lugares de tránsito para las comunidades prehispánicas.",
+   "breve": "es poco probable que en las zonas de páramo se puedan encontrar amplios registros, esto debido a que eran lugares de tránsito para las comunidades prehispánicas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 33
+    }
+   ],
+   "preguntas": [
+    "¿hay restos arqueológicos aquí?",
+    "¿se han encontrado objetos indígenas en el Ruiz?",
+    "¿por qué no hay ruinas indígenas?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-mito-bachue",
+   "estacion": null,
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "El mito de Bachué",
+   "texto": "Uno de los mitos más cercanos que se tienen geográficamente es el de la diosa Bachué, que proviene de los muiscas del altiplano cundiboyacense: Allá lejos en la parte más alta de la cordillera, hay una laguna profunda; hubo un momento en que empezó a aparecer la luz y se vio el primer amanecer y muchas de las cosas que ahora hay en la naturaleza; de repente se fue saliendo de las aguas una mujer con un niño de unos tres años de edad y empezaron a caminar hacia una parte plana, hoy el pueblo de Iguaque. Los días pasaron uno tras otro, hasta cuando el niño fue hombre y se casó con la mujer aparecida de las aguas: Bachué. Anduvieron por todas partes y dejaron su descendencia; así el mundo se fue poblando, hasta cuando ya ancianos, resolvieron regresar al lugar de su origen, a la laguna materna. Allí, Bachué reunió una gran cantidad de sus hijos y les habló sobre la paz y la felicidad de su vivir. En presencia de ellos se convirtieron en dos grandes serpientes que poco a poco se fueron metiendo en la laguna hasta desaparecer para siempre.",
+   "breve": "de repente se fue saliendo de las aguas una mujer con un niño de unos tres años de edad",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 33
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 34
+    }
+   ],
+   "preguntas": [
+    "¿cuál es el mito de Bachué?",
+    "cuéntame el mito de Bachué",
+    "¿quién era Bachué?",
+    "¿hay leyendas de lagunas?",
+    "tell me a legend"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-kumanday",
+   "estacion": null,
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "Kumanday: origen incierto del nombre (UTON)",
+   "texto": "Si bien es conocido el nombre indígena de Kumandai, Kumanday o Cumanday para referirse al Volcán Nevado del Ruiz, no existe la suficiente investigación para delimitar la procedencia de la palabra, la cual se ubica principalmente en la comunidad prehispánica Quimbaya (denominación que tiene muchos debates debido a que Quimbaya puede ser una referencia al trabajo orfebre de diversas comunidades que habitaron el actual territorio de Quindío, Risaralda y parte del Occidente y Centro Sur Caldense), para la cual el vocablo significa en español \"banco hermoso\" (IDEAM), \"Gran padre de barbas blancas\" (tradición oral guías de turismo), entre otros muchos nombres.",
+   "breve": "no existe la suficiente investigación para delimitar la procedencia de la palabra",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 34
+    }
+   ],
+   "preguntas": [
+    "¿qué significa Kumanday?",
+    "¿de dónde viene la palabra Kumanday?",
+    "¿Kumanday es una palabra Quimbaya?",
+    "¿qué quiere decir Cumanday?",
+    "¿cómo se escribe Kumanday?",
+    "what does Kumanday mean?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-comunidades-cumanday",
+   "estacion": null,
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "Comunidades prehispánicas cerca del Cumanday",
+   "texto": "Las comunidades prehispánicas que habitaron en cercanías a Cumanday (Volcán Nevado del Ruiz) fueron: Quimbayas, Pijaos, Pantágoras y Ansermas. Entre ellas tenían relaciones de intercambio económico y cultural. En las crónicas de indias se narra que estas comunidades eran sumamente belicosas; sin embargo, se han dejado de lado diferentes aspectos que muestran la riqueza de estas sociedades. Uno de ellos es la manufactura de piezas en aleación de oro y cobre, conocida como Tumbaga. Además de ello, los diferentes grupos indígenas contaban entre sus habitantes más respetables a los canasteros, quienes recorrían grandes distancias para intercambiar objetos, principalmente de un alto valor simbólico: plumas, conchas, sal y diferentes minerales.",
+   "breve": "Las comunidades prehispánicas que habitaron en cercanías a Cumanday (Volcán Nevado del Ruiz) fueron: Quimbayas, Pijaos, Pantágoras y Ansermas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 34
+    }
+   ],
+   "preguntas": [
+    "¿qué indígenas vivían cerca del volcán?",
+    "¿qué es la tumbaga?",
+    "¿quiénes eran los canasteros?",
+    "¿los indígenas eran guerreros?",
+    "¿quiénes vivían aquí antes de los españoles?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-quimbaya-relacion-ritual",
+   "estacion": null,
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "Qué se sabe de la relación ritual con Cumanday",
+   "texto": "Lo que hoy conocemos y denominamos como Quimbaya es más una denominación de los españoles en la que metieron a las diferentes comunidades prehispánicas que habitaban el territorio. Es posible que estas comunidades tuvieran una relación ritual con Cumanday (Volcán Nevado del Ruiz); sin embargo, el registro arqueológico actual no permite caracterizar en qué consistía dicha relación. En resumen, Cumanday ha estado presente en la vida de las diferentes comunidades que han habitado y siguen habitando el territorio, entre ellas las comunidades prehispánicas. Sin embargo, hasta el momento, no es posible establecer de la mejor forma en qué consistía la relación entre los grupos prehispánicos y Cumanday.",
+   "breve": "el registro arqueológico actual no permite caracterizar en qué consistía dicha relación.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 34
+    }
+   ],
+   "preguntas": [
+    "¿qué rituales hacían los indígenas en el volcán?",
+    "¿quiénes eran los Quimbayas?",
+    "¿los indígenas adoraban al volcán?",
+    "¿se sabe qué hacían los indígenas aquí?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-espanoles-paramo",
+   "estacion": null,
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "Los españoles y el páramo",
+   "texto": "Si bien para las comunidades indígenas los páramos fueron lugares destinados para la recolección de plantas medicinales, el pastoreo de animales y el uso ritual, esa mirada cambiaría con la llegada de los españoles. Ellos vieron en la alta montaña un territorio desolado y desabrigado, un lugar sumamente frío y hostil. A medida que los españoles fueron \"pacificando\" a las comunidades indígenas que habitaban las tierras de mayor riqueza productiva y con climas más benévolos, estas fueron ubicadas en Resguardos Indígenas a más de 3000 metros de altura.",
+   "breve": "Ellos vieron en la alta montaña un territorio desolado y desabrigado, un lugar sumamente frío y hostil.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 34
+    }
+   ],
+   "preguntas": [
+    "¿qué pensaban los españoles del páramo?",
+    "¿qué pasó con los indígenas con la conquista?",
+    "¿por qué hay resguardos en lo alto?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-leyenda-dorado",
+   "estacion": null,
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "La leyenda de El Dorado y la balsa muisca",
+   "texto": "Si hubo algo que movilizó a los españoles en su proceso de \"conquista\" fue las leyendas relacionadas con el oro de las comunidades indígenas. A todos nos suena de algo la leyenda del dorado: comunidades indígenas que viven rodeadas de oro, caciques que son bañados en polvo dorado antes de introducirse en las aguas heladas de las lagunas paramunas. Un ejemplo de ello es la pieza arqueológica de la balsa muisca, en la que se ve a un cacique, sentado en el centro de una balsa, navegar guiado por sus súbditos. Fueron muchos los españoles que buscaron oro en las diferentes regiones del país.",
+   "breve": "A todos nos suena de algo la leyenda del dorado: comunidades indígenas que viven rodeadas de oro, caciques que son bañados en polvo dorado antes de introducirse en las aguas heladas de las lagunas paramunas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 35
+    }
+   ],
+   "preguntas": [
+    "¿qué es la leyenda de El Dorado?",
+    "¿qué es la balsa muisca?",
+    "¿los indígenas tiraban oro a las lagunas?",
+    "¿por qué buscaban oro los españoles?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-juan-diaz-mohan",
+   "estacion": null,
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "Juan Díaz Jaramillo, el mohán de las avalanchas",
+   "texto": "Juan Díaz Jaramillo fue un español que, proveniente del Ecuador, decidió asentarse en Tocaima, persiguiendo el rastro del oro indígena durante la segunda mitad del siglo XVI. Si bien no encontró el tan famoso dorado, sí exploró la actual zona del Norte del Tolima, principalmente el Cañón del Río Lagunilla, en donde fue instalando diferentes minas, las cuales fueron arrasadas por la erupción del Volcán Nevado del Ruiz (conocido para la época como volcán de Cartago) en 1595. Antes de ese suceso, en 1581, una avalancha arrasó con su casa en Tocaima, la casa del Rico del pueblo. En la memoria colectiva se juntaron las dos avalanchas como un solo suceso que dejó a Juan Díaz Jaramillo sin un ápice de riqueza, convirtiéndolo en un mohán o en un \"encantado\" que gobierna las avalanchas, las crecientes y los \"volcanes\".",
+   "breve": "En la memoria colectiva se juntaron las dos avalanchas como un solo suceso que dejó a Juan Díaz Jaramillo sin un ápice de riqueza, convirtiéndolo en un mohán o en un \"encantado\" que gobierna las avalanchas, las crecientes y los \"volcanes\".",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 35
+    }
+   ],
+   "preguntas": [
+    "¿quién fue Juan Díaz?",
+    "¿qué es un mohán?",
+    "¿qué pasó en la erupción de 1595?",
+    "cuéntame la leyenda de Juan Díaz",
+    "¿quién gobierna las avalanchas?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-guacas-campesinas",
+   "estacion": null,
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "Mohanes y guacas en el saber campesino",
+   "texto": "En el conocimiento campesino del norte del Tolima se encuentra asociado a seres, como los mohanes, que habitan los ríos y montañas, incluso a veces se mezclan con la población en los diferentes municipios. En el conocimiento campesino se habla también de guacas, antiguos entierros que dejaron los indígenas antes de ser atacados por los españoles. Las guacas alumbran de colores rojos o azules, sobre todo el viernes santo. Ese día los campesinos hacen guardia con la intención de avistar alguna guaca e ir en su búsqueda. Pero las guacas son huidizas, escapan de la ambición; para tomarlas se debe ser resuelto y ocultar la ambición. Las guacas se presentan en forma de tunjos (niños de oro), ollas repletas de oro, entierros indígenas, toros de oro, cuevas, patos de oro, lagunas que en su parte más profunda se encuentran atestadas del oro lanzado por los indígenas para satisfacer a los dioses.",
+   "breve": "Las guacas alumbran de colores rojos o azules, sobre todo el viernes santo.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 35
+    }
+   ],
+   "preguntas": [
+    "¿qué es una guaca?",
+    "¿hay guacas en el páramo?",
+    "¿por qué alumbran las guacas?",
+    "¿qué es un tunjo?",
+    "¿hay oro enterrado aquí?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-juan-diaz-maldicion",
+   "estacion": null,
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "La maldición del oro de Juan Díaz",
+   "texto": "Las guacas son acumulaciones de riqueza que se desbordan y generan movimientos en masa, sobre todo por las vertientes de los ríos. A partir de relatos orales recolectados en diferentes zonas veredales de Armero, se sigue la historia de Juan Díaz como un hombre que acumuló mucha riqueza y en su ambición negó compartir un poco con un cura vestido de mendigo que llegó hasta su casa y posteriormente con sus padres, quienes lo maldijeron: todo el oro que tiene es maldito y será arrasado por Dios. En los relatos orales Juan Díaz se enfurece, el cielo se oscurece, empieza un diluvio acompañado por truenos en la parte alta de la montaña; una de las avalanchas se lleva la casa de Juan Díaz con toda su riqueza, pero él no muere, se convierte en un encantado, un mohán que propicia las avenidas torrenciales. Juan Díaz es al mismo tiempo quien guarda la riqueza y quien la propicia.",
+   "breve": "Juan Díaz es al mismo tiempo quien guarda la riqueza y quien la propicia.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 36
+    }
+   ],
+   "preguntas": [
+    "¿por qué maldijeron a Juan Díaz?",
+    "¿qué dicen los relatos de Armero sobre Juan Díaz?",
+    "¿qué es una avenida torrencial?",
+    "cuéntame la maldición del oro"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-erupcion-1845",
+   "estacion": null,
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "La erupción y avalancha de 1845",
+   "texto": "Informe de Uldarico Leiva, gobernador de la provincia de Mariquita: \"El 19 del presente a las 9 de la mañana se ha experimentado una avenida horrible del Río Lagunilla, que ha inundado más de siete leguas sobre sus márgenes. Innumerables trozos de nieve han rodado por todas partes acompañados de barro, que, según los datos que se comunican, no son sino el producto de algún volcán en el páramo de Ruiz en donde tiene su origen el Lagunilla\". Claridad: para la época la palabra volcán se refiere a un derrumbe o deslizamiento de tierra. En esta erupción murieron alrededor de 1000 personas en lo que para ese entonces era San Lorenzo, actuales ruinas de Armero.",
+   "breve": "En esta erupción murieron alrededor de 1000 personas en lo que para ese entonces era San Lorenzo, actuales ruinas de Armero.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 36
+    }
+   ],
+   "preguntas": [
+    "¿qué pasó en 1845?",
+    "¿hubo otras erupciones antes de 1985?",
+    "¿Armero ya se había destruido antes?",
+    "¿cuántas veces ha hecho erupción el Ruiz?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-maldicion-cura-armero",
+   "estacion": null,
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "La maldición del cura de Armero",
+   "texto": "El 10 de abril de 1948 fue asesinado y arrastrado por Armero el cura Pedro María Ramírez, quien supuestamente lanzó una maldición al pueblo y quien habría protegido el barrio de tolerancia en la erupción de 1985, ya que fueron las prostitutas quienes le dieron cristiana sepultura. La maldición se cumpliría el 13 de noviembre de 1985. Pero, en la memoria popular, se habla también de toda la riqueza que se acumuló en Armero y del derroche de la misma; la avalancha fue una forma de arrasar con esa riqueza, que luego sería buscada por los avalancheros, personajes ambiguos que llegaron al recién desaparecido Armero para ayudar a buscar sobrevivientes y rescatar cuerpos en el barrizal y también buscar riquezas enterradas en las casas de los ricos. En la memoria popular se habla de que esa avalancha fue generada por Juan Díaz.",
+   "breve": "El 10 de abril de 1948 fue asesinado y arrastrado por Armero el cura Pedro María Ramírez, quien supuestamente lanzó una maldición al pueblo",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 36
+    }
+   ],
+   "preguntas": [
+    "¿es verdad la maldición del cura de Armero?",
+    "¿quién era el cura Pedro María Ramírez?",
+    "¿qué eran los avalancheros?",
+    "¿Armero estaba maldito?",
+    "¿qué leyendas hay de Armero?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-armero-fundacion",
+   "estacion": null,
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "Historia de Armero: construido sobre una zona de riesgo",
+   "texto": "A finales del siglo XIX, las grandes haciendas ubicadas en las inmediaciones de lo que después sería Armero necesitaban tener cerca a sus trabajadores. Familias como las de Raimundo Melo, Sinforoso Chacón y Dominga Cano de Rada, entre otras, llegaron en 1895 a la zona en la que después se edificó el pueblo. El Decreto 1049 del 29 de septiembre de 1908 bautizó al nuevo municipio como San Lorenzo. Nadie sabe por qué se hizo un emplazamiento en el lugar donde habían ocurrido dos avalanchas documentadas: la de 1595, por Fray Pedro Simón, y la de 1845, por viajeros del siglo XIX. Nadie recordó para entonces que se estaba construyendo sobre una zona de riesgo. En 1930, la Asamblea del Tolima decidió cambiar el nombre por el de Armero, en honor a José León Armero, prócer nacido en Mariquita, en 1775.",
+   "breve": "Nadie sabe por qué se hizo un emplazamiento en el lugar donde habían ocurrido dos avalanchas documentadas: la de 1595, por Fray Pedro Simón, y la de 1845, por viajeros del siglo XIX.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 36
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 37
+    }
+   ],
+   "preguntas": [
+    "¿cuándo se fundó Armero?",
+    "¿por qué se llama Armero?",
+    "¿por qué construyeron Armero en zona de riesgo?",
+    "¿Armero se llamaba San Lorenzo?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-armero-algodon",
+   "estacion": null,
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "Armero, capital blanca: algodón y aviación",
+   "texto": "Debido a la actividad comercial, principalmente cultivos de algodón, arroz, la ganadería y la fertilidad de una tierra asentada sobre el lecho de varios ríos, Armero comenzó a ser un foco de migración muy importante en el país. Debido al rápido avance de cultivos como el algodón, fue necesario fumigar con aeronaves una zona que iba a convertirse en la capital blanca de Colombia. Cuenta la historia que el capitán Hans Hoffman, en un Piper modelo J3-CUB, de 65 caballos de fuerza, inició la fumigación animado por don Martín Delgado, propietario de un cultivo que estaba siendo devorado por el gusano de Alabama. La fumigación aérea nació en Armero.",
+   "breve": "La fumigación aérea nació en Armero.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 37
+    }
+   ],
+   "preguntas": [
+    "¿de qué vivía Armero?",
+    "¿por qué Armero era la capital blanca?",
+    "¿dónde nació la fumigación aérea?",
+    "¿cómo era Armero antes de la tragedia?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-armero-memoria",
+   "estacion": null,
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "Armero después de la tragedia",
+   "texto": "Armero sigue siendo una diáspora. Nunca hubo duelo, los muertos quedaron sepultados. Nunca se ha podido terminar de llorar a las víctimas. Décadas han pasado y en Armero se continúa recolectando la memoria dispersa por el país y el mundo; en Guayabal, actual casco urbano del municipio y anteriormente corregimiento, viven muchos de los sobrevivientes, quienes a través de ejercicios de memoria como el de la Fundación Armando Armero buscan encontrar nuevos caminos sin olvidar la tragedia; uno de esos caminos es el que sigue los rastros de los niños sobrevivientes que fueron adoptados de manera regular o irregular y diseminados por toda Colombia e incluso el mundo.",
+   "breve": "Armero sigue siendo una diáspora. Nunca hubo duelo, los muertos quedaron sepultados.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 37
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 38
+    }
+   ],
+   "preguntas": [
+    "¿qué pasó con los sobrevivientes de Armero?",
+    "¿dónde viven los sobrevivientes?",
+    "¿qué pasó con los niños de Armero?",
+    "¿qué es Guayabal?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-biomas-parque",
+   "estacion": null,
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "Biomas del parque: el páramo es el más representativo",
+   "texto": "Se identifican para el Área Protegida los Orobiomas de Bosque Andino, que van desde los 3000 – 4000 m.s.n.m., Orobioma de Páramo, ubicado hacia las cimas de montañas elevadas, y Orobioma nival (4700-5100 m.s.n.m.). La delimitación del Orobioma de Páramo y la definición de su límite inferior se dificulta por efectos antropogénicos, que han contribuido a que el límite original del páramo haya descendido, y que se dé un efecto de \"paramización\". Dentro del Orobioma de Páramo se encuentran los Suborobiomas de Subpáramo, Páramo Propiamente Dicho y Superpáramo. El bioma con mayor representatividad en el Área Protegida es el Páramo, seguido por el bosque Altoandino y finalmente el Glaciar.",
+   "breve": "El bioma con mayor representatividad en el Área Protegida es el Páramo, seguido por el bosque Altoandino y finalmente el Glaciar.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 38
+    }
+   ],
+   "preguntas": [
+    "¿qué ecosistemas tiene el parque?",
+    "¿qué es la paramización?",
+    "¿qué bioma ocupa más espacio?",
+    "¿qué es un orobioma?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-franjas-vegetacion",
+   "estacion": null,
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "Franjas de vegetación: subpáramo, páramo y superpáramo",
+   "texto": "Franja altoandina: constituye una zona de ecotonía entre la vegetación cerrada de la media montaña y abierta de la parte alta; para el PNN Los Nevados esta franja se encuentra desde los 2600 m.s.n.m. Páramo bajo (subpáramo): se caracteriza por el predominio de la vegetación arbustiva; para el PNN Los Nevados esta franja se encuentra desde los 3600 m.s.n.m. Páramo propiamente dicho: páramo de gramíneas; la diversificación comunitaria es máxima; se encuentran casi todos los tipos de vegetación, aunque predominan los frailejonales o rosetales (con 80 especies de Espeletia), los pajonales con especies de Calamagrostis y los chuscales de Chusquea tessellata. Superpáramo: llega hasta el límite inferior de las nieves perpetuas, se caracteriza por la discontinuidad de la vegetación y la apreciable superficie del suelo desnudo.",
+   "breve": "Superpáramo: llega hasta el límite inferior de las nieves perpetuas, se caracteriza por la discontinuidad de la vegetación y la apreciable superficie del suelo desnudo.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 39
+    }
+   ],
+   "preguntas": [
+    "¿qué es el superpáramo?",
+    "¿qué es el subpáramo?",
+    "¿qué diferencia hay entre páramo y superpáramo?",
+    "¿desde qué altura empieza el páramo?",
+    "¿qué es el páramo propiamente dicho?",
+    "what is the superpáramo?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-bosques-matorrales",
+   "estacion": null,
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "Bosques achaparrados, matorrales y pajonales",
+   "texto": "Bosques achaparrados: vegetación con un estrato de arbolitos de 8 a 10 metros de altura dominados por una o dos especies, como los bosques de Escallonia myrtilloides (tibar, rodamonte), de Hesperomeles (mortiño) y los bosques de Polylepis (palo colorado o coloradito). Matorrales: vegetación arbustiva, con predominio de elementos leñosos; se establecen desde el páramo bajo hasta el superpáramo. Pastizales-pajonales: vegetación herbácea dominada por gramíneas en macolla; en condiciones originales del paisaje se encuentran desde el páramo propiamente dicho hasta el superpáramo. Entre las comunidades mejor representadas figuran las de Calamagrostis effusa (en las tres cordilleras) y C. recta (en la cordillera Central).",
+   "breve": "Pastizales-pajonales: vegetación herbácea dominada por gramíneas en macolla",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 39
+    }
+   ],
+   "preguntas": [
+    "¿qué es el pajonal?",
+    "¿qué es el palo colorado?",
+    "¿hay árboles en el páramo?",
+    "¿qué es un mortiño?",
+    "¿qué plantas hay en el páramo?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-frailejonales-cojines",
+   "estacion": null,
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "Frailejonales, cojines, chuscales y rosetales",
+   "texto": "Frailejonales-rosetales: vegetación con un estrato arbustivo emergente conformado por las rosetas de Espeletia, Espeletiopsis y Libanothamnus, entre otros; se les registra desde páramos bajos hasta los límites de nieves perpetuas, con preferencia logran su mayor representatividad en el páramo propiamente dicho. Prados-turberas-tremedales o agrupaciones de plantas vasculares en cojín: colchones compactos de Distichia muscoides, cojines de Oreobolus, cojines almohadillas con especies de Azorella. Chuscales: vegetación dominada por el bambú paramuno Chusquea tessellata. Rosetales bajos: en el superpáramo son muy vistosas las comunidades dominadas por Draba pennell-hazenii y D. pachythyrsa en el Parque Nacional Natural Los Nevados por encima de los 4.200 m.s.n.m.",
+   "breve": "Frailejonales-rosetales: vegetación con un estrato arbustivo emergente conformado por las rosetas de Espeletia, Espeletiopsis y Libanothamnus, entre otros",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 40
+    }
+   ],
+   "preguntas": [
+    "¿qué es un frailejonal?",
+    "¿qué son los colchones de agua?",
+    "¿qué es el chusque?",
+    "¿qué plantas crecen en el superpáramo?",
+    "¿qué es una turbera?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-fauna-porcentajes",
+   "estacion": null,
+   "tema": "fauna",
+   "tipo": "ciencia",
+   "titulo": "La biodiversidad del parque en cifras",
+   "texto": "Según el Plan de Manejo del Parque Nacional Natural Los Nevados (2002), teniendo en cuenta la información de las Corporaciones Autónomas Regionales - CARs y Parques Nacionales Naturales de Colombia, se reporta que la biodiversidad del Parque cuenta con el 27% de las especies de mamíferos, el 23% de los quirópteros, el 50% de los ratones del género Oryzomys, el 11% de los primates y casi el 31% de las especies de aves reportadas en el territorio nacional.",
+   "breve": "la biodiversidad del Parque cuenta con el 27% de las especies de mamíferos, el 23% de los quirópteros, el 50% de los ratones del género Oryzomys, el 11% de los primates y casi el 31% de las especies de aves reportadas en el territorio nacional.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 40
+    }
+   ],
+   "preguntas": [
+    "¿cuántas especies hay en el parque?",
+    "¿cuántas aves hay en el parque?",
+    "¿qué tanta biodiversidad tiene el parque?",
+    "¿hay murciélagos?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-endemicos-mariposas-anfibios",
+   "estacion": null,
+   "tema": "fauna",
+   "tipo": "ciencia",
+   "titulo": "Especies endémicas: mariposas, anfibios y reptiles",
+   "texto": "Es importante resaltar la cantidad de especies endémicas y casi endémicas que se han identificado hasta el momento, como son 11 especies de mariposas endémicas identificadas por Andrade G, 1994 en el parque Ucumarí. En la Cordillera Central se cuenta con alrededor del 80% de endemismos en anfibios (Ardila y Acosta 2000). Los reptiles son el grupo de vertebrados con menor riqueza en el páramo; sin embargo, de 15 especies reportadas para el páramo, 5 poseen distribución restringida estricta y alta especialización (Castaño et al. 2000). Es poco lo que se conoce de la herpetofauna en el PNN Los Nevados, teniendo en cuenta que algunas especies de anfibios se encuentran en declive por la variabilidad y cambio climático.",
+   "breve": "En la Cordillera Central se cuenta con alrededor del 80% de endemismos en anfibios (Ardila y Acosta 2000).",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 41
+    }
+   ],
+   "preguntas": [
+    "¿qué especies endémicas hay?",
+    "¿hay ranas en el páramo?",
+    "¿hay mariposas endémicas?",
+    "¿hay culebras o lagartijas en el páramo?",
+    "are there endemic species?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-aves-endemicas",
+   "estacion": null,
+   "tema": "fauna",
+   "tipo": "ciencia",
+   "titulo": "Aves endémicas: periquito de los Nevados y pato andino",
+   "texto": "En taxones más estudiados como aves, se señala que el área cuenta con un total de especies endémicas y casi-endémicas de 30 especies. Se cuenta con 8 especies de aves endémicas, es decir cuya distribución se halla exclusivamente en Colombia, y 22 más de distribución compartida con alguno de los países hermanos. Una de las especies de aves restringidas estrictamente a los páramos es el periquito de los Nevados (Bolborhynchus ferrugineifrons), especie endémica de nuestro país restringida a las Cordilleras Central y Oriental. Verhelst y Renjifo (2002) consideran a la especie como vulnerable (VU), dado que su población se encuentra entre los 2.000 y 4.000 individuos. El pato andino (Oxyura jamaicensis) es una especie endémica de Colombia y restringida a humedales altoandinos.",
+   "breve": "Una de las especies de aves restringidas estrictamente a los páramos es el periquito de los Nevados (Bolborhynchus ferrugineifrons)",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 41
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 42
+    }
+   ],
+   "preguntas": [
+    "¿qué aves hay en el páramo?",
+    "¿qué es el periquito de los Nevados?",
+    "¿hay aves endémicas?",
+    "¿el periquito está en peligro?",
+    "¿qué es el pato andino?",
+    "which birds live here?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-mamiferos-endemicos",
+   "estacion": null,
+   "tema": "fauna",
+   "tipo": "ciencia",
+   "titulo": "Mamíferos endémicos: los ratones del páramo",
+   "texto": "Respecto a los mamíferos, casi puede considerarse que el Parque Nacional Natural Los Nevados y su Zona de Amortiguación cuentan hasta el momento con 8 endemismos de mamíferos. Las islas de superpáramo, que se encuentran por encima de 4000-4200 m, son más escasas y mucho más pequeñas que el total de las islas de páramo y se encuentran además muy separadas entre sí, por lo que muestran un endemismo elevado (Van der Hammen 1998). En este sentido, todas las especies de mamíferos endémicas registradas para los páramos colombianos están referidas al grupo de los ratones; estos pequeños mamíferos son uno de los grupos más pobremente estudiados.",
+   "breve": "todas las especies de mamíferos endémicas registradas para los páramos colombianos están referidas al grupo de los ratones",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 42
+    }
+   ],
+   "preguntas": [
+    "¿hay mamíferos endémicos?",
+    "¿hay ratones en el páramo?",
+    "¿por qué el superpáramo tiene especies únicas?",
+    "¿qué animales son únicos de aquí?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-mesofauna-pisoteo",
+   "estacion": null,
+   "tema": "fauna",
+   "tipo": "ciencia",
+   "titulo": "La fauna desconocida del suelo y el pisoteo",
+   "texto": "Gran parte de la mesofauna del suelo paramuno aún es desconocida para la ciencia; hasta el momento se desconoce el efecto de las quemas y el pisoteo sobre la fauna, en especial aquella que habita el follaje seco de los frailejones, el suelo y la hojarasca original (Van der Hammen 1998). Por su parte, los macroinvertebrados acuáticos no se quedan atrás: se desconocen en el páramo las especies e individuos; su conocimiento podría contribuir a la caracterización de hábitats y estado de conservación y salud de los mismos.",
+   "breve": "Gran parte de la mesofauna del suelo paramuno aún es desconocida para la ciencia",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 42
+    }
+   ],
+   "preguntas": [
+    "¿qué bichos viven en el suelo?",
+    "¿qué vive en las hojas secas del frailejón?",
+    "¿el pisoteo daña el páramo?",
+    "¿hay insectos en el páramo?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-grandes-mamiferos",
+   "estacion": null,
+   "tema": "fauna",
+   "tipo": "ciencia",
+   "titulo": "Danta de páramo, venados, puma y tigrillo",
+   "texto": "En los páramos colombianos se tienen registros de 21 familias de mamíferos, 46 géneros y 70 especies aproximadamente; entre las especies más llamativas que se pueden observar en el PNN Los Nevados se encuentra la Danta de Páramo (Tapirus pinchaque), el Venado colorado (Mazama rufina), el conejo de páramo (Sylvilagus brasiliensis), la Boruga (Cuniculus taczanowskii), el venado conejo (Pudu mephistophiles), el Puma o León de montaña (Puma concolor), el Tigrillo (Leopardus tigrinus), entre otros. Los grandes mamíferos son altamente vulnerables a la extinción dadas sus necesidades de un territorio extenso y por la presión ejercida sobre sus poblaciones por efecto de la cacería, por lo cual han desaparecido de muchos páramos, como es el caso del venado de cola blanca (Odocoileus virginianus) en el PNN Los Nevados.",
+   "breve": "entre las especies más llamativas que se pueden observar en el PNN Los Nevados se encuentra la Danta de Páramo (Tapirus pinchaque)",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 42
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 43
+    }
+   ],
+   "preguntas": [
+    "¿hay pumas aquí?",
+    "¿qué mamíferos hay en el parque?",
+    "¿hay dantas?",
+    "¿hay venados?",
+    "¿hay tigrillos?",
+    "¿qué animales grandes hay?",
+    "are there pumas?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-pisos-temperatura",
+   "estacion": null,
+   "tema": "clima",
+   "tipo": "ciencia",
+   "titulo": "Temperatura del subpáramo, páramo y superpáramo",
+   "texto": "Otros datos y definiciones según el Gran Libro de los Páramos: Páramo propiamente dicho: es un ecosistema de alta montaña con una temperatura promedio de 5°C. La vegetación predominante incluye frailejones y pajonales, con turberas y pastizales. Se encuentra entre el subpáramo y el superpáramo. Subpáramo o páramo bajo: se encuentra en la parte más baja del ecosistema de páramo, justo por encima del bosque montano. La temperatura promedio es de 10°C y está caracterizado por la presencia de árboles pequeños y arbustos. Superpáramo: es el espacio más recientemente abandonado por el hielo, donde la temperatura oscila entre 0 °C y 6 °C. Sus límites varían, alcanzando hasta los 5.200 msnm. Este ecosistema presenta condiciones extremas, como cambios diarios de temperatura de -2 °C a 25 °C y fuertes vientos, lo que ha generado el desarrollo de varias especies endémicas altamente especializadas.",
+   "breve": "Superpáramo: es el espacio más recientemente abandonado por el hielo, donde la temperatura oscila entre 0 °C y 6 °C.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 43
+    }
+   ],
+   "preguntas": [
+    "¿qué temperatura hace en el páramo?",
+    "¿qué tan frío es el superpáramo?",
+    "¿cuánto cambia la temperatura en el día?",
+    "¿cuál es la temperatura promedio del páramo?",
+    "how cold is it here?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-loricarias",
+   "estacion": "lunares",
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "Las loricarias según el Gran Libro de los Páramos",
+   "texto": "Según \"El gran libro de los páramos\", las loricarias son arbustos que crecen en las zonas más húmedas del superpáramo alto de la cordillera Central. Específicamente, se mencionan dos especies: Loricaria colombiana, que se encuentra en el superpáramo alto de la cordillera Central, y Loricaria complanata, presente en el páramo de Sumapaz y la Sierra Nevada de Santa Marta, acompañada de helechos terrestres como Jamesonia goudotii y hierbas como Lachemilla nivalis. Estos arbustos forman parte de las comunidades vegetales que cubren los suelos bien drenados y arenosos en altitudes entre los 4,000 y 4,400 msnm.",
+   "breve": "las loricarias son arbustos que crecen en las zonas más húmedas del superpáramo alto de la cordillera Central.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 43
+    }
+   ],
+   "preguntas": [
+    "¿qué es la loricaria?",
+    "¿qué especie de loricaria hay aquí?",
+    "¿dónde crece la loricaria?",
+    "¿a qué altura viven las loricarias?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-precipitacion",
+   "estacion": null,
+   "tema": "clima",
+   "tipo": "ciencia",
+   "titulo": "Lluvias: régimen bimodal del parque",
+   "texto": "El PNN Los Nevados se caracteriza por un régimen de precipitación bimodal con dos periodos de lluvia entre abril-mayo y octubre-noviembre, y dos periodos secos entre diciembre-febrero y julio-agosto. En los meses más húmedos la zona norte y oriente del Área Protegida exhibe promedios mensuales cercanos a 200 mm/mes y la zona sur y occidente presenta promedios mensuales cercanos a 400 mm/mes. En los meses más secos la zona norte y oriente del Parque exhibe promedios mensuales entre 50 mm/mes a 100 mm/mes.",
+   "breve": "El PNN Los Nevados se caracteriza por un régimen de precipitación bimodal con dos periodos de lluvia entre abril-mayo y octubre-noviembre, y dos periodos secos entre diciembre-febrero y julio-agosto.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 44
+    }
+   ],
+   "preguntas": [
+    "¿cuándo llueve en el parque?",
+    "¿cuál es la temporada seca?",
+    "¿en qué meses llueve más?",
+    "¿cuándo es mejor época para venir?",
+    "when is the rainy season?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-temperatura-brisas",
+   "estacion": "brisas",
+   "tema": "clima",
+   "tipo": "ciencia",
+   "titulo": "Temperatura media en Brisas",
+   "texto": "El PNN Los Nevados presenta un rango altitudinal entre los 2600 msnm y los 5321 m.s.n.m. en la cumbre del Volcán Nevado del Ruiz. Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados, y en la estación La Laguna, ubicada a 4.000 m.s.n.m., la temperatura media anual es de 3 grados centígrados, pocas horas de sol, humedad relativa alta, frecuencia de nieblas, vientos fuertes y lluvias de poca intensidad. Herd (1982) calculó la isoterma anual a 0 grados centígrados para la región del parque situándola a los 4705 m.s.n.m. (Plan de manejo Parque Nacional Natural Los Nevados, 1998). El IDEAM proporciona datos de temperaturas máximas y mínimas, velocidad y dirección del viento y humedad tomados en la estación meteorológica de Brisas.",
+   "breve": "Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 44
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 45
+    }
+   ],
+   "preguntas": [
+    "¿qué temperatura hace en Brisas?",
+    "¿a qué altura está Brisas?",
+    "¿qué tan frío es aquí?",
+    "¿cuál es la temperatura promedio?",
+    "¿a qué altura empieza el congelamiento?",
+    "what is the temperature here?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-nino-nina",
+   "estacion": null,
+   "tema": "clima",
+   "tipo": "ciencia",
+   "titulo": "El Niño y La Niña en el parque",
+   "texto": "Durante la ocurrencia de un evento Niño fuerte de mayor probabilidad (según IDEAM) se pueden observar disminuciones entre 40% y 80% de la precipitación media en el área del PNN correspondiente a los sectores de las cuencas del río Combeima y Totare (en el suroriente), en las cuencas de los ríos Lagunilla y Recio (en el oriente) y en la zona alta de la cuenca del río Quindío. En cuanto a la temperatura media, toda el área del Parque Nacional se ve expuesta a un incremento cercano a 1°C. Durante la ocurrencia de un evento Niña fuerte se pueden observar aumentos entre 120% y 160% de la precipitación media en el área del PNN, y la temperatura media se ve expuesta a una reducción cercana a 1°C.",
+   "breve": "En cuanto a la temperatura media, toda el área del Parque Nacional se ve expuesta a un incremento cercano a 1°C.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 45
+    }
+   ],
+   "preguntas": [
+    "¿cómo afecta El Niño al parque?",
+    "¿qué pasa con La Niña?",
+    "¿El Niño calienta el páramo?",
+    "¿llueve más con La Niña?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-cambio-climatico-2040",
+   "estacion": null,
+   "tema": "clima",
+   "tipo": "ciencia",
+   "titulo": "Escenario de cambio climático 2040-2050",
+   "texto": "De acuerdo con el escenario A2 (pesimista) de cambio climático proyectado para el periodo 2040-2050 por el IDEAM en la segunda comunicación nacional, en la zona occidental del área protegida, específicamente en la cuenca del río Chinchiná, se presentaría la mayor exposición por reducciones de la lluvia de hasta un 50%; mientras que en la mayor parte del Área Protegida se mantendría en los rangos de lluvia actuales. En cuanto a temperatura media, según este escenario se observa que toda la región se vería expuesta a un incremento entre 2°C a 3°C. Este escenario solo contempla lo que sucedería en términos de cambio climático, lo cual se vería exacerbado con la ocurrencia de eventos de variabilidad climática como el fenómeno del Niño.",
+   "breve": "toda la región se vería expuesta a un incremento entre 2°C a 3°C.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 45
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 46
+    }
+   ],
+   "preguntas": [
+    "¿cómo afectará el cambio climático al parque?",
+    "¿va a llover menos?",
+    "¿cuánto subirá la temperatura?",
+    "¿qué pasará con el río Chinchiná?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-mam-estudio-turistas",
+   "estacion": null,
+   "tema": "salud",
+   "tipo": "ciencia",
+   "titulo": "Estudio del mal agudo de montaña en turistas del Ruiz",
+   "texto": "El estudio realizado por Eder Peña \"Actividad física y síntomas en la aclimatación en turistas que visitan el Nevado del Ruiz – Colombia\" explora la relación entre la actividad física de los turistas y la aparición de síntomas del Mal Agudo de Montaña (MAM) al exponerse a altitudes elevadas, específicamente en el Nevado del Ruiz, a alturas de 4,287 y 4,816 metros sobre el nivel del mar. Participantes: 129 turistas que visitaron el Nevado del Ruiz entre diciembre de 2008 y diciembre de 2009. A 4,287 metros, el 1.6% de los turistas presentó síntomas graves de MAM. A 4,816 metros, el 16% presentó síntomas graves de MAM. A mayor altitud, la prevalencia y severidad de los síntomas aumentaron.",
+   "breve": "A mayor altitud, la prevalencia y severidad de los síntomas aumentaron.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 46
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 47
+    }
+   ],
+   "preguntas": [
+    "¿qué es el mal de altura?",
+    "¿qué es el mal agudo de montaña?",
+    "¿a mucha gente le da soroche aquí?",
+    "¿la altura afecta a los turistas?",
+    "¿qué dice el estudio del mal de montaña?",
+    "what is altitude sickness?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-mam-actividad-fisica",
+   "estacion": null,
+   "tema": "salud",
+   "tipo": "ciencia",
+   "titulo": "Actividad física y mal agudo de montaña",
+   "texto": "Relación entre actividad física y MAM: los turistas clasificados como sedentarios fueron más propensos a desarrollar síntomas del MAM, ya que la falta de actividad física redujo su capacidad aeróbica, haciéndolos más vulnerables a la hipoxia (falta de oxígeno). Los turistas más activos presentaron una mejor adaptación a la altitud. Además de la inactividad física, otros factores como la rapidez del ascenso, la edad (jóvenes son más susceptibles) y el sexo (mujeres más propensas) juegan un papel en la aparición de síntomas de MAM. La exposición a condiciones climáticas extremas como el frío también incrementa los riesgos. En resumen, este estudio destaca cómo la preparación física puede jugar un rol crucial en la prevención del mal agudo de montaña.",
+   "breve": "los turistas clasificados como sedentarios fueron más propensos a desarrollar síntomas del MAM",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 47
+    }
+   ],
+   "preguntas": [
+    "¿por qué a unos les da mal de altura y a otros no?",
+    "¿hacer ejercicio ayuda con la altura?",
+    "¿qué aumenta el riesgo de mal de altura?",
+    "¿subir rápido afecta?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-guias-actividad-fisica",
+   "estacion": null,
+   "tema": "salud",
+   "tipo": "ciencia",
+   "titulo": "Estudio de actividad física en los guías",
+   "texto": "El artículo realizado por Eder Peña \"Actividad física en guías que trabajan en el Nevado del Ruiz, Colombia\" tiene como objetivo caracterizar la actividad física de los guías de este parque nacional, que operan en altitudes elevadas bajo condiciones extremas. Participantes: 18 guías con edades entre 20 y 61 años. El 88.9% de los guías usa protección solar. El 61.1% mantiene la hidratación durante el trabajo. Los guías enfrentan riesgos físicos importantes debido a las condiciones ambientales del Nevado del Ruiz (temperaturas bajas, alta radiación solar, viento), y deben tomar medidas preventivas como la protección solar y una adecuada hidratación.",
+   "breve": "Los guías enfrentan riesgos físicos importantes debido a las condiciones ambientales del Nevado del Ruiz (temperaturas bajas, alta radiación solar, viento)",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 48
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 49
+    }
+   ],
+   "preguntas": [
+    "¿cómo se cuidan los guías?",
+    "¿por qué usan protector solar los guías?",
+    "¿la radiación es fuerte aquí?",
+    "¿qué riesgos tiene trabajar aquí?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-hipoxia-hipobarica",
+   "estacion": null,
+   "tema": "salud",
+   "tipo": "ciencia",
+   "titulo": "Qué es la hipoxia hipobárica y cómo se aclimata el cuerpo",
+   "texto": "La hipoxia hipobárica, causada por la disminución de la presión atmosférica en altitudes elevadas, lleva a una reducción en la cantidad de oxígeno disponible para los tejidos. A medida que subimos, la presión parcial de oxígeno en el aire disminuye, lo que significa que, aunque la proporción de oxígeno sigue siendo del 21%, la cantidad disponible para el cuerpo disminuye, lo que reduce la oxigenación de los tejidos. Hiperventilación: uno de los primeros mecanismos de adaptación es el aumento de la frecuencia y profundidad de la respiración. Aumento de la producción de hemoglobina: para mejorar la capacidad de transporte de oxígeno, el cuerpo aumenta el número de glóbulos rojos y la concentración de hemoglobina en la sangre; este cambio toma más tiempo.",
+   "breve": "A medida que subimos, la presión parcial de oxígeno en el aire disminuye, lo que significa que, aunque la proporción de oxígeno sigue siendo del 21%, la cantidad disponible para el cuerpo disminuye",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 49
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 50
+    }
+   ],
+   "preguntas": [
+    "¿hay menos oxígeno aquí arriba?",
+    "¿por qué cuesta respirar en la altura?",
+    "¿qué es la hipoxia hipobárica?",
+    "¿por qué me agito al caminar?",
+    "¿cómo se adapta el cuerpo a la altura?",
+    "is there less oxygen up here?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-everest-sin-oxigeno",
+   "estacion": null,
+   "tema": "salud",
+   "tipo": "ciencia",
+   "titulo": "El Everest sin oxígeno (1978)",
+   "texto": "A través de estudios en alpinistas, se han identificado mecanismos que permiten una mejor comprensión de cómo los cuerpos humanos pueden aclimatarse a la hipoxia. Se analizan casos de éxito en la historia del alpinismo, como la conquista del Everest sin oxígeno por Reinhold Messner y Peter Habeler en 1978, lo que rompió teorías previas que afirmaban que era imposible escalar tales altitudes sin oxígeno suplementario.",
+   "breve": "la conquista del Everest sin oxígeno por Reinhold Messner y Peter Habeler en 1978",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 50
+    }
+   ],
+   "preguntas": [
+    "¿alguien subió el Everest sin oxígeno?",
+    "¿quién es Reinhold Messner?",
+    "¿se puede subir tan alto sin oxígeno?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-enfermedad-aguda-montana",
+   "estacion": null,
+   "tema": "salud",
+   "tipo": "ciencia",
+   "titulo": "Enfermedad aguda de montaña (información general)",
+   "texto": "La hipobaria reduce la cantidad de oxígeno disponible debido a la disminución de la presión atmosférica, lo que provoca hipoxemia (falta de oxígeno en la sangre). Enfermedad aguda de montaña: esta es la forma más conocida y se manifiesta cuando una persona asciende rápidamente a gran altitud. Los síntomas incluyen cefalea, náuseas, vómitos, fatiga y dificultades para dormir. Aparecen entre las 6 horas posteriores al ascenso y pueden durar hasta 4 días. Existen complicaciones graves, como el edema pulmonar de altura y el edema cerebral de altura.",
+   "breve": "Enfermedad aguda de montaña: esta es la forma más conocida y se manifiesta cuando una persona asciende rápidamente a gran altitud.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 53
+    }
+   ],
+   "preguntas": [
+    "¿qué es la enfermedad aguda de montaña?",
+    "¿qué es el soroche?",
+    "¿por qué da mal de altura?",
+    "¿qué es la hipoxemia?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-hipoxia-terapias",
+   "estacion": null,
+   "tema": "salud",
+   "tipo": "ciencia",
+   "titulo": "Terapias en pacientes críticos (bloqueada)",
+   "texto": "Estrategias terapéuticas: las terapias que estimulan la biogénesis mitocondrial o protegen la función mitocondrial se consideran prometedoras en el manejo de la hipoxia en pacientes críticos. Intervenciones terapéuticas que protejan o estimulen la biogénesis mitocondrial podrían ser útiles tanto en entornos de alta altitud como en situaciones clínicas críticas.",
+   "breve": "Estrategias terapéuticas: las terapias que estimulan la biogénesis mitocondrial o protegen la función mitocondrial se consideran prometedoras en el manejo de la hipoxia en pacientes críticos.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 52
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 53
+    }
+   ],
+   "preguntas": [
+    "¿cómo se trata la hipoxia?",
+    "¿qué tratamiento hay para la falta de oxígeno?"
+   ],
+   "bloqueada": true,
+   "motivo": "Contenido de tratamiento médico. El asistente nunca da tratamientos: ante síntomas, avisa a tu guía.",
+   "estado": "validado"
+  },
+  {
+   "id": "uton-mam-diagnostico-tratamiento",
+   "estacion": null,
+   "tema": "salud",
+   "tipo": "ciencia",
+   "titulo": "Diagnóstico y tratamiento del mal de montaña (bloqueada)",
+   "texto": "Diagnóstico y tratamiento: el diagnóstico de la enfermedad aguda de montaña se basa en la escala de Lake Louise, que evalúa los síntomas. La enfermedad de Monge se diagnostica mediante hemogramas (para la poliglobulia) y pruebas cardíacas (ecocardiogramas, cateterismo). El tratamiento más efectivo es el retorno a niveles de presión normales (normobaria). Para prevenir síntomas agudos, se utiliza acetazolamida y oxígeno, aunque este último es costoso y difícil de implementar en ciertos ambientes de trabajo.",
+   "breve": "El tratamiento más efectivo es el retorno a niveles de presión normales (normobaria).",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 54
+    }
+   ],
+   "preguntas": [
+    "¿qué tomo para el mal de altura?",
+    "¿cómo se trata el soroche?",
+    "¿qué medicamento sirve para la altura?",
+    "¿cómo sé si tengo mal de montaña?"
+   ],
+   "bloqueada": true,
+   "motivo": "Diagnóstico, tratamiento y medicamentos (acetazolamida, oxígeno). El asistente nunca diagnostica ni receta: ante síntomas, avisa a tu guía.",
+   "estado": "validado"
   }
  ],
- "conflictos": []
+ "conflictos": [
+  {
+   "tema": "Significado de Kumanday",
+   "fichas": [
+    "norte-kumanday",
+    "norte-discurso-kumanday",
+    "norte-tumbas-sagrado",
+    "uton-kumanday"
+   ],
+   "nota": "El guion zona norte (pp. 1, 2 y 6) traduce Kumanday como 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'. El guion UTON 2024 (p. 34) dice que no hay investigación suficiente para delimitar la procedencia de la palabra y recoge otras traducciones: 'banco hermoso' (IDEAM) y 'Gran padre de barbas blancas' (tradición oral de guías)."
+  },
+  {
+   "tema": "Número de muertos de la erupción de 1985",
+   "fichas": [
+    "uton-armero-1985",
+    "uton-segundo-periodo"
+   ],
+   "nota": "El guion UTON 2024 da dos cifras: «más de 23,000 personas» (p. 10) y «más de 25,000 personas» (p. 26)."
+  },
+  {
+   "tema": "Comunidades indígenas cercanas al volcán",
+   "fichas": [
+    "uton-tumbas-peregrinaciones",
+    "uton-comunidades-cumanday"
+   ],
+   "nota": "El guion UTON 2024 lista en p. 10 a Quimbayas, Carrapas, Gualíes, Panches, Ansermas y Pijaos; en p. 34 lista a Quimbayas, Pijaos, Pantágoras y Ansermas."
+  },
+  {
+   "tema": "Motivo de la restricción del ascenso más allá del Valle de las Tumbas",
+   "fichas": [
+    "norte-tumbas-lahares",
+    "uton-tumbas-restriccion"
+   ],
+   "nota": "El guion zona norte (p. 6) dice que el ascenso está restringido por la actividad del volcán y por la fragilidad del superpáramo; el UTON 2024 (p. 10) dice que la razón es principalmente el riesgo de lahares."
+  },
+  {
+   "tema": "Área del glaciar del Nevado del Ruiz",
+   "fichas": [
+    "uton-cvnr-definicion",
+    "uton-glaciar-ruiz-2022"
+   ],
+   "nota": "El guion UTON 2024 cita en p. 15 una cubierta glaciar «actual» de 9,3 km² (Ceballos–Hernández et al., 2020) y en p. 29 un área de 7,68 km² para 2022 (IDEAM). Son mediciones de fechas distintas; el dato vigente lo da el IDEAM."
+  },
+  {
+   "tema": "Edad del volcán Nereidas",
+   "fichas": [
+    "uton-nereidas-olleta",
+    "uton-olleta-nereidas-pirana"
+   ],
+   "nota": "El guion UTON 2024 dice en p. 10 que las lavas de La Olleta y Nereidas son mayores a 80 mil años, y en p. 17 que Nereidas tiene aproximadamente 66,000 años."
+  },
+  {
+   "tema": "Número de especies de frailejón",
+   "fichas": [
+    "uton-frailejon-especies",
+    "uton-franjas-vegetacion"
+   ],
+   "nota": "El guion UTON 2024 dice en p. 5 que en Colombia hay cerca de 60 especies de frailejones (más de 100 en total), y en p. 39 que en el páramo propiamente dicho predominan los frailejonales «con 80 especies de Espeletia»."
+  },
+  {
+   "tema": "Retroceso de los glaciares colombianos y nevados a finales del siglo XIX",
+   "fichas": [
+    "uton-pequena-edad-hielo",
+    "uton-deshielo-siglo-xx",
+    "uton-retirada-glaciar-actual"
+   ],
+   "nota": "El guion UTON 2024 dice en p. 30 que los glaciares se han reducido «en casi 84%» y que había «aproximadamente 19» nevados; en p. 31 dice «más de un 84%» y «entre 19 y 20» nevados."
+  },
+  {
+   "tema": "Fechas del Tardiglacial",
+   "fichas": [
+    "uton-ultima-glaciacion",
+    "uton-glaciacion-resumen"
+   ],
+   "nota": "El guion UTON 2024 ubica el Tardiglacial entre 11.000 y 10.000 años antes del presente (p. 30) y entre 21.000 y 14.000 años antes del presente (p. 31)."
+  },
+  {
+   "tema": "Municipios abastecidos por el parque",
+   "fichas": [
+    "norte-brisas-introduccion",
+    "norte-ficha-tecnica",
+    "uton-pnn-agua"
+   ],
+   "nota": "El guion zona norte dice «más de 37 municipios» en p. 5 y «37 municipios» en p. 3; el UTON 2024 (pp. 5-6) dice 37 municipios."
+  },
+  {
+   "tema": "Origen del color rojizo de las rocas de Lunares",
+   "fichas": [
+    "norte-lunar-gelifraccion-oxidacion",
+    "uton-lunares-oxidacion"
+   ],
+   "nota": "Ambos guiones lo atribuyen a la oxidación. El zona norte (p. 6) habla de oxidación de hierro y azufre de la lava vieja; el UTON 2024 (p. 8) habla de oxidación del hierro almacenado en minerales como las hornblendas."
+  }
+ ]
 }

@@ -19,7 +19,7 @@ PAQUETE = RAIZ / "contenido" / "paquete.json"
 PREGUNTAS = RAIZ / "contenido" / "preguntas_desarrollo.json"
 
 ESTACIONES = {"brisas", "aguacerales", "arenales", "lunares", "tumbas"}
-TEMAS = {"agua", "flora", "fauna", "geologia", "glaciar", "clima", "cultura", "historia", "normas", "glosario"}
+TEMAS = {"agua", "flora", "fauna", "geologia", "glaciar", "clima", "cultura", "historia", "normas", "glosario", "salud"}
 TIPOS = {"ciencia", "relato", "norma", "glosario"}
 ESTADOS = {"validado", "borrador"}
 CAMPOS = ["id", "estacion", "tema", "tipo", "titulo", "texto", "breve", "citas", "preguntas", "bloqueada", "motivo", "estado"]
