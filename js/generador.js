@@ -90,16 +90,14 @@ export async function calentar() {
   } catch { return false; }
 }
 
-// «Sí, antes se llamaba…» → «Sí, según la tradición oral, antes se llamaba…». La primera palabra pasa a minúscula salvo que
-// sea un nombre propio (aparece con mayúscula a mitad de frase en el texto del guion).
-export function conTradicion(texto, ctx = '') {
-  const m = texto.match(/^((?:S[ií]|No)[,.]\s*)?(.*)$/s);
-  const pre = m[1] ? m[1].replace(/\.\s*$/, ',').trim() + ' ' : '';
-  let resto = m[2];
-  const w = (resto.match(/^[\p{L}-]+/u) || [''])[0];
-  const propio = w && new RegExp(`[\\p{Ll},;]\\s+${w}\\b`, 'u').test(ctx);
-  if (w && !propio) resto = resto[0].toLowerCase() + resto.slice(1);
-  return (pre ? pre + 'según' : 'Según') + ' la tradición oral, ' + resto;
+// «Sí, hay una niña fantasma…» → «Según la tradición oral, hay una niña fantasma…»: el «Sí»/«No» inicial se quita (un relato no
+// se afirma ni se niega como hecho). La primera palabra pasa a minúscula solo si es una palabra común (no un nombre propio).
+const COMUNES = /^(El|La|Los|Las|Lo|Un|Una|Unos|Unas|Se|Es|Era|Fue|Hay|Había|Este|Esta|Estos|Estas|Ese|Esa|En|Para|Por|Su|Sus|Significa|Dicen|Cuentan|Allí|Aquí|Antes|Desde|Cuando|Que|Ella|Él)(?![\p{L}])/u;
+export function conTradicion(texto) {
+  let resto = texto.replace(/^(S[ií]|No)[,.]\s*/, '');
+  resto = resto.charAt(0).toUpperCase() + resto.slice(1);
+  if (COMUNES.test(resto)) resto = resto[0].toLowerCase() + resto.slice(1);
+  return 'Según la tradición oral, ' + resto;
 }
 
 const limpiar = (s) => s.replace(/<think>[\s\S]*?(<\/think>|$)/g, '').trim().replace(/^["«“']+|["»”']+$/g, '').trim();
@@ -189,13 +187,13 @@ export async function reescribir(r, pregunta, { timeoutMs = 6000, alTrozo = null
   }
   // El relato siempre se presenta como tradición oral (se antepone de forma determinista; no se le pide al modelo porque
   // entonces lo escribe también en respuestas de ciencia).
-  if (relato && texto && !/tradici[oó]n oral/i.test(texto) && !/no tengo esa informaci/i.test(texto)) texto = conTradicion(texto, ctx);
+  if (relato && texto && !/tradici[oó]n oral/i.test(texto) && !/no tengo esa informaci/i.test(texto)) texto = conTradicion(texto);
   const v = verificar(texto, ctx, pregunta, { relato });
   // Respaldo por frase contra el texto COMPLETO de la ficha (no solo el contexto que vio el modelo).
   const fuente = frases((r.ampliar || '') + ' ' + (r.breve || ''));
   const gen = frases(texto.replace(/^(S[ií], |No, )?Seg[uú]n la tradici[oó]n oral, /i, ''));
   const res = await respaldo(gen, fuente, { embeber: EMBEBER, pregunta });
-  const fr = v.dijoNoSe ? [] : fallasRespaldo(res, { umbral: EMBEBER ? UMBRAL_E5 : UMBRAL_LEXICO });
+  const fr = v.dijoNoSe ? [] : fallasRespaldo(res, { umbral: EMBEBER ? UMBRAL_E5 : UMBRAL_LEXICO, pregunta });
   const fallas = [...v.fallas, ...fr];
   return { texto, ok: fallas.length === 0, fallas, ms: ms(), primeraMs: g.primera, motor: n ? 'nativo' : 'llama.cpp',
     respaldo: res.map(({ frase, fraseFuente, sim }) => ({ frase, fraseFuente, sim })) };
