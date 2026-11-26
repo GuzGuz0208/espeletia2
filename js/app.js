@@ -186,7 +186,7 @@ async function mostrarFinal() {
   const { botonPDF, botonCollage, hayFotos } = await import('./exportar.js');
   const capa = $('#capa-detalle');
   capa.innerHTML = `<div class="detalle final">
-      <p class="final-sello">24/24</p>
+      <p class="final-sello">${E.paquete.cromos.length}/${E.paquete.cromos.length}</p>
       <h2>${t('cel.final')}</h2>
       <p>${t('cel.finalSub', { n: E.paquete.cromos.length })}</p>
       <div class="acciones"><button class="btn btn-flor" id="final-desc">${t('cel.descargar')}</button>${(await hayFotos()) ? `<button class="btn btn-linea" id="final-collage">${t('pdf.collageBtn')}</button>` : ''}<button class="btn btn-linea" id="final-cerrar">${t('cerrar')}</button></div>
