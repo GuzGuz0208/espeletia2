@@ -772,3 +772,8 @@ body[data-vista="equipo"] .rol-equipo { display: inline; }
 @media (prefers-reduced-motion: reduce) {
   .pj .pj-svg, .chat-pj .pj-svg, .tapa-fray, .tapa-condor, .ranura.en-sobre { animation: none !important; }
 }
+
+/* Rendimiento (pantallas de alta densidad): las animaciones decorativas se repiten 3 veces y se detienen */
+.pj .pj-svg, .chat-pj .pj-svg, .tapa-fray, .tapa-condor, .tapa-magma { animation-iteration-count: 3 !important; }
+/* Cita corta siempre visible bajo la respuesta («UTON 2024 · p. 8»); el detalle va en «Ver fuente» */
+.ficha-cita-corta { margin: .35rem 0 0; font-size: .82rem; opacity: .75; }

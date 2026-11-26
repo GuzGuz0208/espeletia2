@@ -1,0 +1,182 @@
+{
+ "fecha": "2026-11-26T18:05:49.294Z",
+ "dispositivo": "25080RABDG",
+ "preguntas": 20,
+ "segundos": 58,
+ "temperatura": {
+  "inicio": 36.7,
+  "fin": 36.7
+ },
+ "energiaEstimadaApp_mAh": 4.46,
+ "mAhPorPregunta": 0.223,
+ "descargaTelefono_mAh": null,
+ "capacidadBateria_mAh": 5937,
+ "preguntasPorBateria": 26623,
+ "conIA": 16,
+ "iaVerificada": 13,
+ "totalMsMediana": 3304,
+ "nota": "Energía = estimación de Android (batterystats, modelo de potencia del fabricante) para la app, con el cable «desconectado» por software. No es una medición con amperímetro.",
+ "lineaBatterystats": "UID u0a390: 4.46 bg: 3.34",
+ "detalle": [
+  {
+   "q": "¿Por qué dicen que el páramo es una fábrica de agua?",
+   "tipo": "respuesta",
+   "motorMs": 80,
+   "iaMs": 2551,
+   "iaOk": true,
+   "totalMs": 2631
+  },
+  {
+   "q": "¿Qué papel cumple el frailejón en este lugar?",
+   "tipo": "respuesta",
+   "motorMs": 74,
+   "iaMs": 3230,
+   "iaOk": true,
+   "totalMs": 3304
+  },
+  {
+   "q": "¿Por qué debemos evitar pisar las dunas?",
+   "tipo": "respuesta",
+   "motorMs": 68,
+   "iaMs": 4722,
+   "iaOk": true,
+   "totalMs": 4790
+  },
+  {
+   "q": "¿Por qué se fracturan las rocas en Lunares?",
+   "tipo": "respuesta",
+   "motorMs": 81,
+   "iaMs": 4021,
+   "iaOk": true,
+   "totalMs": 4102
+  },
+  {
+   "q": "¿Y por qué algunas rocas son rojizas?",
+   "tipo": "respuesta",
+   "motorMs": 74,
+   "iaMs": 2991,
+   "iaOk": true,
+   "totalMs": 3065
+  },
+  {
+   "q": "¿Por qué se llama Valle de las Tumbas?",
+   "tipo": "respuesta",
+   "motorMs": 71,
+   "iaMs": 3556,
+   "iaOk": true,
+   "totalMs": 3626
+  },
+  {
+   "q": "¿Las rocas gigantes de Arenales las arrojó el volcán?",
+   "tipo": "respuesta",
+   "motorMs": 88,
+   "iaMs": 2870,
+   "iaOk": false,
+   "totalMs": 2958
+  },
+  {
+   "q": "¿Qué es la necromasa del frailejón?",
+   "tipo": "respuesta",
+   "motorMs": 74,
+   "iaMs": 4022,
+   "iaOk": false,
+   "totalMs": 4096
+  },
+  {
+   "q": "¿Qué animales viven en el páramo?",
+   "tipo": "respuesta",
+   "motorMs": 64,
+   "iaMs": 3927,
+   "iaOk": true,
+   "totalMs": 3991
+  },
+  {
+   "q": "¿Qué es un glaciar?",
+   "tipo": "respuesta",
+   "motorMs": 59,
+   "iaMs": 5076,
+   "iaOk": true,
+   "totalMs": 5134
+  },
+  {
+   "q": "¿Hay restaurante en Brisas?",
+   "tipo": "abstencion",
+   "motorMs": 3,
+   "iaMs": 0,
+   "iaOk": false,
+   "totalMs": 3
+  },
+  {
+   "q": "¿Cuál es la alerta del volcán hoy?",
+   "tipo": "seguridad",
+   "motorMs": 2,
+   "iaMs": 0,
+   "iaOk": false,
+   "totalMs": 2
+  },
+  {
+   "q": "¿Qué significa Kumanday?",
+   "tipo": "conflicto",
+   "motorMs": 55,
+   "iaMs": 0,
+   "iaOk": false,
+   "totalMs": 55
+  },
+  {
+   "q": "porqe se rompen las piedras en lunares",
+   "tipo": "respuesta",
+   "motorMs": 68,
+   "iaMs": 3596,
+   "iaOk": true,
+   "totalMs": 3663
+  },
+  {
+   "q": "¿Cómo se formaron las lagunas?",
+   "tipo": "respuesta",
+   "motorMs": 62,
+   "iaMs": 2780,
+   "iaOk": true,
+   "totalMs": 2843
+  },
+  {
+   "q": "¿Qué es el pajonal?",
+   "tipo": "respuesta",
+   "motorMs": 56,
+   "iaMs": 4314,
+   "iaOk": true,
+   "totalMs": 4370
+  },
+  {
+   "q": "¿Por qué el agua del páramo es importante?",
+   "tipo": "respuesta",
+   "motorMs": 67,
+   "iaMs": 2300,
+   "iaOk": true,
+   "totalMs": 2368
+  },
+  {
+   "q": "¿Qué es la gelifracción?",
+   "tipo": "respuesta",
+   "motorMs": 60,
+   "iaMs": 4546,
+   "iaOk": false,
+   "totalMs": 4605
+  },
+  {
+   "q": "¿Qué altura tiene el nevado del Ruiz?",
+   "tipo": "conflicto",
+   "motorMs": 70,
+   "iaMs": 0,
+   "iaOk": false,
+   "totalMs": 70
+  },
+  {
+   "q": "¿Qué es un lahar?",
+   "tipo": "respuesta",
+   "motorMs": 59,
+   "iaMs": 2069,
+   "iaOk": true,
+   "totalMs": 2128
+  }
+ ]
+}
