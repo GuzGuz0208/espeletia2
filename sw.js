@@ -5,7 +5,7 @@
 //   grandes que no cambian); lo demás, «caché y actualizar en segundo plano».
 // Nunca se toca otro origen (p. ej. el servidor local del modelo en 127.0.0.1:8080 no pasa por aquí).
 // Al cambiar archivos de la app, sube VERSION.
-const VERSION = 'fray-v4-2026-11-26';
+const VERSION = 'fray-v5-2026-11-26';
 
 const APP = [
   './', 'index.html', 'panel.html', 'styles.css', 'manifest.json',
