@@ -23,8 +23,10 @@ if (archivoPreg) {
   const raw = JSON.parse(readFileSync(archivoPreg, 'utf8'));
   const lista = Array.isArray(raw) ? raw : raw.preguntas || raw.casos || [];
   for (const q of lista) {
-    const id = q.ficha || q.id_ficha || q.esperada || (Array.isArray(q.fichas) ? q.fichas[0] : null);
-    const texto = q.pregunta || q.texto || q.q;
+    const esp = q.esperado || {};
+    if (esp.tipo && esp.tipo !== 'respuesta') continue;   // seguridad, abstención y conflictos no pasan por el modelo
+    const id = q.ficha || q.id_ficha || (esp.fichas || q.fichas || [])[0];
+    const texto = q.pregunta || q.texto || q.p;
     if (texto && id && fichas[id] && !fichas[id].bloqueada) casos.push({ id: q.id || id, pregunta: texto, ficha: id, trampa: false });
   }
   casos = casos.slice(0, N);
