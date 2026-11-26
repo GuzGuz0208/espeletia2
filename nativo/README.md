@@ -115,6 +115,24 @@ Prueba: abrir con señal → esperar «IA local lista» (533 MB) → modo avión
 
 En el teléfono hay que permitir «instalar apps de orígenes desconocidos» para el navegador o para adb.
 
+## Medido el 26-nov-2026 (REDMI Note 15 Pro 5G, Dimensity 7400, 7,6 GB, Android 17)
+APK 17,9 MB. Descarga de Qwen3.5-0.8B (533 MB) por wifi en ~3,5 min con la barra de progreso; carga del modelo 3,1-3,3 s al
+abrir; RAM del proceso (WebView + e5 + modelo) ~1,2-1,5 GB. Reabierta en **modo avión** (sin wifi ni datos): la PWA sale del
+service worker y la IA local responde. 5 preguntas por el camino real (`fray.preguntar` → `generador.reescribir` →
+`FrayNativo`), 3 corridas, 4 hilos:
+
+| Pregunta | Primera palabra | Total | Tokens | Verificador JS |
+|---|---|---|---|---|
+| ¿a qué altura está Aguacerales? | 1,3-2,0 s | 3,9-5,4 s | 41 | bloquea (cifra 4160 «sin frase de respaldo») |
+| ¿por qué se llama Aguacerales? | 1,1 s | 2,5 s | 21 | bloquea (frase sin respaldo) |
+| ¿por qué se fracturan las rocas en Lunares? | 1,4 s | 3,8 s | 38 | pasa |
+| ¿cómo se adapta el frailejón al frío? | 1,4-1,6 s | 4,0-4,6 s | 40 | pasa |
+| ¿qué es la gelifracción? | 1,4 s (una vez 5,6 s) | 4,2 s (una vez >6 s) | 45 | bloquea (frase inventada) |
+| ¿me puedo comer el frailejón? | — | — | — | carril crítico: no llama al modelo |
+
+Decodificación 12-16 tokens/s. Temperatura de la batería 33,8 → 35,9 °C tras ~30 generaciones; batería 85 % → 85 % (el
+teléfono estaba por USB, así que el consumo no se pudo medir). Cuando el verificador bloquea, se queda la frase del guion.
+
 ## Qué falta para iPhone
 iPhone sigue con la PWA (respuesta extractiva). Para un IPA haría falta una Mac con Xcode y una cuenta de Apple Developer.
 
