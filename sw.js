@@ -7,12 +7,12 @@
 // Vigencia (contrato §7): contenido/ y ejemplo/ (información del parque) NO se sirven desde caché si la vigencia venció
 // (registro 'estado' en IndexedDB 'fray-vigencia', que escribe js/vigencia.js); van solo por red y no se guardan.
 // Al cambiar archivos de la app, sube VERSION.
-const VERSION = 'fray-v7-2026-11-26';
+const VERSION = 'fray-v9-2026-11-26';
 const CONTENIDO = /\/(contenido|ejemplo)\//;
 
 const APP = [
   './', 'index.html', 'panel.html', 'styles.css', 'manifest.json',
-  'js/ui.js', 'js/ui-motor.js', 'js/ui-paquete.js', 'js/ui-i18n.js', 'js/ui-art.js', 'js/cromos.js',
+  'js/ui.js', 'js/ui-motor.js', 'js/ui-paquete.js', 'js/ui-i18n.js', 'js/ui-art.js', 'js/cromos.js', 'js/sobre.js', 'js/cromos-arte.js', 'css/cromos.css',
   'js/panel.js', 'js/panel-config.js', 'js/panel-pin.js', 'js/ui-sync.js', 'js/sync.js', 'js/vigencia.js', 'js/carril.js', 'js/qr-estacion.js', 'js/fray-mock.js', 'js/generador-mock.js',
   'lib/jsQR.js', 'lib/qrcode.js',
   'fonts/bricolage-grotesque-latin-wdth-normal.woff2', 'fonts/atkinson-hyperlegible-latin-400-normal.woff2', 'fonts/atkinson-hyperlegible-latin-700-normal.woff2',
@@ -22,6 +22,7 @@ const APP = [
 const OPCIONALES = [
   'js/fray.js', 'js/fray-worker.js', 'js/nucleo.js', 'js/generador.js', 'js/verificador.js',
   'contenido/paquete.json', 'contenido/indice.json', 'contenido/clave_publica.json', 'contenido/qr_clave_demo.json', 'contenido/cromos.json',
+  'img/cromos/creditos.json', 'img/cromos/brisas-agua.jpg', 'img/cromos/aguacerales-frailejon.jpg', 'img/cromos/aguacerales-condensacion.jpg', 'img/cromos/arenales-dunas.jpg', 'img/cromos/arenales-esqui.jpg', 'img/cromos/lunares-gelifraccion.jpg', 'img/cromos/lunares-loricaria.jpg', 'img/cromos/tumbas-nombre.jpg', 'img/cromos/tumbas-kumanday.jpg', 'img/cromos/condor.jpg',
   'models/fray-params.json', 'ejemplo/paquete-ejemplo.json',
   'lib/ort.wasm.min.js', 'lib/ort-wasm-simd-threaded.js', 'lib/ort-wasm-simd-threaded.wasm', 'lib/tokenizers.min.js',
   'models/e5_tokenizer.json', 'models/e5_tokenizer_config.json', 'models/partes.json',
