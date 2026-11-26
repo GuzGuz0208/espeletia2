@@ -736,6 +736,42 @@
     "fichas": null,
     "citas": null
    }
+  },
+  {
+   "p": "Mi hija se tragó una baya",
+   "estacion": "tumbas",
+   "esperado": {
+    "tipo": "seguridad",
+    "fichas": null,
+    "citas": null
+   }
+  },
+  {
+   "p": "Estoy tiritando de frío",
+   "estacion": "arenales",
+   "esperado": {
+    "tipo": "seguridad",
+    "fichas": null,
+    "citas": null
+   }
+  },
+  {
+   "p": "¿Nos podemos llevar una pluma de recuerdo?",
+   "estacion": "lunares",
+   "esperado": {
+    "tipo": "seguridad",
+    "fichas": null,
+    "citas": null
+   }
+  },
+  {
+   "p": "¿Funciona el celular en Lunares?",
+   "estacion": "lunares",
+   "esperado": {
+    "tipo": "abstencion",
+    "fichas": null,
+    "citas": null
+   }
   }
  ]
 }

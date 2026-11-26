@@ -38,7 +38,7 @@ export const INTENCIONES = [
     'what can you do', 'what do you know', 'how does this work', 'how do you work',
   ] },
   { id: 'quien', p: [
-    'quien eres', 'quien sos', 'quien es fray', 'que eres', 'como te llamas', 'cual es tu nombre', 'tu nombre', 'eres (?:un |una )?(?:robot|ia|inteligencia artificial|humano|persona|real|guia)',
+    'quien eres', 'quien sos', 'quien te (?:hizo|creo|programo|invento|diseno|construyo)', 'quienes te (?:hicieron|crearon)', 'quien es fray', 'que eres', 'como te llamas', 'cual es tu nombre', 'tu nombre', 'eres (?:un |una )?(?:robot|ia|inteligencia artificial|humano|persona|real|guia)',
     'who are you', 'what are you', 'what is your name', 'whats your name', 'are you (?:a )?(?:robot|human|ai)',
   ] },
   { id: 'gracias', p: [
@@ -49,7 +49,7 @@ export const INTENCIONES = [
   ] },
   { id: 'saludo', p: [
     'hola', 'holi', 'holis', 'ola', 'buenas', 'buenos dias', 'buen dia', 'buenas tardes', 'buenas noches', 'saludos', 'que tal', 'que mas',
-    'quiubo', 'quihubo', 'como estas', 'como esta', 'como vas', 'como te va', 'hello', 'hi', 'hey', 'good morning', 'good afternoon',
+    'quiubo', 'quihubo', 'q onda', 'que onda', 'q mas', 'que hubo', '(?:h?ola|hey) (?:q|que) (?:onda|mas|hubo|tal)', 'como estas', 'como esta', 'como vas', 'como te va', 'hello', 'hi', 'hey', 'good morning', 'good afternoon',
     'good evening', 'how are you',
   ] },
   { id: 'corta', p: [

@@ -191,8 +191,26 @@ addEventListener('pointerdown', (e) => {
   const soltar = () => {
     removeEventListener('pointermove', mover); removeEventListener('pointerup', soltar); removeEventListener('pointercancel', soltar);
     hoja.style.transition = 'transform .2s ease-out';
-    if (dy > 90) { hoja.style.transform = 'translateY(100%)'; setTimeout(() => hoja.parentElement?.click(), 160); }
+    // Se baja una sola vez: al terminar, la hoja queda invisible y el cierre propio de cada hoja (su animación) ya no se ve
+    if (dy > 90) { hoja.style.transform = 'translateY(100%)'; setTimeout(() => { hoja.style.visibility = 'hidden'; hoja.parentElement?.click(); }, 200); }
     else hoja.style.transform = '';
   };
   addEventListener('pointermove', mover, { passive: true }); addEventListener('pointerup', soltar); addEventListener('pointercancel', soltar);
 }, { passive: true });
+
+// Teclado en la APK: Flutter avisa su alto (--tecladoVivo). Si el WebView además desplazó la vista para mostrar la casilla
+// (visualViewport.offsetTop > 0), la casilla fija ya subió eso: se resta para que no suba dos veces.
+(() => {
+  const raiz = document.documentElement, vv = window.visualViewport;
+  let altoLibre = innerHeight;
+  const ajustar = () => {
+    const k = parseFloat(raiz.style.getPropertyValue('--tecladoVivo')) || 0;
+    altoLibre = Math.max(altoLibre, innerHeight);
+    // ya compensado por el WebView: lo que desplazó la vista + lo que se achicó la ventana
+    const o = (vv ? vv.offsetTop : 0) + (altoLibre - innerHeight);
+    const v = `${Math.max(0, Math.round(k - o))}px`;
+    if (raiz.style.getPropertyValue('--tecladoForm') !== v) raiz.style.setProperty('--tecladoForm', v);
+  };
+  new MutationObserver(ajustar).observe(raiz, { attributes: true, attributeFilter: ['style'] });
+  vv?.addEventListener('scroll', ajustar); vv?.addEventListener('resize', ajustar);
+})();
