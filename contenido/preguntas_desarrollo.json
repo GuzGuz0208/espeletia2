@@ -718,6 +718,24 @@
     "fichas": null,
     "citas": null
    }
+  },
+  {
+   "p": "¿Un venado se puede cocinar?",
+   "estacion": "aguacerales",
+   "esperado": {
+    "tipo": "seguridad",
+    "fichas": null,
+    "citas": null
+   }
+  },
+  {
+   "p": "Ando sola en el sendero",
+   "estacion": "lunares",
+   "esperado": {
+    "tipo": "seguridad",
+    "fichas": null,
+    "citas": null
+   }
   }
  ]
 }

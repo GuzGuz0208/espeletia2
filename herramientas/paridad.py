@@ -100,7 +100,7 @@ def regenerar():
     s = re.sub(r'^(\s*)//', r'\1#', s, flags=re.M)
     s = re.sub(r';\s*$', '', s, flags=re.M)
     s = re.sub(r'^(\s*)(id|si|salvo):', r"\1'\2':", s, flags=re.M)
-    s = re.sub(r'^(\s*)(emergencia|salud|comer|animales|volcan|condiciones|servicios|agua|premisa):', r"\1'\2':", s, flags=re.M)
+    s = re.sub(r'^(\s*)(emergencia|salud|cazar|comer|animales|volcan|condiciones|servicios|agua|premisa):', r"\1'\2':", s, flags=re.M)
     s = s.replace('.slice(3, -1)', '[3:-1]')
     viejo = open(os.path.join(H, 'carril_py.py'), encoding='utf8').read()
     cab = viejo[:viejo.index('MENSAJES = {')]

@@ -297,6 +297,9 @@ async function enviar(texto) {
 const IDIOMAS_DICTADO = { es: ['es-CO', 'es-ES'], en: ['en-US', 'en-GB'] };
 
 async function reconocimientoLocal(lang) {
+  // Dentro del WebView de Android (APK Fray o cualquier «; wv)»), SpeechRecognition.available() tumba el proceso de la
+  // página y la app se cierra (probado el 26-nov en Ajustes, WebView 157): ahí no se ofrece el dictado.
+  if (window.FrayNativo || /; wv\)/.test(navigator.userAgent)) return null;
   const API = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!API?.available || !('processLocally' in API.prototype)) return null;
   for (const idioma of IDIOMAS_DICTADO[lang] || []) {

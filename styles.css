@@ -777,3 +777,9 @@ body[data-vista="equipo"] .rol-equipo { display: inline; }
 .pj .pj-svg, .chat-pj .pj-svg, .tapa-fray, .tapa-condor, .tapa-magma { animation-iteration-count: 3 !important; }
 /* Cita corta siempre visible bajo la respuesta («UTON 2024 · p. 8»); el detalle va en «Ver fuente» */
 .ficha-cita-corta { margin: .35rem 0 0; font-size: .82rem; opacity: .75; }
+
+/* Teclado dentro de la APK: Flutter ya no redimensiona el WebView; avisa la altura una vez (--teclado, .con-teclado) */
+.con-teclado body { padding-bottom: var(--teclado, 0px); }
+.con-teclado .muelle { display: none; }
+.con-teclado .chat-form { bottom: var(--teclado, 0px); }
+.con-teclado .vista-chat { min-height: calc(100dvh - var(--teclado, 0px) - env(safe-area-inset-top)); }
