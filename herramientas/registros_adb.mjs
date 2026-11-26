@@ -11,7 +11,7 @@
 // Salida: pruebas/registros/registro-<fecha>.json y registro-<fecha>.md (tabla pregunta → tipo → cita → IA → tiempos).
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -125,7 +125,11 @@ function deDescargas() {
   try { lista = adb('shell', 'ls -t /sdcard/Download/fray-registro-*.json 2>/dev/null').trim(); } catch { /* no hay */ }
   const ultimo = lista.split(/\r?\n/).map((x) => x.trim()).find((x) => x.endsWith('.json'));
   if (!ultimo) { log('Download: no hay fray-registro-*.json'); return []; }
-  const local = join(SALIDA, ultimo.split('/').pop());
+  // El nombre viene del teléfono: se valida (sin rutas ni «..») y se comprueba que quede dentro de pruebas/registros/
+  const nombre = ultimo.split(/[\/]/).pop();
+  if (!/^fray-registro-[\w.-]+\.json$/.test(nombre) || nombre.includes('..')) { log('nombre de archivo no válido:', nombre); return []; }
+  const local = join(SALIDA, nombre);
+  if (!resolve(local).startsWith(resolve(SALIDA) + sep)) { log('ruta fuera de pruebas/registros:', local); return []; }
   try { adb('pull', ultimo, local); } catch (e) { log('adb pull falló:', e.message); return []; }
   try { const d = JSON.parse(readFileSync(local, 'utf8')); log(`Download: ${ultimo} (${(d.entradas || []).length} entradas)`); return d.entradas || []; }
   catch (e) { log('archivo exportado ilegible:', e.message); return []; }
