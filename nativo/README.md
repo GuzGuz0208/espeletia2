@@ -27,7 +27,9 @@ Paquete Android: `co.fray.paramo`.
 ## Instalación automática del modelo
 1. Al abrir la app se busca el GGUF del modelo elegido en la memoria privada de la app. Si está (verificado una vez con
    SHA-256), se **precarga** y se calienta el prompt del sistema: la primera pregunta ya no paga la carga.
-2. Si no está, y alguien lo copió con adb a la carpeta de importación, se verifica (tamaño + SHA-256) y se usa ahí mismo.
+2. Si no está, y alguien lo copió con adb a la carpeta de importación, se **copia a la memoria privada** verificando tamaño y
+   SHA-256 contra el catálogo empaquetado, y se borra la copia externa. Nunca se carga un modelo en sitio desde el
+   almacenamiento externo.
 3. Si no, **se descarga solo** desde Hugging Face (`resolve/main`) en cuanto hay señal: barra de progreso, **reanudable**
    (HTTP Range: si se corta o se cierra la app, sigue donde iba), reintentos solos (10 s, 20 s, 40 s… hasta 2 min, y al volver
    a la app), verificación de tamaño y SHA-256, y queda en la memoria privada de la app (se borra al desinstalar).
@@ -48,15 +50,18 @@ llegar antes que la precarga. También devuelve `instalacion: {estado, modelo, h
 `sha256` y `bytes` salen de `huggingface_hub` (`model_info(files_metadata=True)`, `lfs.sha256`):
 `python nativo/herramientas/huella_hf.py <repo> <archivo>` imprime la entrada lista.
 
-**Cambiar el modelo sin recompilar:** edita una copia de `assets/modelo.json` (por ejemplo `porDefecto`) y cópiala al teléfono:
+**Elegir otro modelo sin recompilar:** en los ajustes ocultos, o con un `modelo.json` que solo diga cuál:
 ```bash
+echo '{"porDefecto": "qwen3.5-2b-q4km"}' > modelo.json
 adb push modelo.json /sdcard/Android/data/co.fray.paramo/files/modelo.json
 ```
-La app la lee al abrir (si no es válida, usa la suya). En los ajustes ocultos aparece «modelo.json reemplazado».
+En release ese archivo **solo puede elegir** entre los ids empaquetados en `assets/modelo.json`: nunca cambia `url`, `sha256`
+ni `bytes` (la integridad del modelo sale siempre del APK). El reemplazo completo del catálogo solo vale en compilaciones de
+depuración (`kDebugMode`). Agregar un modelo nuevo = editar `assets/modelo.json` y recompilar.
 
 ### Importar el GGUF sin señal
 - **adb:** `adb push Qwen3.5-0.8B-Q4_K_M.gguf /sdcard/Android/data/co.fray.paramo/files/` y abre la app (la carpeta existe
-  después de abrirla una vez). Se verifica y se usa en ese lugar (no se duplica).
+  después de abrirla una vez). Se copia a la memoria privada verificando SHA-256 y se borra la copia externa.
 - **USB / archivo:** ajustes ocultos → «Importar GGUF desde archivo». Se reconoce por tamaño y SHA-256 y se copia a la memoria
   privada de la app.
 

@@ -239,7 +239,7 @@ class _PantallaAjustesState extends State<PantallaAjustes> {
               const SizedBox(height: 4),
               Text(
                   'Sin señal: adb push ${ins.modelo?.archivo ?? '<archivo>.gguf'} ${Almacen.i.carpetaImportar}/ '
-                  'y vuelve a abrir la app (se verifica y se usa ahí mismo).',
+                  'y vuelve a abrir la app (se copia a la memoria privada, se verifica con SHA-256 y se borra la copia externa).',
                   style: t.bodySmall),
               const Divider(),
               Row(children: [

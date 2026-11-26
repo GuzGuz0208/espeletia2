@@ -8,6 +8,7 @@ import 'dart:io';
 import 'dart:isolate';
 
 import 'package:crypto/crypto.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
 
@@ -72,17 +73,21 @@ class Catalogo {
         ParamsMotor.fromJson((j['motor'] as Map?)?.cast<String, dynamic>() ?? const {}), origen);
   }
 
-  /// assets/modelo.json, o modelo.json en la carpeta de importación si alguien lo copió con adb (cambia el modelo sin
-  /// recompilar). Si el reemplazo no es válido se ignora.
+  /// assets/modelo.json (empaquetado y firmado con el APK). Si alguien copió con adb un modelo.json a la carpeta de
+  /// importación, en release **solo puede elegir** `porDefecto` entre los ids empaquetados (nunca cambia url, sha256 ni
+  /// bytes: la integridad del modelo siempre sale del APK). El reemplazo completo solo vale en compilaciones de depuración.
   static Future<Catalogo> leer() async {
     final base = _desde(jsonDecode(await rootBundle.loadString('assets/modelo.json')) as Map<String, dynamic>, 'app');
     final ext = Almacen.i.externo;
-    if (ext != null) {
-      final f = File('${ext.path}/modelo.json');
-      try {
-        if (await f.exists()) return _desde(jsonDecode(await f.readAsString()) as Map<String, dynamic>, f.path);
-      } catch (_) {/* reemplazo inválido: se usa el de la app */}
-    }
+    if (ext == null) return base;
+    final f = File('${ext.path}/modelo.json');
+    try {
+      if (!await f.exists()) return base;
+      final j = jsonDecode(await f.readAsString()) as Map<String, dynamic>;
+      if (kDebugMode && j['modelos'] is List) return _desde(j, f.path);
+      final pd = j['porDefecto'];
+      if (pd is String && base.porId(pd) != null) return Catalogo._(base.modelos, pd, base.motor, 'app (porDefecto: $pd)');
+    } catch (_) {/* reemplazo inválido: se usa el de la app */}
     return base;
   }
 }
@@ -145,7 +150,6 @@ class Almacen {
   File _marca(ModeloInfo m) => File('${interno.path}/${m.archivo}.verificado');
   File _parte(ModeloInfo m) => File('${interno.path}/${m.archivo}.part');
   File? _importable(ModeloInfo m) => externo == null ? null : File('${externo!.path}/${m.archivo}');
-  File _marcaImportado(ModeloInfo m) => File('${interno.path}/${m.archivo}.importado');
 
   String get carpetaImportar => externo?.path ?? '(sin almacenamiento externo)';
 
@@ -156,12 +160,7 @@ class Almacen {
         await d.length() == m.bytes) {
       return d.path;
     }
-    final imp = _importable(m), marcaImp = _marcaImportado(m);
-    if (imp != null && await imp.exists() && await marcaImp.exists() &&
-        (await marcaImp.readAsString()).trim() == m.sha256 && await imp.length() == m.bytes) {
-      return imp.path;
-    }
-    return null;
+    return null; // nunca se carga en sitio desde el almacenamiento externo (otra app con permisos podría cambiarlo)
   }
 
   /// Bytes ya descargados de una descarga a medias (para reanudar).
@@ -176,17 +175,18 @@ class Almacen {
     return imp != null && await imp.exists() && await imp.length() == m.bytes;
   }
 
-  /// Verifica el archivo copiado con adb push y lo usa en su sitio (no se duplica).
+  /// Copia el archivo dejado con adb push a la memoria privada de la app, verificando tamaño y SHA-256 contra el catálogo
+  /// empaquetado mientras copia; si coincide, lo deja listo y borra la copia externa (no se duplican 0,5-1,3 GB).
   Future<String> importarDeCarpeta(ModeloInfo m, void Function(String) estado) async {
     final imp = _importable(m);
     if (imp == null || !await imp.exists()) throw ErrorDefinitivo('No encontré ${m.archivo} en $carpetaImportar');
     final largo = await imp.length();
     if (largo != m.bytes) throw ErrorDefinitivo('Tamaño $largo B, se esperaban ${m.bytes} B (¿copia incompleta?)');
-    estado('Verificando la huella SHA-256…');
-    final h = await huellaArchivo(imp.path);
-    if (h != m.sha256) throw ErrorDefinitivo('La huella SHA-256 no coincide: no es el archivo publicado');
-    await _marcaImportado(m).writeAsString(m.sha256);
-    return imp.path;
+    await importarArchivo(largo, () => imp.openRead(), [m], estado);
+    try {
+      await imp.delete();
+    } catch (_) {}
+    return _destino(m).path;
   }
 
   /// Importa un GGUF elegido con el selector de archivos (USB, Descargas…). Se reconoce por su tamaño y su huella y se
@@ -324,7 +324,7 @@ class Almacen {
   }
 
   Future<void> borrar(ModeloInfo m) async {
-    for (final f in [_destino(m), _marca(m), _parte(m), _marcaImportado(m), File('${interno.path}/${m.archivo}.importando')]) {
+    for (final f in [_destino(m), _marca(m), _parte(m), File('${interno.path}/${m.archivo}.importando')]) {
       if (await f.exists()) await f.delete();
     }
   }

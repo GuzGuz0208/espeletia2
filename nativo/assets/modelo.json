@@ -1,5 +1,5 @@
 {
-  "nota": "Modelo de la IA local de Fray. 'porDefecto' elige cuál se descarga al abrir la app por primera vez. sha256 y bytes salen de huggingface_hub (model_info files_metadata=True, lfs.sha256) el 2026-11-26: python nativo/herramientas/huella_hf.py <repo> <archivo>. Para cambiar el modelo sin recompilar: copia este archivo editado con adb push a /sdcard/Android/data/co.fray.paramo/files/modelo.json (ver nativo/README.md).",
+  "nota": "Modelo de la IA local de Fray. 'porDefecto' elige cuál se descarga al abrir la app por primera vez. sha256 y bytes salen de huggingface_hub (model_info files_metadata=True, lfs.sha256) el 2026-11-26: python nativo/herramientas/huella_hf.py <repo> <archivo>. Para elegir otro modelo de esta lista sin recompilar: adb push de un modelo.json con solo {\"porDefecto\": \"<id>\"} a /sdcard/Android/data/co.fray.paramo/files/ (en release no puede cambiar url, sha256 ni bytes; ver nativo/README.md).",
   "porDefecto": "qwen3.5-0.8b-q4km",
   "motor": {
     "nCtx": 2048,
