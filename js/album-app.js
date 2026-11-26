@@ -9,7 +9,7 @@
 import * as est from './album-estado.js';
 import { E, bus } from './album-estado.js';
 import { t } from './album-textos.js';
-import { $, $$, aviso, vibrar, animar } from './album-util.js';
+import { $, $$, esc, aviso, vibrar, animar } from './album-util.js';
 import { iniciarAlbum, pintarCabezote, abrirDetalle, cerrarDetalle } from './album-vista.js';
 import { iniciarSobres, abrirSobres } from './album-sobre.js';
 import { pintarMapa } from './album-mapa.js';
@@ -29,6 +29,7 @@ const listo = (async () => {
   iniciarSobres({ irA: (v) => { if (v === 'album' && location.hash !== '#/album') location.hash = '#/album'; }, preguntar });
   conectar();
   pintarNombre();
+  pintarResumen();
 })();
 listo.catch((e) => console.error('[album]', e));
 
@@ -67,6 +68,8 @@ export async function ganados() { await listo; return Object.keys(E.album); }
 async function alResponder({ estacion, fichas = [] }) {
   await listo;
   if (estacion) await est.visitar(estacion);
+  // Sin estación elegida, solo cuenta si estuvo hace poco en una (los cromos se ganan en las paradas)
+  if (!estacion && !est.enParque()) return;
   for (const c of est.cromos()) {
     if (c.como !== 'pregunta' || est.tiene(c.id)) continue;
     if (c.estacion && c.estacion !== estacion) continue;
@@ -103,6 +106,36 @@ function pausa(c) {
   const paso = () => { if (pintar()) { ganada(); return; } raf = requestAnimationFrame(paso); };
   const tick = setInterval(() => { if (pintar()) ganada(); }, 1000);
   raf = requestAnimationFrame(paso);
+}
+
+// ---------- Resumen del álbum en la pantalla de Fray ----------
+function proximo() {
+  const actual = document.body.dataset.estacion || location.hash.replace(/^#\/?/, '');
+  const libres = est.cromos().filter((c) => !est.tiene(c.id) && c.como !== 'pausa');
+  const c = libres.find((k) => k.estacion === actual) || libres.find((k) => k.como === 'estacion') || libres[0];
+  if (!c) return '';
+  if (c.estacion && c.estacion === actual) return t('resumen.proxAqui', { nombre: c.nombre });
+  if (c.como === 'estacion') return t('resumen.proxEstacion', { nombre: c.nombre, est: est.nombreEstacion(c.estacion) });
+  if (c.estacion) return t('resumen.proxPreguntaEst', { nombre: c.nombre, est: est.nombreEstacion(c.estacion) });
+  return t('resumen.proxPregunta', { nombre: c.nombre });
+}
+function pintarResumen() {
+  const caja = $('#resumen-album');
+  if (!caja) return;
+  const n = est.pegados(), tot = est.total(), p = est.pendientes().length;
+  caja.innerHTML = `
+    <a class="resumen-link" href="#/album">
+      <span class="resumen-tit">${esc(t('resumen.titulo'))}</span>
+      <span class="resumen-cuenta"><b>${n}</b>/${tot}</span>
+      <span class="barra-progreso"><span style="width:${(100 * n) / Math.max(1, tot)}%"></span></span>
+    </a>
+    ${p ? `<button type="button" class="btn btn-flor resumen-sobres">${esc(p === 1 ? t('resumen.sobre1') : t('resumen.sobres', { n: p }))}</button>` : ''}
+    <p class="resumen-pista">${esc(n === tot ? t('pista.fin') : proximo())}</p>
+    ${E.nombre ? '' : `<label class="campo-inicio"><span>${esc(t('resumen.nombre'))} <small>(${esc(t('resumen.opcional'))})</small></span>
+      <input class="campo-nombre" maxlength="24" autocomplete="given-name" enterkeyhint="done" placeholder="${esc(t('resumen.nombrePh'))}"></label>`}`;
+  caja.querySelector('.resumen-sobres')?.addEventListener('click', () => abrirSobres());
+  const inp = caja.querySelector('.campo-nombre');
+  if (inp) inp.addEventListener('change', () => est.ponerNombre(inp.value));
 }
 
 // ---------- Vistas ----------
@@ -147,7 +180,7 @@ async function pedirPin() {
 }
 
 function conectar() {
-  bus.addEventListener('cambio', () => { pintarNombre(); if (!$('#vista-mapa').hidden) pintarMapa(irEstacion); });
+  bus.addEventListener('cambio', () => { pintarNombre(); if (!document.activeElement?.closest('#resumen-album')) pintarResumen(); if (!$('#vista-mapa').hidden) pintarMapa(irEstacion); });
   bus.addEventListener('capitulo', (e) => {
     const k = est.capitulos().find((c) => c.id === e.detail.cap);
     setTimeout(() => { aviso(t('cel.capitulo', { cap: k.es }), 3500); lluvia(2200); vibrar([60, 60, 60, 60, 120]); }, 400);
@@ -160,11 +193,23 @@ function conectar() {
   $('#pin-cancelar').onclick = () => $('#dlg-pin').close();
   $('#btn-borrar-album').onclick = async () => { if (confirm(t('ajustes.borrarSeguro'))) await est.vaciar(); };
   $('.muelle [data-ir="ajustes"]').onclick = () => $('#dlg-ajustes').showModal();
-  $('.muelle [data-ir="fray"]').onclick = () => {
-    const h = location.hash.replace(/^#\/?/, '');
-    if (['album', 'mapa', 'guia'].includes(h)) location.hash = ultimaEstacion() ? `#/${ultimaEstacion()}` : '#/';
-    else location.hash = '#/';
+  // Fray: vuelve a la pantalla principal (conserva la estación elegida)
+  const hashActual = () => location.hash.replace(/^#\/?/, '');
+  $('.muelle [data-ir="fray"]').onclick = () => { if (['album', 'mapa', 'guia', 'qr'].includes(hashActual())) location.hash = '#/'; };
+  window.addEventListener('hashchange', () => { if (!['album', 'mapa', 'guia'].includes(hashActual())) { marcarMuelle('fray'); pintarResumen(); } });
+  // Exportar el registro de la prueba (js/registro.js, rama juan/conversacion): si aún no existe, lo dice
+  $('#btn-exportar-registro').onclick = async () => {
+    const msg = $('#registro-msg');
+    try {
+      const r = await import('./registro.js');
+      if (typeof r.exportarRegistro !== 'function') throw new Error('sin exportarRegistro');
+      await r.exportarRegistro();
+      msg.textContent = t('registro.listo');
+    } catch (e) { console.warn('[registro]', e); msg.textContent = t('registro.noHay'); }
   };
+  // Enlace a la APK: solo en un navegador Android (dentro de la APK existe window.FrayNativo)
+  const android = /Android/i.test(navigator.userAgent) && !window.FrayNativo;
+  for (const a of $$('.enlace-apk')) a.hidden = !android;
 
   document.addEventListener('fray:vista', (e) => listo.then(() => entrarVista(e.detail.vista)));
   document.addEventListener('fray:respuesta', (e) => alResponder(e.detail || {}).catch((err) => console.warn('[album]', err)));

@@ -25,25 +25,6 @@
     <!-- Vigencia del contenido (contrato §7): «Disponible hasta las HH:MM» y aviso 1 h antes -->
     <p class="vigencia" id="vigencia" role="status" hidden></p>
 
-    <!-- 1. Inicio: elegir estación -->
-    <section class="vista" id="vista-inicio">
-      <div class="saludo">
-        <div class="fray" id="fray-inicio"></div>
-        <div>
-          <h1 data-t="app.titulo"></h1>
-          <p class="sub" data-t="app.sub"></p>
-        </div>
-      </div>
-      <p class="estado" id="estado-carga" data-t="estado.preparando"></p>
-      <label class="campo-inicio"><span>¿Cómo te llamas? <small>(opcional)</small></span>
-        <input class="campo-nombre" maxlength="24" autocomplete="given-name" enterkeyhint="done" placeholder="Tu nombre para el álbum"></label>
-      <button class="btn btn-flor btn-grande btn-ancho" id="btn-qr"><span class="ico" id="ico-qr"></span><span data-t="inicio.qr"></span></button>
-      <h2 class="titulo-seccion" data-t="inicio.elige"></h2>
-      <ol class="estaciones" id="lista-estaciones"></ol>
-      <p class="nota-guia" data-t="inicio.guia"></p>
-      <p class="pie"><a href="panel.html" data-t="pie.panel"></a></p>
-    </section>
-
     <!-- 2. Escanear QR de estación -->
     <section class="vista" id="vista-qr" hidden>
       <h2 class="titulo-seccion" data-t="qr.titulo"></h2>
@@ -61,6 +42,11 @@
           <p class="altitud" id="chat-altitud"></p>
         </div>
       </div>
+      <!-- La estación es solo un contexto opcional: mejora la búsqueda. Se fija con el QR o se cambia con un toque. -->
+      <button type="button" class="chip-estacion" id="chip-estacion"></button>
+      <!-- Resumen del álbum (lo pinta js/album-app.js): progreso, sobres por abrir y próximo cromo -->
+      <div class="resumen-album" id="resumen-album"></div>
+      <p class="estado" id="estado-carga" data-t="estado.preparando"></p>
       <div class="avisos" id="avisos" role="status" hidden></div>
       <p class="burbuja-fray" id="chat-hola"></p>
       <div class="sugerencias" id="sugerencias">
@@ -68,6 +54,8 @@
         <div class="chips" id="chips-sug"></div>
       </div>
       <div class="conversacion" id="conversacion" aria-live="polite"></div>
+      <p class="nota-guia" data-t="inicio.guia"></p>
+      <p class="pie"><a class="enlace-apk" id="enlace-apk" href="descargas/fray-paramo-arm64.apk" download hidden>Descargar app Android con IA local</a></p>
     </section>
 
     <!-- 4. Contenido vencido (contrato §7): solo queda el carril de seguridad -->
@@ -152,7 +140,24 @@
       <button type="button" class="btn btn-linea btn-mini" id="btn-guia">Modo guía</button>
       <button type="button" class="btn btn-peligro btn-mini" id="btn-borrar-album">Borrar mi álbum</button>
     </div>
+    <div class="ajustes-mas">
+      <button type="button" class="btn btn-linea btn-mini" id="btn-exportar-registro">Exportar registro de la prueba</button>
+      <a class="btn btn-linea btn-mini enlace-apk" href="descargas/fray-paramo-arm64.apk" download hidden>Descargar app Android con IA local</a>
+    </div>
+    <p class="mensaje" id="registro-msg" role="status"></p>
     <form method="dialog"><button class="btn btn-flor btn-ancho" data-t="ajustes.cerrar"></button></form>
+  </dialog>
+
+  <!-- Elegir estación (contexto opcional del chat) -->
+  <dialog id="dlg-estacion" class="dialogo">
+    <h2 data-t="inicio.elige"></h2>
+    <button type="button" class="btn btn-flor btn-grande btn-ancho" id="btn-qr"><span class="ico" id="ico-qr"></span><span data-t="inicio.qr"></span></button>
+    <ol class="estaciones" id="lista-estaciones"></ol>
+    <div class="acciones">
+      <button type="button" class="btn btn-linea btn-ancho" id="btn-sin-estacion">No estoy en una estación</button>
+      <button type="button" class="btn btn-linea btn-ancho" id="btn-estacion-cerrar" data-t="ajustes.cerrar"></button>
+    </div>
+    <p class="pie"><a href="panel.html" data-t="pie.panel"></a></p>
   </dialog>
 
   <!-- PIN del modo guía: uno por dispositivo, solo su hash PBKDF2 en este teléfono (js/panel-pin.js) -->

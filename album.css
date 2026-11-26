@@ -311,3 +311,31 @@ body[data-vista="chat"], body[data-vista="vencido"] { padding-bottom: calc(8rem 
   .vista-album *, .capa *, .capa { animation: none !important; transition: none !important; }
 }
 @media (min-width: 520px) { .ranuras { grid-template-columns: repeat(4, 1fr); } }
+
+/* ---------- Pantalla principal: estación como contexto y resumen del álbum ---------- */
+.chip-estacion { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 56px; margin: 4px 0 12px; padding: 8px 14px; border-radius: 999px; border: 2px solid var(--verde); background: var(--hoja); color: var(--tinta); font-weight: 700; text-align: left; }
+.chip-estacion svg { width: 1.3em; height: 1.3em; fill: currentColor; flex: 0 0 auto; }
+.chip-estacion span { flex: 1; }
+.chip-estacion b { color: var(--verde); text-decoration: underline; text-underline-offset: 3px; }
+.resumen-album { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px 12px; margin: 0 0 14px; padding: 14px; border-radius: var(--radio); background: var(--hoja); box-shadow: 4px 4px 0 var(--amarillo); }
+.resumen-album:empty { display: none; }
+.resumen-link { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 6px 10px; color: var(--tinta); text-decoration: none; }
+.resumen-tit { font: 800 1.25rem var(--display); color: var(--verde); }
+.resumen-cuenta { font: 700 1.1rem var(--display); color: var(--gris); }
+.resumen-cuenta b { font-size: 1.6rem; color: var(--verde); }
+.resumen-link .barra-progreso { grid-column: 1 / -1; }
+.resumen-pista { margin: 0; color: var(--gris); font-size: .95rem; }
+.resumen-album .campo-inicio { margin: 0; }
+.marca-estacion { justify-self: center; margin: 0; padding: 4px 12px; border-radius: 999px; background: var(--amarillo); color: #1d2b38; font-weight: 700; font-size: .85rem; }
+.resp-charla { border-radius: 4px var(--radio) var(--radio) var(--radio); }
+.enlace-apk { font-weight: 700; }
+#dlg-estacion .estaciones { margin: 14px 0; }
+#dlg-estacion .acciones { display: grid; }
+
+.resumen-pista, .resumen-album .campo-inicio { grid-column: 1 / -1; }
+.resumen-sobres { min-height: 52px; padding: 8px 14px; white-space: nowrap; }
+.resumen-album:not(:has(.resumen-sobres)) .resumen-link { grid-column: 1 / -1; }
+.vista-chat .cab-estacion { padding: 8px 0 4px; }
+.vista-chat .cab-estacion h1 { font-size: 1.5rem; }
+.campo-nombre { width: 100%; max-width: 100%; min-width: 0; }
+.dialogo fieldset { min-width: 0; }

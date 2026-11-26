@@ -102,9 +102,9 @@ const emitir = (tipo, detail) => {
 };
 
 function mostrar(vista) {
-  for (const v of ['inicio', 'qr', 'chat', 'vencido', ...VISTAS_ALBUM]) { const n = $(`#vista-${v}`); if (n) n.hidden = v !== vista; }
+  for (const v of ['qr', 'chat', 'vencido', ...VISTAS_ALBUM]) { const n = $(`#vista-${v}`); if (n) n.hidden = v !== vista; }
   $('#form-pregunta').hidden = vista !== 'chat' && vista !== 'vencido';
-  $('#btn-volver').hidden = vista === 'inicio' || vista === 'vencido';
+  $('#btn-volver').hidden = vista === 'chat' || vista === 'vencido';
   document.body.dataset.vista = vista;
   pintarVigencia();
   if (vista !== 'qr') pararCamara();
@@ -117,10 +117,8 @@ function rutaActual() {
   if (VISTAS_ALBUM.includes(id)) { $('#barra-titulo').textContent = ''; mostrar(id); emitir('fray:vista', { vista: id }); return; }
   if (E.vencido) return pintarVencido();
   if (id === 'qr') return mostrar('qr'), iniciarCamara();
-  if (id && estacionPorId(id)) return abrirEstacion(id);
-  E.estacion = null;
-  $('#barra-titulo').textContent = '';
-  mostrar('inicio');
+  // Pantalla principal: chat con Fray (con o sin estación) y resumen del álbum
+  return abrirEstacion(id && estacionPorId(id) ? id : (id ? null : E.estacion));
 }
 
 // ---------- Inicio ----------
@@ -132,6 +130,7 @@ function pintarEstaciones() {
     const li = el('li');
     const a = el('a', 'estacion');
     a.href = `#/${encodeURIComponent(s.id)}`;
+    a.onclick = () => $('#dlg-estacion').close();
     a.append(el('span', 'estacion-num', s.orden === 0 ? 'i' : String(s.orden)));
     const txt = el('span', 'estacion-txt');
     txt.append(el('b', null, s.nombre));
@@ -181,24 +180,32 @@ function sugerenciasDe(estacion) {
 }
 
 function abrirEstacion(id, { conservar = false } = {}) {
-  const est = estacionPorId(id);
-  if (!est) return;
-  const cambio = E.estacion !== id;
-  E.estacion = id;
-  $('#barra-titulo').textContent = est.nombre;
-  $('#chat-estacion').textContent = est.nombre;
-  $('#chat-altitud').textContent = textoAltitud(est);
-  $('#chat-hola').textContent = t('chat.hola', { estacion: est.nombre });
+  // La estación es un contexto opcional: sin estación, Fray responde igual (busca en todo el paquete)
+  const est = id ? estacionPorId(id) : null;
+  if (id && !est) return;
+  const cambio = E.estacion !== (est ? id : null);
+  E.estacion = est ? id : null;
+  document.body.dataset.estacion = E.estacion || ''; // contexto para el resumen del álbum
+  $('#barra-titulo').textContent = est ? est.nombre : '';
+  $('#chat-estacion').textContent = est ? est.nombre : t('app.titulo');
+  $('#chat-altitud').textContent = est ? textoAltitud(est) : '';
+  $('#chat-hola').textContent = est ? t('chat.hola', { estacion: est.nombre }) : t('chat.holaSin');
+  const chip = $('#chip-estacion');
+  chip.replaceChildren();
+  chip.innerHTML = iconos.qr;
+  chip.append(el('span', null, est ? t('chat.estoyEn', { estacion: est.nombre }) : t('chat.sinEstacion')), el('b', null, t('chat.cambiar')));
   const chips = $('#chips-sug');
   chips.replaceChildren();
-  for (const q of sugerenciasDe(id)) {
+  for (const q of sugerenciasDe(E.estacion)) {
     const b = el('button', 'chip', q);
     b.type = 'button';
     b.onclick = () => preguntar(q);
     chips.append(b);
   }
   $('#sugerencias').hidden = !chips.children.length;
-  if (cambio && !conservar) $('#conversacion').replaceChildren();
+  // Cambiar de estación no borra la conversación: solo deja una marca
+  const conv = $('#conversacion');
+  if (cambio && !conservar && conv.children.length && est) conv.append(el('p', 'marca-estacion', t('chat.ahoraEn', { estacion: est.nombre })));
   pintarAvisos();
   mostrar('chat');
 }
@@ -244,6 +251,23 @@ function pintarRespuesta(tarjeta, r) {
   tarjeta.className = `resp resp-${r.tipo}`;
   tarjeta.replaceChildren();
 
+  // Charla (saludos, gracias, «¿quién eres?»): burbuja normal de Fray, sin cita, con sugerencias para seguir
+  if (r.tipo === 'charla') {
+    tarjeta.className = 'resp resp-charla';
+    tarjeta.append(el('p', 'resp-texto', r.breve || ''));
+    const sug = (r.sugerencias || []).map((x) => (typeof x === 'string' ? x : x?.texto || x?.pregunta || x?.titulo)).filter(Boolean);
+    if (sug.length) {
+      const cs = el('div', 'chips');
+      for (const q of sug) {
+        const b = el('button', 'chip', q);
+        b.type = 'button';
+        b.onclick = () => preguntar(q);
+        cs.append(b);
+      }
+      tarjeta.append(cs);
+    }
+    return;
+  }
   if (r.tipo === 'seguridad') {
     const cab = el('p', 'resp-cab cab-seguridad');
     cab.innerHTML = iconos.alerta;
@@ -327,7 +351,7 @@ function pintarRespuesta(tarjeta, r) {
 // solo se reemplaza si la reescritura pasa el verificador (ok === true). La cita nunca se quita.
 async function mejorarConIA(tarjeta, r, pregunta) {
   try {
-    const out = await E.gen.reescribir(r, pregunta, { timeoutMs: 6000 });
+    const out = await E.gen.reescribir(r, pregunta, { timeoutMs: 8000 });
     if (!out?.ok || !out.texto || !tarjeta.isConnected) return;
     tarjeta.querySelector('.resp-texto').textContent = out.texto;
     tarjeta.querySelector('.marca-ia').hidden = false;
@@ -466,11 +490,13 @@ function conectarEventos() {
   $('#btn-ajustes').innerHTML = iconos.ajustes;
   $('#ico-qr').innerHTML = iconos.qr;
   $('#ico-enviar').innerHTML = iconos.enviar;
-  $('#fray-inicio').innerHTML = dibujoFray(110);
   $('#fray-chat').innerHTML = dibujoFray(64);
 
   $('#btn-volver').onclick = () => { location.hash = ''; };
-  $('#btn-qr').onclick = () => { location.hash = '#/qr'; };
+  $('#btn-qr').onclick = () => { $('#dlg-estacion').close(); location.hash = '#/qr'; };
+  $('#chip-estacion').onclick = () => $('#dlg-estacion').showModal();
+  $('#btn-estacion-cerrar').onclick = () => $('#dlg-estacion').close();
+  $('#btn-sin-estacion').onclick = () => { $('#dlg-estacion').close(); E.estacion = null; location.hash = '#/'; abrirEstacion(null); };
   $('#btn-qr-cancelar').onclick = () => { location.hash = ''; };
   $('#btn-ajustes').onclick = () => $('#dlg-ajustes').showModal();
   document.querySelectorAll('#opc-letra button').forEach((b) => { b.onclick = () => guardarAjustes({ letra: b.dataset.letra }); });
@@ -485,9 +511,10 @@ function conectarEventos() {
   // «Preguntar a Fray» desde un cromo del álbum: abre el chat de la estación y hace la pregunta
   document.addEventListener('fray:preguntar', (e) => {
     const { estacion, texto } = e.detail || {};
-    if (E.vencido || !estacionPorId(estacion)) return;
-    if (location.hash !== `#/${encodeURIComponent(estacion)}`) location.hash = `#/${encodeURIComponent(estacion)}`;
-    else abrirEstacion(estacion, { conservar: true });
+    if (E.vencido) return;
+    const destino = estacionPorId(estacion) ? `#/${encodeURIComponent(estacion)}` : (E.estacion ? `#/${encodeURIComponent(E.estacion)}` : '#/');
+    if (location.hash !== destino) location.hash = destino;
+    else abrirEstacion(E.estacion, { conservar: true });
     setTimeout(() => preguntar(texto), 50);
   });
   alCambiar(() => recargarPaquete().catch(manejarErrorCarga));
@@ -507,7 +534,7 @@ function pintarVigencia() {
   if (!p) return;
   const e = vig.estadoVigencia();
   const vista = document.body.dataset.vista || 'inicio';
-  if (E.vencido || e.estado !== 'vigente' || !e.venceEn || (vista !== 'inicio' && !e.pronto)) { p.hidden = true; return; }
+  if (E.vencido || e.estado !== 'vigente' || !e.venceEn || (vista !== 'chat' && !e.pronto)) { p.hidden = true; return; }
   const { hora, manana } = vig.textoHora(e.venceEn, getIdioma());
   p.textContent = t(e.pronto ? 'vigencia.pronto' : manana ? 'vigencia.hastaManana' : 'vigencia.hasta', { hora });
   p.classList.toggle('vigencia-pronto', !!e.pronto);
