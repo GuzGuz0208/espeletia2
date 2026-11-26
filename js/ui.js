@@ -6,7 +6,9 @@ import { fray as cargarFray, generador as cargarGenerador, info, claveQR } from 
 import { cargarPaquete, alCambiar, avisarCambio } from './ui-paquete.js';
 import { arrancarSync, sync } from './ui-sync.js';
 import { verificarQR } from './qr-estacion.js';
-import { t, setIdioma, traducirDOM } from './ui-i18n.js';
+import { t, setIdioma, traducirDOM, getIdioma } from './ui-i18n.js';
+import * as vig from './vigencia.js';
+import { carril } from './carril.js';
 import { fray as dibujoFray, iconos } from './ui-art.js';
 
 const $ = (s) => document.querySelector(s);
@@ -29,6 +31,7 @@ const E = {
   genListo: false,
   estacion: null,     // id de la estación abierta
   cromosDados: new Set(),
+  vencido: false,     // venció la vigencia del contenido (contrato §7)
 };
 
 // ---------- Ajustes (letra, contraste, idioma) ----------
@@ -50,7 +53,9 @@ function guardarAjustes(cambio) {
   try { localStorage.setItem(AJUSTES, JSON.stringify(a)); } catch { /* sin almacenamiento */ }
   aplicarAjustes(a);
   pintarEstado();
-  if (E.estacion) abrirEstacion(E.estacion, { conservar: true });
+  pintarVigencia();
+  if (E.vencido) pintarVencido();
+  else if (E.estacion) abrirEstacion(E.estacion, { conservar: true });
 }
 
 // ---------- Utilidades de contenido ----------
@@ -90,15 +95,17 @@ function darCromo(estacion) {
 
 // ---------- Navegación ----------
 function mostrar(vista) {
-  for (const v of ['inicio', 'qr', 'chat']) $(`#vista-${v}`).hidden = v !== vista;
-  $('#form-pregunta').hidden = vista !== 'chat';
-  $('#btn-volver').hidden = vista === 'inicio';
+  for (const v of ['inicio', 'qr', 'chat', 'vencido']) $(`#vista-${v}`).hidden = v !== vista;
+  $('#form-pregunta').hidden = vista !== 'chat' && vista !== 'vencido';
+  $('#btn-volver').hidden = vista === 'inicio' || vista === 'vencido';
   document.body.dataset.vista = vista;
+  pintarVigencia();
   if (vista !== 'qr') pararCamara();
   window.scrollTo(0, 0);
 }
 
 function rutaActual() {
+  if (E.vencido) return pintarVencido();
   const id = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
   if (id === 'qr') return mostrar('qr'), iniciarCamara();
   if (id && estacionPorId(id)) return abrirEstacion(id);
@@ -190,7 +197,7 @@ function abrirEstacion(id, { conservar = false } = {}) {
 async function preguntar(texto) {
   texto = texto.trim();
   if (!texto) return;
-  const conv = $('#conversacion');
+  const conv = E.vencido ? $('#conv-vencido') : $('#conversacion');
   conv.append(el('p', 'burbuja-visitante', texto));
   const tarjeta = el('article', 'resp resp-cargando');
   tarjeta.append(el('p', 'resp-texto', t('chat.pensando')));
@@ -198,9 +205,15 @@ async function preguntar(texto) {
   tarjeta.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
   let r;
+  // Vigencia vencida: solo el carril de seguridad (remite al guía, sin contenido del parque)
+  if (E.vencido || vig.verificarVigencia().estado === 'vencido') {
+    pintarRespuesta(tarjeta, carril(texto) || { tipo: 'vencido', breve: t('vencido.respuesta'), citas: [] });
+    return;
+  }
   try {
     const motor = E.motor || (await E.motorP);
     r = await motor.preguntar(texto, { estacion: E.estacion });
+    if (r?.tipo === 'vencido') { pintarRespuesta(tarjeta, { ...r, breve: t('vencido.respuesta') }); alVencer(); return; }
   } catch (e) {
     console.error(e);
     tarjeta.className = 'resp resp-abstencion';
@@ -424,6 +437,7 @@ function avance(a) {
 }
 
 async function recargarPaquete() {
+  if (E.vencido) return;
   const { paquete, origen, incluido } = await cargarPaquete();
   E.paquete = paquete;
   E.origen = origen;
@@ -454,18 +468,98 @@ function conectarEventos() {
   ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('#form-pregunta').requestSubmit(); } });
 
   window.addEventListener('hashchange', rutaActual);
-  alCambiar(() => recargarPaquete());
+  alCambiar(() => recargarPaquete().catch(manejarErrorCarga));
+  $('#fray-vencido').innerHTML = dibujoFray(110);
+  $('#btn-renovar').onclick = () => intentarRenovar();
+  // Vigencia: se revisa cada 30 s, al volver a la app y al recuperar la señal
+  setInterval(revisarVigencia, 30000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) revisarVigencia(); });
+  window.addEventListener('online', () => { if (E.vencido) intentarRenovar(); });
+  vig.alCambiar((e) => { if (e.estado === 'vencido') alVencer(); });
   if ('speechSynthesis' in window) speechSynthesis.onvoiceschanged = () => {};
+}
+
+// ---------- Vigencia del contenido (contrato §7) ----------
+function pintarVigencia() {
+  const p = $('#vigencia');
+  if (!p) return;
+  const e = vig.estadoVigencia();
+  const vista = document.body.dataset.vista || 'inicio';
+  if (E.vencido || e.estado !== 'vigente' || !e.venceEn || (vista !== 'inicio' && !e.pronto)) { p.hidden = true; return; }
+  const { hora, manana } = vig.textoHora(e.venceEn, getIdioma());
+  p.textContent = t(e.pronto ? 'vigencia.pronto' : manana ? 'vigencia.hastaManana' : 'vigencia.hasta', { hora });
+  p.classList.toggle('vigencia-pronto', !!e.pronto);
+  p.hidden = false;
+}
+
+function pintarVencido() {
+  const r = (() => { try { return JSON.parse(localStorage.getItem('fray.vigencia') || 'null'); } catch { return null; } })();
+  $('#vencido-titulo').textContent = t('vencido.titulo', { horas: r?.horas || vig.HORAS_DEFECTO });
+  $('#barra-titulo').textContent = '';
+  E.estacion = null;
+  mostrar('vencido');
+}
+
+let venciendo = null;
+function alVencer() {
+  return (venciendo ??= (async () => {
+    E.vencido = true;
+    E.paquete = null;
+    E.listo = false;
+    try { E.motor?.descargar?.(); } catch { /* nada */ }
+    $('#conversacion').replaceChildren();
+    $('#lista-estaciones').replaceChildren();
+    $('#avisos').replaceChildren();
+    pintarVencido();
+    await vig.borrarContenido();
+    await intentarRenovar();
+  })().finally(() => { venciendo = null; }));
+}
+
+let renovando = null;
+function intentarRenovar() {
+  return (renovando ??= (async () => {
+    const msg = $('#vencido-estado');
+    msg.textContent = t('vencido.renovando');
+    const r = await vig.renovar();
+    if (!r.ok) { msg.textContent = t('vencido.sinRed'); return false; }
+    msg.textContent = '';
+    E.vencido = false;
+    $('#conv-vencido').replaceChildren();
+    await recargarPaquete().catch(manejarErrorCarga);
+    rutaActual();
+    return true;
+  })().finally(() => { renovando = null; }));
+}
+
+function revisarVigencia() {
+  const e = vig.verificarVigencia();
+  if (e.estado === 'vencido' && !E.vencido) alVencer();
+  pintarVigencia();
+}
+
+function manejarErrorCarga(e) {
+  if (e?.vencido) { alVencer(); return; }
+  console.error(e);
+  $('#estado-carga').textContent = t('chat.error');
 }
 
 async function iniciar() {
   aplicarAjustes(leerAjustes());
   conectarEventos();
-  await recargarPaquete().catch((e) => { console.error(e); $('#estado-carga').textContent = t('chat.error'); });
+  // Vigencia: si venció, borra y (con señal) renueva antes de cargar nada del parque
+  const v = await vig.asegurarVigencia().catch(() => vig.estadoVigencia());
+  if (v.estado === 'vencido') { E.vencido = true; pintarVencido(); $('#vencido-estado').textContent = t('vencido.sinRed'); }
+  else await recargarPaquete().catch(manejarErrorCarga);
   // Sincronización con la base (contrato §5.5). Sin urlBase configurada no usa la red.
   arrancarSync({
     versionLocal: E.incluido?.version,
     alPaqueteNuevo: async (p) => {
+      // Llegó un paquete firmado: si la vigencia había vencido, hay señal → se renueva (o se borra si no se pudo)
+      if (E.vencido || vig.verificarVigencia().estado === 'vencido') {
+        if (!(await intentarRenovar())) await vig.borrarContenido();
+        return;
+      }
       E.paquete = p;
       E.origen = 'sync';
       pintarEstaciones();
@@ -477,6 +571,7 @@ async function iniciar() {
   }).catch((e) => console.warn('Sync:', e));
   setInterval(pintarAvisos, 60000); // los avisos vencidos desaparecen solos
   rutaActual();
+  pintarVigencia();
   try {
     E.gen = await cargarGenerador();
     E.genListo = !!(await E.gen.disponible())?.listo;

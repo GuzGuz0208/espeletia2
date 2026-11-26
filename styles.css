@@ -251,3 +251,7 @@ a { color: var(--verde); }
   .imprimible, .imprimible * { visibility: visible; }
   .imprimible { position: absolute; left: 0; top: 0; }
 }
+
+/* Vigencia del contenido (contrato §7) */
+.vigencia { margin: 0 0 10px; font-size: .85rem; text-align: center; opacity: .8; }
+.vigencia.vigencia-pronto { opacity: 1; padding: 10px 14px; border-radius: 12px; background: var(--hoja); font-weight: 700; border-left: 6px solid var(--sello); text-align: left; }
