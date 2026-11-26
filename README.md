@@ -26,6 +26,12 @@ generador de ejemplo.
 - Si aún no existen `js/fray.js` o `contenido/paquete.json`, la interfaz usa `js/fray-mock.js` y
   `ejemplo/paquete-ejemplo.json` y lo indica con una insignia «Motor de ejemplo · Paquete de ejemplo».
 
+- **Vercel** (sitio estático, sin build): `vercel.json` pone `no-cache` a `index.html`, `panel.html`, `sw.js`, `manifest.json` y
+  `contenido/`, `application/wasm` a los `.wasm`, caché inmutable a `models/partes/` y `X-Robots-Tag: noindex`. No hacen falta
+  COOP/COEP: ONNX Runtime corre con 1 hilo (`numThreads = 1`), y con COEP el generador no podría hablar con 127.0.0.1:8080.
+  `.vercelignore` deja fuera fuentes/, docs/, herramientas/, pruebas/, servidor/, legado/, qr/ y ejemplo/. El repo es privado y
+  el despliegue debe ir **con protección de acceso** (el paquete lleva texto de los guiones).
+
 ### Motor
 Motor (js/fray.js, contrato §2): `python -m http.server 8000 --bind 127.0.0.1` en la raíz y abrir
 `http://127.0.0.1:8000/prueba-motor.html` (página mínima de prueba; la interfaz real es aparte). Todo es local: `lib/` (ONNX Runtime

@@ -5,7 +5,7 @@
 //   grandes que no cambian); lo demás, «caché y actualizar en segundo plano».
 // Nunca se toca otro origen (p. ej. el servidor local del modelo en 127.0.0.1:8080 no pasa por aquí).
 // Al cambiar archivos de la app, sube VERSION.
-const VERSION = 'fray-v3-2026-11-26';
+const VERSION = 'fray-v4-2026-11-26';
 
 const APP = [
   './', 'index.html', 'panel.html', 'styles.css', 'manifest.json',
@@ -14,11 +14,12 @@ const APP = [
   'lib/jsQR.js', 'lib/qrcode.js',
   'fonts/bricolage-grotesque-latin-wdth-normal.woff2', 'fonts/atkinson-hyperlegible-latin-400-normal.woff2', 'fonts/atkinson-hyperlegible-latin-700-normal.woff2',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png',
-  'ejemplo/paquete-ejemplo.json',
 ];
 
 const OPCIONALES = [
-  'js/fray.js', 'js/fray-worker.js', 'js/nucleo.js', 'js/carril.js', 'js/generador.js', 'contenido/paquete.json', 'contenido/clave_publica.json', 'models/fray-params.json',
+  'js/fray.js', 'js/fray-worker.js', 'js/nucleo.js', 'js/carril.js', 'js/generador.js', 'js/verificador.js',
+  'contenido/paquete.json', 'contenido/indice.json', 'contenido/clave_publica.json', 'contenido/qr_clave_demo.json',
+  'models/fray-params.json', 'ejemplo/paquete-ejemplo.json',
   'lib/ort.wasm.min.js', 'lib/ort-wasm-simd-threaded.js', 'lib/ort-wasm-simd-threaded.wasm', 'lib/tokenizers.min.js',
   'models/e5_tokenizer.json', 'models/e5_tokenizer_config.json', 'models/partes.json',
 ];

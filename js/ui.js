@@ -387,7 +387,8 @@ async function leerFotograma() {
       valor = window.jsQR(d.data, d.width, d.height, { inversionAttempts: 'attemptBoth' })?.data || null;
     }
     if (!valor) return;
-    const id = await verificarQR(valor, claveQR(E.paquete));
+    const v = await verificarQR(valor, await claveQR(E.paquete), E.paquete.estaciones.map((s) => s.id));
+    const id = v.ok ? v.estacion : null;
     if (id && estacionPorId(id)) {
       pararCamara();
       navigator.vibrate?.(40);

@@ -5,8 +5,8 @@ import { TIPOS, TEMAS, ESTADOS } from './panel-config.js';
 import { hayPin, definirPin, comprobarPin, sesionActiva, restablecer, LARGO_MINIMO } from './panel-pin.js';
 import { cargarPaquete, paqueteBase, guardarVersion, versiones, avisarCambio } from './ui-paquete.js';
 import { urlBase, guardarUrlBase, arrancarSync, sync } from './ui-sync.js';
-import { fray as cargarFray, claveQR, CLAVE_QR_DEMO } from './ui-motor.js';
-import { textoQR } from './qr-estacion.js';
+import { fray as cargarFray, claveQR } from './ui-motor.js';
+import { generarQR } from './qr-estacion.js';
 
 const $ = (s) => document.querySelector(s);
 const P = { paquete: null, origen: null, motor: null, editando: null /* id o null si es nueva */ };
@@ -320,7 +320,7 @@ async function importar(archivo) {
     }
     if (!confirm(`Reemplazar el paquete actual por «${completo.version || archivo.name}» (${completo.fichas.length} fichas)?`)) return;
     // Cambiar la clave de los QR invalida los QR impresos: se pide una confirmación aparte
-    if (claveQR(completo) !== claveQR(P.paquete)
+    if ((completo.claveQR || null) !== (P.paquete.claveQR || null)
       && !confirm('ATENCIÓN: este paquete trae otra clave para los QR de estación. Los QR impresos con la clave actual dejarán de funcionar. ¿Aceptas cambiar la clave?')) return;
     await publicar(completo, `Paquete completo importado: ${archivo.name}`);
     res.append(el('p', 'ok', `Listo: paquete cargado con ${completo.fichas.length} fichas. Fray ya responde con él.`));
@@ -434,9 +434,9 @@ async function pintarQR() {
   const caja = $('#qr-tarjeta');
   caja.replaceChildren();
   if (!est || !window.qrcode) return;
-  const clave = claveQR(P.paquete);
-  $('#qr-aviso').hidden = clave !== CLAVE_QR_DEMO;
-  const texto = await textoQR(est.id, clave);
+  const clave = await claveQR(P.paquete);
+  $('#qr-aviso').hidden = !!P.paquete.claveQR;
+  const texto = await generarQR(est.id, clave);
   const qr = window.qrcode(0, 'M');
   qr.addData(texto);
   qr.make();

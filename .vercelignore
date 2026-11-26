@@ -5,3 +5,14 @@ herramientas/
 pruebas/
 servidor/
 ejemplo/
+legado/
+qr/
+prueba-motor.html
+contenido/preguntas_desarrollo.json
+contenido/paquete.ejemplo.json
+AGENTS.md
+README.md
+.gitattributes
+.playwright-mcp/
+publicado/
+datos/
