@@ -1,0 +1,15 @@
+{
+ "descripcion": "5 preguntas de extremo a extremo para medir el generador en el dispositivo. El texto es copia literal del guion zona norte (fuentes/guion-zona-norte.pdf, página indicada). Si existe contenido/paquete.json se puede cambiar por fichas reales; esto es solo para medir velocidad.",
+ "preguntas": [
+  { "id": "suelo", "pregunta": "¿por qué el suelo del páramo es como una esponja?", "tipoContenido": "ciencia", "cita": "NORTE p. 2",
+    "breve": "Aquí el suelo es el protagonista: gracias a su origen volcánico, funciona como una esponja que retiene hasta 40 veces su peso en agua." },
+  { "id": "frailejon", "pregunta": "¿cómo hace el frailejón para que no se le congele el agua?", "tipoContenido": "ciencia", "cita": "NORTE p. 2",
+    "breve": "Sus hojas peludas atrapan la humedad y su 'necromasa' (hojas muertas que cubren el tallo) actúa como un aislante térmico para que el agua en su interior no se congele." },
+  { "id": "kumanday", "pregunta": "¿qué significa Kumanday?", "tipoContenido": "relato", "cita": "NORTE p. 2",
+    "breve": "Las comunidades indígenas lo bautizaron como Kumanday, que en su lengua significa 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'." },
+  { "id": "aguacerales", "pregunta": "¿a qué altura está Aguacerales?", "tipoContenido": "ciencia", "cita": "NORTE p. 4",
+    "breve": "Nodo 1: Aguacerales (4.160 msnm)." },
+  { "id": "glaciar", "pregunta": "¿cómo se forma un glaciar?", "tipoContenido": "ciencia", "cita": "NORTE p. 2",
+    "breve": "Un glaciar es una masa de hielo de origen terrestre que se forma mediante un proceso de cientos de años: la nieve se acumula, se compacta bajo su propio peso, expulsa el aire y se recristaliza hasta convertirse en hielo glaciar denso y azulado." }
+ ]
+}

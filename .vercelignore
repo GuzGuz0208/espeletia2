@@ -4,3 +4,18 @@ docs/
 herramientas/
 pruebas/
 servidor/
+ejemplo/
+legado/
+qr/
+prueba-motor.html
+contenido/preguntas_desarrollo.json
+contenido/paquete.ejemplo.json
+AGENTS.md
+README.md
+.gitattributes
+.playwright-mcp/
+# publicado/ se despliega (manifest, paquete y avisos firmados: decisión 12); el archivo USB no hace falta en la nube
+publicado/fray-paquete-usb.json
+datos/
+# Código de la app Android (el APK se sirve desde descargas/)
+nativo/

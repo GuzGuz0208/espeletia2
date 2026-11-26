@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel del parque · Fray</title>
+  <meta name="theme-color" content="#2f6b4f">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <!-- Entrada con PIN: uno por dispositivo, lo define el personal en el primer uso (js/panel-pin.js) -->
+  <form class="login" id="login">
+    <h1>Panel del parque</h1>
+    <p id="login-ayuda">Solo para el personal del parque.</p>
+    <label for="pin" id="pin-etiqueta">PIN del personal</label>
+    <input id="pin" type="password" inputmode="numeric" autocomplete="off" required>
+    <label for="pin2" id="pin2-etiqueta" hidden>Repite el PIN</label>
+    <input id="pin2" type="password" inputmode="numeric" autocomplete="off" hidden>
+    <p class="error" id="pin-error" role="alert"></p>
+    <button class="btn btn-flor btn-grande" id="btn-entrar">Entrar</button>
+    <button class="btn btn-peligro btn-mini" type="button" id="btn-restablecer">Restablecer PIN (borra los datos del panel en este dispositivo)</button>
+    <a href="./">← Volver a Fray</a>
+  </form>
+
+  <div class="panel" id="panel" hidden>
+    <h1>Panel del parque</h1>
+    <p id="resumen"></p>
+    <p class="aviso-demo" id="aviso-ejemplo" hidden></p>
+
+    <nav class="pestanas" role="tablist">
+      <button role="tab" data-tab="fichas" aria-selected="true">Fichas</button>
+      <button role="tab" data-tab="importar">Importar y exportar</button>
+      <button role="tab" data-tab="sin">Preguntas sin respuesta</button>
+      <button role="tab" data-tab="versiones">Versiones</button>
+      <button role="tab" data-tab="qr">QR de estación</button>
+      <button role="tab" data-tab="sync">Sincronización</button>
+      <a class="btn btn-mini btn-linea" href="./" style="margin-left:auto">Ver como visitante</a>
+    </nav>
+
+    <!-- Fichas: lista + editor -->
+    <section data-panel="fichas">
+      <div id="lista-fichas">
+        <div class="filtros">
+          <input type="search" id="f-buscar" placeholder="Buscar por título, texto o pregunta" aria-label="Buscar">
+          <select id="f-estacion" aria-label="Estación"></select>
+          <select id="f-tipo" aria-label="Tipo"></select>
+          <select id="f-estado" aria-label="Estado">
+            <option value="">Todos los estados</option>
+            <option value="validado">Validado</option>
+            <option value="borrador">Borrador</option>
+            <option value="bloqueada">Bloqueada</option>
+          </select>
+          <button class="btn btn-flor" id="btn-nueva">+ Nueva ficha</button>
+        </div>
+        <table class="tabla">
+          <thead><tr><th>Título</th><th>Estación</th><th>Tipo</th><th>Citas</th><th>Estado</th></tr></thead>
+          <tbody id="tbody-fichas"></tbody>
+        </table>
+      </div>
+
+      <form class="form-ficha" id="form-ficha" hidden>
+        <h2 id="ed-titulo-form">Editar ficha</h2>
+        <div class="fila-campos">
+          <label class="campo"><span>Título</span><input name="titulo" required></label>
+          <label class="campo"><span>Identificador</span><input name="id" required pattern="[a-z0-9\-]+"><small>Minúsculas y guiones. No cambia después de crearla.</small></label>
+        </div>
+        <div class="fila-campos">
+          <label class="campo"><span>Estación</span><select name="estacion"></select></label>
+          <label class="campo"><span>Tema</span><select name="tema"></select></label>
+          <label class="campo"><span>Tipo</span><select name="tipo"></select><small>«relato» se muestra como tradición oral.</small></label>
+          <label class="campo"><span>Estado</span><select name="estado"></select></label>
+        </div>
+        <label class="campo"><span>Texto (del guion)</span><textarea name="texto" required></textarea><small>Copia el texto literal o casi literal del guion.</small></label>
+        <label class="campo"><span>Respuesta breve</span><textarea name="breve" required style="min-height:70px"></textarea><small>1-2 frases copiadas del propio texto de arriba.</small></label>
+        <div class="campo">
+          <span>Citas (guion y página del PDF)</span>
+          <div id="ed-citas"></div>
+          <button type="button" class="btn btn-mini btn-linea" id="btn-cita">+ Añadir cita</button>
+        </div>
+        <label class="campo"><span>Formas de preguntar (una por línea)</span><textarea name="preguntas" style="min-height:90px"></textarea><small>La primera aparece como sugerencia en la estación.</small></label>
+        <div class="fila-campos">
+          <label class="interruptor"><input type="checkbox" name="bloqueada"> Bloqueada (no se usa para responder)</label>
+          <label class="campo"><span>Motivo del bloqueo</span><input name="motivo"></label>
+        </div>
+        <p class="error" id="ed-errores" role="alert"></p>
+        <div class="acciones">
+          <button class="btn btn-flor" type="submit">Guardar</button>
+          <button class="btn btn-linea" type="button" id="btn-cancelar">Cancelar</button>
+          <button class="btn btn-peligro" type="button" id="btn-borrar">Borrar ficha</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Importar y exportar -->
+    <section data-panel="importar" hidden>
+      <h2>Importar fichas</h2>
+      <p>Sube un CSV o un JSON. Las fichas con el mismo identificador se reemplazan; las demás se agregan.
+        Un JSON con <code>estaciones</code> y <code>fichas</code> se toma como <b>paquete completo</b> (así se copia de un dispositivo a otro).</p>
+      <div class="acciones">
+        <label class="btn btn-flor">Elegir archivo… <input type="file" id="archivo" accept=".csv,.json,text/csv,application/json" hidden></label>
+        <button class="btn btn-linea" id="btn-plantilla-csv">Descargar plantilla CSV</button>
+        <button class="btn btn-linea" id="btn-plantilla-json">Descargar plantilla JSON</button>
+      </div>
+      <div id="import-resultado"></div>
+      <h2 style="margin-top:28px">Exportar el paquete</h2>
+      <p>Descarga el paquete con todas las fichas para llevarlo por USB a los otros dispositivos (en Brisas, antes de subir).</p>
+      <button class="btn btn-verde" id="btn-exportar">Exportar paquete (JSON)</button>
+      <h2 style="margin-top:28px">Publicar para todos los teléfonos</h2>
+      <p>En el PC de Brisas: 1) «Exportar para publicar» → 2) doble clic en «Publicar» en el escritorio → en 1-2 minutos todo
+        teléfono con señal recibe y activa la versión nueva solo. Paso a paso en <code>docs/operacion-base.md</code>.</p>
+      <button class="btn btn-flor" id="btn-exportar-publicar">Exportar para publicar</button>
+      <p id="export-resultado" role="status"></p>
+    </section>
+
+    <!-- Preguntas sin respuesta -->
+    <section data-panel="sin" hidden>
+      <h2>Preguntas sin respuesta</h2>
+      <p>Preguntas que Fray no pudo responder con los guiones. Se guardan solo en este dispositivo, sin datos de quién preguntó.</p>
+      <div class="acciones">
+        <button class="btn btn-linea" id="btn-sin-csv">Exportar CSV</button>
+        <button class="btn btn-peligro" id="btn-sin-limpiar">Limpiar lista</button>
+      </div>
+      <table class="tabla" style="margin-top:12px">
+        <thead><tr><th>Fecha</th><th>Estación</th><th>Pregunta</th><th></th></tr></thead>
+        <tbody id="tbody-sin"></tbody>
+      </table>
+    </section>
+
+    <!-- Versiones -->
+    <section data-panel="versiones" hidden>
+      <h2>Versiones del paquete</h2>
+      <p>Cada vez que guardas se crea una versión nueva. Puedes volver a una anterior.</p>
+      <p><button class="btn btn-linea" id="btn-base">Volver al paquete que trae la app</button></p>
+      <table class="tabla">
+        <thead><tr><th>Versión</th><th>Fecha</th><th>Cambio</th><th>Fichas</th><th></th></tr></thead>
+        <tbody id="tbody-versiones"></tbody>
+      </table>
+    </section>
+
+    <!-- QR de estación -->
+    <section data-panel="qr" hidden>
+      <h2>QR de estación para imprimir</h2>
+      <p>El visitante lo escanea y Fray abre esa estación. Va firmado con la clave del paquete y se verifica sin internet.</p>
+      <div class="filtros">
+        <select id="qr-estacion" aria-label="Estación"></select>
+        <button class="btn btn-flor" id="btn-imprimir">Imprimir</button>
+      </div>
+      <p class="aviso-demo" id="qr-aviso" hidden>Este paquete no trae clave propia: el QR usa la clave de demostración.</p>
+      <div class="imprimible" id="qr-tarjeta"></div>
+    </section>
+
+    <!-- Sincronización con la base (contrato §5) -->
+    <section data-panel="sync" hidden>
+      <h2>Sincronización con la base</h2>
+      <p id="sync-estado" class="estado"></p>
+      <p id="sync-detalle"></p>
+      <div class="acciones">
+        <button class="btn btn-flor" id="btn-sync-ahora">Sincronizar ahora</button>
+        <button class="btn btn-linea" id="btn-sync-atras">Volver a la versión anterior</button>
+        <label class="btn btn-linea">Importar paquete (USB)… <input type="file" id="archivo-usb" accept=".json,application/json" hidden></label>
+        <button class="btn btn-linea" id="btn-sync-exportar">Exportar preguntas (USB)</button>
+      </div>
+      <p id="sync-resultado" role="status"></p>
+
+      <h3 style="margin-top:24px">De dónde se bajan las actualizaciones</h3>
+      <p>Vacío = lo publicado en este mismo sitio (<code>/publicado</code>, por defecto). O el servidor de la base, p. ej.
+        <code>http://192.168.4.1:8090</code> (wifi local de Brisas).</p>
+      <div class="filtros">
+        <input id="sync-url" type="url" placeholder="http://192.168.4.1:8090" aria-label="Dirección de la base">
+        <button class="btn btn-verde" id="btn-sync-url">Guardar dirección</button>
+      </div>
+      <h3 style="margin-top:24px">Dónde se suben las preguntas sin respuesta</h3>
+      <p>El servidor de la base (<code>servidor/sync_base.py</code>, p. ej. <code>http://192.168.4.1:8090</code>). Vacío = las
+        preguntas se quedan en cola en el teléfono hasta que haya dónde subirlas (el sitio publicado no recibe preguntas).</p>
+      <div class="filtros">
+        <input id="sync-subida" type="url" placeholder="http://192.168.4.1:8090" aria-label="Servidor para subir preguntas">
+        <button class="btn btn-verde" id="btn-sync-subida">Guardar servidor</button>
+      </div>
+
+      <h3 style="margin-top:24px">Bandeja de la base: preguntas sin respuesta de todos los dispositivos</h3>
+      <div class="filtros">
+        <input id="sync-token" type="password" placeholder="Token del panel (si la base lo pide)" aria-label="Token del panel" autocomplete="off">
+        <button class="btn btn-flor" id="btn-bandeja">Cargar bandeja</button>
+      </div>
+      <table class="tabla">
+        <thead><tr><th>Veces</th><th>Pregunta</th><th>Estación</th><th>Última</th><th></th></tr></thead>
+        <tbody id="tbody-bandeja"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <script src="lib/qrcode.js" defer></script>
+  <script type="module" src="js/panel.js"></script>
+</body>
+</html>

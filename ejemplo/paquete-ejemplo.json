@@ -1,0 +1,143 @@
+{
+  "version": "ejemplo-2026-11-26.0",
+  "actualizado": "2026-11-26",
+  "ejemplo": true,
+  "nota": "PAQUETE DE EJEMPLO para probar la interfaz mientras llega contenido/paquete.json (rama juan/contenido). Textos copiados de los guiones con su página del PDF. No es el paquete oficial.",
+  "fuentes": {
+    "UTON2024": { "titulo": "Guion Ecoturístico UTON 2024", "paginas": 57 },
+    "NORTE": { "titulo": "Guión turístico (zona norte)", "paginas": 7 }
+  },
+  "estaciones": [
+    { "id": "brisas", "nombre": "Brisas", "orden": 0, "altitud": { "m": 4110, "citas": [{ "guion": "UTON2024", "pagina": 44 }] } },
+    { "id": "aguacerales", "nombre": "Aguacerales", "orden": 1, "altitud": { "m": 4160, "citas": [{ "guion": "UTON2024", "pagina": 5 }] } },
+    { "id": "arenales", "nombre": "Arenales", "orden": 2, "altitud": { "m": 4290, "citas": [{ "guion": "UTON2024", "pagina": 6 }] } },
+    { "id": "lunares", "nombre": "Lunares", "orden": 3, "altitud": { "m": 4350, "citas": [{ "guion": "UTON2024", "pagina": 8 }] } },
+    { "id": "tumbas", "nombre": "Valle de las Tumbas", "orden": 4, "altitud": { "m": 4460, "citas": [{ "guion": "UTON2024", "pagina": 9 }] } }
+  ],
+  "fichas": [
+    {
+      "id": "brisas-agua",
+      "estacion": "brisas",
+      "tema": "agua",
+      "tipo": "ciencia",
+      "titulo": "El parque y el agua",
+      "texto": "El Parque Nacional Natural Los Nevados tiene cerca de 62.000 (62.142) hectáreas de las cuales protege aproximadamente 53,532 hectáreas de páramos, lo que corresponde al 86% del área protegida, abastece de agua a 37 municipios y beneficia a cerca de 3 millones de personas en la región del eje cafetero, los páramos son ecosistemas únicos y vitales para Colombia y el planeta. Actúan como esponjas gigantes, regulando el suministro de agua y capturando carbono, lo que ayuda a mitigar el cambio climático.",
+      "breve": "Actúan como esponjas gigantes, regulando el suministro de agua y capturando carbono, lo que ayuda a mitigar el cambio climático.",
+      "citas": [{ "guion": "UTON2024", "pagina": 5 }],
+      "preguntas": ["¿Por qué es importante el páramo para el agua?", "¿A cuántos municipios abastece el parque?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "aguacerales-frailejon",
+      "estacion": "aguacerales",
+      "tema": "flora",
+      "tipo": "ciencia",
+      "titulo": "El frailejón y sus adaptaciones",
+      "texto": "Los frailejones, como muchas plantas de paramo han desarrollado adaptaciones, como hojas gruesas y vellosidades (pubescencia), para sobrevivir en este clima extremo, forman una “chaqueta” de materia muerta (necromasa) que les ayuda a protegerse de las inclementes condiciones del clima.",
+      "breve": "Forman una “chaqueta” de materia muerta (necromasa) que les ayuda a protegerse de las inclementes condiciones del clima.",
+      "citas": [{ "guion": "UTON2024", "pagina": 5 }],
+      "preguntas": ["¿Qué papel cumple el frailejón aquí?", "¿Por qué el frailejón tiene pelitos?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "aguacerales-nombre",
+      "estacion": "aguacerales",
+      "tema": "agua",
+      "tipo": "ciencia",
+      "titulo": "Por qué se llama Aguacerales",
+      "texto": "En el sitio “Aguacerales”, encontramos diversa vegetación. Estas plantas desempeñan un papel crucial en la captación y regulación del agua. Las gotas que precipitan se unen para formar riachuelos que alimentan la cuenca del río Chinchiná. La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales.",
+      "breve": "La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales.",
+      "citas": [{ "guion": "UTON2024", "pagina": 5 }],
+      "preguntas": ["¿Por qué se llama Aguacerales?", "¿De dónde sale el agua que cae?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "arenales-dunas",
+      "estacion": "arenales",
+      "tema": "geologia",
+      "tipo": "ciencia",
+      "titulo": "Las dunas de Arenales",
+      "texto": "En esta estación hay una abundante acumulación de arena, conocida como dunas de arena, estas son moldeadas y modeladas por el viento. Las dunas, están sobre Andesitas (lavas del viejo Ruiz/ older Ruiz) que tienen una edad aproximada de 100 mil años, se estima que estas dunas deben de tener alrededor de unos 200 o 400 años aproximadamente puesto que se forman posterior al retroceso glaciar en esta locación (se requieren estudios).",
+      "breve": "En esta estación hay una abundante acumulación de arena, conocida como dunas de arena, estas son moldeadas y modeladas por el viento.",
+      "citas": [{ "guion": "UTON2024", "pagina": 7 }],
+      "preguntas": ["¿De dónde sale tanta arena?", "¿Qué edad tienen las dunas?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "arenales-historia",
+      "estacion": "arenales",
+      "tema": "historia",
+      "tipo": "ciencia",
+      "titulo": "Cabañas y esquí en Arenales",
+      "texto": "El sector Arenales ha sido históricamente una zona de camping con varias construcciones para los visitantes, desde una bodega de papa en 1937 hasta el Chalet Arenales, diseñado por el arquitecto Simón Vélez, que se incendió en 2010. La actual cabaña exhibe pendones sobre la historia del esquí en el nevado del Ruiz en los años 50 y 60, cuando se realizaron campeonatos sudamericanos que llevaron a la creación del Club de Ski de Manizales. La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones.",
+      "breve": "La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones.",
+      "citas": [{ "guion": "UTON2024", "pagina": 7 }],
+      "preguntas": ["¿Aquí se esquiaba?", "¿Qué pasó con el chalet?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "lunares-gelifraccion",
+      "estacion": "lunares",
+      "tema": "geologia",
+      "tipo": "ciencia",
+      "titulo": "Gelifracción",
+      "texto": "Los visitantes pueden observar de cerca los procesos geológicos que han dado forma al paisaje, como las grietas producidas por el congelamiento y descongelamiento del agua en las rocas, este proceso es conocido como gelifracción que es un tipo de meteorización, ocurre cuando el agua se congela, el agua tiene la propiedad de aumentar su volumen al congelarse, si el agua esta confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen, por esta razón las rocas están llenas de grietas.",
+      "breve": "El agua tiene la propiedad de aumentar su volumen al congelarse, si el agua esta confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen, por esta razón las rocas están llenas de grietas.",
+      "citas": [{ "guion": "UTON2024", "pagina": 8 }],
+      "preguntas": ["¿Por qué se rompen las rocas?", "¿Por qué las rocas tienen grietas?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "lunares-rojo",
+      "estacion": "lunares",
+      "tema": "geologia",
+      "tipo": "ciencia",
+      "titulo": "El color rojizo de las rocas",
+      "texto": "Por último, el color rojizo obedece a otro tipo de meteorización, esta es de origen químico, acontece que las rocas están formadas por minerales, y a su vez lo minerales están formados por elementos químicos, algunos de estos elementos son susceptibles a reaccionar con el oxígeno, en este caso la oxidación del hierro (almacenado en minerales como las Hornblendas) deja en evidencia tonalidades rojizas sobre la roca.",
+      "breve": "La oxidación del hierro (almacenado en minerales como las Hornblendas) deja en evidencia tonalidades rojizas sobre la roca.",
+      "citas": [{ "guion": "UTON2024", "pagina": 8 }],
+      "preguntas": ["¿Por qué las rocas son rojas?", "¿Qué es la oxidación de las rocas?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "tumbas-nombre",
+      "estacion": "tumbas",
+      "tema": "cultura",
+      "tipo": "ciencia",
+      "titulo": "El nombre del Valle de las Tumbas",
+      "texto": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes. Algunas comunidades cercanas al PNNN usaban rocas con esta forma para construir tumbas de cancel, (esto no quiere decir que fueran extraídas del Ruiz, es solo una similitud).",
+      "breve": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes.",
+      "citas": [{ "guion": "UTON2024", "pagina": 9 }],
+      "preguntas": ["¿Por qué se llama Valle de las Tumbas?", "¿Aquí hay tumbas de verdad?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "norte-kumanday",
+      "estacion": null,
+      "tema": "cultura",
+      "tipo": "relato",
+      "titulo": "Kumanday según el guion zona norte",
+      "texto": "Mucho antes de las expediciones coloniales, este territorio era la morada de comunidades que guardaban un respeto profundo por la montaña. Lo llamaban Kumanday. En la cosmogonía indígena, este nombre se traduce como 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'.",
+      "breve": "En la cosmogonía indígena, este nombre se traduce como 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'.",
+      "citas": [{ "guion": "NORTE", "pagina": 1 }],
+      "preguntas": ["¿Qué significa Kumanday?", "¿Cómo llamaban los indígenas al volcán?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "uton-kumanday",
+      "estacion": null,
+      "tema": "cultura",
+      "tipo": "relato",
+      "titulo": "Kumanday según el guion UTON 2024",
+      "texto": "Si bien es conocido el nombre indígena de Kumandai, Kumanday o Cumanday, para referirse al Volcán Nevado del Ruiz, no existe la suficiente investigación para delimitar la procedencia de la palabra.",
+      "breve": "No existe la suficiente investigación para delimitar la procedencia de la palabra.",
+      "citas": [{ "guion": "UTON2024", "pagina": 34 }],
+      "preguntas": ["¿Qué significa Kumanday?", "¿De dónde viene la palabra Kumanday?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    }
+  ],
+  "conflictos": [
+    { "tema": "Significado de Kumanday", "fichas": ["norte-kumanday", "uton-kumanday"],
+      "nota": "El guion zona norte da traducciones; el UTON 2024 (p. 34) dice que no hay investigación suficiente." }
+  ]
+}

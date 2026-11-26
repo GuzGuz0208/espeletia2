@@ -1,0 +1,1447 @@
+{
+ "paquete": "2026-11-26.3",
+ "casos": [
+  {
+   "pregunta": "¿Qué papel cumple el frailejón en este lugar?",
+   "estacion": "aguacerales",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "norte-aguacerales-niebla",
+     "uton-frailejon-adaptaciones",
+     "norte-frailejon-necromasa"
+    ],
+    "citas": [
+     {
+      "guion": "NORTE",
+      "pagina": 5
+     },
+     {
+      "guion": "UTON2024",
+      "pagina": 5
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Observen los frailejones: su importancia radica en que son ingenieros hídricos. Sus hojas están cubiertas de pubescencia (pelos blancos), es una adaptación evolutiva para protegerse de la alta radiación UV y retener calor.",
+    "fraseRespaldo": "Observen los frailejones: su importancia radica en que son ingenieros hídricos. Sus hojas están cubiertas de pubescencia (pelos blancos), es una adaptación evolutiva para protegerse de la alta radiación UV y retener calor.",
+    "ampliar": "\"Bienvenidos a Aguacerales. Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'. Observen los frailejones: su importancia radica en que son ingenieros hídricos. Sus hojas están cubiertas de pubescencia (pelos blancos), es una adaptación evolutiva para protegerse de la alta radiación UV y retener calor. Este es el inicio del ciclo que alimenta los ríos que vemos en las zonas bajas: rompen la gota de niebla, la condensan y la dirigen al suelo. Ese suelo, compuesto por ceniza volcánica y materia orgánica, funciona como una esponja que libera el agua lentamente hacia las cuencas de los ríos Chinchiná y Gualí. Sin este proceso microscópico que ocurre aquí, no habría agua potable en las ciudades de abajo\".",
+    "citas": [
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 5
+     }
+    ],
+    "fichas": [
+     "norte-aguacerales-niebla"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9897456169128418,
+     "lex": 1.0,
+     "score": 1.0597456169128419,
+     "neg": 0.8084895014762878,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Por qué debemos evitar pisar las dunas?",
+   "estacion": "arenales",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-dunas-no-pisar"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 7
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Las dunas entran en las zonas de carácter intangible del PNNN, es parte del patrimonio geológico, debido a que estas dunas en algunas ocasiones tienen una alta carga de humedad; si son pisadas, las huellas pueden perdurar meses.",
+    "fraseRespaldo": "Las dunas entran en las zonas de carácter intangible del PNNN, es parte del patrimonio geológico, debido a que estas dunas en algunas ocasiones tienen una alta carga de humedad; si son pisadas, las huellas pueden perdurar meses.",
+    "ampliar": "Las dunas entran en las zonas de carácter intangible del PNNN, es parte del patrimonio geológico, debido a que estas dunas en algunas ocasiones tienen una alta carga de humedad; si son pisadas, las huellas pueden perdurar meses. Por esta razón y por la particularidad de su formación no deben ser intervenidas.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 7
+     }
+    ],
+    "fichas": [
+     "uton-dunas-no-pisar"
+    ],
+    "tipoContenido": "norma",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9971036911010742,
+     "lex": 1.0,
+     "score": 1.0671036911010743,
+     "neg": 0.8077809810638428,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Qué proceso explica las fracturas y cuál explica el color?",
+   "estacion": "lunares",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "norte-lunar-gelifraccion-oxidacion",
+     "uton-lunares-gelifraccion",
+     "uton-lunares-oxidacion"
+    ],
+    "citas": [
+     {
+      "guion": "NORTE",
+      "pagina": 6
+     },
+     {
+      "guion": "UTON2024",
+      "pagina": 8
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos: es oxidación de hierro y azufre presentes en la lava vieja al entrar en contacto con el oxígeno y la humedad ambiental.",
+    "fraseRespaldo": "Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos: es oxidación de hierro y azufre presentes en la lava vieja al entrar en contacto con el oxígeno y la humedad ambiental.",
+    "ampliar": "El paisaje aquí se torna 'lunar' debido a la gelifracción. El agua se filtra en las grietas de la roca, se congela por la noche aumentando su volumen y las estalla desde adentro: actúa como una cuña que rompe las rocas andesíticas en pedazos angulares. Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos: es oxidación de hierro y azufre presentes en la lava vieja al entrar en contacto con el oxígeno y la humedad ambiental. Estamos caminando sobre flujos de lava antiguos que están siendo transformados por la atmósfera.",
+    "citas": [
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 6
+     }
+    ],
+    "fichas": [
+     "norte-lunar-gelifraccion-oxidacion"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9956834316253662,
+     "lex": 1.0,
+     "score": 1.0656834316253663,
+     "neg": 0.818671703338623,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Por qué se fracturan las rocas en Lunares?",
+   "estacion": "lunares",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-lunares-gelifraccion",
+     "norte-lunar-gelifraccion-oxidacion"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 8
+     },
+     {
+      "guion": "NORTE",
+      "pagina": 6
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "El paisaje aquí se torna 'lunar' debido a la gelifracción. El agua se filtra en las grietas de la roca, se congela por la noche aumentando su volumen y las estalla desde adentro: actúa como una cuña que rompe las rocas andesíticas en pedazos angulares.",
+    "fraseRespaldo": "El paisaje aquí se torna 'lunar' debido a la gelifracción. El agua se filtra en las grietas de la roca, se congela por la noche aumentando su volumen y las estalla desde adentro: actúa como una cuña que rompe las rocas andesíticas en pedazos angulares.",
+    "ampliar": "El paisaje aquí se torna 'lunar' debido a la gelifracción. El agua se filtra en las grietas de la roca, se congela por la noche aumentando su volumen y las estalla desde adentro: actúa como una cuña que rompe las rocas andesíticas en pedazos angulares. Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos: es oxidación de hierro y azufre presentes en la lava vieja al entrar en contacto con el oxígeno y la humedad ambiental. Estamos caminando sobre flujos de lava antiguos que están siendo transformados por la atmósfera.",
+    "citas": [
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 6
+     }
+    ],
+    "fichas": [
+     "norte-lunar-gelifraccion-oxidacion"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9965012073516846,
+     "lex": 1.0,
+     "score": 1.0665012073516846,
+     "neg": 0.7819222211837769,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Dónde estamos y qué es este parque?",
+   "estacion": "brisas",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "norte-brisas-introduccion"
+    ],
+    "citas": [
+     {
+      "guion": "NORTE",
+      "pagina": 5
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "\"Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+    "fraseRespaldo": "\"Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+    "ampliar": "Introducción: Sector Brisas (Puerta de Entrada). Concepto clave: ubicación geográfica e importancia hídrica. \"Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios. Nos encontramos en el flanco norte del Complejo Volcánico Nevado del Ruiz (CVNR), una estructura compuesta por cuatro domos principales: Nereidas, Olleta, Piraña y el cráter activo Arenas. Este ecosistema de páramo es un 'regulador hídrico' vital para el Eje Cafetero\".",
+    "citas": [
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 5
+     }
+    ],
+    "fichas": [
+     "norte-brisas-introduccion"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9508864879608154,
+     "lex": 1.0,
+     "score": 1.0208864879608155,
+     "neg": 0.8696967363357544,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Qué temperatura promedio hace en Brisas?",
+   "estacion": "brisas",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-temperatura-brisas"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 44
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados, y en la estación La Laguna, ubicada a 4.000 m.s.n.m., la temperatura media anual es de 3 grados centígrados, pocas horas de sol, humedad relativa alta, frecuencia de nieblas, vientos fuertes y lluvias de poca intensidad.",
+    "fraseRespaldo": "Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados, y en la estación La Laguna, ubicada a 4.000 m.s.n.m., la temperatura media anual es de 3 grados centígrados, pocas horas de sol, humedad relativa alta, frecuencia de nieblas, vientos fuertes y lluvias de poca intensidad.",
+    "ampliar": "El PNN Los Nevados presenta un rango altitudinal entre los 2600 msnm y los 5321 m.s.n.m. en la cumbre del Volcán Nevado del Ruiz. Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados, y en la estación La Laguna, ubicada a 4.000 m.s.n.m., la temperatura media anual es de 3 grados centígrados, pocas horas de sol, humedad relativa alta, frecuencia de nieblas, vientos fuertes y lluvias de poca intensidad. Herd (1982) calculó la isoterma anual a 0 grados centígrados para la región del parque situándola a los 4705 m.s.n.m. (Plan de manejo Parque Nacional Natural Los Nevados, 1998). El IDEAM proporciona datos de temperaturas máximas y mínimas, velocidad y dirección del viento y humedad tomados en la estación meteorológica de Brisas.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 44
+     },
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 45
+     }
+    ],
+    "fichas": [
+     "uton-temperatura-brisas"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9826255440711975,
+     "lex": 1.0,
+     "score": 1.0526255440711976,
+     "neg": 0.7868322730064392,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿A cuántos municipios les da agua el parque?",
+   "estacion": "brisas",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "norte-ficha-tecnica",
+     "uton-pnn-agua",
+     "norte-brisas-introduccion"
+    ],
+    "citas": [
+     {
+      "guion": "NORTE",
+      "pagina": 3
+     },
+     {
+      "guion": "UTON2024",
+      "pagina": 5
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Importancia hídrica: Abastece a 37 municipios y beneficia a cerca de 3 millones de personas en el Eje Cafetero.",
+    "fraseRespaldo": "Importancia hídrica: Abastece a 37 municipios y beneficia a cerca de 3 millones de personas en el Eje Cafetero.",
+    "ampliar": "Ficha Técnica General del PNN Los Nevados. Extensión total: 62,142 hectáreas. Área de páramos protegida: 53,532 hectáreas (86% del total). Importancia hídrica: Abastece a 37 municipios y beneficia a cerca de 3 millones de personas en el Eje Cafetero. Geología base: El Complejo Volcánico Nevado del Ruiz (CVNR) está compuesto por cuatro estructuras: Nereidas, Olleta, Piraña y Arenas. Roca predominante: Andesita (roca volcánica común de los Andes).",
+    "citas": [
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 3
+     }
+    ],
+    "fichas": [
+     "norte-ficha-tecnica"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9407095909118652,
+     "lex": 1.0,
+     "score": 0.9907095909118653,
+     "neg": 0.7993520498275757,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Por qué se llama Aguacerales?",
+   "estacion": "aguacerales",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-aguacerales-nombre"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 5
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales.",
+    "fraseRespaldo": "La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales.",
+    "ampliar": "En el sitio \"Aguacerales\" encontramos diversa vegetación. Estas plantas desempeñan un papel crucial en la captación y regulación del agua. Las gotas que precipitan se unen para formar riachuelos que alimentan la cuenca del río Chinchiná. La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales. Aquí se puede apreciar cómo el agua contenida en las nubes es capturada por la vegetación (condensación) y pasa a formar pequeñas gotas que descienden y llegan a los musgos que crecen sobre la roca; estas gotas se juntan formando hilos de agua que al caer van formando un riachuelo que irá a la quebrada. Este fenómeno de condensación se da durante las 24 horas del día, todos los días del año. Durante las noches frías, los hilos de agua se congelan y forman carámbanos (habitualmente ocurre en temporada seca).",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 5
+     }
+    ],
+    "fichas": [
+     "uton-aguacerales-nombre"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9968294501304626,
+     "lex": 1.0,
+     "score": 1.0668294501304627,
+     "neg": 0.8003442287445068,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿A qué altura estamos?",
+   "estacion": "aguacerales",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-aguacerales-ficha"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 5
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "\"Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+    "fraseRespaldo": "\"Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+    "ampliar": "Introducción: Sector Brisas (Puerta de Entrada). Concepto clave: ubicación geográfica e importancia hídrica. \"Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios. Nos encontramos en el flanco norte del Complejo Volcánico Nevado del Ruiz (CVNR), una estructura compuesta por cuatro domos principales: Nereidas, Olleta, Piraña y el cráter activo Arenas. Este ecosistema de páramo es un 'regulador hídrico' vital para el Eje Cafetero\".",
+    "citas": [
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 5
+     }
+    ],
+    "fichas": [
+     "norte-brisas-introduccion"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9319532513618469,
+     "lex": 0.5877988153571039,
+     "score": 0.9613431921297021,
+     "neg": 0.8548559546470642,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": false
+  },
+  {
+   "pregunta": "¿qué especie de frailejon hay en el parque",
+   "estacion": "aguacerales",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-frailejon-especies"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 5
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Existen más de 100 especies de frailejones, en Colombia se tienen cerca de 60 de estas especies y para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana.",
+    "fraseRespaldo": "Existen más de 100 especies de frailejones, en Colombia se tienen cerca de 60 de estas especies y para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana.",
+    "ampliar": "Existen más de 100 especies de frailejones, en Colombia se tienen cerca de 60 de estas especies y para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana. El nombre genérico \"Espeletia\" fue nombrado en honor a José Manuel de Ezpeleta, el virrey del Nuevo Reino de Granada.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 5
+     },
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 6
+     }
+    ],
+    "fichas": [
+     "uton-frailejon-especies"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9502006769180298,
+     "lex": 0.7184045791393094,
+     "score": 1.0061209058749951,
+     "neg": 0.7898851633071899,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Por qué las plantas tienen pelitos blancos?",
+   "estacion": "aguacerales",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "norte-aguacerales-niebla",
+     "uton-frailejon-adaptaciones"
+    ],
+    "citas": [
+     {
+      "guion": "NORTE",
+      "pagina": 5
+     },
+     {
+      "guion": "UTON2024",
+      "pagina": 5
+     }
+    ]
+   },
+   "r": {
+    "tipo": "abstencion",
+    "breve": "No tengo esa información en los guiones oficiales; pregúntale a tu guía o al personal del parque.",
+    "ampliar": null,
+    "citas": [],
+    "fichas": [],
+    "tipoContenido": null,
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.878803014755249,
+     "lex": 0.4334923017746506,
+     "score": 0.9204776298439816,
+     "neg": 0.7825605869293213,
+     "modo": "semantico"
+    },
+    "_mejor": "norte-aguacerales-niebla"
+   },
+   "ficha_correcta": false
+  },
+  {
+   "pregunta": "¿De dónde sale tanta arena?",
+   "estacion": "arenales",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-arenales-origen-arena",
+     "norte-arenales-discurso"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 7
+     },
+     {
+      "guion": "NORTE",
+      "pagina": 5
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "¿De dónde sale todo este material arenoso? 1. El viento funciona como agente erosivo sobre las rocas (fricción por el viento cargado de partículas) generando otras pequeñas partículas de polvo y arena. 2.",
+    "fraseRespaldo": "¿De dónde sale todo este material arenoso? 1. El viento funciona como agente erosivo sobre las rocas (fricción por el viento cargado de partículas) generando otras pequeñas partículas de polvo y arena. 2.",
+    "ampliar": "¿De dónde sale todo este material arenoso? 1. El viento funciona como agente erosivo sobre las rocas (fricción por el viento cargado de partículas) generando otras pequeñas partículas de polvo y arena. 2. El viento transporta partículas de otros lugares hacia el edificio volcánico y viceversa. 3. Hay formación de material particulado por la meteorización tanto química como mecánica que se encarga de destruir la roca en material más fino. 4. Sumado a la abundante ceniza generada en el complejo volcánico. Todo este material es transportado por el viento, siendo llevado en suspensión o arrastrado hasta toparse con la barrera de rocas que hay detrás de la cabaña de Arenales, acumulándose allí, dando paso a la formación de estas dunas.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 7
+     }
+    ],
+    "fichas": [
+     "uton-arenales-origen-arena"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.970128059387207,
+     "lex": 0.5162910219333836,
+     "score": 1.0159426104838762,
+     "neg": 0.8539845943450928,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Por qué ya no se esquía en el Ruiz?",
+   "estacion": "arenales",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-arenales-historia-esqui"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 7
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "La actual cabaña exhibe pendones sobre la historia del esquí en el nevado del Ruiz en los años 50 y 60, cuando se realizaron campeonatos sudamericanos que llevaron a la creación del Club de Ski de Manizales.",
+    "fraseRespaldo": "La actual cabaña exhibe pendones sobre la historia del esquí en el nevado del Ruiz en los años 50 y 60, cuando se realizaron campeonatos sudamericanos que llevaron a la creación del Club de Ski de Manizales.",
+    "ampliar": "El sector Arenales ha sido históricamente una zona de camping con varias construcciones para los visitantes, desde una bodega de papa en 1937 hasta el Chalet Arenales, diseñado por el arquitecto Simón Vélez, que se incendió en 2010. La actual cabaña exhibe pendones sobre la historia del esquí en el nevado del Ruiz en los años 50 y 60, cuando se realizaron campeonatos sudamericanos que llevaron a la creación del Club de Ski de Manizales. La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 7
+     }
+    ],
+    "fichas": [
+     "uton-arenales-historia-esqui"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.916658878326416,
+     "lex": 1.0,
+     "score": 0.9866588783264161,
+     "neg": 0.799021303653717,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Es verdad que en Arenales hay una niña fantasma?",
+   "estacion": "arenales",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-nina-fantasma"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 7
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Hay un mito que viene desde los 80's sobre una niña fantasma; se dice que ella mora en este sector, y que diversos guías, guardaparques, montañistas y rescatistas la han visto.",
+    "fraseRespaldo": "Hay un mito que viene desde los 80's sobre una niña fantasma; se dice que ella mora en este sector, y que diversos guías, guardaparques, montañistas y rescatistas la han visto.",
+    "ampliar": "Hay un mito que viene desde los 80's sobre una niña fantasma; se dice que ella mora en este sector, y que diversos guías, guardaparques, montañistas y rescatistas la han visto.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 7
+     }
+    ],
+    "fichas": [
+     "uton-nina-fantasma"
+    ],
+    "tipoContenido": "relato",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9155694246292114,
+     "lex": 1.0,
+     "score": 0.9855694246292115,
+     "neg": 0.8044174909591675,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Esas rocas enormes las tiró el volcán?",
+   "estacion": "arenales",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-arenales-viento-rocas"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 7
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Hay unas rocas enormes detrás de la cabaña cerca a la quebrada; estas rocas no fueron arrojadas por el volcán, estas fueron dejadas allá por el retroceso glaciar.",
+    "fraseRespaldo": "Hay unas rocas enormes detrás de la cabaña cerca a la quebrada; estas rocas no fueron arrojadas por el volcán, estas fueron dejadas allá por el retroceso glaciar.",
+    "ampliar": "Datos curiosos: El viento es tan fuerte en algunas ocasiones que arrancó las escaleras de la cabaña; actualmente se encuentran en otra posición. Hay unas rocas enormes detrás de la cabaña cerca a la quebrada; estas rocas no fueron arrojadas por el volcán, estas fueron dejadas allá por el retroceso glaciar.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 7
+     }
+    ],
+    "fichas": [
+     "uton-arenales-viento-rocas"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9852078557014465,
+     "lex": 1.0,
+     "score": 1.0552078557014466,
+     "neg": 0.7771338224411011,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Por qué se llama Valle Lunar?",
+   "estacion": "lunares",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "norte-lunar-importancia",
+     "uton-lunares-paisaje"
+    ],
+    "citas": [
+     {
+      "guion": "NORTE",
+      "pagina": 6
+     },
+     {
+      "guion": "UTON2024",
+      "pagina": 8
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "\"Este es el Valle Lunar, llamado así por su aspecto estéril y desolado. La importancia de este punto es entender la fuerza física del clima.",
+    "fraseRespaldo": "\"Este es el Valle Lunar, llamado así por su aspecto estéril y desolado. La importancia de este punto es entender la fuerza física del clima.",
+    "ampliar": "Parada: Valle Lunar (La Fuerza de los Elementos). Concepto clave: gelifracción y oxidación. Importancia: Es la estación técnica por excelencia. Aquí se explica cómo se \"descompone\" la montaña. Características únicas: formaciones rocosas angulares, ausencia casi total de vegetación y colores minerales intensos. \"Este es el Valle Lunar, llamado así por su aspecto estéril y desolado. La importancia de este punto es entender la fuerza física del clima.",
+    "citas": [
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 6
+     }
+    ],
+    "fichas": [
+     "norte-lunar-importancia"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9963274002075195,
+     "lex": 1.0,
+     "score": 1.0663274002075196,
+     "neg": 0.7811384797096252,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Qué son esos rayones en las rocas?",
+   "estacion": "lunares",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-lunares-estrias"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 8
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares y son el resultado del movimiento del mismo; su acción abrasiva sobre la roca deja como evidencia estas marcas que sirven como herramienta para determinar la dirección del movimiento del glaciar.",
+    "fraseRespaldo": "También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares y son el resultado del movimiento del mismo; su acción abrasiva sobre la roca deja como evidencia estas marcas que sirven como herramienta para determinar la dirección del movimiento del glaciar.",
+    "ampliar": "También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares y son el resultado del movimiento del mismo; su acción abrasiva sobre la roca deja como evidencia estas marcas que sirven como herramienta para determinar la dirección del movimiento del glaciar.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 8
+     }
+    ],
+    "fichas": [
+     "uton-lunares-estrias"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9886472225189209,
+     "lex": 1.0,
+     "score": 1.058647222518921,
+     "neg": 0.8355842232704163,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Por qué se llama Valle de las Tumbas?",
+   "estacion": "tumbas",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-tumbas-nombre"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 9
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes.",
+    "fraseRespaldo": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes.",
+    "ampliar": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes. Algunas comunidades cercanas al PNNN usaban rocas con esta forma para construir tumbas de cancel (esto no quiere decir que fueran extraídas del Ruiz, es solo una similitud); estas rocas están hoy cubiertas por arena. El nombre de Valle de las Tumbas, así como el de las anteriores estaciones, es heredado por tradición oral, y hay registros de que en los 80's ya recibía este nombre. El sitio también es conocido como \"Desierto de la Soledad\", nombres que reflejan tanto el tranquilo paisaje del lugar como su significado místico y cultural.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 9
+     },
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 10
+     }
+    ],
+    "fichas": [
+     "uton-tumbas-nombre"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9959449172019958,
+     "lex": 1.0,
+     "score": 1.065944917201996,
+     "neg": 0.781927227973938,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Por qué no podemos seguir subiendo al cráter?",
+   "estacion": "tumbas",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-tumbas-restriccion",
+     "norte-tumbas-lahares"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 10
+     },
+     {
+      "guion": "NORTE",
+      "pagina": 6
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "El ascenso más allá de este punto está restringido no solo por la actividad del volcán, sino por la fragilidad del ecosistema de superpáramo, donde la vida lucha por colonizar la roca desnuda tras el retiro del glaciar.",
+    "fraseRespaldo": "El ascenso más allá de este punto está restringido no solo por la actividad del volcán, sino por la fragilidad del ecosistema de superpáramo, donde la vida lucha por colonizar la roca desnuda tras el retiro del glaciar.",
+    "ampliar": "Técnicamente, estamos en la zona de influencia directa de lahares (flujos de lodo volcánico). La importancia de terminar aquí es entender que el volcán está vivo; el cráter Arenas está cerca y emite gases constantemente. El ascenso más allá de este punto está restringido no solo por la actividad del volcán, sino por la fragilidad del ecosistema de superpáramo, donde la vida lucha por colonizar la roca desnuda tras el retiro del glaciar. Aquí, en el ecosistema de superpáramo, la temperatura fluctúa tanto que las plantas han desarrollado estrategias extremas para no morir congeladas cada noche. Es el límite entre la vida y la roca pura\".",
+    "citas": [
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 6
+     }
+    ],
+    "fichas": [
+     "norte-tumbas-lahares"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.931132435798645,
+     "lex": 0.3905352575774903,
+     "score": 0.9706591986775196,
+     "neg": 0.8010117411613464,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Qué pasó en Armero en 1985?",
+   "estacion": "tumbas",
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-armero-1985"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 10
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Estos flujos devastaron las poblaciones de Armero, Tolima, Villamaría y Chinchiná, causando la muerte de más de 23,000 personas.",
+    "fraseRespaldo": "Estos flujos devastaron las poblaciones de Armero, Tolima, Villamaría y Chinchiná, causando la muerte de más de 23,000 personas.",
+    "ampliar": "Erupción del Nevado del Ruiz: el 13 de noviembre de 1985, el volcán Nevado del Ruiz entró en erupción, provocando uno de los desastres volcánicos más catastróficos del siglo XX. El calor de la erupción derritió el glaciar del volcán, generando lahares (flujos de lodo volcánico) que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos (Poa y Nereidas). Estos flujos devastaron las poblaciones de Armero, Tolima, Villamaría y Chinchiná, causando la muerte de más de 23,000 personas.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 10
+     }
+    ],
+    "fichas": [
+     "uton-armero-1985"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9351227283477783,
+     "lex": 1.0,
+     "score": 1.0051227283477784,
+     "neg": 0.8111850619316101,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿El volcán está apagado?",
+   "estacion": null,
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "norte-volcan-activo"
+    ],
+    "citas": [
+     {
+      "guion": "NORTE",
+      "pagina": 7
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Decir que está \"apagado\" genera una falsa sensación de seguridad. Si ocurriera una emisión de ceniza o un evento sísmico, el turista no estaría preparado psicológicamente para seguir los protocolos de emergencia, lo que aumenta el pánico y el riesgo.",
+    "fraseRespaldo": "Decir que está \"apagado\" genera una falsa sensación de seguridad. Si ocurriera una emisión de ceniza o un evento sísmico, el turista no estaría preparado psicológicamente para seguir los protocolos de emergencia, lo que aumenta el pánico y el riesgo.",
+    "ampliar": "Verdades: El Nevado del Ruiz es un volcán activo. Decir que está \"apagado\" genera una falsa sensación de seguridad. Si ocurriera una emisión de ceniza o un evento sísmico, el turista no estaría preparado psicológicamente para seguir los protocolos de emergencia, lo que aumenta el pánico y el riesgo. Detalle para el guía: se debe hablar de \"periodos de reposo\" o \"actividad constante\", pero nunca de extinción. El guía debe explicar que la vigilancia del Servicio Geológico Colombiano es 24/7 precisamente porque es un sistema vivo.",
+    "citas": [
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 7
+     }
+    ],
+    "fichas": [
+     "norte-volcan-activo"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9925915002822876,
+     "lex": 1.0,
+     "score": 1.0425915002822876,
+     "neg": 0.819262683391571,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Por qué la montaña se ve gris y no blanca?",
+   "estacion": null,
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "norte-ceniza-nieve"
+    ],
+    "citas": [
+     {
+      "guion": "NORTE",
+      "pagina": 7
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Confundir ceniza con nieve: muchos turistas llegan esperando ver nieve blanca y, al ver la montaña gris, los guías a veces intentan \"suavizar\" la realidad diciendo que \"la nieve está debajo\" o que \"eso blanco es hielo\".",
+    "fraseRespaldo": "Confundir ceniza con nieve: muchos turistas llegan esperando ver nieve blanca y, al ver la montaña gris, los guías a veces intentan \"suavizar\" la realidad diciendo que \"la nieve está debajo\" o que \"eso blanco es hielo\".",
+    "ampliar": "Confundir ceniza con nieve: muchos turistas llegan esperando ver nieve blanca y, al ver la montaña gris, los guías a veces intentan \"suavizar\" la realidad diciendo que \"la nieve está debajo\" o que \"eso blanco es hielo\". Detalle para el guía: es un error técnico. Lo que cubre gran parte del sector norte es ceniza volcánica reciente y depósitos piroclásticos. Decir la verdad permite explicar el dinamismo del volcán. La nieve y el glaciar están en franco retroceso; ocultar esto es ignorar la crisis climática que el guion busca visibilizar.",
+    "citas": [
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 7
+     }
+    ],
+    "fichas": [
+     "norte-ceniza-nieve"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9595609903335571,
+     "lex": 1.0,
+     "score": 1.0095609903335572,
+     "neg": 0.7987743020057678,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Cuánto glaciar le queda al Ruiz?",
+   "estacion": null,
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-glaciar-ruiz-2022"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 29
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "El volcán Nevado del Ruiz es el glaciar más icónico de la región Andina central.",
+    "fraseRespaldo": "El volcán Nevado del Ruiz es el glaciar más icónico de la región Andina central.",
+    "ampliar": "El volcán Nevado del Ruiz es el glaciar más icónico de la región Andina central. Está compuesto por una única masa de hielo, cuya área, para el 2022, se calculó en 7,68 ±0,26 km², que, comparada con la del 2021 (7,96 ±0,29 km²), muestra una reducción de 0,28 km² (3.5 %). La característica destacada de este volcán nevado ha sido la emisión de ceniza volcánica y su acumulación sobre parte o la totalidad del glaciar, lo que generó, dependiendo del espesor acumulado, un incremento en el derretimiento (depósitos de ceniza de pocos centímetros) o un aislamiento térmico del glaciar (depósitos de ceniza mayores a 15 cm aprox.). Durante el fenómeno climático extremo La Niña, fue común que la nieve cubriera los depósitos de ceniza (tomado de Informe del estado de los glaciares colombianos 2022).",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 29
+     }
+    ],
+    "fichas": [
+     "uton-glaciar-ruiz-2022"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9606468677520752,
+     "lex": 1.0,
+     "score": 1.0106468677520752,
+     "neg": 0.8093825578689575,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Qué animales grandes hay en el parque?",
+   "estacion": null,
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-grandes-mamiferos",
+     "norte-fauna-condor-danta"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 42
+     },
+     {
+      "guion": "NORTE",
+      "pagina": 2
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Los grandes mamíferos son altamente vulnerables a la extinción dadas sus necesidades de un territorio extenso y por la presión ejercida sobre sus poblaciones por efecto de la cacería, por lo cual han desaparecido de muchos páramos, como es el caso del venado de cola blanca (Odocoileus virginianus) en el PNN Los Nevados.",
+    "fraseRespaldo": "Los grandes mamíferos son altamente vulnerables a la extinción dadas sus necesidades de un territorio extenso y por la presión ejercida sobre sus poblaciones por efecto de la cacería, por lo cual han desaparecido de muchos páramos, como es el caso del venado de cola blanca (Odocoileus virginianus) en el PNN Los Nevados.",
+    "ampliar": "En los páramos colombianos se tienen registros de 21 familias de mamíferos, 46 géneros y 70 especies aproximadamente; entre las especies más llamativas que se pueden observar en el PNN Los Nevados se encuentra la Danta de Páramo (Tapirus pinchaque), el Venado colorado (Mazama rufina), el conejo de páramo (Sylvilagus brasiliensis), la Boruga (Cuniculus taczanowskii), el venado conejo (Pudu mephistophiles), el Puma o León de montaña (Puma concolor), el Tigrillo (Leopardus tigrinus), entre otros. Los grandes mamíferos son altamente vulnerables a la extinción dadas sus necesidades de un territorio extenso y por la presión ejercida sobre sus poblaciones por efecto de la cacería, por lo cual han desaparecido de muchos páramos, como es el caso del venado de cola blanca (Odocoileus virginianus) en el PNN Los Nevados.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 42
+     },
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 43
+     }
+    ],
+    "fichas": [
+     "uton-grandes-mamiferos"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9377405643463135,
+     "lex": 1.0,
+     "score": 0.9877405643463135,
+     "neg": 0.7790269255638123,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Qué es el superpáramo?",
+   "estacion": null,
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-franjas-vegetacion",
+     "uton-pisos-temperatura"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 39
+     },
+     {
+      "guion": "UTON2024",
+      "pagina": 43
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Superpáramo: llega hasta el límite inferior de las nieves perpetuas, se caracteriza por la discontinuidad de la vegetación y la apreciable superficie del suelo desnudo.",
+    "fraseRespaldo": "Superpáramo: llega hasta el límite inferior de las nieves perpetuas, se caracteriza por la discontinuidad de la vegetación y la apreciable superficie del suelo desnudo.",
+    "ampliar": "Franja altoandina: constituye una zona de ecotonía entre la vegetación cerrada de la media montaña y abierta de la parte alta; para el PNN Los Nevados esta franja se encuentra desde los 2600 m.s.n.m. Páramo bajo (subpáramo): se caracteriza por el predominio de la vegetación arbustiva; para el PNN Los Nevados esta franja se encuentra desde los 3600 m.s.n.m. Páramo propiamente dicho: páramo de gramíneas; la diversificación comunitaria es máxima; se encuentran casi todos los tipos de vegetación, aunque predominan los frailejonales o rosetales (con 80 especies de Espeletia), los pajonales con especies de Calamagrostis y los chuscales de Chusquea tessellata. Superpáramo: llega hasta el límite inferior de las nieves perpetuas, se caracteriza por la discontinuidad de la vegetación y la apreciable superficie del suelo desnudo.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 39
+     }
+    ],
+    "fichas": [
+     "uton-franjas-vegetacion"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.995430588722229,
+     "lex": 1.0,
+     "score": 1.045430588722229,
+     "neg": 0.7983482480049133,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Quién fue Juan Díaz Jaramillo?",
+   "estacion": null,
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-juan-diaz-mohan"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 35
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Juan Díaz Jaramillo fue un español que, proveniente del Ecuador, decidió asentarse en Tocaima, persiguiendo el rastro del oro indígena durante la segunda mitad del siglo XVI.",
+    "fraseRespaldo": "Juan Díaz Jaramillo fue un español que, proveniente del Ecuador, decidió asentarse en Tocaima, persiguiendo el rastro del oro indígena durante la segunda mitad del siglo XVI.",
+    "ampliar": "Juan Díaz Jaramillo fue un español que, proveniente del Ecuador, decidió asentarse en Tocaima, persiguiendo el rastro del oro indígena durante la segunda mitad del siglo XVI. Si bien no encontró el tan famoso dorado, sí exploró la actual zona del Norte del Tolima, principalmente el Cañón del Río Lagunilla, en donde fue instalando diferentes minas, las cuales fueron arrasadas por la erupción del Volcán Nevado del Ruiz (conocido para la época como volcán de Cartago) en 1595. Antes de ese suceso, en 1581, una avalancha arrasó con su casa en Tocaima, la casa del Rico del pueblo. En la memoria colectiva se juntaron las dos avalanchas como un solo suceso que dejó a Juan Díaz Jaramillo sin un ápice de riqueza, convirtiéndolo en un mohán o en un \"encantado\" que gobierna las avalanchas, las crecientes y los \"volcanes\".",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 35
+     }
+    ],
+    "fichas": [
+     "uton-juan-diaz-mohan"
+    ],
+    "tipoContenido": "relato",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9107942581176758,
+     "lex": 1.0,
+     "score": 0.9607942581176758,
+     "neg": 0.7868971228599548,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿En qué meses llueve más?",
+   "estacion": null,
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "uton-precipitacion"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 44
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "En los meses más húmedos la zona norte y oriente del Área Protegida exhibe promedios mensuales cercanos a 200 mm/mes y la zona sur y occidente presenta promedios mensuales cercanos a 400 mm/mes.",
+    "fraseRespaldo": "En los meses más húmedos la zona norte y oriente del Área Protegida exhibe promedios mensuales cercanos a 200 mm/mes y la zona sur y occidente presenta promedios mensuales cercanos a 400 mm/mes.",
+    "ampliar": "El PNN Los Nevados se caracteriza por un régimen de precipitación bimodal con dos periodos de lluvia entre abril-mayo y octubre-noviembre, y dos periodos secos entre diciembre-febrero y julio-agosto. En los meses más húmedos la zona norte y oriente del Área Protegida exhibe promedios mensuales cercanos a 200 mm/mes y la zona sur y occidente presenta promedios mensuales cercanos a 400 mm/mes. En los meses más secos la zona norte y oriente del Parque exhibe promedios mensuales entre 50 mm/mes a 100 mm/mes.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 44
+     }
+    ],
+    "fichas": [
+     "uton-precipitacion"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9945278167724609,
+     "lex": 1.0,
+     "score": 1.044527816772461,
+     "neg": 0.8357270359992981,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Qué significa Kumanday?",
+   "estacion": "tumbas",
+   "esperado": {
+    "tipo": "conflicto",
+    "fichas": [
+     "norte-kumanday",
+     "uton-kumanday"
+    ],
+    "citas": [
+     {
+      "guion": "NORTE",
+      "pagina": 1
+     },
+     {
+      "guion": "UTON2024",
+      "pagina": 34
+     }
+    ]
+   },
+   "r": {
+    "tipo": "conflicto",
+    "breve": "Guión turístico (zona norte), p. 1: En la cosmogonía indígena, este nombre se traduce como 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'.\nGuión turístico (zona norte), p. 2: Este gigante que nos observa no siempre se llamó 'Ruiz'. Mucho antes, las comunidades indígenas lo bautizaron como Kumanday, que en su lengua significa 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'.\nGuión turístico (zona norte), p. 6: Este lugar era sagrado para los pueblos indígenas, quienes lo llamaban Kumanday ('cerro blanco'); para las comunidades precolombinas, este era un lugar de pagamentos y respeto, no de conquista.\nGuion Ecoturístico UTON 2024, p. 34: no existe la suficiente investigación para delimitar la procedencia de la palabra",
+    "ampliar": "Guión turístico (zona norte), p. 1: La Identidad Ancestral: Del Kumanday al Ruiz. Iniciamos con el origen del nombre indígena. Mucho antes de las expediciones coloniales, este territorio era la morada de comunidades que guardaban un respeto profundo por la montaña. Lo llamaban Kumanday. En la cosmogonía indígena, este nombre se traduce como 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'. Para ellos, el volcán era un ser vivo, un centinela sagrado que marcaba la conexión entre la tierra y el cielo. Al llamarlo 'Blanco', no solo describían su cima nevada, sino que reconocían su pureza como fuente de vida.\n\nGuión turístico (zona norte), p. 2: Discurso: \"Kumanday, el Centinela del Agua\". \"¡Bienvenidos a una de las aulas ambientales más importantes de los Andes colombianos! Antes de comenzar nuestro ascenso por el sector norte, es fundamental entender el territorio que estamos pisando. Este gigante que nos observa no siempre se llamó 'Ruiz'. Mucho antes, las comunidades indígenas lo bautizaron como Kumanday, que en su lengua significa 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'. Para ellos, la montaña no era solo roca, sino una deidad blanca que marcaba el límite de lo sagrado.\n\nGuión turístico (zona norte), p. 6: \"Llegamos a los 4,460 msnm. Este lugar era sagrado para los pueblos indígenas, quienes lo llamaban Kumanday ('cerro blanco'); para las comunidades precolombinas, este era un lugar de pagamentos y respeto, no de conquista.\n\nGuion Ecoturístico UTON 2024, p. 34: Si bien es conocido el nombre indígena de Kumandai, Kumanday o Cumanday para referirse al Volcán Nevado del Ruiz, no existe la suficiente investigación para delimitar la procedencia de la palabra, la cual se ubica principalmente en la comunidad prehispánica Quimbaya (denominación que tiene muchos debates debido a que Quimbaya puede ser una referencia al trabajo orfebre de diversas comunidades que habitaron el actual territorio de Quindío, Risaralda y parte del Occidente y Centro Sur Caldense), para la cual el vocablo significa en español \"banco hermoso\" (IDEAM), \"Gran padre de barbas blancas\" (tradición oral guías de turismo), entre otros muchos nombres.",
+    "citas": [
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 1
+     },
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 2
+     },
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 6
+     },
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 34
+     }
+    ],
+    "fichas": [
+     "norte-kumanday",
+     "norte-discurso-kumanday",
+     "norte-tumbas-sagrado",
+     "uton-kumanday"
+    ],
+    "tipoContenido": "relato",
+    "alternativas": [],
+    "aviso": "Los guiones difieren",
+    "nota": "El guion zona norte (pp. 1, 2 y 6) traduce Kumanday como 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'. El guion UTON 2024 (p. 34) dice que no hay investigación suficiente para delimitar la procedencia de la palabra y recoge otras traducciones: 'banco hermoso' (IDEAM) y 'Gran padre de barbas blancas' (tradición oral de guías).",
+    "_diag": {
+     "sem": 0.9917423725128174,
+     "lex": 1.0,
+     "score": 1.0417423725128174,
+     "neg": 0.7891156077384949,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Cuántas personas murieron en la tragedia de Armero?",
+   "estacion": "tumbas",
+   "esperado": {
+    "tipo": "conflicto",
+    "fichas": [
+     "uton-armero-1985",
+     "uton-segundo-periodo"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 10
+     },
+     {
+      "guion": "UTON2024",
+      "pagina": 26
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Estos flujos devastaron las poblaciones de Armero, Tolima, Villamaría y Chinchiná, causando la muerte de más de 23,000 personas.",
+    "fraseRespaldo": "Estos flujos devastaron las poblaciones de Armero, Tolima, Villamaría y Chinchiná, causando la muerte de más de 23,000 personas.",
+    "ampliar": "Erupción del Nevado del Ruiz: el 13 de noviembre de 1985, el volcán Nevado del Ruiz entró en erupción, provocando uno de los desastres volcánicos más catastróficos del siglo XX. El calor de la erupción derritió el glaciar del volcán, generando lahares (flujos de lodo volcánico) que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos (Poa y Nereidas). Estos flujos devastaron las poblaciones de Armero, Tolima, Villamaría y Chinchiná, causando la muerte de más de 23,000 personas.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 10
+     }
+    ],
+    "fichas": [
+     "uton-armero-1985"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9821934700012207,
+     "lex": 1.0,
+     "score": 1.0521934700012208,
+     "neg": 0.796533465385437,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Cuántas especies de frailejón hay en Colombia?",
+   "estacion": "aguacerales",
+   "esperado": {
+    "tipo": "conflicto",
+    "fichas": [
+     "uton-frailejon-especies",
+     "uton-franjas-vegetacion"
+    ],
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 5
+     },
+     {
+      "guion": "UTON2024",
+      "pagina": 39
+     }
+    ]
+   },
+   "r": {
+    "tipo": "conflicto",
+    "breve": "Guion Ecoturístico UTON 2024, p. 5; Guion Ecoturístico UTON 2024, p. 6: para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana.\nGuion Ecoturístico UTON 2024, p. 39: Superpáramo: llega hasta el límite inferior de las nieves perpetuas, se caracteriza por la discontinuidad de la vegetación y la apreciable superficie del suelo desnudo.",
+    "ampliar": "Guion Ecoturístico UTON 2024, p. 5; Guion Ecoturístico UTON 2024, p. 6: Existen más de 100 especies de frailejones, en Colombia se tienen cerca de 60 de estas especies y para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana. El nombre genérico \"Espeletia\" fue nombrado en honor a José Manuel de Ezpeleta, el virrey del Nuevo Reino de Granada.\n\nGuion Ecoturístico UTON 2024, p. 39: Franja altoandina: constituye una zona de ecotonía entre la vegetación cerrada de la media montaña y abierta de la parte alta; para el PNN Los Nevados esta franja se encuentra desde los 2600 m.s.n.m. Páramo bajo (subpáramo): se caracteriza por el predominio de la vegetación arbustiva; para el PNN Los Nevados esta franja se encuentra desde los 3600 m.s.n.m. Páramo propiamente dicho: páramo de gramíneas; la diversificación comunitaria es máxima; se encuentran casi todos los tipos de vegetación, aunque predominan los frailejonales o rosetales (con 80 especies de Espeletia), los pajonales con especies de Calamagrostis y los chuscales de Chusquea tessellata. Superpáramo: llega hasta el límite inferior de las nieves perpetuas, se caracteriza por la discontinuidad de la vegetación y la apreciable superficie del suelo desnudo.",
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 5
+     },
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 6
+     },
+     {
+      "guion": "UTON2024",
+      "titulo": "Guion Ecoturístico UTON 2024",
+      "pagina": 39
+     }
+    ],
+    "fichas": [
+     "uton-frailejon-especies",
+     "uton-franjas-vegetacion"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": "Los guiones difieren",
+    "nota": "El guion UTON 2024 dice en p. 5 que en Colombia hay cerca de 60 especies de frailejones (más de 100 en total), y en p. 39 que en el páramo propiamente dicho predominan los frailejonales «con 80 especies de Espeletia».",
+    "_diag": {
+     "sem": 0.9758037328720093,
+     "lex": 1.0,
+     "score": 1.0458037328720093,
+     "neg": 0.7821327447891235,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  },
+  {
+   "pregunta": "¿Dónde está la nieve que hay debajo de la ceniza?",
+   "estacion": null,
+   "esperado": {
+    "tipo": "respuesta",
+    "fichas": [
+     "norte-ceniza-nieve"
+    ],
+    "citas": [
+     {
+      "guion": "NORTE",
+      "pagina": 7
+     }
+    ]
+   },
+   "r": {
+    "tipo": "respuesta",
+    "breve": "Confundir ceniza con nieve: muchos turistas llegan esperando ver nieve blanca y, al ver la montaña gris, los guías a veces intentan \"suavizar\" la realidad diciendo que \"la nieve está debajo\" o que \"eso blanco es hielo\".",
+    "fraseRespaldo": "Confundir ceniza con nieve: muchos turistas llegan esperando ver nieve blanca y, al ver la montaña gris, los guías a veces intentan \"suavizar\" la realidad diciendo que \"la nieve está debajo\" o que \"eso blanco es hielo\".",
+    "ampliar": "Confundir ceniza con nieve: muchos turistas llegan esperando ver nieve blanca y, al ver la montaña gris, los guías a veces intentan \"suavizar\" la realidad diciendo que \"la nieve está debajo\" o que \"eso blanco es hielo\". Detalle para el guía: es un error técnico. Lo que cubre gran parte del sector norte es ceniza volcánica reciente y depósitos piroclásticos. Decir la verdad permite explicar el dinamismo del volcán. La nieve y el glaciar están en franco retroceso; ocultar esto es ignorar la crisis climática que el guion busca visibilizar.",
+    "citas": [
+     {
+      "guion": "NORTE",
+      "titulo": "Guión turístico (zona norte)",
+      "pagina": 7
+     }
+    ],
+    "fichas": [
+     "norte-ceniza-nieve"
+    ],
+    "tipoContenido": "ciencia",
+    "alternativas": [],
+    "aviso": null,
+    "_diag": {
+     "sem": 0.9862793684005737,
+     "lex": 1.0,
+     "score": 1.0362793684005738,
+     "neg": 0.8135795593261719,
+     "modo": "semantico"
+    }
+   },
+   "ficha_correcta": true
+  }
+ ]
+}

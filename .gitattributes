@@ -1,0 +1,11 @@
+* text=auto eol=lf
+*.sh text eol=lf
+*.ps1 text eol=crlf
+*.bin binary
+*.wasm binary
+*.onnx binary
+*.png binary
+*.gguf binary
+# Lo publicado va firmado byte a byte (sha256): git no debe tocar los finales de línea
+publicado/** -text
+*.cmd text eol=crlf

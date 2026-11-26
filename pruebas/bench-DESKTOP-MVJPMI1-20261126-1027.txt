@@ -1,0 +1,58 @@
+﻿**********************
+Inicio de la transcripción de Windows PowerShell
+Hora de inicio: 20261126102731
+Nombre de usuario: DESKTOP-MVJPMI1\danna
+Usuario RunAs: DESKTOP-MVJPMI1\danna
+Nombre de la configuración: 
+Máquina: DESKTOP-MVJPMI1 (Microsoft Windows NT 10.0.26300.0)
+Aplicación host: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -File herramientas\bench_dispositivo.ps1 -Modelo q25-1.5b
+Id. de proceso: 9952
+PSVersion: 5.1.26100.10068
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.10068
+BuildVersion: 10.0.26100.10068
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+=== Fray · bench del dispositivo · 2026-11-26T10:27:32 ===
+equipo: DESKTOP-MVJPMI1 · Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz · núcleos 4 / lógicos 8 · hilos usados 4
+modelo: q25-1.5b (C:\Users\danna\espeletia-llm\gguf\q25-1.5b\qwen2.5-1.5b-instruct-q4_k_m.gguf)
+--- RAM antes: 17.402 MB libres de 32.605 MB
+(temperatura de CPU: Windows no la expone sin herramientas del fabricante; anótala con HWiNFO si está instalado)
+
+=== llama-bench (pp = leer prompt, tg = generar; t/s) ===
+llama-bench.exe : load_backend: loaded RPC backend from C:\Users\danna\espeletia-llm\bin\llama-b12738\ggml-rpc.dll
+En C:\wt2\modelo\herramientas\bench_dispositivo.ps1: 34 Carácter: 3
++   & "$bin\llama-bench.exe" -m $gguf -t $Hilos -p '64,256' -n 48 -r 2  ...
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (load_backend: l...38\ggml-rpc.dll:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+load_backend: loaded CPU backend from C:\Users\danna\espeletia-llm\bin\llama-b12738\ggml-cpu-haswell.dll
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| qwen2 1.5B Q4_K - Medium       |   1.04 GiB |     1.78 B | CPU        |       4 |            pp64 |         64.73 ± 9.70 |
+| qwen2 1.5B Q4_K - Medium       |   1.04 GiB |     1.78 B | CPU        |       4 |           pp256 |         93.88 ± 2.52 |
+| qwen2 1.5B Q4_K - Medium       |   1.04 GiB |     1.78 B | CPU        |       4 |            tg48 |         16.01 ± 4.22 |
+
+=== 5 preguntas de extremo a extremo (llama-server 127.0.0.1:8080) ===
+--- RAM con el modelo cargado: 17.257 MB libres de 32.605 MB
+0-calentar: 1.ª palabra ≈ 290 ms · total 360 ms · prompt nuevo 18 tok · generó 3 tok a 34,4 t/s
+    Hola.
+1-suelo: 1.ª palabra ≈ 790 ms · total 2547 ms · prompt nuevo 68 tok · generó 37 tok a 20,5 t/s
+    El suelo del páramo es como una esponja debido a su origen volcánico, que puede retener hasta 40 veces su peso en agua.
+2-frailejon: 1.ª palabra ≈ 1028 ms · total 3363 ms · prompt nuevo 85 tok · generó 47 tok a 19,7 t/s
+    El frailejón mantén su agua no congele gracias a sus hojas peludas que atrapan la humedad y su 'necromasa' que actúa como un aislante térmico.
+3-kumanday: 1.ª palabra ≈ 996 ms · total 2830 ms · prompt nuevo 63 tok · generó 38 tok a 20,2 t/s
+    Kumanday significa 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco' en la lengua de los indígenas.
+4-aguacerales: 1.ª palabra ≈ 584 ms · total 1474 ms · prompt nuevo 40 tok · generó 21 tok a 22,5 t/s
+    Aguacerales está a 4.160 metros sobre el nivel del mar.
+5-glaciar: 1.ª palabra ≈ 1177 ms · total 3582 ms · prompt nuevo 89 tok · generó 51 tok a 20,8 t/s
+    Un glaciar se forma a través de la acumulación de nieve que se compacta bajo su propio peso, expulsa el aire y se recristaliza hasta convertirse en hielo glaciar denso y azulado.
+--- CPU media de llama-server durante las 5 preguntas: 49 % del equipo (para docs/energia.md, método B)
+--- RAM tras las preguntas: 17.160 MB libres de 32.605 MB
+**********************
+Fin de la transcripción de Windows PowerShell
+Hora de finalización: 20261126102806
+**********************

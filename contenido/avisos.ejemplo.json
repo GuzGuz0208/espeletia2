@@ -1,0 +1,11 @@
+[
+ {
+  "id": "ejemplo-1",
+  "texto": "EJEMPLO (no es un aviso real): hoy el grupo de la mañana se reúne en la oficina de Brisas.",
+  "tipo": "operativo",
+  "emitidoPor": "Coordinación de guías, Brisas",
+  "vigenteDesde": "2026-11-26T06:00:00-05:00",
+  "vigenteHasta": "2026-11-26T18:00:00-05:00",
+  "estaciones": null
+ }
+]
