@@ -1,0 +1,16 @@
+{
+ "models/e5_small_latino.onnx": {
+  "bytes": 65799313,
+  "sha256": "ebc99db47d1dee4aa4df82fa788a73de34e1ec11132e5d3aaf81cce84ef3bd7c",
+  "partes": [
+   "models/partes/e5_small_latino.onnx.ebc99db4.00.bin",
+   "models/partes/e5_small_latino.onnx.ebc99db4.01.bin",
+   "models/partes/e5_small_latino.onnx.ebc99db4.02.bin",
+   "models/partes/e5_small_latino.onnx.ebc99db4.03.bin",
+   "models/partes/e5_small_latino.onnx.ebc99db4.04.bin",
+   "models/partes/e5_small_latino.onnx.ebc99db4.05.bin",
+   "models/partes/e5_small_latino.onnx.ebc99db4.06.bin",
+   "models/partes/e5_small_latino.onnx.ebc99db4.07.bin"
+  ]
+ }
+}
