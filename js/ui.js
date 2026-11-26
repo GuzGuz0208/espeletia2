@@ -129,7 +129,7 @@ function pintarEstado() {
   const ins = $('#insignia-ejemplo');
   const marcas = [];
   if (info.motor === 'ejemplo') marcas.push(t('estado.ejemplo'));
-  if (E.origen === 'ejemplo') marcas.push(t('estado.paqueteEjemplo'));
+  if (E.paquete?.ejemplo) marcas.push(t('estado.paqueteEjemplo'));
   ins.hidden = !marcas.length;
   ins.textContent = marcas.join(' · ');
   ins.title = info.errores.join('\n');
@@ -141,7 +141,9 @@ function sugerenciasDe(estacion) {
   const fs = E.paquete.fichas.filter((f) => usable(f) && f.preguntas?.length);
   const propias = fs.filter((f) => f.estacion === estacion);
   const generales = fs.filter((f) => !f.estacion);
-  return [...new Set([...propias, ...generales].map((f) => f.preguntas[0]))].slice(0, 4);
+  // Primera letra en mayúscula (también después de «¿»), solo para mostrar
+  const bonita = (q) => q.replace(/^(¿?\s*)(\p{L})/u, (_, a, b) => a + b.toUpperCase());
+  return [...new Set([...propias, ...generales].map((f) => bonita(f.preguntas[0])))].slice(0, 4);
 }
 
 function abrirEstacion(id, { conservar = false } = {}) {
@@ -178,8 +180,8 @@ async function preguntar(texto) {
 
   let r;
   try {
-    if (!E.listo) await E.cargando;
-    r = await E.motor.preguntar(texto, { estacion: E.estacion });
+    const motor = E.motor || (await E.motorP);
+    r = await motor.preguntar(texto, { estacion: E.estacion });
   } catch (e) {
     console.error(e);
     tarjeta.className = 'resp resp-abstencion';
@@ -237,7 +239,7 @@ function pintarRespuesta(tarjeta, r) {
   if (r.tipo === 'abstencion') tarjeta.append(el('p', 'nota', t('chat.abstencion')));
 
   if (r.tipo === 'duda' && r.alternativas?.length) {
-    tarjeta.append(el('p', 'nota', t('chat.duda')));
+    if (!r.breve) tarjeta.append(el('p', 'nota', t('chat.duda')));
     const alts = el('div', 'chips');
     for (const a of r.alternativas) {
       const b = el('button', 'chip', a.titulo);
@@ -378,13 +380,25 @@ async function leerFotograma() {
 }
 
 // ---------- Arranque ----------
-async function prepararMotor() {
+// El motor indexa en segundo plano. La pantalla y las preguntas no esperan: el motor real responde la seguridad
+// al instante (carril crítico) y espera él mismo al índice para lo demás.
+function prepararMotor() {
   E.listo = false;
   pintarEstado();
-  E.motor = await cargarFray();
-  await E.motor.cargar(E.paquete);
-  E.listo = true;
-  pintarEstado();
+  E.motorP = cargarFray().then(async (m) => {
+    E.motor = m;
+    await m.cargar(E.paquete, { alAvance: avance });
+    E.listo = true;
+    pintarEstado();
+    return m;
+  });
+  E.motorP.catch((e) => { console.error(e); $('#estado-carga').textContent = t('chat.error'); });
+  return E.motorP;
+}
+
+function avance(a) {
+  const txt = t('estado.preparando');
+  $('#estado-carga').textContent = a?.total ? `${txt} ${Math.round((100 * a.hechos) / a.total)} %` : txt;
 }
 
 async function recargarPaquete() {
@@ -392,8 +406,7 @@ async function recargarPaquete() {
   E.paquete = paquete;
   E.origen = origen;
   pintarEstaciones();
-  E.cargando = prepararMotor();
-  await E.cargando;
+  prepararMotor();
   if (E.estacion) abrirEstacion(E.estacion, { conservar: true });
 }
 

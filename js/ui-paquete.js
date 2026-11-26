@@ -45,7 +45,15 @@ async function leerJSON(url) {
 /** Devuelve { paquete, origen } con el paquete que debe usarse ahora. */
 export async function cargarPaquete() {
   const v = await vigente();
-  if (v) return { paquete: v.paquete, origen: 'dispositivo' };
+  // Lo editado en el Panel manda, salvo que se haya hecho sobre el paquete de ejemplo y ya exista el oficial
+  if (v && !v.paquete.ejemplo) return { paquete: v.paquete, origen: 'dispositivo' };
+  const base = await paqueteBase();
+  if (v && base.origen === 'ejemplo') return { paquete: v.paquete, origen: 'dispositivo' };
+  return base;
+}
+
+/** El paquete que viene con la app (sin cambios del Panel): contenido/paquete.json o, si aún no existe, el de ejemplo. */
+export async function paqueteBase() {
   try { return { paquete: await leerJSON('contenido/paquete.json'), origen: 'contenido' }; } catch { /* aún no existe */ }
   return { paquete: await leerJSON('ejemplo/paquete-ejemplo.json'), origen: 'ejemplo' };
 }
@@ -63,7 +71,7 @@ export async function guardarVersion(paquete, nota = '') {
   // El número sigue a la versión vigente (también al volver a una vieja: nunca se repite un número)
   const anterior = (await vigente())?.version || paquete.version;
   const nuevo = { ...structuredClone(paquete), version: siguienteVersion(anterior), actualizado: new Date().toISOString().slice(0, 10) };
-  delete nuevo.ejemplo;
+  // `ejemplo: true` se conserva: así se sabe que estas ediciones parten del paquete de ejemplo
   await tx('readwrite', (s) => s.add({ version: nuevo.version, fecha: new Date().toISOString(), nota, paquete: nuevo }));
   // Recorta versiones viejas
   const todas = await versiones();

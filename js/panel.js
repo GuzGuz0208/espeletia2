@@ -2,7 +2,7 @@
 // Cada guardado crea una versión nueva del paquete en el dispositivo (IndexedDB) y reindexa el motor.
 
 import { PIN_DEMO, TIPOS, TEMAS, ESTADOS } from './panel-config.js';
-import { cargarPaquete, guardarVersion, versiones } from './ui-paquete.js';
+import { cargarPaquete, paqueteBase, guardarVersion, versiones } from './ui-paquete.js';
 import { fray as cargarFray, claveQR, CLAVE_QR_DEMO } from './ui-motor.js';
 import { textoQR } from './qr-estacion.js';
 
@@ -441,7 +441,7 @@ function pintarTodo() {
   const val = p.fichas.filter((f) => f.estado === 'validado' && !f.bloqueada).length;
   $('#resumen').textContent = `Paquete ${p.version} · ${n} fichas (${val} validadas y activas) · origen: ${P.origen === 'dispositivo' ? 'guardado en este dispositivo' : P.origen === 'ejemplo' ? 'paquete de ejemplo' : 'contenido/paquete.json'}`;
   const aviso = $('#aviso-ejemplo');
-  aviso.hidden = P.origen !== 'ejemplo';
+  aviso.hidden = !p.ejemplo;
   aviso.textContent = 'Estás viendo el PAQUETE DE EJEMPLO (ejemplo/paquete-ejemplo.json). Llegará el paquete oficial en contenido/paquete.json.';
   pintarFiltros();
   pintarLista();
@@ -482,6 +482,13 @@ async function entrar() {
     pintarSinRespuesta();
   };
   $('#qr-estacion').onchange = pintarQR;
+  $('#btn-base').onclick = async () => {
+    const { paquete, origen } = await paqueteBase();
+    if (!confirm(`¿Volver al paquete que trae la app (${paquete.version}, ${paquete.fichas.length} fichas)? Las versiones guardadas siguen en la lista.`)) return;
+    await publicar(paquete, `Paquete base (${origen === 'ejemplo' ? 'ejemplo' : 'contenido/paquete.json'} ${paquete.version})`);
+    pintarVersiones();
+    toast('Listo: Fray responde con el paquete base.');
+  };
   $('#btn-imprimir').onclick = () => window.print();
 }
 
