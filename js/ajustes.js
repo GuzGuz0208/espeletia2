@@ -47,6 +47,7 @@ export async function abrirAjustes() {
       <button class="btn btn-linea btn-ancho" id="aj-collage">${esc(t('pdf.collageBtn'))}</button>
       <p class="estado-offline ${listo ? 'listo' : ''}"><span class="punto"></span>${esc(listo ? t('aj.listo') : t('aj.noListo'))}</p>
       <div class="estado-ia" id="aj-ia"></div>
+      <details class="rendimiento" id="aj-rend"><summary>${esc(t('rend.titulo'))}</summary><div id="aj-rend-c"><p class="rend-nota">${esc(t('rend.calculando'))}</p></div></details>
       <div class="hoja-pie">
         <span class="hoja-links"><button class="link" id="aj-creditos">${esc(t('aj.creditos'))}</button><button class="link" id="aj-guia">${esc(t('aj.guia'))}</button><button class="link" id="aj-equipo">${esc(t('aj.equipo'))}</button></span>
         <span class="hoja-links"><button class="link" id="aj-registro">${esc(t('aj.registro'))}</button><a class="link" href="panel.html">${esc(t('aj.panel'))}</a>${/Android/i.test(navigator.userAgent) && !window.FrayNativo ? `<a class="link" href="descargas/fray-paramo-arm64.apk" download>${esc(t('aj.apk'))}</a>` : ''}</span>
@@ -86,6 +87,7 @@ export async function abrirAjustes() {
     $$('[data-ahorro]', hoja).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
   }));
   $('#aj-creditos').onclick = () => abrirCreditos();
+  $('#aj-rend').ontoggle = (e) => { if (e.target.open) pintarRendimiento($('#aj-rend-c')); };
   // Registro de la prueba (js/registro.js, si ya está en esta versión)
   $('#aj-registro').onclick = async () => {
     try {
@@ -420,4 +422,34 @@ function pintarIA(hoja) {
     await Promise.allSettled([ml.load(), chat.reintentar()]);
     pintarIA(hoja);
   };
+}
+
+// ---------- Rendimiento en este teléfono (rúbrica: registrar tiempo de respuesta y consumo del dispositivo) ----------
+// Tiempos MEDIDOS con el registro de la prueba de este teléfono (js/registro.js; no sale del celular). La energía no se
+// puede medir desde la página: se muestra la referencia medida en la prueba del 26-nov (estimación de Android).
+const MAH_POR_PREGUNTA = 0.22; // pruebas/resultados/energia-telefono-2026-11-26.json (Redmi Note 15 Pro, con IA local)
+const mediana = (xs) => { const v = xs.filter((x) => Number.isFinite(x)).sort((a, b) => a - b); return v.length ? v[Math.floor(v.length / 2)] : null; };
+const seg = (ms) => (ms == null ? '—' : `${(ms / 1000).toLocaleString(E.lang === 'es' ? 'es-CO' : 'en-US', { maximumFractionDigits: 1 })} s`);
+async function pintarRendimiento(caja) {
+  let reg = [];
+  try { reg = await (await import('./registro.js')).leerRegistro(); } catch { /* sin registro */ }
+  const preg = reg.filter((e) => e.evento === 'pregunta');
+  const ia = reg.filter((e) => e.evento === 'ia' && Number.isFinite(e.ms));
+  const iaOk = ia.filter((e) => e.ok);
+  // respuesta completa = búsqueda + IA de la misma pregunta (ref); sin IA, solo la búsqueda
+  const porRef = new Map(preg.map((e) => [e.ref, e.ms]));
+  const completas = ia.map((e) => (porRef.get(e.ref) || 0) + e.ms);
+  let bat = null;
+  try { const b = await navigator.getBattery?.(); if (b) bat = `${Math.round(b.level * 100)} %${b.charging ? ` · ${t('rend.cargando')}` : ''}`; } catch { /* sin API */ }
+  const filas = [
+    [t('rend.preguntas'), String(preg.length)],
+    [t('rend.busqueda'), seg(mediana(preg.map((e) => e.ms)))],
+    [t('rend.primera'), seg(mediana(ia.map((e) => e.primeraMs)))],
+    [t('rend.completa'), seg(mediana(completas))],
+    [t('rend.verificada'), ia.length ? `${iaOk.length} / ${ia.length}` : '—'],
+    [t('rend.bateria'), bat || '—'],
+    [t('rend.energia'), preg.length ? `≈ ${(preg.length * MAH_POR_PREGUNTA).toLocaleString(E.lang === 'es' ? 'es-CO' : 'en-US', { maximumFractionDigits: 1 })} mAh` : '—'],
+  ];
+  caja.innerHTML = `<dl class="rend-tabla">${filas.map(([a, b]) => `<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join('')}</dl>
+    <p class="rend-nota">${esc(t('rend.nota', { mah: String(MAH_POR_PREGUNTA).replace('.', E.lang === 'es' ? ',' : '.') }))}</p>`;
 }

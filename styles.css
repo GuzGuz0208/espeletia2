@@ -813,3 +813,9 @@ body[data-vista="equipo"] .rol-equipo { display: inline; }
 /* Personajes de la portada en su propia capa de composición: su animación no repinta el resto de la tapa */
 .tapa-pj { will-change: transform; }
 .tapa { contain: paint; }
+
+/* Ajustes → Rendimiento en este teléfono */
+.rendimiento summary { cursor: pointer; font-weight: 700; padding: 6px 0; }
+.rend-tabla { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; margin: 6px 0; font-size: .92rem; }
+.rend-tabla dt { color: #586a63; } .rend-tabla dd { margin: 0; font-weight: 700; text-align: right; }
+.rend-nota { font-size: .8rem; color: #586a63; margin: 4px 0 0; }
