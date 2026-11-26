@@ -10,6 +10,7 @@ MENSAJES = {
   'volcan': 'El estado y el nivel de alerta del volcán cambian y yo no los conozco. Pregúntale al personal del parque o a tu guía; la fuente oficial es el Servicio Geológico Colombiano.',
   'condiciones': 'El clima, el acceso, los horarios y los cierres de hoy cambian y yo no los conozco. Pregúntale al personal del parque o a tu guía.',
   'servicios': 'Los guiones oficiales no tienen información sobre servicios (comida, baños, conexión u hospedaje). Pregúntale a tu guía o al personal del parque.',
+  'agua': 'No te bañes ni te metas a las lagunas, ríos o quebradas del páramo: por tu seguridad y la del páramo, el agua se observa desde el sendero. Sigue siempre la indicación de tu guía.',
   'premisa': 'Los guiones oficiales no dicen que eso se pueda hacer aquí. Antes de cualquier actividad, pregúntale a tu guía o al personal del parque y sigue siempre su indicación.',
 }
 # Palabras de apoyo (texto ya normalizado: sin tildes, minúsculas)
@@ -41,6 +42,7 @@ REGLAS = [
       '\\b(me|nos) (separe|separamos|aleje|alejamos|adelante|adelantamos|atrase|atrasamos|desvie|desviamos)\\b',
       '\\b(me|nos) (quede|quedamos) (atras|solo|sola|solos|solas|sin el grupo|sin guia)\\b',
       '\\bno (veo|vemos|encuentro|encontramos|oigo|escucho) (al|a mi|a nuestro|a la|a el|el|la|mi) (guia|grupo)\\b',
+      '\\b(me|nos) (dejaron|dejo|abandonaron|abandono) (solo|sola|solos|solas|atras)\\b',
       '\\bperdi (al|a mi|el|mi) (grupo|guia)\\b', '\\blost (my|the|our) (group|guide)\\b',
       '\\b(golpe|golpeo|golpee) (en|la|su|mi) cabeza', '\\b(lo|la|me|nos) (pico|mordio|ataco) ',
       '\\bayuda urgente\\b', '\\bnecesito ayuda\\b', '\\bhelp\\b', '\\binjur', '\\bhurt\\b', '\\bbleed', '\\bfaint', '\\bunconscious',
@@ -77,7 +79,7 @@ REGLAS = [
       '\\b(puedo|podemos|se puede|es bueno|es seguro) tomar (agua|el agua|del agua|te|infusion|aromatica|de esa|de esta|de la|del|de ese|de este)\\b',
       '\\bcomer(me|la|lo|las|los|se|te)\\b', '\\b(me|lo|la|los|las) (como|comi|pruebo|probe|mastico|chupo|bebo)\\b',
       '\\bmastica', '\\bmastico', '\\bchupar', '\\bprobar(la|lo|las|los)?\\b', '\\bpruebo\\b',
-      '\\bvenen', '\\btoxic', '\\bmedicinal', '\\balucin', '\\bpsicoactiv', '\\bpropiedades (curativas|medicinales)', '\\bsirve (para|como) (curar|remedio|medicina|sanar|aliviar)',
+      '\\bvenen', '\\btoxic', '\\bmedicinal', '\\balucinogen', '\\b(hace|hacen|da|dan|te hace|te da) alucinar', '\\bpsicoactiv', '\\bpropiedades (curativas|medicinales)', '\\bsirve (para|como) (curar|remedio|medicina|sanar|aliviar)',
       '\\bremedio', '\\b(cura|curar|sana|sanar) (el|la|los|las|para)\\b', '\\binfusion', '\\baromatica', '\\b(te|agua|bebida) de (frailejon|hoja|hojas|planta|plantas|hierba|flor)',
       '\\b(tomar|beber|tomarse|tomarme|tomo|bebo|se toma|se bebe|puedo tomar|puedo beber) (el |del |de la |de )?agua (de|del|en)\\b', '\\b(agua|aguas) (de la laguna|del rio|de la quebrada|del nacimiento) (es|se) (potable|puede)', '\\bpotable',
       '\\b(comer|come|comen|probar|masticar) (un |una |el |la |los |las |esa |ese |esta |este |esas |esos |estos |estas )?' + PLANTA,
@@ -161,6 +163,15 @@ REGLAS = [
     'si': [
       '\\b(restaurante|restaurantes|cafeteria|cafeterias|tienda|tiendas|almuerzo|almorzar|bano|banos|sanitario|sanitarios|wifi|internet|cobertura|parqueadero|parqueo|hotel|hoteles|hospedaje|alojamiento|cajero|cajeros|datafono|souvenir|souvenirs|restaurant|bathroom|toilet|parking)\\b',
       '\\b(venden|compro|comprar|consigo) (comida|agua|cafe|bebidas|algo de comer)\\b',
+    ],
+    'salvo': [],
+  },
+  {
+    # Meterse al agua: regla fija de seguridad (los guiones no lo dicen; nunca se responde «sí»). Prueba en el teléfono, 26-nov.
+    'id': 'agua',
+    'si': [
+      '\\b(puedo|podemos|se puede|se pueden|esta permitido|me dejan|nos dejan|dejan|can i|can we)\\b.*\\b(banar|banarme|banarnos|banarse|nadar|zambullir|zambullirme|meterme|meternos|meterse|swim)\\b',
+      '\\b(donde|en que parte) (me puedo|nos podemos|se puede) (banar|nadar)\\b', '\\b(banarse|nadar|banarme) en (la|las|el|los) (laguna|lagunas|rio|rios|quebrada|quebradas|lago|agua)',
     ],
     'salvo': [],
   },

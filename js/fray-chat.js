@@ -54,10 +54,10 @@ export async function preguntar(texto, { estacion = estacionActual() } = {}) {
 }
 
 /** Reescritura con la IA local (si hay una lista). Solo cambia el texto si pasa el verificador (ok === true). */
-export async function reescribir(r, pregunta) {
+export async function reescribir(r, pregunta, { timeoutMs = 8000 } = {}) {
   if (!genListo || r?.tipo !== 'respuesta') return null;
   try {
-    const out = await gen.reescribir(r, pregunta, { timeoutMs: 8000 });
+    const out = await gen.reescribir(r, pregunta, { timeoutMs });
     return out?.ok && out.texto ? out.texto : null;
   } catch (e) { console.warn('Generador:', e); return null; }
 }

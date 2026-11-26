@@ -202,6 +202,7 @@ export async function borrarContenido() {
   res.panel = await vaciarIDB('fray-paquete', 'versiones');
   res.vectores = await vaciarIDB('fray-vectores', 'v');
   res.registro = await vaciarIDB('fray-registro', 'e');   // registro de la prueba (js/registro.js): vence con el contenido
+  try { localStorage.removeItem('fray-chat-historial'); res.chat = true; } catch { /* sin almacenamiento */ } // historial del chat (js/chatui.js)
   try { almacen().removeItem('fray.sinRespuesta'); res.sinRespuesta = true; } catch { /* nada */ }
   try { res.caches = await borrarCaches(); } catch (e) { console.warn('[vigencia] caches', e); }
   const r = leer();
