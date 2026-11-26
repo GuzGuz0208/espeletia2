@@ -55,7 +55,7 @@ function guardarAjustes(cambio) {
   pintarEstado();
   pintarVigencia();
   if (E.vencido) pintarVencido();
-  else if (E.estacion) abrirEstacion(E.estacion, { conservar: true });
+  else if (E.estacion && !enAlbum()) abrirEstacion(E.estacion, { conservar: true });
 }
 
 // ---------- Utilidades de contenido ----------
@@ -94,8 +94,12 @@ function darCromo(estacion) {
 }
 
 // ---------- Navegación ----------
+// Vistas del Álbum del Páramo (js/album-app.js): se pintan allá al recibir 'fray:vista'
+const VISTAS_ALBUM = ['album', 'mapa', 'guia'];
+const emitir = (tipo, detail) => document.dispatchEvent(new CustomEvent(tipo, { detail }));
+
 function mostrar(vista) {
-  for (const v of ['inicio', 'qr', 'chat', 'vencido']) $(`#vista-${v}`).hidden = v !== vista;
+  for (const v of ['inicio', 'qr', 'chat', 'vencido', ...VISTAS_ALBUM]) { const n = $(`#vista-${v}`); if (n) n.hidden = v !== vista; }
   $('#form-pregunta').hidden = vista !== 'chat' && vista !== 'vencido';
   $('#btn-volver').hidden = vista === 'inicio' || vista === 'vencido';
   document.body.dataset.vista = vista;
@@ -105,8 +109,10 @@ function mostrar(vista) {
 }
 
 function rutaActual() {
-  if (E.vencido) return pintarVencido();
   const id = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
+  // El álbum se puede ver también con el contenido vencido (los cromos quedan sin el dato del guion)
+  if (VISTAS_ALBUM.includes(id)) { $('#barra-titulo').textContent = ''; mostrar(id); emitir('fray:vista', { vista: id }); return; }
+  if (E.vencido) return pintarVencido();
   if (id === 'qr') return mostrar('qr'), iniciarCamara();
   if (id && estacionPorId(id)) return abrirEstacion(id);
   E.estacion = null;
@@ -226,6 +232,7 @@ async function preguntar(texto) {
   if (r.tipo === 'abstencion') sync.registrarSinRespuesta(texto, E.estacion).catch(() => {});
   if (r.tipo === 'respuesta') {
     darCromo(E.estacion);
+    emitir('fray:respuesta', { estacion: E.estacion, fichas: r.fichas || [] });
     if (E.genListo) mejorarConIA(tarjeta, r, texto);
   }
 }
@@ -400,6 +407,8 @@ async function leerFotograma() {
       valor = window.jsQR(d.data, d.width, d.height, { inversionAttempts: 'attemptBoth' })?.data || null;
     }
     if (!valor) return;
+    // QR del modo guía (js/album-guia.js): lo verifica el álbum
+    if (valor.startsWith('FRAYG1|')) { pararCamara(); navigator.vibrate?.(40); emitir('fray:qr-guia', { texto: valor }); return; }
     const v = await verificarQR(valor, await claveQR(E.paquete), E.paquete.estaciones.map((s) => s.id));
     const id = v.ok ? v.estacion : null;
     if (id && estacionPorId(id)) {
@@ -442,10 +451,12 @@ async function recargarPaquete() {
   E.paquete = paquete;
   E.origen = origen;
   E.incluido = incluido;
+  emitir('fray:paquete', { paquete });
   pintarEstaciones();
   prepararMotor();
-  if (E.estacion) abrirEstacion(E.estacion, { conservar: true });
+  if (E.estacion && !enAlbum()) abrirEstacion(E.estacion, { conservar: true });
 }
+const enAlbum = () => VISTAS_ALBUM.includes(location.hash.replace(/^#\/?/, ''));
 
 function conectarEventos() {
   $('#btn-volver').innerHTML = iconos.volver;
@@ -468,6 +479,14 @@ function conectarEventos() {
   ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('#form-pregunta').requestSubmit(); } });
 
   window.addEventListener('hashchange', rutaActual);
+  // «Preguntar a Fray» desde un cromo del álbum: abre el chat de la estación y hace la pregunta
+  document.addEventListener('fray:preguntar', (e) => {
+    const { estacion, texto } = e.detail || {};
+    if (E.vencido || !estacionPorId(estacion)) return;
+    if (location.hash !== `#/${encodeURIComponent(estacion)}`) location.hash = `#/${encodeURIComponent(estacion)}`;
+    else abrirEstacion(estacion, { conservar: true });
+    setTimeout(() => preguntar(texto), 50);
+  });
   alCambiar(() => recargarPaquete().catch(manejarErrorCarga));
   $('#fray-vencido').innerHTML = dibujoFray(110);
   $('#btn-renovar').onclick = () => intentarRenovar();
@@ -505,6 +524,7 @@ function alVencer() {
   return (venciendo ??= (async () => {
     E.vencido = true;
     E.paquete = null;
+    emitir('fray:paquete', { paquete: null });
     E.listo = false;
     try { E.motor?.descargar?.(); } catch { /* nada */ }
     $('#conversacion').replaceChildren();
@@ -562,9 +582,10 @@ async function iniciar() {
       }
       E.paquete = p;
       E.origen = 'sync';
+      emitir('fray:paquete', { paquete: p });
       pintarEstaciones();
       avisarCambio(p.version);
-      if (E.estacion) abrirEstacion(E.estacion, { conservar: true });
+      if (E.estacion && !enAlbum()) abrirEstacion(E.estacion, { conservar: true });
       prepararMotor(); // reindexa en segundo plano
     },
     alAvisos: () => pintarAvisos(),

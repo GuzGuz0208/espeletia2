@@ -1,16 +1,19 @@
-# Genera contenido/album.json: los cromos del Álbum del Páramo, cada uno con un dato LITERAL de los guiones y su cita.
+# Genera album.json (raíz): el CATÁLOGO del Álbum del Páramo (ids, nombres, capítulos, ilustraciones, ficha de respaldo).
+# El catálogo NO lleva textos de los guiones: el dato y la cita se leen en el teléfono del contenido del parque (vigencia de
+# 24 h): contenido/cromos.json (Eduardo) o la ficha del paquete (breve + citas[0]). Este script comprueba que cada cromo tenga
+# un dato literal de los guiones con su página.
 # Fuentes:
-#   1. contenido/cromos.json de la rama eduardo/cromos (10 cromos con dato literal y cita), copiado aquí en EDUARDO.
+#   1. contenido/cromos.json (Eduardo, PR #12): 10 cromos con dato literal y cita.
 #   2. Para los demás cromos del álbum anterior: la ficha equivalente de contenido/paquete.json (dato = breve, cita = citas[0]).
 # Comprueba que cada dato esté dentro del texto de su ficha (sin tildes ni puntuación) y que la ficha no esté bloqueada.
 # Los cromos del álbum anterior sin respaldo en los guiones NO entran (se listan en NO_ENTRAN).
 # Uso: python -X utf8 herramientas/album_cromos.py [--eduardo ruta/cromos.json]
-import json, re, sys, unicodedata, subprocess
+import json, re, sys, unicodedata
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 PAQUETE = RAIZ / 'contenido' / 'paquete.json'
-SALIDA = RAIZ / 'contenido' / 'album.json'
+SALIDA = RAIZ / 'album.json'
 
 CAPITULOS = [
     {'id': 'sendero', 'num': 'I', 'es': 'El sendero', 'en': 'The trail'},
@@ -68,11 +71,7 @@ def norm(s):
 
 
 def cromos_eduardo(ruta):
-    if ruta:
-        return json.loads(Path(ruta).read_text(encoding='utf-8'))
-    txt = subprocess.run(['git', 'show', 'origin/eduardo/cromos:contenido/cromos.json'], cwd=RAIZ,
-                         capture_output=True, text=True, encoding='utf-8', check=True).stdout
-    return json.loads(txt)
+    return json.loads(Path(ruta or RAIZ / 'contenido' / 'cromos.json').read_text(encoding='utf-8'))
 
 
 def main():
@@ -95,13 +94,11 @@ def main():
             avisos.append(f'{cid}: el dato no aparece tal cual en el texto de la ficha {fid} (revísalo contra el PDF)')
         salida.append({
             'id': cid, 'n': n, 'capitulo': cap, 'como': como, 'estacion': est, 'arte': arte,
-            'nombre': nombre, 'tipo': tipo, 'dato': dato, 'cita': {'guion': cita['guion'], 'pagina': cita['pagina']},
-            'ficha': fid, 'fichas': [fid, *extra], 'brillante': brillante, 'origen': origen,
+            'nombre': nombre, 'ficha': fid, 'fichas': [fid, *extra], 'brillante': brillante, 'origen': origen,
             **({'segundos': 120} if como == 'pausa' else {}),
         })
     doc = {
-        'nota': 'Generado por herramientas/album_cromos.py. Cada dato es literal de un guion con su página (PDF). No editar a mano.',
-        'version': paquete['version'],
+        'nota': 'Generado por herramientas/album_cromos.py. Sin textos de los guiones: el dato y la cita salen de contenido/ (vigencia 24 h). No editar a mano.',
         'capitulos': CAPITULOS,
         'cromos': salida,
         'noEntran': NO_ENTRAN,

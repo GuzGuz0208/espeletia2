@@ -5,7 +5,7 @@ const textos = {
   es: {
     'app.titulo': 'Fray, tu guía del páramo',
     'app.sub': 'Pregúntame sobre lo que ves. Respondo con los guiones oficiales del parque y te digo de qué página sale.',
-    'inicio.elige': 'Elige tu estación',
+    'inicio.elige': '¿En qué estación estás?',
     'inicio.qr': 'Escanear el QR de la estación',
     'inicio.introduccion': 'Introducción',
     'inicio.guia': 'Tu guía va contigo: yo lo complemento, no lo reemplazo.',
@@ -53,7 +53,7 @@ const textos = {
   en: {
     'app.titulo': 'Fray, your páramo guide',
     'app.sub': 'Ask me about what you see. I answer from the park’s official scripts (in Spanish) and tell you the page.',
-    'inicio.elige': 'Choose your station',
+    'inicio.elige': 'Which station are you at?',
     'inicio.qr': 'Scan the station QR code',
     'inicio.introduccion': 'Introduction',
     'inicio.guia': 'Your guide comes with you: I add to them, I don’t replace them.',

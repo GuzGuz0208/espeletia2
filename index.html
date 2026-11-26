@@ -10,6 +10,7 @@
   <link rel="icon" href="icons/icon-192.png">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="album.css">
 </head>
 <body>
   <!-- Barra superior: estado y ajustes -->
@@ -34,6 +35,8 @@
         </div>
       </div>
       <p class="estado" id="estado-carga" data-t="estado.preparando"></p>
+      <label class="campo-inicio"><span>¿Cómo te llamas? <small>(opcional)</small></span>
+        <input class="campo-nombre" maxlength="24" autocomplete="given-name" enterkeyhint="done" placeholder="Tu nombre para el álbum"></label>
       <button class="btn btn-flor btn-grande btn-ancho" id="btn-qr"><span class="ico" id="ico-qr"></span><span data-t="inicio.qr"></span></button>
       <h2 class="titulo-seccion" data-t="inicio.elige"></h2>
       <ol class="estaciones" id="lista-estaciones"></ol>
@@ -79,6 +82,36 @@
       <p class="nota-guia" data-t="vencido.seguridad"></p>
       <div class="conversacion" id="conv-vencido" aria-live="polite"></div>
     </section>
+
+    <!-- 5. Álbum del Páramo (js/album-app.js) -->
+    <section class="vista vista-album" id="vista-album" hidden aria-labelledby="album-titulo">
+      <header class="cabezote">
+        <div class="cabezote-txt">
+          <h1 id="album-titulo">Álbum del Páramo</h1>
+          <p id="album-dueno" class="dueno"></p>
+        </div>
+        <p class="contador" aria-live="polite"><b id="cuenta-n">0</b><span>/</span><span id="cuenta-t">0</span></p>
+      </header>
+      <div class="barra-progreso" aria-hidden="true"><span id="barra-album"></span></div>
+      <button id="btn-sobres" class="sobres-pendientes" hidden>
+        <span class="sobres-pila" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span id="sobres-txt"></span>
+        <span class="sobres-abrir">Abrir</span>
+      </button>
+      <p id="pista" class="pista"></p>
+      <div class="libro">
+        <div id="paginas" class="paginas" aria-live="polite"></div>
+        <nav id="indice" class="indice" aria-label="Capítulos del álbum"></nav>
+      </div>
+      <button class="btn btn-linea btn-grande btn-ancho btn-pdf">Descargar mi álbum (PDF)</button>
+      <p class="nota-pdf">El PDF guarda tus cromos y tu recorrido.</p>
+    </section>
+
+    <!-- 6. Mapa del sendero -->
+    <section class="vista vista-mapa" id="vista-mapa" hidden></section>
+
+    <!-- 7. Modo guía (con PIN) -->
+    <section class="vista vista-guia" id="vista-guia" hidden></section>
   </main>
 
   <!-- Caja de pregunta (solo en el chat) -->
@@ -107,10 +140,56 @@
         <button type="button" data-idioma="en">English</button>
       </div>
     </fieldset>
+    <fieldset>
+      <legend>Mi álbum</legend>
+      <label class="campo-inicio"><span>Tu nombre (opcional)</span>
+        <input class="campo-nombre" maxlength="24" autocomplete="given-name" enterkeyhint="done" placeholder="Tu nombre para el álbum"></label>
+      <p class="sub">Sale en tu álbum y en el certificado. Solo se guarda en este teléfono.</p>
+      <button type="button" class="btn btn-linea btn-ancho btn-pdf">Descargar mi álbum (PDF)</button>
+      <p class="nota-pdf">El PDF guarda tus cromos y tu recorrido.</p>
+    </fieldset>
+    <div class="ajustes-mas">
+      <button type="button" class="btn btn-linea btn-mini" id="btn-guia">Modo guía</button>
+      <button type="button" class="btn btn-peligro btn-mini" id="btn-borrar-album">Borrar mi álbum</button>
+    </div>
     <form method="dialog"><button class="btn btn-flor btn-ancho" data-t="ajustes.cerrar"></button></form>
   </dialog>
 
+  <!-- PIN del modo guía: uno por dispositivo, solo su hash PBKDF2 en este teléfono (js/panel-pin.js) -->
+  <dialog id="dlg-pin" class="dialogo">
+    <h2>Modo guía</h2>
+    <form id="form-pin">
+      <p id="pin-txt"></p>
+      <input id="pin-in" class="pin-in" type="password" inputmode="numeric" pattern="[0-9]*" minlength="6" maxlength="12" autocomplete="off" aria-label="PIN del guía">
+      <p class="mensaje" id="pin-msg" role="status"></p>
+      <div class="acciones"><button class="btn btn-flor">Entrar</button><button type="button" class="btn btn-linea" id="pin-cancelar">Cancelar</button></div>
+    </form>
+  </dialog>
+
+  <!-- Barra inferior: pocas opciones grandes -->
+  <nav class="muelle" aria-label="Secciones">
+    <button data-ir="fray" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><span>Fray</span></button>
+    <a href="#/album" data-ir="album"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7a2 2 0 0 1 1 1v15a2 2 0 0 0-1-1H4z M20 4h-7a2 2 0 0 0-1 1v15a2 2 0 0 1 1-1h7z"/></svg><span>Álbum</span><b id="muelle-badge" class="muelle-badge" hidden></b></a>
+    <a href="#/mapa" data-ir="mapa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z M9 4v14 M15 6v14"/></svg><span>Mapa</span></a>
+    <button data-ir="ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>Ajustes</span></button>
+  </nav>
+
+  <!-- Capas del álbum -->
+  <div id="capa-detalle" class="capa" hidden role="dialog" aria-modal="true"></div>
+  <div id="capa-sobre" class="capa capa-sobre" hidden role="dialog" aria-modal="true"></div>
+  <div id="capa-pausa" class="capa capa-pausa" hidden role="dialog" aria-modal="true">
+    <p class="pausa-tit">Mirada larga</p>
+    <svg viewBox="0 0 120 120" class="anillo" aria-hidden="true"><circle cx="60" cy="60" r="52" class="pista-anillo"/><circle cx="60" cy="60" r="52" class="avance" id="pausa-avance"/></svg>
+    <p id="pausa-tiempo" class="pausa-tiempo">2:00</p>
+    <p class="pausa-txt">Deja el teléfono quieto y mira el páramo.</p>
+    <p id="pausa-estado" class="pausa-estado"></p>
+    <button id="pausa-salir" class="btn btn-linea">Salir</button>
+  </div>
+  <canvas id="album-confeti" class="confeti" aria-hidden="true"></canvas>
+  <div id="album-aviso" class="album-aviso" role="status" aria-live="polite"></div>
+
   <script src="lib/jsQR.js" defer></script>
+  <script src="lib/qrcode.js" defer></script>
   <script type="module" src="js/ui.js"></script>
   <script type="module" src="js/cromos.js"></script>
 </body>
