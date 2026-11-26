@@ -214,3 +214,13 @@ addEventListener('pointerdown', (e) => {
   new MutationObserver(ajustar).observe(raiz, { attributes: true, attributeFilter: ['style'] });
   vv?.addEventListener('scroll', ajustar); vv?.addEventListener('resize', ajustar);
 })();
+
+// Lienzo → Blob. En el WebView de Android `canvas.toBlob` tardaba ~13 s por imagen (medido el 26-nov en el teléfono de la
+// prueba) y `toDataURL` 0,16 s: se usa toDataURL y se convierte a bytes. Mismo resultado (JPEG o PNG).
+export function lienzoBlob(cv, tipo = 'image/png', calidad) {
+  const url = cv.toDataURL(tipo, calidad);
+  const b64 = url.slice(url.indexOf(',') + 1);
+  const bin = atob(b64), bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return Promise.resolve(new Blob([bytes], { type: url.slice(5, url.indexOf(';')) || tipo }));
+}

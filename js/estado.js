@@ -2,7 +2,7 @@
 import * as db from './db.js';
 import * as vig from './vigencia.js';
 import { cargarPaquete } from './ui-paquete.js';
-import { distancia } from './util.js';
+import { distancia, lienzoBlob } from './util.js';
 
 export const bus = new EventTarget();
 const emitir = (tipo, detalle) => bus.dispatchEvent(new CustomEvent(tipo, { detail: detalle }));
@@ -202,7 +202,7 @@ async function miniatura(blob, lado = 360) {
     cv.width = Math.round(bmp.width * s); cv.height = Math.round(bmp.height * s);
     cv.getContext('2d').drawImage(bmp, 0, 0, cv.width, cv.height);
     bmp.close?.();
-    return await new Promise((ok) => cv.toBlob(ok, 'image/jpeg', 0.8));
+    return await lienzoBlob(cv, 'image/jpeg', 0.8);
   } catch (e) { return blob; }
 }
 async function guardarFoto(id, blob) {

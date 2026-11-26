@@ -3,7 +3,7 @@ import * as ml from './ml.js';
 import { E, cromo as getCromo, cromos, texto, nombreClase, tiene, ganar, pendienteDeClase, bloqueadoDeClase, ponerFoto } from './estado.js';
 import * as guia from './guia.js';
 import { t, citar } from './i18n.js';
-import { $, $$, h, esc, animar, vibrar, hablar, aviso, ahorro, escuchar, reducido } from './util.js';
+import { $, $$, h, esc, animar, vibrar, hablar, aviso, ahorro, escuchar, reducido, lienzoBlob } from './util.js';
 import * as est from './estado.js';
 import { personajes } from './art.js';
 
@@ -137,7 +137,7 @@ async function fotoConPersonaje() {
   const x = (r.left - marco.left + offX) / k, y = (r.top - marco.top + offY) / k, w = r.width / k, hh = r.height / k;
   const img = await (await import('./exportar.js')).svgImg(personajes[compa.personaje](300)); // con xmlns y estilos
   ctx.drawImage(img, x, y, w, hh);
-  const blob = await new Promise((ok) => cv.toBlob(ok, 'image/jpeg', 0.88));
+  const blob = await lienzoBlob(cv, 'image/jpeg', 0.88);
   await est.guardarFotoPersonaje(blob, { personaje: compa.personaje, cromo: compa.id });
   vibrar(40);
   aviso(t('compa.guardada'), 3000);
@@ -405,7 +405,7 @@ function lienzo(v, lado = 1100) {
   ctx.drawImage(v, 0, 0, cv.width, cv.height);
   return cv;
 }
-const capturar = (v) => new Promise((ok) => lienzo(v).toBlob(ok, 'image/jpeg', 0.86));
+const capturar = (v) => lienzoBlob(lienzo(v), 'image/jpeg', 0.86);
 
 async function disparar() {
   if (!objetivo || !stream) return;
