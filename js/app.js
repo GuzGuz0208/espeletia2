@@ -186,7 +186,7 @@ async function mostrarFinal() {
   const { botonPDF, botonCollage, hayFotos } = await import('./exportar.js');
   const capa = $('#capa-detalle');
   capa.innerHTML = `<div class="detalle final">
-      <p class="final-sello">24/24</p>
+      <p class="final-sello">${E.paquete.cromos.length}/${E.paquete.cromos.length}</p>
       <h2>${t('cel.final')}</h2>
       <p>${t('cel.finalSub', { n: E.paquete.cromos.length })}</p>
       <div class="acciones"><button class="btn btn-flor" id="final-desc">${t('cel.descargar')}</button>${(await hayFotos()) ? `<button class="btn btn-linea" id="final-collage">${t('pdf.collageBtn')}</button>` : ''}<button class="btn btn-linea" id="final-cerrar">${t('cerrar')}</button></div>
@@ -349,8 +349,16 @@ async function iniciar() {
   // Las geocercas funcionan en cualquier pantalla, pero el permiso solo se pide al abrir el Mapa
   // (o se activa solo si el visitante ya lo había dado).
   try { const pr = await navigator.permissions?.query({ name: 'geolocation' }); if (pr?.state === 'granted') mapa.iniciarGPS(); } catch (e) { /* sin API */ }
+  // Ajustes → «Preparar mapa y cámara al abrir» (activado por defecto): GPS, permiso de cámara y modelo, sin entrar a cada pestaña
+  if (E.ajustes.preparar !== false) prepararAlAbrir();
   if (est.pendientes().length) setTimeout(() => aviso(t('album.sobres', { n: est.pendientes().length })), 600);
   iniciarAtras();
+}
+
+// GPS (pide el permiso si hace falta), mapa pintado y cámara + modelo listos. No bloquea el arranque.
+export async function prepararAlAbrir() {
+  try { mapa.iniciarGPS(); mapa.pintar(); } catch (e) { console.warn('preparar mapa', e); }
+  await lente.preparar();
 }
 
 // ---------- Botón «atrás» del teléfono ----------

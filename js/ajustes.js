@@ -6,6 +6,7 @@ import { $, $$, h, esc, aviso, vibrar, animar, atraparFoco } from './util.js';
 import { listoOffline, revisarArchivos, danados, ultimaRevision } from './portada.js';
 import { botonPDF, botonCollage, descargar } from './exportar.js';
 import { iniciarGPS } from './mapa.js';
+import { preparar as prepararLente } from './lente.js';
 import * as chat from './fray-chat.js';
 import * as pinDisp from './panel-pin.js';
 import { errores, tiempos } from './motor.js';
@@ -41,6 +42,7 @@ export async function abrirAjustes() {
         <small class="aj-nota">${esc(t('aj.dictadoNota'))}</small></div>
       <label class="interruptor"><input type="checkbox" id="aj-voz" ${E.ajustes.voz ? 'checked' : ''}><span>${esc(t('aj.voz'))}</span></label>
       <label class="interruptor"><input type="checkbox" id="aj-vibrar" ${E.ajustes.vibrar ? 'checked' : ''}><span>${esc(t('aj.vibrar'))}</span></label>
+      <label class="interruptor"><input type="checkbox" id="aj-preparar" ${E.ajustes.preparar !== false ? 'checked' : ''}><span>${esc(t('aj.preparar'))}</span></label>
       <button class="btn btn-linea btn-ancho" id="aj-poster">${esc(t('aj.poster'))}</button>
       <button class="btn btn-linea btn-ancho" id="aj-collage">${esc(t('pdf.collageBtn'))}</button>
       <p class="estado-offline ${listo ? 'listo' : ''}"><span class="punto"></span>${esc(listo ? t('aj.listo') : t('aj.noListo'))}</p>
@@ -96,6 +98,7 @@ export async function abrirAjustes() {
   pintarDictado(hoja);
   $('#aj-voz').onchange = (e) => { E.ajustes.voz = e.target.checked; guardar(); };
   $('#aj-vibrar').onchange = (e) => { E.ajustes.vibrar = e.target.checked; guardar(); };
+  $('#aj-preparar').onchange = (e) => { E.ajustes.preparar = e.target.checked; guardar(); if (e.target.checked) { iniciarGPS(); prepararLente(); } };
   $('#aj-poster').onclick = (e) => botonPDF(e.currentTarget);
   $('#aj-collage').onclick = (e) => botonCollage(e.currentTarget);
   $('#aj-equipo').onclick = async () => { await cerrar(); pedirPIN('equipo', t('eq.pin')); };

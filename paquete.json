@@ -429,6 +429,11 @@
    "en": "Siete cueros (Polylepis)"
   },
   {
+   "id": "loricaria",
+   "es": "Loricaria",
+   "en": "Loricaria"
+  },
+  {
    "id": "otro",
    "es": "Otra cosa",
    "en": "Something else",
@@ -812,6 +817,29 @@
   },
   {
    "n": 16,
+   "id": "loricaria",
+   "ficha": "loricaria",
+   "tema": {
+    "es": "la loricaria",
+    "en": "the loricaria"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "loricaria",
+   "personaje": "magma",
+   "es": {
+    "nombre": "Cacho de venado"
+   },
+   "en": {
+    "nombre": "Páramo coral"
+   },
+   "guion": {
+    "ficha": "uton-loricarias",
+    "cromo": "lunares-loricaria"
+   }
+  },
+  {
+   "n": 17,
    "id": "condor",
    "ficha": "condor",
    "tema": {
@@ -835,7 +863,7 @@
    }
   },
   {
-   "n": 17,
+   "n": 18,
    "id": "puma",
    "ficha": "mamiferos",
    "tema": {
@@ -858,7 +886,7 @@
    }
   },
   {
-   "n": 18,
+   "n": 19,
    "id": "danta",
    "ficha": "danta",
    "tema": {
@@ -881,7 +909,7 @@
    }
   },
   {
-   "n": 19,
+   "n": 20,
    "id": "periquito",
    "ficha": "periquito",
    "tema": {
@@ -903,7 +931,7 @@
    }
   },
   {
-   "n": 20,
+   "n": 21,
    "id": "pato",
    "ficha": "pato_andino",
    "tema": {
@@ -926,7 +954,7 @@
    }
   },
   {
-   "n": 21,
+   "n": 22,
    "id": "aguila",
    "ficha": "aguila",
    "tema": {
@@ -949,7 +977,7 @@
    }
   },
   {
-   "n": 22,
+   "n": 23,
    "id": "agua",
    "ficha": "agua",
    "tema": {
@@ -971,7 +999,7 @@
    }
   },
   {
-   "n": 23,
+   "n": 24,
    "id": "armero",
    "ficha": "armero",
    "tema": {
@@ -992,7 +1020,7 @@
    }
   },
   {
-   "n": 24,
+   "n": 25,
    "id": "esqui",
    "ficha": "esqui",
    "tema": {
@@ -1014,7 +1042,7 @@
    }
   },
   {
-   "n": 25,
+   "n": 26,
    "id": "nombres",
    "ficha": "nombres",
    "tema": {

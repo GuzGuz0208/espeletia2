@@ -240,7 +240,7 @@ const T = {
     // Ajustes
     'aj.titulo': 'Ajustes', 'aj.nombre': 'Nombre en el álbum', 'aj.idioma': 'Idioma', 'aj.tema': 'Apariencia',
     'aj.tema.auto': 'Automática', 'aj.tema.papel': 'Papel', 'aj.tema.noche': 'Noche',
-    'aj.voz': 'Leer los datos en voz alta', 'aj.vibrar': 'Vibrar', 'aj.poster': 'Descargar mi álbum (PDF)',
+    'aj.voz': 'Leer los datos en voz alta', 'aj.vibrar': 'Vibrar', 'aj.preparar': 'Preparar mapa y cámara al abrir', 'aj.poster': 'Descargar mi álbum (PDF)',
     'aj.equipo': 'Modo equipo', 'aj.listo': 'Listo para usar sin señal', 'aj.noListo': 'Aún no está guardado para usar sin señal',
     'aj.cerrar': 'Listo', 'aj.version': 'Paquete Páramo {v}',
     // Equipo
@@ -682,7 +682,7 @@ const T = {
     'pausa.regla': 'If you touch the screen, we start over.', 'pausa.reinicio': 'You touched the screen: starting over.', 'pausa.salir': 'Exit',
     'aj.titulo': 'Settings', 'aj.nombre': 'Name on the album', 'aj.idioma': 'Language', 'aj.tema': 'Appearance',
     'aj.tema.auto': 'Automatic', 'aj.tema.papel': 'Paper', 'aj.tema.noche': 'Night',
-    'aj.voz': 'Read facts aloud', 'aj.vibrar': 'Vibrate', 'aj.poster': 'Download my album (PDF)',
+    'aj.voz': 'Read facts aloud', 'aj.vibrar': 'Vibrate', 'aj.preparar': 'Get map and camera ready on open', 'aj.poster': 'Download my album (PDF)',
     'aj.equipo': 'Team mode', 'aj.listo': 'Ready to use with no signal', 'aj.noListo': 'Not saved for offline use yet',
     'aj.cerrar': 'Done', 'aj.version': 'Páramo package {v}',
     'eq.pin': 'Team PIN', 'eq.pinMal': 'Wrong PIN', 'eq.titulo': 'Team mode',
