@@ -7,12 +7,16 @@
 // Vigencia (contrato §7): contenido/ y ejemplo/ (información del parque) NO se sirven desde caché si la vigencia venció
 // (registro 'estado' en IndexedDB 'fray-vigencia', que escribe js/vigencia.js); van solo por red y no se guardan.
 // Al cambiar archivos de la app, sube VERSION.
-const VERSION = 'fray-v7-2026-11-26';
+const VERSION = 'fray-v8-2026-11-26';
 const CONTENIDO = /\/(contenido|ejemplo)\//;
 
 const APP = [
   './', 'index.html', 'panel.html', 'styles.css', 'manifest.json',
   'js/ui.js', 'js/ui-motor.js', 'js/ui-paquete.js', 'js/ui-i18n.js', 'js/ui-art.js', 'js/cromos.js',
+  // Álbum del Páramo (album.json es solo el catálogo, sin textos de los guiones: el dato va en contenido/, con vigencia)
+  'album.css', 'album.json', 'js/album-app.js', 'js/album-estado.js', 'js/album-db.js', 'js/album-util.js', 'js/album-textos.js',
+  'js/album-arte.js', 'js/album-cromo.js', 'js/album-sobre.js', 'js/album-vista.js', 'js/album-celebrar.js', 'js/album-pdf.js',
+  'js/album-mapa.js', 'js/album-guia.js',
   'js/panel.js', 'js/panel-config.js', 'js/panel-pin.js', 'js/ui-sync.js', 'js/sync.js', 'js/vigencia.js', 'js/carril.js', 'js/qr-estacion.js', 'js/fray-mock.js', 'js/generador-mock.js',
   'lib/jsQR.js', 'lib/qrcode.js',
   'fonts/bricolage-grotesque-latin-wdth-normal.woff2', 'fonts/atkinson-hyperlegible-latin-400-normal.woff2', 'fonts/atkinson-hyperlegible-latin-700-normal.woff2',

@@ -1,0 +1,335 @@
+{
+ "nota": "Generado por herramientas/album_cromos.py. Sin textos de los guiones: el dato y la cita salen de contenido/ (vigencia 24 h). No editar a mano.",
+ "capitulos": [
+  {
+   "id": "sendero",
+   "num": "I",
+   "es": "El sendero",
+   "en": "The trail"
+  },
+  {
+   "id": "flora",
+   "num": "II",
+   "es": "Flora y paisaje",
+   "en": "Plants and landscape"
+  },
+  {
+   "id": "fauna",
+   "num": "III",
+   "es": "Fauna",
+   "en": "Wildlife"
+  },
+  {
+   "id": "historias",
+   "num": "IV",
+   "es": "Historias del guía",
+   "en": "Guide's stories"
+  }
+ ],
+ "cromos": [
+  {
+   "id": "brisas-agua",
+   "n": 1,
+   "capitulo": "sendero",
+   "como": "estacion",
+   "estacion": "brisas",
+   "arte": "brisas",
+   "nombre": "Brisas, puerta del agua",
+   "ficha": "norte-brisas-introduccion",
+   "fichas": [
+    "norte-brisas-introduccion"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "aguacerales-frailejon",
+   "n": 2,
+   "capitulo": "sendero",
+   "como": "estacion",
+   "estacion": "aguacerales",
+   "arte": "frailejon",
+   "nombre": "Frailejón",
+   "ficha": "uton-frailejon-especies",
+   "fichas": [
+    "uton-frailejon-especies"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "arenales-dunas",
+   "n": 3,
+   "capitulo": "sendero",
+   "como": "estacion",
+   "estacion": "arenales",
+   "arte": "e3",
+   "nombre": "Dunas de arena",
+   "ficha": "uton-dunas-no-pisar",
+   "fichas": [
+    "uton-dunas-no-pisar"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "lunares-gelifraccion",
+   "n": 4,
+   "capitulo": "sendero",
+   "como": "estacion",
+   "estacion": "lunares",
+   "arte": "roca",
+   "nombre": "Gelifracción",
+   "ficha": "uton-lunares-gelifraccion",
+   "fichas": [
+    "uton-lunares-gelifraccion"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "tumbas-nombre",
+   "n": 5,
+   "capitulo": "sendero",
+   "como": "estacion",
+   "estacion": "tumbas",
+   "arte": "tumbas",
+   "nombre": "Valle de las Tumbas",
+   "ficha": "uton-tumbas-nombre",
+   "fichas": [
+    "uton-tumbas-nombre"
+   ],
+   "brillante": true,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "mirada",
+   "n": 6,
+   "capitulo": "sendero",
+   "como": "pausa",
+   "estacion": null,
+   "arte": "mirada",
+   "nombre": "Mirada larga",
+   "ficha": "uton-biomas-parque",
+   "fichas": [
+    "uton-biomas-parque"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-biomas-parque",
+   "segundos": 120
+  },
+  {
+   "id": "aguacerales-condensacion",
+   "n": 7,
+   "capitulo": "flora",
+   "como": "pregunta",
+   "estacion": "aguacerales",
+   "arte": "agua",
+   "nombre": "El agua que se atrapa",
+   "ficha": "uton-aguacerales-nombre",
+   "fichas": [
+    "uton-aguacerales-nombre",
+    "norte-aguacerales-niebla"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "frailejon-necromasa",
+   "n": 8,
+   "capitulo": "flora",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "hojas",
+   "nombre": "Abrigo de hojas",
+   "ficha": "norte-frailejon-necromasa",
+   "fichas": [
+    "norte-frailejon-necromasa",
+    "uton-frailejon-adaptaciones"
+   ],
+   "brillante": false,
+   "origen": "paquete:norte-frailejon-necromasa"
+  },
+  {
+   "id": "lunares-loricaria",
+   "n": 9,
+   "capitulo": "flora",
+   "como": "pregunta",
+   "estacion": "lunares",
+   "arte": "musgo",
+   "nombre": "Coral de páramo",
+   "ficha": "uton-lunares-vegetacion-tiempo",
+   "fichas": [
+    "uton-lunares-vegetacion-tiempo",
+    "uton-loricarias",
+    "uton-lunares-paisaje"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "pajonal",
+   "n": 10,
+   "capitulo": "flora",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "pajonal",
+   "nombre": "Pajonal",
+   "ficha": "uton-bosques-matorrales",
+   "fichas": [
+    "uton-bosques-matorrales"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-bosques-matorrales"
+  },
+  {
+   "id": "andesitas",
+   "n": 11,
+   "capitulo": "flora",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "roca",
+   "nombre": "Andesitas",
+   "ficha": "uton-andesitas-edad",
+   "fichas": [
+    "uton-andesitas-edad"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-andesitas-edad"
+  },
+  {
+   "id": "glaciar",
+   "n": 12,
+   "capitulo": "flora",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "nevado",
+   "nombre": "El glaciar del Ruiz",
+   "ficha": "uton-glaciar-ruiz-2022",
+   "fichas": [
+    "uton-glaciar-ruiz-2022",
+    "norte-glaciar-cumbre"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-glaciar-ruiz-2022"
+  },
+  {
+   "id": "condor",
+   "n": 13,
+   "capitulo": "fauna",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "condor",
+   "nombre": "Cóndor de los Andes",
+   "ficha": "norte-fauna-condor-danta",
+   "fichas": [
+    "norte-fauna-condor-danta"
+   ],
+   "brillante": true,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "danta",
+   "n": 14,
+   "capitulo": "fauna",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "danta",
+   "nombre": "Danta de páramo",
+   "ficha": "uton-grandes-mamiferos",
+   "fichas": [
+    "uton-grandes-mamiferos"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-grandes-mamiferos"
+  },
+  {
+   "id": "periquito",
+   "n": 15,
+   "capitulo": "fauna",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "periquito",
+   "nombre": "Periquito de los Nevados",
+   "ficha": "uton-aves-endemicas",
+   "fichas": [
+    "uton-aves-endemicas"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-aves-endemicas"
+  },
+  {
+   "id": "agua",
+   "n": 16,
+   "capitulo": "historias",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "laguna",
+   "nombre": "Esponjas gigantes",
+   "ficha": "uton-pnn-agua",
+   "fichas": [
+    "uton-pnn-agua"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-pnn-agua"
+  },
+  {
+   "id": "arenales-esqui",
+   "n": 17,
+   "capitulo": "historias",
+   "como": "pregunta",
+   "estacion": "arenales",
+   "arte": "huella",
+   "nombre": "Memoria del esquí",
+   "ficha": "uton-arenales-historia-esqui",
+   "fichas": [
+    "uton-arenales-historia-esqui"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "complejo-volcanico",
+   "n": 18,
+   "capitulo": "historias",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "tumbas",
+   "nombre": "Cuatro volcanes en uno",
+   "ficha": "uton-complejo-volcanico",
+   "fichas": [
+    "uton-complejo-volcanico"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-complejo-volcanico"
+  },
+  {
+   "id": "tumbas-kumanday",
+   "n": 19,
+   "capitulo": "historias",
+   "como": "pregunta",
+   "estacion": "tumbas",
+   "arte": "volcanes",
+   "nombre": "Kumanday",
+   "ficha": "uton-kumanday",
+   "fichas": [
+    "uton-kumanday",
+    "norte-kumanday"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  }
+ ],
+ "noEntran": {
+  "e2 Frío de altura": "el dato venía de PNN 2019; no hay ficha con ese dato",
+  "grupo Cromo de grupo": "necesita la cámara (foto de grupo); sin dato de los guiones",
+  "sietecueros Siete cueros": "los guiones solo nombran Polylepis de pasada; sin ficha propia",
+  "musgo Musgos y líquenes": "solo aparece en listas de plantas de las fichas de estación",
+  "laguna Laguna": "solo hay una definición de glosario",
+  "oso Oso de anteojos": "no aparece en los guiones",
+  "pato Pato andino": "los guiones no traen una frase propia del pato",
+  "aguila Águila de páramo": "solo aparece en listas de fauna de las estaciones",
+  "sombrilla Especies sombrilla": "no aparece en los guiones",
+  "volcanes Tres volcanes": "la fecha de creación venía de PNN 2019"
+ }
+}
