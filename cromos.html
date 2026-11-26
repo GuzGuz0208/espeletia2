@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Fray · prueba de cromos</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root { --hoja: var(--papel-2); --linea: var(--papel-3); --radio: 16px; }
+    main { width: min(100% - 2rem, 40rem); margin: 1.5rem auto; display: grid; gap: 1.2rem; }
+    h1 { font: 800 1.8rem/1.1 var(--display); font-stretch: 85%; color: var(--verde); margin: 0; }
+    fieldset { border: 2px solid var(--linea); border-radius: var(--radio); padding: .8rem 1rem 1rem; display: grid; gap: .6rem; }
+    legend { font-weight: 700; padding: 0 .3rem; }
+    .fila { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .fila .btn { flex: 1 1 10rem; }
+    .gano { margin: 0; font-size: .9rem; color: var(--gris); }
+    label { display: flex; gap: .6rem; align-items: center; min-height: 44px; }
+    input[type="checkbox"] { width: 1.4rem; height: 1.4rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Prueba de cromos</h1>
+    <p>Prueba local del sobre y los cromos de exposición. Sin sonido.</p>
+
+    <fieldset>
+      <legend>Por estación</legend>
+      <div class="fila" id="por-estacion"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Un cromo exacto: <code>{ id }</code></legend>
+      <div class="fila" id="por-id"></div>
+      <p class="gano" id="gano" aria-live="polite"></p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Condiciones</legend>
+      <label><input type="checkbox" id="quieto"> Menos movimiento (además del ajuste del sistema)</label>
+      <label><input type="checkbox" id="contraste"> Alto contraste</label>
+      <label><input type="checkbox" id="ingles"> English</label>
+      <div class="fila" id="letra">
+        <button class="btn btn-linea" type="button" data-letra="1">A</button>
+        <button class="btn btn-linea" type="button" data-letra="2">A+</button>
+        <button class="btn btn-linea" type="button" data-letra="3">A++</button>
+      </div>
+      <div class="fila">
+        <button class="btn btn-flor" type="button" id="ver-album">Ver álbum</button>
+        <button class="btn btn-linea" type="button" id="tres">Tres sobres seguidos</button>
+        <button class="btn btn-peligro" type="button" id="olvidar">Borrar mis cromos</button>
+      </div>
+    </fieldset>
+  </main>
+
+  <script type="module">
+    import { ganados, olvidar } from './js/cromos-demo.js';
+    import { asegurarVigencia } from './js/vigencia.js';
+    import { cargarPaquete } from './js/ui-paquete.js';
+    const raiz = document.documentElement;
+    const disparar = (detail) => document.dispatchEvent(new CustomEvent('fray:cromo', { detail }));
+    await asegurarVigencia();
+    await cargarPaquete();
+    if (!(await asegurarVigencia()).vigente) {
+      document.querySelector('main').replaceChildren(document.createTextNode('El contenido del parque venció.'));
+      throw new Error('Contenido del parque vencido');
+    }
+    const r = await fetch('contenido/cromos.json');
+    const { cromos } = await r.json();
+    const estaciones = [...new Set(cromos.map((c) => c.estacion).filter(Boolean))];
+    const boton = (texto, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-linea'; b.textContent = texto; b.onclick = fn; return b; };
+    for (const e of estaciones) document.getElementById('por-estacion').append(boton(e, () => disparar({ estacion: e })));
+    for (const c of cromos) document.getElementById('por-id').append(boton(c.nombre, () => disparar({ id: c.id })));
+    const pintar = () => { document.getElementById('gano').textContent = `Ganados: ${ganados().length} de ${cromos.length}`; };
+    pintar();
+    document.addEventListener('fray:cromo-pegado', pintar);
+    document.getElementById('ver-album').onclick = () => document.dispatchEvent(new CustomEvent('fray:album'));
+    document.getElementById('olvidar').onclick = () => { olvidar(); pintar(); };
+    document.getElementById('tres').onclick = () => ['brisas-agua', 'aguacerales-frailejon', 'condor'].forEach((id) => disparar({ id }));
+    document.getElementById('quieto').onchange = (e) => { if (e.target.checked) raiz.dataset.movimiento = 'reducido'; else delete raiz.dataset.movimiento; };
+    document.getElementById('contraste').onchange = (e) => { if (e.target.checked) raiz.dataset.contraste = 'alto'; else delete raiz.dataset.contraste; };
+    document.getElementById('ingles').onchange = (e) => { raiz.lang = e.target.checked ? 'en' : 'es'; };
+    for (const b of document.querySelectorAll('#letra button')) b.onclick = () => { raiz.dataset.letra = b.dataset.letra; };
+  </script>
+</body>
+</html>

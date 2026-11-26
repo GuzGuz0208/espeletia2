@@ -7,3 +7,4 @@
 | lib/jsQR.js | jsQR (cozmo) | Apache-2.0 | jsQR-Apache-2.0.txt |
 | models/partes/e5_small_latino.onnx.*, models/e5_tokenizer*.json | multilingual-e5-small (intfloat), versión modificada (podada, int8) | MIT | MIT-multilingual-e5-small.txt |
 | lib/qrcode.js | qrcode-generator (Kazuhiko Arase) — «QR Code» es marca registrada de DENSO WAVE | MIT | aviso MIT en la cabecera del archivo |
+| img/cromos/*.jpg | Fotos de los cromos (Wikimedia Commons, recortadas) | CC BY 4.0 y CC BY-SA 3.0/4.0, por foto | fotos-cromos.md |

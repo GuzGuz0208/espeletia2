@@ -1,0 +1,85 @@
+{
+ "nota": "Fotos de los cromos: Wikimedia Commons, recortadas a 480×522 px (obra derivada: recorte y compresión). Las CC BY-SA se comparten con la misma licencia. Se cita autor, licencia y enlace en el cromo.",
+ "fotos": {
+  "brisas-agua": {
+   "autor": "Msolerg",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0",
+   "fecha": "2024-10-16",
+   "archivo": "Ingreso al Parque Nacional Natural Los Nevados.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Ingreso_al_Parque_Nacional_Natural_Los_Nevados.jpg"
+  },
+  "aguacerales-frailejon": {
+   "autor": "Xemenendura",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fecha": "2020-07-16",
+   "archivo": "Espeletia hartwegiana 00.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Espeletia_hartwegiana_00.jpg"
+  },
+  "aguacerales-condensacion": {
+   "autor": "Johan Andrés Toro",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fecha": "2025-09-07",
+   "archivo": "Ladera alta llena de Fraiilejones en el Nevado del Ruiz.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Ladera_alta_llena_de_Fraiilejones_en_el_Nevado_del_Ruiz.jpg"
+  },
+  "arenales-dunas": {
+   "autor": "Kamilokardona",
+   "licencia": "CC BY-SA 3.0",
+   "licenciaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+   "fecha": "2007-03-29",
+   "archivo": "Arenales del Ruiz.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Arenales_del_Ruiz.jpg"
+  },
+  "arenales-esqui": {
+   "autor": "Ricohin",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fecha": "2011-02-16",
+   "archivo": "Nevado del Ruiz, Caldas 01.JPG",
+   "url": "https://commons.wikimedia.org/wiki/File:Nevado_del_Ruiz,_Caldas_01.JPG"
+  },
+  "lunares-gelifraccion": {
+   "autor": "Jose David Niño Velasquez",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fecha": "2019-05-22",
+   "archivo": "Fragmento de roca volcánica y cenizas Volcán Nevado del Ruiz.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Fragmento_de_roca_volc%C3%A1nica_y_cenizas_Volc%C3%A1n_Nevado_del_Ruiz.jpg"
+  },
+  "lunares-loricaria": {
+   "autor": "Jose David Niño Velasquez",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fecha": "2018-12-15",
+   "archivo": "Cacho de venado (Loricaria colombiana).jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Cacho_de_venado_(Loricaria_colombiana).jpg"
+  },
+  "tumbas-nombre": {
+   "autor": "Msolerg",
+   "licencia": "CC BY 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by/4.0",
+   "fecha": "2024-10-16",
+   "archivo": "El valle de las tumbas.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:El_valle_de_las_tumbas.jpg"
+  },
+  "tumbas-kumanday": {
+   "autor": "EFGA1995",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fecha": "2024-09-24",
+   "archivo": "Norte del Nevado del Ruiz.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Norte_del_Nevado_del_Ruiz.jpg"
+  },
+  "condor": {
+   "autor": "Charles J. Sharp",
+   "licencia": "CC BY-SA 4.0",
+   "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fecha": "2025-10-06",
+   "archivo": "Andean condor (Vultur gryphus) male in flight Farellones.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Andean_condor_(Vultur_gryphus)_male_in_flight_Farellones.jpg"
+  }
+ }
+}
