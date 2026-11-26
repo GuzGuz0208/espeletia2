@@ -1,0 +1,94 @@
+{
+  "_aviso": "PAQUETE DE EJEMPLO SOLO PARA PROBAR EL FORMATO DEL MOTOR. Textos inventados: NO son de los guiones y NO se usan en la demostración. El real es contenido/paquete.json (rama juan/contenido).",
+  "version": "ejemplo-2026-11-26.1",
+  "actualizado": "2026-11-26",
+  "fuentes": {
+    "UTON2024": { "titulo": "Guion Ecoturístico UTON 2024", "paginas": 57 },
+    "NORTE": { "titulo": "Guión turístico (zona norte)", "paginas": 7 }
+  },
+  "estaciones": [
+    { "id": "brisas", "nombre": "Brisas", "orden": 0, "altitud": null },
+    { "id": "aguacerales", "nombre": "Aguacerales", "orden": 1, "altitud": null },
+    { "id": "arenales", "nombre": "Arenales", "orden": 2, "altitud": null },
+    { "id": "lunares", "nombre": "Lunares", "orden": 3, "altitud": null },
+    { "id": "tumbas", "nombre": "Valle de las Tumbas", "orden": 4, "altitud": null }
+  ],
+  "fichas": [
+    {
+      "id": "ej-lunares-gelifraccion", "estacion": "lunares", "tema": "geologia", "tipo": "ciencia",
+      "titulo": "[EJEMPLO] Gelifracción",
+      "texto": "[EJEMPLO] La gelifracción es la ruptura de las rocas por el hielo. El agua entra en las grietas durante el día y se congela en la noche. Al congelarse, el agua aumenta de volumen y abre la grieta poco a poco. Después de muchos ciclos, la roca se parte en fragmentos angulosos.",
+      "breve": "La gelifracción es la ruptura de las rocas por el hielo.",
+      "citas": [{ "guion": "UTON2024", "pagina": 8 }],
+      "preguntas": ["¿por qué se rompen las rocas?", "¿qué es la gelifracción?", "¿cómo rompe el hielo una piedra?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "ej-aguacerales-frailejon", "estacion": "aguacerales", "tema": "flora", "tipo": "ciencia",
+      "titulo": "[EJEMPLO] Frailejón",
+      "texto": "[EJEMPLO] El frailejón es una planta típica del páramo con hojas cubiertas de pelos finos. Esos pelos lo protegen del frío intenso de la noche y del sol fuerte del día. Las hojas secas quedan pegadas al tallo como un abrigo. El frailejón crece muy despacio, apenas unos centímetros por año.",
+      "breve": "El frailejón es una planta típica del páramo con hojas cubiertas de pelos finos.",
+      "citas": [{ "guion": "UTON2024", "pagina": 12 }],
+      "preguntas": ["¿qué es un frailejón?", "¿por qué el frailejón tiene pelos?", "¿cuánto crece un frailejón?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "ej-arenales-agua", "estacion": "arenales", "tema": "agua", "tipo": "ciencia",
+      "titulo": "[EJEMPLO] El páramo como esponja",
+      "texto": "[EJEMPLO] El suelo y los musgos del páramo retienen el agua de la lluvia y de la niebla como una esponja. Luego la sueltan poco a poco hacia quebradas y ríos. Por eso el páramo regula el agua que llega a las ciudades de abajo.",
+      "breve": "El suelo y los musgos del páramo retienen el agua de la lluvia y de la niebla como una esponja.",
+      "citas": [{ "guion": "NORTE", "pagina": 4 }],
+      "preguntas": ["¿por qué el páramo es importante para el agua?", "¿de dónde viene el agua de los ríos?", "¿el páramo es una esponja?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "ej-tumbas-glaciar", "estacion": "tumbas", "tema": "glaciar", "tipo": "ciencia",
+      "titulo": "[EJEMPLO] Retroceso del glaciar",
+      "texto": "[EJEMPLO] El glaciar del volcán ha perdido gran parte de su área en las últimas décadas. El aumento de la temperatura derrite el hielo más rápido de lo que se forma. Las rocas pulidas del valle muestran hasta dónde llegaba el hielo antes.",
+      "breve": "El glaciar del volcán ha perdido gran parte de su área en las últimas décadas.",
+      "citas": [{ "guion": "UTON2024", "pagina": 20 }],
+      "preguntas": ["¿el glaciar se está derritiendo?", "¿por qué retrocede el glaciar?", "¿hasta dónde llegaba el hielo?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "ej-brisas-normas", "estacion": "brisas", "tema": "normas", "tipo": "norma",
+      "titulo": "[EJEMPLO] Normas del recorrido",
+      "texto": "[EJEMPLO] Durante el recorrido se camina siempre con el guía y por el sendero marcado. No se deja basura y no se hace ruido para no espantar a los animales. Los grupos son pequeños para cuidar el páramo.",
+      "breve": "Durante el recorrido se camina siempre con el guía y por el sendero marcado.",
+      "citas": [{ "guion": "NORTE", "pagina": 2 }],
+      "preguntas": ["¿cuáles son las normas?", "¿puedo salirme del sendero?", "¿qué no se puede hacer en el parque?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "ej-norte-kumanday", "estacion": null, "tema": "cultura", "tipo": "relato",
+      "titulo": "[EJEMPLO] Kumanday (versión A)",
+      "texto": "[EJEMPLO] Según la tradición oral recogida en este guion, Kumanday significa «nariz humeante».",
+      "breve": "Según la tradición oral recogida en este guion, Kumanday significa «nariz humeante».",
+      "citas": [{ "guion": "NORTE", "pagina": 5 }],
+      "preguntas": ["¿qué significa Kumanday?", "¿de dónde viene el nombre Kumanday?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "ej-uton-kumanday", "estacion": null, "tema": "cultura", "tipo": "relato",
+      "titulo": "[EJEMPLO] Kumanday (versión B)",
+      "texto": "[EJEMPLO] Este guion indica que no hay investigación suficiente para afirmar el significado de la palabra Kumanday.",
+      "breve": "Este guion indica que no hay investigación suficiente para afirmar el significado de la palabra Kumanday.",
+      "citas": [{ "guion": "UTON2024", "pagina": 34 }],
+      "preguntas": ["¿qué quiere decir Kumanday?", "¿Kumanday tiene significado?"],
+      "bloqueada": false, "motivo": null, "estado": "validado"
+    },
+    {
+      "id": "ej-norte-alerta", "estacion": null, "tema": "geologia", "tipo": "ciencia",
+      "titulo": "[EJEMPLO] Nivel de alerta del volcán",
+      "texto": "[EJEMPLO] Frase de nivel de alerta que NO debe salir nunca (ficha bloqueada).",
+      "breve": "Frase de nivel de alerta que NO debe salir nunca (ficha bloqueada).",
+      "citas": [{ "guion": "NORTE", "pagina": 7 }],
+      "preguntas": ["¿en qué alerta está el volcán?"],
+      "bloqueada": true, "motivo": "Información cambiante: el estado del volcán lo da el personal (SGC).", "estado": "validado"
+    }
+  ],
+  "conflictos": [
+    { "tema": "Significado de Kumanday", "fichas": ["ej-norte-kumanday", "ej-uton-kumanday"],
+      "nota": "[EJEMPLO] Un guion da una traducción; el otro dice que no hay investigación suficiente." }
+  ]
+}
