@@ -6,8 +6,9 @@
 // Nunca se toca otro origen (p. ej. el servidor local del modelo en 127.0.0.1:8080 no pasa por aquí).
 // Vigencia (contrato §7): contenido/ y ejemplo/ (información del parque) NO se sirven desde caché si la vigencia venció
 // (registro 'estado' en IndexedDB 'fray-vigencia', que escribe js/vigencia.js); van solo por red y no se guardan.
+// publicado/ (actualizaciones firmadas) no pasa por el caché: js/sync.js siempre ve el manifest recién publicado.
 // Al cambiar archivos de la app, sube VERSION.
-const VERSION = 'fray-v8-2026-11-26';
+const VERSION = 'fray-v10-2026-11-26-act';
 const CONTENIDO = /\/(contenido|ejemplo)\//;
 
 const APP = [
@@ -17,7 +18,7 @@ const APP = [
   'album.css', 'album.json', 'js/album-app.js', 'js/album-estado.js', 'js/album-db.js', 'js/album-util.js', 'js/album-textos.js',
   'js/album-arte.js', 'js/album-cromo.js', 'js/album-sobre.js', 'js/album-vista.js', 'js/album-celebrar.js', 'js/album-pdf.js',
   'js/album-mapa.js', 'js/album-guia.js',
-  'js/panel.js', 'js/panel-config.js', 'js/panel-pin.js', 'js/ui-sync.js', 'js/sync.js', 'js/vigencia.js', 'js/carril.js', 'js/qr-estacion.js', 'js/fray-mock.js', 'js/generador-mock.js',
+  'js/panel.js', 'js/panel-config.js', 'js/panel-pin.js', 'js/ui-sync.js', 'js/actualizar.js', 'js/sync.js', 'js/vigencia.js', 'js/carril.js', 'js/qr-estacion.js', 'js/fray-mock.js', 'js/generador-mock.js',
   'lib/jsQR.js', 'lib/qrcode.js',
   'fonts/bricolage-grotesque-latin-wdth-normal.woff2', 'fonts/atkinson-hyperlegible-latin-400-normal.woff2', 'fonts/atkinson-hyperlegible-latin-700-normal.woff2',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png',
@@ -91,6 +92,8 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET' || url.origin !== self.location.origin) return;
+  // Actualizaciones publicadas (js/sync.js): siempre por red, nunca desde ni hacia el caché (decisión 12)
+  if (url.pathname.startsWith('/publicado/')) return;
   const fijo = /\/(models|lib|fonts)\//.test(url.pathname);
   if (CONTENIDO.test(url.pathname)) {
     e.respondWith((async () => {

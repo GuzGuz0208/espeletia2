@@ -54,6 +54,7 @@ const textos = {
     'vencido.sinRed': 'Sin señal. Inténtalo en la entrada del parque.',
     'vencido.seguridad': 'Ante cualquier emergencia o malestar, avisa a tu guía o al personal del parque.',
     'vencido.respuesta': 'Tu acceso a la guía del parque terminó. Pregúntale a tu guía; para usar la guía de nuevo, ábrela con señal en la entrada del parque.',
+    'sync.actualizado': 'Contenido actualizado: versión {version}',
   },
   en: {
     'app.titulo': 'Fray, your páramo guide',
@@ -107,6 +108,7 @@ const textos = {
     'vencido.sinRed': 'No signal. Try again at the park entrance.',
     'vencido.seguridad': 'In any emergency or if you feel unwell, tell your guide or the park staff.',
     'vencido.respuesta': 'Your access to the park guide has ended. Ask your guide; to use the guide again, open it with signal at the park entrance.',
+    'sync.actualizado': 'Content updated: version {version}',
   },
 };
 

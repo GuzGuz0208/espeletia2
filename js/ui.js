@@ -4,7 +4,7 @@
 
 import { fray as cargarFray, generador as cargarGenerador, info, claveQR } from './ui-motor.js';
 import { cargarPaquete, alCambiar, avisarCambio } from './ui-paquete.js';
-import { arrancarSync, sync } from './ui-sync.js';
+import { iniciarActualizaciones, sync } from './actualizar.js';
 import { verificarQR } from './qr-estacion.js';
 import { t, setIdioma, traducirDOM, getIdioma } from './ui-i18n.js';
 import * as vig from './vigencia.js';
@@ -601,9 +601,9 @@ async function iniciar() {
   const v = await vig.asegurarVigencia().catch(() => vig.estadoVigencia());
   if (v.estado === 'vencido') { E.vencido = true; pintarVencido(); $('#vencido-estado').textContent = t('vencido.sinRed'); }
   else await recargarPaquete().catch(manejarErrorCarga);
-  // Sincronización con la base (contrato §5.5). Sin urlBase configurada no usa la red.
-  arrancarSync({
-    versionLocal: E.incluido?.version,
+  // Actualizaciones obligatorias y automáticas (contrato §5.8): contenido firmado y código nuevo, sin preguntar
+  iniciarActualizaciones({
+    versionLocal: E.incluido?.version, cajaTexto: '#pregunta', textoActualizado: (v) => t('sync.actualizado', { version: v }),
     alPaqueteNuevo: async (p) => {
       // Llegó un paquete firmado: si la vigencia había vencido, hay señal → se renueva (o se borra si no se pudo)
       if (E.vencido || vig.verificarVigencia().estado === 'vencido') {
