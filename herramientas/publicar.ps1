@@ -13,6 +13,8 @@ param(
   [switch]$SinPush
 )
 $ErrorActionPreference = 'Stop'
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch { }
+$env:PYTHONIOENCODING = 'utf-8'
 $Repo = Split-Path -Parent $PSScriptRoot
 
 function Fin($texto, $codigo) {
@@ -29,17 +31,18 @@ try {
     Fin "No encontré $Paquete. En el Panel: pestaña «Importar y exportar» → «Exportar para publicar», y vuelve a intentarlo." 1
   }
 
-  # Python con `cryptography`: el venv del proyecto si existe; si no, el python del sistema
-  $Py = $env:FRAY_PYTHON
-  if (-not $Py) {
-    $venv = 'C:\Users\danna\espeletia-llm\venv\Scripts\python.exe'
-    $Py = if (Test-Path $venv) { $venv } else { 'python' }
+  # El primer Python que tenga `cryptography` (FRAY_PYTHON, el venv del proyecto o el del sistema)
+  $Py = $null
+  foreach ($c in @($env:FRAY_PYTHON, 'C:\Users\danna\espeletia-llm\venv\Scripts\python.exe', 'python', 'py')) {
+    if (-not $c) { continue }
+    try { & $c -c 'import cryptography' 2>$null; if ($LASTEXITCODE -eq 0) { $Py = $c; break } } catch { }
   }
+  if (-not $Py) { Fin 'No encontré Python con el paquete cryptography (pip install cryptography). Avisa a soporte.' 1 }
 
   Write-Host '1/4 Trayendo la última versión del repositorio…'
   git -C $Repo checkout main | Out-Null
   if ($LASTEXITCODE -ne 0) { Fin 'No pude pasar a la rama main (¿hay cambios sin guardar en el repo?). Avisa a soporte.' 1 }
-  git -C $Repo pull --ff-only
+  git -C $Repo -c pull.rebase=false pull --ff-only origin main
   if ($LASTEXITCODE -ne 0) { Fin 'No pude actualizar el repositorio (¿sin internet?). Inténtalo de nuevo en un momento.' 1 }
 
   Write-Host '2/4 Revisando y firmando el paquete…'

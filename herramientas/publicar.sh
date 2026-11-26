@@ -13,7 +13,7 @@ PY="${FRAY_PYTHON:-python3}"
 [ -f "$PAQUETE" ] || { echo "No encontré $PAQUETE. En el Panel: «Exportar para publicar»."; exit 1; }
 echo "1/4 Trayendo la última versión del repositorio…"
 git -C "$REPO" checkout main >/dev/null
-git -C "$REPO" pull --ff-only
+git -C "$REPO" -c pull.rebase=false pull --ff-only origin main
 echo "2/4 Revisando y firmando el paquete…"
 ARGS=(-X utf8 "$REPO/herramientas/firmar_paquete.py" --paquete "$PAQUETE" --salida "$REPO/publicado")
 if [ -f "$AVISOS" ]; then ARGS+=(--avisos "$AVISOS"); echo "    con avisos: $AVISOS"; else echo "    sin avisos del día"; fi
