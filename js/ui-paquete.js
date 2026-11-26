@@ -11,7 +11,11 @@ function abrir() {
   return new Promise((ok, mal) => {
     const req = indexedDB.open(DB, 1);
     req.onupgradeneeded = () => req.result.createObjectStore(STORE, { keyPath: 'n', autoIncrement: true });
-    req.onsuccess = () => ok(req.result);
+    req.onsuccess = () => {
+      // Si otra pestaña quiere borrar o actualizar la base (p. ej. «Restablecer PIN»), se suelta enseguida
+      req.result.onversionchange = () => req.result.close();
+      ok(req.result);
+    };
     req.onerror = () => mal(req.error);
   });
 }
@@ -21,8 +25,8 @@ async function tx(modo, fn) {
   return new Promise((ok, mal) => {
     const t = db.transaction(STORE, modo);
     const r = fn(t.objectStore(STORE));
-    t.oncomplete = () => ok(r?.result);
-    t.onerror = () => mal(t.error);
+    t.oncomplete = () => { db.close(); ok(r?.result); };
+    t.onerror = () => { db.close(); mal(t.error); };
   });
 }
 

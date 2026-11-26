@@ -13,4 +13,14 @@ solo se usa para el reto.
 - Base de la que parte: [dsalazardev/espeletia-ai](https://github.com/dsalazardev/espeletia-ai) (Álbum del Páramo).
 
 ## Cómo correrlo
-Pendiente (se completa en el sprint 2): servidor estático local + modelo local opcional.
+Servidor estático local (sin red): `python -m http.server 8000 --bind 127.0.0.1` y abrir `http://127.0.0.1:8000/`.
+Tras la primera carga, `sw.js` deja todo guardado para modo avión. Con `?ia=demo` se ve la marca de reescritura con el
+generador de ejemplo.
+
+- `index.html` · pantalla del visitante: estación (o QR firmado) → pregunta → respuesta breve, «Ampliar» y cita.
+- `panel.html` · Panel del parque: fichas, importar/exportar, preguntas sin respuesta, versiones y QR de estación.
+  El PIN se define en el primer uso **en cada dispositivo** y solo se guarda su hash PBKDF2 en ese dispositivo.
+  **En producción, `panel.html` no se instala en los kioscos de los visitantes**: el Panel se usa en el dispositivo del
+  personal y el paquete se lleva a los kioscos exportado (USB, en Brisas antes de subir).
+- Si aún no existen `js/fray.js` o `contenido/paquete.json`, la interfaz usa `js/fray-mock.js` y
+  `ejemplo/paquete-ejemplo.json` y lo indica con una insignia «Motor de ejemplo · Paquete de ejemplo».

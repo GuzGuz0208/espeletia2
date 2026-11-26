@@ -5,12 +5,12 @@
 //   grandes que no cambian); lo demás, «caché y actualizar en segundo plano».
 // Nunca se toca otro origen (p. ej. el servidor local del modelo en 127.0.0.1:8080 no pasa por aquí).
 // Al cambiar archivos de la app, sube VERSION.
-const VERSION = 'fray-v1-2026-11-26';
+const VERSION = 'fray-v2-2026-11-26';
 
 const APP = [
   './', 'index.html', 'panel.html', 'styles.css', 'manifest.json',
   'js/ui.js', 'js/ui-motor.js', 'js/ui-paquete.js', 'js/ui-i18n.js', 'js/ui-art.js',
-  'js/panel.js', 'js/panel-config.js', 'js/qr-estacion.js', 'js/fray-mock.js', 'js/generador-mock.js',
+  'js/panel.js', 'js/panel-config.js', 'js/panel-pin.js', 'js/qr-estacion.js', 'js/fray-mock.js', 'js/generador-mock.js',
   'lib/jsQR.js', 'lib/qrcode.js',
   'fonts/bricolage-grotesque-latin-wdth-normal.woff2', 'fonts/atkinson-hyperlegible-latin-400-normal.woff2', 'fonts/atkinson-hyperlegible-latin-700-normal.woff2',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png',

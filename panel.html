@@ -10,14 +10,17 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Entrada con PIN (de demostración: ver js/panel-config.js) -->
+  <!-- Entrada con PIN: uno por dispositivo, lo define el personal en el primer uso (js/panel-pin.js) -->
   <form class="login" id="login">
     <h1>Panel del parque</h1>
-    <p class="aviso-demo">PIN de demostración. Cámbialo en el dispositivo (js/panel-config.js).</p>
-    <label for="pin">PIN del personal</label>
+    <p id="login-ayuda">Solo para el personal del parque.</p>
+    <label for="pin" id="pin-etiqueta">PIN del personal</label>
     <input id="pin" type="password" inputmode="numeric" autocomplete="off" required>
+    <label for="pin2" id="pin2-etiqueta" hidden>Repite el PIN</label>
+    <input id="pin2" type="password" inputmode="numeric" autocomplete="off" hidden>
     <p class="error" id="pin-error" role="alert"></p>
-    <button class="btn btn-flor btn-grande">Entrar</button>
+    <button class="btn btn-flor btn-grande" id="btn-entrar">Entrar</button>
+    <button class="btn btn-peligro btn-mini" type="button" id="btn-restablecer">Restablecer PIN (borra los datos del panel en este dispositivo)</button>
     <a href="./">← Volver a Fray</a>
   </form>
 

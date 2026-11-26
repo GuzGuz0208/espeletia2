@@ -1,7 +1,8 @@
 // Panel del parque: el personal edita, importa y exporta fichas sin tocar código.
 // Cada guardado crea una versión nueva del paquete en el dispositivo (IndexedDB) y reindexa el motor.
 
-import { PIN_DEMO, TIPOS, TEMAS, ESTADOS } from './panel-config.js';
+import { TIPOS, TEMAS, ESTADOS } from './panel-config.js';
+import { hayPin, definirPin, comprobarPin, sesionActiva, restablecer, LARGO_MINIMO } from './panel-pin.js';
 import { cargarPaquete, paqueteBase, guardarVersion, versiones } from './ui-paquete.js';
 import { fray as cargarFray, claveQR, CLAVE_QR_DEMO } from './ui-motor.js';
 import { textoQR } from './qr-estacion.js';
@@ -39,12 +40,22 @@ const slug = (s) => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,
 const fecha = (iso) => new Date(iso).toLocaleString('es-CO', { dateStyle: 'short', timeStyle: 'short' });
 
 // ---------- Guardar y reindexar ----------
+// Cada acción que cambia o saca datos comprueba la sesión ella misma (no basta con haber entrado).
+function exigirSesion() {
+  if (sesionActiva()) return true;
+  mostrarLogin('La sesión se cerró por inactividad. Escribe el PIN otra vez.');
+  return false;
+}
+
 async function publicar(paquete, nota) {
+  if (!exigirSesion()) throw new Error('Sin sesión');
+  toast('Guardando… Fray está reindexando las fichas.');
   const nuevo = await guardarVersion(paquete, nota);
   P.paquete = nuevo;
   P.origen = 'dispositivo';
-  await P.motor.cargar(nuevo);
   pintarTodo();
+  P.motor = await cargarFray();
+  await P.motor.cargar(nuevo); // reindexa en el dispositivo (con el motor real puede tardar unos segundos)
   return nuevo;
 }
 
@@ -191,6 +202,7 @@ function cerrarEditor() {
 
 async function guardarFicha(e) {
   e.preventDefault();
+  if (!exigirSesion()) return;
   const f = leerEditor();
   const errores = validarFicha(f, P.paquete);
   if (!P.editando && P.paquete.fichas.some((x) => x.id === f.id)) errores.push('Ya existe una ficha con ese identificador.');
@@ -206,6 +218,7 @@ async function guardarFicha(e) {
 }
 
 async function borrarFicha() {
+  if (!exigirSesion()) return;
   if (!P.editando || !confirm('¿Borrar esta ficha? Puedes recuperarla volviendo a la versión anterior.')) return;
   const p = structuredClone(P.paquete);
   p.fichas = p.fichas.filter((x) => x.id !== P.editando);
@@ -244,7 +257,12 @@ function leerCSV(texto) {
   return resto.map((f) => Object.fromEntries(claves.map((k, i) => [k, (f[i] ?? '').trim()])));
 }
 
-const csvCampo = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+// Contra inyección de fórmulas en Excel/LibreOffice: si empieza por = + - @ tabulador o retorno, se antepone «'»
+const csvCampo = (v) => {
+  let s = String(v ?? '');
+  if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`;
+  return `"${s.replace(/"/g, '""')}"`;
+};
 function aCSV(filas, columnas) {
   return '﻿' + [columnas.join(','), ...filas.map((f) => columnas.map((c) => csvCampo(f[c])).join(','))].join('\r\n');
 }
@@ -271,6 +289,7 @@ function fichaDeFila(r) {
 }
 
 async function importar(archivo) {
+  if (!exigirSesion()) return;
   const res = $('#import-resultado');
   res.replaceChildren();
   const texto = await archivo.text();
@@ -299,6 +318,9 @@ async function importar(archivo) {
       return;
     }
     if (!confirm(`Reemplazar el paquete actual por «${completo.version || archivo.name}» (${completo.fichas.length} fichas)?`)) return;
+    // Cambiar la clave de los QR invalida los QR impresos: se pide una confirmación aparte
+    if (claveQR(completo) !== claveQR(P.paquete)
+      && !confirm('ATENCIÓN: este paquete trae otra clave para los QR de estación. Los QR impresos con la clave actual dejarán de funcionar. ¿Aceptas cambiar la clave?')) return;
     await publicar(completo, `Paquete completo importado: ${archivo.name}`);
     res.append(el('p', 'ok', `Listo: paquete cargado con ${completo.fichas.length} fichas. Fray ya responde con él.`));
     return;
@@ -341,6 +363,7 @@ function plantillaJSON() {
   descargar('plantilla-fichas.json', JSON.stringify(ejemplo, null, 2), 'application/json');
 }
 function exportar() {
+  if (!exigirSesion()) return;
   descargar(`paquete-${P.paquete.version || 'fray'}.json`, JSON.stringify(P.paquete, null, 2), 'application/json');
 }
 
@@ -384,7 +407,7 @@ async function pintarVersiones() {
     if (i > 0) {
       const b = el('button', 'btn btn-mini btn-linea', 'Volver a esta versión');
       b.onclick = async () => {
-        if (!confirm(`¿Volver a la versión ${v.version}?`)) return;
+        if (!exigirSesion() || !confirm(`¿Volver a la versión ${v.version}?`)) return;
         await publicar(v.paquete, `Vuelta a ${v.version}`);
         toast(`Listo: Fray responde otra vez con la versión ${v.version}.`);
       };
@@ -447,15 +470,19 @@ function pintarTodo() {
   pintarLista();
 }
 
+let iniciado = false;
 async function entrar() {
   $('#login').hidden = true;
   $('#panel').hidden = false;
+  if (iniciado) return; // volver tras una sesión caducada: no se recarga ni se duplican eventos
+  iniciado = true;
   const { paquete, origen } = await cargarPaquete();
   P.paquete = paquete;
   P.origen = origen;
-  P.motor = await cargarFray();
-  await P.motor.cargar(paquete);
   pintarTodo();
+  // El motor se carga en segundo plano: la lista se puede usar ya
+  P.motor = await cargarFray();
+  P.motor.cargar(paquete).catch((e) => console.error(e));
 
   document.querySelectorAll('[role="tab"]').forEach((b) => { b.onclick = () => cambiarTab(b.dataset.tab); });
   for (const id of ['#f-buscar', '#f-estacion', '#f-tipo', '#f-estado']) $(id).addEventListener('input', pintarLista);
@@ -473,16 +500,18 @@ async function entrar() {
   $('#btn-plantilla-json').onclick = plantillaJSON;
   $('#btn-exportar').onclick = exportar;
   $('#btn-sin-csv').onclick = async () => {
+    if (!exigirSesion()) return;
     const l = await P.motor.sinRespuesta();
     descargar('preguntas-sin-respuesta.csv', aCSV(l.map((s) => ({ ...s, estacion: s.estacion || '' })), ['fecha', 'estacion', 'texto']), 'text/csv;charset=utf-8');
   };
   $('#btn-sin-limpiar').onclick = async () => {
-    if (!confirm('¿Borrar todas las preguntas sin respuesta de este dispositivo?')) return;
+    if (!exigirSesion() || !confirm('¿Borrar todas las preguntas sin respuesta de este dispositivo?')) return;
     await P.motor.limpiarSinRespuesta();
     pintarSinRespuesta();
   };
   $('#qr-estacion').onchange = pintarQR;
   $('#btn-base').onclick = async () => {
+    if (!exigirSesion()) return;
     const { paquete, origen } = await paqueteBase();
     if (!confirm(`¿Volver al paquete que trae la app (${paquete.version}, ${paquete.fichas.length} fichas)? Las versiones guardadas siguen en la lista.`)) return;
     await publicar(paquete, `Paquete base (${origen === 'ejemplo' ? 'ejemplo' : 'contenido/paquete.json'} ${paquete.version})`);
@@ -492,13 +521,46 @@ async function entrar() {
   $('#btn-imprimir').onclick = () => window.print();
 }
 
-$('#login').onsubmit = (e) => {
+// ---------- Entrada con PIN ----------
+function mostrarLogin(mensaje = '') {
+  const crear = !hayPin();
+  $('#panel').hidden = true;
+  $('#login').hidden = false;
+  $('#login-ayuda').textContent = crear
+    ? `Primer uso en este dispositivo: define el PIN del personal (${LARGO_MINIMO} a 12 números). Solo se guarda cifrado aquí.`
+    : 'Solo para el personal del parque.';
+  $('#pin-etiqueta').textContent = crear ? 'Nuevo PIN' : 'PIN del personal';
+  $('#pin2').hidden = $('#pin2-etiqueta').hidden = !crear;
+  $('#pin2').required = crear;
+  $('#btn-entrar').textContent = crear ? 'Guardar PIN y entrar' : 'Entrar';
+  $('#btn-restablecer').hidden = crear;
+  $('#pin').value = $('#pin2').value = '';
+  $('#pin-error').textContent = mensaje;
+  $('#pin').focus();
+}
+
+$('#login').onsubmit = async (e) => {
   e.preventDefault();
-  if ($('#pin').value === PIN_DEMO) {
-    try { sessionStorage.setItem('fray.panel', '1'); } catch { /* nada */ }
+  const pin = $('#pin').value;
+  $('#pin-error').textContent = '';
+  try {
+    if (!hayPin()) {
+      if (pin !== $('#pin2').value) throw new Error('Los dos PIN no coinciden.');
+      await definirPin(pin);
+    } else if (!(await comprobarPin(pin))) {
+      await new Promise((r) => setTimeout(r, 800)); // freno a los intentos seguidos
+      throw new Error('PIN incorrecto.');
+    }
     entrar();
-  } else {
-    $('#pin-error').textContent = 'PIN incorrecto.';
+  } catch (err) {
+    $('#pin-error').textContent = err.message;
   }
 };
-try { if (sessionStorage.getItem('fray.panel') === '1') entrar(); } catch { /* nada */ }
+
+$('#btn-restablecer').onclick = async () => {
+  if (!confirm('Restablecer el PIN borra en este dispositivo las versiones guardadas desde el Panel y las preguntas sin respuesta. Fray vuelve al paquete que trae la app. ¿Continuar?')) return;
+  await restablecer();
+  location.reload();
+};
+
+mostrarLogin();
