@@ -1,0 +1,689 @@
+{
+ "descripcion": "Respuestas generadas por Qwen3.5-2B y Qwen2.5-1.5B (26-nov, banco de desarrollo contenido/preguntas_desarrollo.json, ficha correcta como contexto) que PASARON el verificador de cifras y nombres, etiquetadas por el agente: error=null es correcta; error=texto es un error que el visitante vería. Más 8 casos sintéticos. Sirve para calibrar el respaldo por frase: node herramientas/calibrar_respaldo.mjs",
+ "casos": [
+  {
+   "id": "q35-2b-breve|norte-aguacerales-niebla",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Qué papel cumple el frailejón en este lugar?",
+   "ficha": "norte-aguacerales-niebla",
+   "fuente": "\"Bienvenidos a Aguacerales. Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'. Observen los frailejones: su importancia radica en que son ingenieros hídricos. Sus hojas están cubiertas de pubescencia (pelos blancos), es una adaptación evolutiva para protegerse de la alta radiación UV y retener calor. Este es el inicio del ciclo que alimenta los ríos que vemos en las zonas bajas: rompen la gota de niebla, la condensan y la dirigen al suelo. Ese suelo, compuesto por ceniza volcánica y materia orgánica, funciona como una esponja que libera el agua lentamente hacia las cuencas de los ríos Chinchiná y Gualí. Sin este proceso microscópico que ocurre aquí, no habría agua potable en las ciudades de abajo\". Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'.",
+   "resp": "El frailejón en este lugar cumple el papel de atrapar el agua, ya que aquí la niebla o condensación se forma por contacto en lugar de por lluvia.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|uton-dunas-no-pisar",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Por qué debemos evitar pisar las dunas?",
+   "ficha": "uton-dunas-no-pisar",
+   "fuente": "Las dunas entran en las zonas de carácter intangible del PNNN, es parte del patrimonio geológico, debido a que estas dunas en algunas ocasiones tienen una alta carga de humedad; si son pisadas, las huellas pueden perdurar meses. Por esta razón y por la particularidad de su formación no deben ser intervenidas. si son pisadas, las huellas pueden perdurar meses. Por esta razón y por la particularidad de su formación no deben ser intervenidas.",
+   "resp": "No pisar las dunas porque si lo hacen, las huellas pueden perdurar meses y no deben ser intervenidas por su formación única.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|norte-lunar-gelifraccion-oxidacion",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Qué proceso explica las fracturas y cuál explica el color?",
+   "ficha": "norte-lunar-gelifraccion-oxidacion",
+   "fuente": "El paisaje aquí se torna 'lunar' debido a la gelifracción. El agua se filtra en las grietas de la roca, se congela por la noche aumentando su volumen y las estalla desde adentro: actúa como una cuña que rompe las rocas andesíticas en pedazos angulares. Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos: es oxidación de hierro y azufre presentes en la lava vieja al entrar en contacto con el oxígeno y la humedad ambiental. Estamos caminando sobre flujos de lava antiguos que están siendo transformados por la atmósfera. El paisaje aquí se torna 'lunar' debido a la gelifracción. Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos",
+   "resp": "La gelifracción explica las fracturas y la oxidación de minerales ferrosos el color.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|uton-lunares-gelifraccion",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Por qué se fracturan las rocas en Lunares?",
+   "ficha": "uton-lunares-gelifraccion",
+   "fuente": "Los visitantes pueden observar de cerca los procesos geológicos que han dado forma al paisaje, como las grietas producidas por el congelamiento y descongelamiento del agua en las rocas; este proceso es conocido como gelifracción, que es un tipo de meteorización. Ocurre cuando el agua se congela: el agua tiene la propiedad de aumentar su volumen al congelarse; si el agua está confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen; por esta razón las rocas están llenas de grietas. Estas fracturas contribuyen a la formación de suelo arenoso y la llegada de vegetación pionera. el agua tiene la propiedad de aumentar su volumen al congelarse; si el agua está confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen; por esta razón las rocas están llenas de grietas.",
+   "resp": "El agua aumenta su volumen al congelarse, lo que causa un desgaste o fracturamiento en las rocas si está confinada a los poros o grietas previas.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|norte-brisas-introduccion",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Dónde estamos y qué es este parque?",
+   "ficha": "norte-brisas-introduccion",
+   "fuente": "Introducción: Sector Brisas (Puerta de Entrada). Concepto clave: ubicación geográfica e importancia hídrica. \"Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios. Nos encontramos en el flanco norte del Complejo Volcánico Nevado del Ruiz (CVNR), una estructura compuesta por cuatro domos principales: Nereidas, Olleta, Piraña y el cráter activo Arenas. Este ecosistema de páramo es un 'regulador hídrico' vital para el Eje Cafetero\". Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+   "resp": "Estamos en el Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|uton-temperatura-brisas",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Qué temperatura promedio hace en Brisas?",
+   "ficha": "uton-temperatura-brisas",
+   "fuente": "El PNN Los Nevados presenta un rango altitudinal entre los 2600 msnm y los 5321 m.s.n.m. en la cumbre del Volcán Nevado del Ruiz. Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados, y en la estación La Laguna, ubicada a 4.000 m.s.n.m., la temperatura media anual es de 3 grados centígrados, pocas horas de sol, humedad relativa alta, frecuencia de nieblas, vientos fuertes y lluvias de poca intensidad. Herd (1982) calculó la isoterma anual a 0 grados centígrados para la región del parque situándola a los 4705 m.s.n.m. (Plan de manejo Parque Nacional Natural Los Nevados, 1998). El IDEAM proporciona datos de temperaturas máximas y mínimas, velocidad y dirección del viento y humedad tomados en la estación meteorológica de Brisas. Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados",
+   "resp": "Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|uton-aguacerales-nombre",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Por qué se llama Aguacerales?",
+   "ficha": "uton-aguacerales-nombre",
+   "fuente": "En el sitio \"Aguacerales\" encontramos diversa vegetación. Estas plantas desempeñan un papel crucial en la captación y regulación del agua. Las gotas que precipitan se unen para formar riachuelos que alimentan la cuenca del río Chinchiná. La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales. Aquí se puede apreciar cómo el agua contenida en las nubes es capturada por la vegetación (condensación) y pasa a formar pequeñas gotas que descienden y llegan a los musgos que crecen sobre la roca; estas gotas se juntan formando hilos de agua que al caer van formando un riachuelo que irá a la quebrada. Este fenómeno de condensación se da durante las 24 horas del día, todos los días del año. Durante las noches frías, los hilos de agua se congelan y forman carámbanos (habitualmente ocurre en temporada seca). La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales.",
+   "resp": "La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|uton-aguacerales-ficha",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿A qué altura estamos?",
+   "ficha": "uton-aguacerales-ficha",
+   "fuente": "1. Aguacerales. Altura: 4.160 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 5.2 km aproximadamente del Cráter Arenas. Ecosistema o bioma: páramo propiamente dicho. Fauna característica: conejo, águila, cusumbos, taira, venados, colibríes, dantas, comadreja, guagua, zorro, puma, patos. Plantas características: pajonal, romeros, frailejón, valeriana, senecios, mortiños, musgo. Estructuras geológicas/geomorfológicas: lavas con relieve invertido, depósitos de caída piroclástica, valle en U, paleosuelos. Altura: 4.160 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 5.2 km aproximadamente del Cráter Arenas.",
+   "resp": "Estamos a 4.160 msnm aproximadamente, ubicados en el flanco occidental del edificio volcánico a 5.2 km del Cráter Arenas.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|uton-frailejon-especies",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿qué especie de frailejon hay en el parque",
+   "ficha": "uton-frailejon-especies",
+   "fuente": "Existen más de 100 especies de frailejones, en Colombia se tienen cerca de 60 de estas especies y para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana. El nombre genérico \"Espeletia\" fue nombrado en honor a José Manuel de Ezpeleta, el virrey del Nuevo Reino de Granada. para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana.",
+   "resp": "En el parque se encuentra únicamente la especie de Frailejón Espeletia hartwegiana.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|norte-aguacerales-niebla",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Por qué las plantas tienen pelitos blancos?",
+   "ficha": "norte-aguacerales-niebla",
+   "fuente": "\"Bienvenidos a Aguacerales. Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'. Observen los frailejones: su importancia radica en que son ingenieros hídricos. Sus hojas están cubiertas de pubescencia (pelos blancos), es una adaptación evolutiva para protegerse de la alta radiación UV y retener calor. Este es el inicio del ciclo que alimenta los ríos que vemos en las zonas bajas: rompen la gota de niebla, la condensan y la dirigen al suelo. Ese suelo, compuesto por ceniza volcánica y materia orgánica, funciona como una esponja que libera el agua lentamente hacia las cuencas de los ríos Chinchiná y Gualí. Sin este proceso microscópico que ocurre aquí, no habría agua potable en las ciudades de abajo\". Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'.",
+   "resp": "Las plantas tienen pelitos blancos porque el agua se atrapa en ellos y no cae como lluvia, como en una selva.",
+   "error": "atribuye a los pelos atrapar el agua; el texto dado no lo dice"
+  },
+  {
+   "id": "q35-2b-breve|uton-arenales-origen-arena",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿De dónde sale tanta arena?",
+   "ficha": "uton-arenales-origen-arena",
+   "fuente": "¿De dónde sale todo este material arenoso? 1. El viento funciona como agente erosivo sobre las rocas (fricción por el viento cargado de partículas) generando otras pequeñas partículas de polvo y arena. 2. El viento transporta partículas de otros lugares hacia el edificio volcánico y viceversa. 3. Hay formación de material particulado por la meteorización tanto química como mecánica que se encarga de destruir la roca en material más fino. 4. Sumado a la abundante ceniza generada en el complejo volcánico. Todo este material es transportado por el viento, siendo llevado en suspensión o arrastrado hasta toparse con la barrera de rocas que hay detrás de la cabaña de Arenales, acumulándose allí, dando paso a la formación de estas dunas. Todo este material es transportado por el viento, siendo llevado en suspensión o arrastrado hasta toparse con la barrera de rocas que hay detrás de la cabaña de Arenales, acumulándose allí, dando paso a la formación de estas dunas.",
+   "resp": "Todo este material es transportado por el viento, siendo llevado en suspensión o arrastrado hasta toparse con la barrera de rocas que hay detrás de la cabaña de Arenales, acumulándose allí, dando paso a la formación de estas dunas.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|uton-arenales-historia-esqui",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Por qué ya no se esquía en el Ruiz?",
+   "ficha": "uton-arenales-historia-esqui",
+   "fuente": "El sector Arenales ha sido históricamente una zona de camping con varias construcciones para los visitantes, desde una bodega de papa en 1937 hasta el Chalet Arenales, diseñado por el arquitecto Simón Vélez, que se incendió en 2010. La actual cabaña exhibe pendones sobre la historia del esquí en el nevado del Ruiz en los años 50 y 60, cuando se realizaron campeonatos sudamericanos que llevaron a la creación del Club de Ski de Manizales. La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones. La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones.",
+   "resp": "La actividad de esquí se detuvo porque el deshielo afectó las instalaciones.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|norte-lunar-importancia",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Por qué se llama Valle Lunar?",
+   "ficha": "norte-lunar-importancia",
+   "fuente": "Parada: Valle Lunar (La Fuerza de los Elementos). Concepto clave: gelifracción y oxidación. Importancia: Es la estación técnica por excelencia. Aquí se explica cómo se \"descompone\" la montaña. Características únicas: formaciones rocosas angulares, ausencia casi total de vegetación y colores minerales intensos. \"Este es el Valle Lunar, llamado así por su aspecto estéril y desolado. La importancia de este punto es entender la fuerza física del clima. Este es el Valle Lunar, llamado así por su aspecto estéril y desolado.",
+   "resp": "El Valle Lunar se llama así por su aspecto estéril y desolado.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|uton-lunares-estrias",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Qué son esos rayones en las rocas?",
+   "ficha": "uton-lunares-estrias",
+   "fuente": "También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares y son el resultado del movimiento del mismo; su acción abrasiva sobre la roca deja como evidencia estas marcas que sirven como herramienta para determinar la dirección del movimiento del glaciar. También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares",
+   "resp": "Las rocas con marcas en superficies que parecen \"arañazos\" se llaman estrías glaciares.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|uton-tumbas-nombre",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Por qué se llama Valle de las Tumbas?",
+   "ficha": "uton-tumbas-nombre",
+   "fuente": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes. Algunas comunidades cercanas al PNNN usaban rocas con esta forma para construir tumbas de cancel (esto no quiere decir que fueran extraídas del Ruiz, es solo una similitud); estas rocas están hoy cubiertas por arena. El nombre de Valle de las Tumbas, así como el de las anteriores estaciones, es heredado por tradición oral, y hay registros de que en los 80's ya recibía este nombre. El sitio también es conocido como \"Desierto de la Soledad\", nombres que reflejan tanto el tranquilo paisaje del lugar como su significado místico y cultural. El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes.",
+   "resp": "El Valle de las Tumbas recibe su nombre por la presencia de rocas largas y planas que se asemejan a ataúdes.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-breve|uton-armero-1985",
+   "origen": "q35-2b-breve",
+   "pregunta": "¿Qué pasó en Armero en 1985?",
+   "ficha": "uton-armero-1985",
+   "fuente": "Erupción del Nevado del Ruiz: el 13 de noviembre de 1985, el volcán Nevado del Ruiz entró en erupción, provocando uno de los desastres volcánicos más catastróficos del siglo XX. El calor de la erupción derritió el glaciar del volcán, generando lahares (flujos de lodo volcánico) que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos (Poa y Nereidas). Estos flujos devastaron las poblaciones de Armero, Tolima, Villamaría y Chinchiná, causando la muerte de más de 23,000 personas. El calor de la erupción derritió el glaciar del volcán, generando lahares (flujos de lodo volcánico) que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos (Poa y Nereidas).",
+   "resp": "El calor de la erupción derritió el glaciar del volcán, generando lahares que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|norte-aguacerales-niebla",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Qué papel cumple el frailejón en este lugar?",
+   "ficha": "norte-aguacerales-niebla",
+   "fuente": "\"Bienvenidos a Aguacerales. Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'. Observen los frailejones: su importancia radica en que son ingenieros hídricos. Sus hojas están cubiertas de pubescencia (pelos blancos), es una adaptación evolutiva para protegerse de la alta radiación UV y retener calor. Este es el inicio del ciclo que alimenta los ríos que vemos en las zonas bajas: rompen la gota de niebla, la condensan y la dirigen al suelo. Ese suelo, compuesto por ceniza volcánica y materia orgánica, funciona como una esponja que libera el agua lentamente hacia las cuencas de los ríos Chinchiná y Gualí. Sin este proceso microscópico que ocurre aquí, no habría agua potable en las ciudades de abajo\". Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'.",
+   "resp": "El frailejón actúa como un ingeniero hídrico que atrapa la niebla y la convierte en agua para alimentar los ríos Chinchiná y Gualí.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|uton-dunas-no-pisar",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Por qué debemos evitar pisar las dunas?",
+   "ficha": "uton-dunas-no-pisar",
+   "fuente": "Las dunas entran en las zonas de carácter intangible del PNNN, es parte del patrimonio geológico, debido a que estas dunas en algunas ocasiones tienen una alta carga de humedad; si son pisadas, las huellas pueden perdurar meses. Por esta razón y por la particularidad de su formación no deben ser intervenidas. si son pisadas, las huellas pueden perdurar meses. Por esta razón y por la particularidad de su formación no deben ser intervenidas.",
+   "resp": "Las dunas entran en las zonas de carácter intangible del PNNN, es parte del patrimonio geológico, debido a que estas dunas en algunas ocasiones tienen una alta carga de humedad; si son pisadas, las huellas pueden perdurar meses.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|norte-lunar-gelifraccion-oxidacion",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Qué proceso explica las fracturas y cuál explica el color?",
+   "ficha": "norte-lunar-gelifraccion-oxidacion",
+   "fuente": "El paisaje aquí se torna 'lunar' debido a la gelifracción. El agua se filtra en las grietas de la roca, se congela por la noche aumentando su volumen y las estalla desde adentro: actúa como una cuña que rompe las rocas andesíticas en pedazos angulares. Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos: es oxidación de hierro y azufre presentes en la lava vieja al entrar en contacto con el oxígeno y la humedad ambiental. Estamos caminando sobre flujos de lava antiguos que están siendo transformados por la atmósfera. El paisaje aquí se torna 'lunar' debido a la gelifracción. Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos",
+   "resp": "Las fracturas se explican por la gelifracción que actúa como una cuña, mientras que el color rojizo es causado por la oxidación de minerales ferrosos en la lava antigua.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|uton-lunares-gelifraccion",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Por qué se fracturan las rocas en Lunares?",
+   "ficha": "uton-lunares-gelifraccion",
+   "fuente": "Los visitantes pueden observar de cerca los procesos geológicos que han dado forma al paisaje, como las grietas producidas por el congelamiento y descongelamiento del agua en las rocas; este proceso es conocido como gelifracción, que es un tipo de meteorización. Ocurre cuando el agua se congela: el agua tiene la propiedad de aumentar su volumen al congelarse; si el agua está confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen; por esta razón las rocas están llenas de grietas. Estas fracturas contribuyen a la formación de suelo arenoso y la llegada de vegetación pionera. el agua tiene la propiedad de aumentar su volumen al congelarse; si el agua está confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen; por esta razón las rocas están llenas de grietas.",
+   "resp": "Las rocas en Lunares se fracturan debido al proceso de gelifracción, donde el agua se congela y aumenta su volumen al entrar en los poros de la roca, provocando un desgaste que genera grietas.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|norte-brisas-introduccion",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Dónde estamos y qué es este parque?",
+   "ficha": "norte-brisas-introduccion",
+   "fuente": "Introducción: Sector Brisas (Puerta de Entrada). Concepto clave: ubicación geográfica e importancia hídrica. \"Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios. Nos encontramos en el flanco norte del Complejo Volcánico Nevado del Ruiz (CVNR), una estructura compuesta por cuatro domos principales: Nereidas, Olleta, Piraña y el cráter activo Arenas. Este ecosistema de páramo es un 'regulador hídrico' vital para el Eje Cafetero\". Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+   "resp": "Estamos en el Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|uton-temperatura-brisas",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Qué temperatura promedio hace en Brisas?",
+   "ficha": "uton-temperatura-brisas",
+   "fuente": "El PNN Los Nevados presenta un rango altitudinal entre los 2600 msnm y los 5321 m.s.n.m. en la cumbre del Volcán Nevado del Ruiz. Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados, y en la estación La Laguna, ubicada a 4.000 m.s.n.m., la temperatura media anual es de 3 grados centígrados, pocas horas de sol, humedad relativa alta, frecuencia de nieblas, vientos fuertes y lluvias de poca intensidad. Herd (1982) calculó la isoterma anual a 0 grados centígrados para la región del parque situándola a los 4705 m.s.n.m. (Plan de manejo Parque Nacional Natural Los Nevados, 1998). El IDEAM proporciona datos de temperaturas máximas y mínimas, velocidad y dirección del viento y humedad tomados en la estación meteorológica de Brisas. Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados",
+   "resp": "La temperatura promedio en Brisas es de 2,24 grados centígrados.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|norte-ficha-tecnica",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿A cuántos municipios les da agua el parque?",
+   "ficha": "norte-ficha-tecnica",
+   "fuente": "Ficha Técnica General del PNN Los Nevados. Extensión total: 62,142 hectáreas. Área de páramos protegida: 53,532 hectáreas (86% del total). Importancia hídrica: Abastece a 37 municipios y beneficia a cerca de 3 millones de personas en el Eje Cafetero. Geología base: El Complejo Volcánico Nevado del Ruiz (CVNR) está compuesto por cuatro estructuras: Nereidas, Olleta, Piraña y Arenas. Roca predominante: Andesita (roca volcánica común de los Andes). Extensión total: 62,142 hectáreas. Área de páramos protegida: 53,532 hectáreas (86% del total).",
+   "resp": "El parque abastece a 37 municipios y beneficia a cerca de 3 millones de personas en el Eje Cafetero.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|uton-aguacerales-nombre",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Por qué se llama Aguacerales?",
+   "ficha": "uton-aguacerales-nombre",
+   "fuente": "En el sitio \"Aguacerales\" encontramos diversa vegetación. Estas plantas desempeñan un papel crucial en la captación y regulación del agua. Las gotas que precipitan se unen para formar riachuelos que alimentan la cuenca del río Chinchiná. La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales. Aquí se puede apreciar cómo el agua contenida en las nubes es capturada por la vegetación (condensación) y pasa a formar pequeñas gotas que descienden y llegan a los musgos que crecen sobre la roca; estas gotas se juntan formando hilos de agua que al caer van formando un riachuelo que irá a la quebrada. Este fenómeno de condensación se da durante las 24 horas del día, todos los días del año. Durante las noches frías, los hilos de agua se congelan y forman carámbanos (habitualmente ocurre en temporada seca). La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales.",
+   "resp": "En el sitio \"Aguacerales\" encontramos diversa vegetación que captura y regula el agua, formando riachuelos que alimentan la cuenca del río Chinchiná.",
+   "error": "NR: no dice por qué se llama así"
+  },
+  {
+   "id": "q35-2b-ficha|uton-aguacerales-ficha",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿A qué altura estamos?",
+   "ficha": "uton-aguacerales-ficha",
+   "fuente": "1. Aguacerales. Altura: 4.160 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 5.2 km aproximadamente del Cráter Arenas. Ecosistema o bioma: páramo propiamente dicho. Fauna característica: conejo, águila, cusumbos, taira, venados, colibríes, dantas, comadreja, guagua, zorro, puma, patos. Plantas características: pajonal, romeros, frailejón, valeriana, senecios, mortiños, musgo. Estructuras geológicas/geomorfológicas: lavas con relieve invertido, depósitos de caída piroclástica, valle en U, paleosuelos. Altura: 4.160 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 5.2 km aproximadamente del Cráter Arenas.",
+   "resp": "Estamos a 4.160 msnm aproximadamente en el flanco occidental del edificio volcánico, a 5.2 km del Cráter Arenas.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|uton-frailejon-especies",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿qué especie de frailejon hay en el parque",
+   "ficha": "uton-frailejon-especies",
+   "fuente": "Existen más de 100 especies de frailejones, en Colombia se tienen cerca de 60 de estas especies y para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana. El nombre genérico \"Espeletia\" fue nombrado en honor a José Manuel de Ezpeleta, el virrey del Nuevo Reino de Granada. para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana.",
+   "resp": "Existen más de 100 especies de frailejones en Colombia, y en el PNNN solo se reporta la especie Espeletia hartwegiana, cuyo nombre genérico fue nombrado en honor a José Manuel de Ezpeleta.",
+   "error": "«más de 100 especies en Colombia» (100 es en el mundo; en Colombia cerca de 60)"
+  },
+  {
+   "id": "q35-2b-ficha|norte-aguacerales-niebla",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Por qué las plantas tienen pelitos blancos?",
+   "ficha": "norte-aguacerales-niebla",
+   "fuente": "\"Bienvenidos a Aguacerales. Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'. Observen los frailejones: su importancia radica en que son ingenieros hídricos. Sus hojas están cubiertas de pubescencia (pelos blancos), es una adaptación evolutiva para protegerse de la alta radiación UV y retener calor. Este es el inicio del ciclo que alimenta los ríos que vemos en las zonas bajas: rompen la gota de niebla, la condensan y la dirigen al suelo. Ese suelo, compuesto por ceniza volcánica y materia orgánica, funciona como una esponja que libera el agua lentamente hacia las cuencas de los ríos Chinchiná y Gualí. Sin este proceso microscópico que ocurre aquí, no habría agua potable en las ciudades de abajo\". Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'.",
+   "resp": "Las plantas tienen pelitos blancos porque son una adaptación evolutiva que protege de la alta radiación UV y retiene el calor.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|uton-arenales-origen-arena",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿De dónde sale tanta arena?",
+   "ficha": "uton-arenales-origen-arena",
+   "fuente": "¿De dónde sale todo este material arenoso? 1. El viento funciona como agente erosivo sobre las rocas (fricción por el viento cargado de partículas) generando otras pequeñas partículas de polvo y arena. 2. El viento transporta partículas de otros lugares hacia el edificio volcánico y viceversa. 3. Hay formación de material particulado por la meteorización tanto química como mecánica que se encarga de destruir la roca en material más fino. 4. Sumado a la abundante ceniza generada en el complejo volcánico. Todo este material es transportado por el viento, siendo llevado en suspensión o arrastrado hasta toparse con la barrera de rocas que hay detrás de la cabaña de Arenales, acumulándose allí, dando paso a la formación de estas dunas. Todo este material es transportado por el viento, siendo llevado en suspensión o arrastrado hasta toparse con la barrera de rocas que hay detrás de la cabaña de Arenales, acumulándose allí, dando paso a la formación de estas dunas.",
+   "resp": "El viento funciona como agente erosivo sobre las rocas, generando partículas de polvo y arena que son transportadas hacia el edificio volcánico y viceversa, acumulándose detrás de la barrera de rocas.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|uton-arenales-historia-esqui",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Por qué ya no se esquía en el Ruiz?",
+   "ficha": "uton-arenales-historia-esqui",
+   "fuente": "El sector Arenales ha sido históricamente una zona de camping con varias construcciones para los visitantes, desde una bodega de papa en 1937 hasta el Chalet Arenales, diseñado por el arquitecto Simón Vélez, que se incendió en 2010. La actual cabaña exhibe pendones sobre la historia del esquí en el nevado del Ruiz en los años 50 y 60, cuando se realizaron campeonatos sudamericanos que llevaron a la creación del Club de Ski de Manizales. La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones. La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones.",
+   "resp": "El sector Arenales ha sido históricamente una zona de camping con varias construcciones para los visitantes, desde una bodega de papa en 1937 hasta el Chalet Arenales, diseñado por el arquitecto Simón Vélez, que se incendió en 2010.",
+   "error": "NR: habla del camping, no del esquí"
+  },
+  {
+   "id": "q35-2b-ficha|norte-lunar-importancia",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Por qué se llama Valle Lunar?",
+   "ficha": "norte-lunar-importancia",
+   "fuente": "Parada: Valle Lunar (La Fuerza de los Elementos). Concepto clave: gelifracción y oxidación. Importancia: Es la estación técnica por excelencia. Aquí se explica cómo se \"descompone\" la montaña. Características únicas: formaciones rocosas angulares, ausencia casi total de vegetación y colores minerales intensos. \"Este es el Valle Lunar, llamado así por su aspecto estéril y desolado. La importancia de este punto es entender la fuerza física del clima. Este es el Valle Lunar, llamado así por su aspecto estéril y desolado.",
+   "resp": "El Valle Lunar se llama así por su aspecto estéril y desolado, donde la gelifracción y la oxidación descomponen la montaña.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|uton-lunares-estrias",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Qué son esos rayones en las rocas?",
+   "ficha": "uton-lunares-estrias",
+   "fuente": "También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares y son el resultado del movimiento del mismo; su acción abrasiva sobre la roca deja como evidencia estas marcas que sirven como herramienta para determinar la dirección del movimiento del glaciar. También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares",
+   "resp": "Las rocas con marcas en su superficie son llamadas estrías glaciares y son el resultado del movimiento del glaciar.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|uton-tumbas-nombre",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Por qué se llama Valle de las Tumbas?",
+   "ficha": "uton-tumbas-nombre",
+   "fuente": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes. Algunas comunidades cercanas al PNNN usaban rocas con esta forma para construir tumbas de cancel (esto no quiere decir que fueran extraídas del Ruiz, es solo una similitud); estas rocas están hoy cubiertas por arena. El nombre de Valle de las Tumbas, así como el de las anteriores estaciones, es heredado por tradición oral, y hay registros de que en los 80's ya recibía este nombre. El sitio también es conocido como \"Desierto de la Soledad\", nombres que reflejan tanto el tranquilo paisaje del lugar como su significado místico y cultural. El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes.",
+   "resp": "El Valle de las Tumbas recibe ese nombre por la presencia de rocas largas y planas que se asemejan a ataúdes, cubiertas hoy por arena.",
+   "error": null
+  },
+  {
+   "id": "q35-2b-ficha|uton-armero-1985",
+   "origen": "q35-2b-ficha",
+   "pregunta": "¿Qué pasó en Armero en 1985?",
+   "ficha": "uton-armero-1985",
+   "fuente": "Erupción del Nevado del Ruiz: el 13 de noviembre de 1985, el volcán Nevado del Ruiz entró en erupción, provocando uno de los desastres volcánicos más catastróficos del siglo XX. El calor de la erupción derritió el glaciar del volcán, generando lahares (flujos de lodo volcánico) que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos (Poa y Nereidas). Estos flujos devastaron las poblaciones de Armero, Tolima, Villamaría y Chinchiná, causando la muerte de más de 23,000 personas. El calor de la erupción derritió el glaciar del volcán, generando lahares (flujos de lodo volcánico) que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos (Poa y Nereidas).",
+   "resp": "La erupción del Nevado del Ruiz en 1985 provocó la muerte de más de 23,000 personas en Armero y otras poblaciones, generando lahares que destruyeron los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos.",
+   "error": "«lahares que destruyeron los cañones» (el guion: descendieron por los cañones)"
+  },
+  {
+   "id": "q25-1.5b-breve|norte-aguacerales-niebla",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Qué papel cumple el frailejón en este lugar?",
+   "ficha": "norte-aguacerales-niebla",
+   "fuente": "\"Bienvenidos a Aguacerales. Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'. Observen los frailejones: su importancia radica en que son ingenieros hídricos. Sus hojas están cubiertas de pubescencia (pelos blancos), es una adaptación evolutiva para protegerse de la alta radiación UV y retener calor. Este es el inicio del ciclo que alimenta los ríos que vemos en las zonas bajas: rompen la gota de niebla, la condensan y la dirigen al suelo. Ese suelo, compuesto por ceniza volcánica y materia orgánica, funciona como una esponja que libera el agua lentamente hacia las cuencas de los ríos Chinchiná y Gualí. Sin este proceso microscópico que ocurre aquí, no habría agua potable en las ciudades de abajo\". Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'.",
+   "resp": "El frailejón juega un papel crucial en este lugar, interceptando la niebla o condensación por contacto.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|uton-dunas-no-pisar",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Por qué debemos evitar pisar las dunas?",
+   "ficha": "uton-dunas-no-pisar",
+   "fuente": "Las dunas entran en las zonas de carácter intangible del PNNN, es parte del patrimonio geológico, debido a que estas dunas en algunas ocasiones tienen una alta carga de humedad; si son pisadas, las huellas pueden perdurar meses. Por esta razón y por la particularidad de su formación no deben ser intervenidas. si son pisadas, las huellas pueden perdurar meses. Por esta razón y por la particularidad de su formación no deben ser intervenidas.",
+   "resp": "No debemos pisar las dunas porque las huellas pueden perdurar meses, y debido a su formación única, no deben ser intervenidas.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|norte-lunar-gelifraccion-oxidacion",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Qué proceso explica las fracturas y cuál explica el color?",
+   "ficha": "norte-lunar-gelifraccion-oxidacion",
+   "fuente": "El paisaje aquí se torna 'lunar' debido a la gelifracción. El agua se filtra en las grietas de la roca, se congela por la noche aumentando su volumen y las estalla desde adentro: actúa como una cuña que rompe las rocas andesíticas en pedazos angulares. Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos: es oxidación de hierro y azufre presentes en la lava vieja al entrar en contacto con el oxígeno y la humedad ambiental. Estamos caminando sobre flujos de lava antiguos que están siendo transformados por la atmósfera. El paisaje aquí se torna 'lunar' debido a la gelifracción. Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos",
+   "resp": "El proceso que explica las fracturas es la gelifracción, mientras que el color rojizo es el resultado de la oxidación de minerales ferrosos.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|uton-lunares-gelifraccion",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Por qué se fracturan las rocas en Lunares?",
+   "ficha": "uton-lunares-gelifraccion",
+   "fuente": "Los visitantes pueden observar de cerca los procesos geológicos que han dado forma al paisaje, como las grietas producidas por el congelamiento y descongelamiento del agua en las rocas; este proceso es conocido como gelifracción, que es un tipo de meteorización. Ocurre cuando el agua se congela: el agua tiene la propiedad de aumentar su volumen al congelarse; si el agua está confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen; por esta razón las rocas están llenas de grietas. Estas fracturas contribuyen a la formación de suelo arenoso y la llegada de vegetación pionera. el agua tiene la propiedad de aumentar su volumen al congelarse; si el agua está confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen; por esta razón las rocas están llenas de grietas.",
+   "resp": "Las rocas en Lunares se fracturan debido a que el agua, al congelarse, aumenta su volumen y puede someter a un desgaste o fracturamiento en sus grietas previas.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|norte-brisas-introduccion",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Dónde estamos y qué es este parque?",
+   "ficha": "norte-brisas-introduccion",
+   "fuente": "Introducción: Sector Brisas (Puerta de Entrada). Concepto clave: ubicación geográfica e importancia hídrica. \"Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios. Nos encontramos en el flanco norte del Complejo Volcánico Nevado del Ruiz (CVNR), una estructura compuesta por cuatro domos principales: Nereidas, Olleta, Piraña y el cráter activo Arenas. Este ecosistema de páramo es un 'regulador hídrico' vital para el Eje Cafetero\". Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+   "resp": "Estamos en el Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|uton-temperatura-brisas",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Qué temperatura promedio hace en Brisas?",
+   "ficha": "uton-temperatura-brisas",
+   "fuente": "El PNN Los Nevados presenta un rango altitudinal entre los 2600 msnm y los 5321 m.s.n.m. en la cumbre del Volcán Nevado del Ruiz. Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados, y en la estación La Laguna, ubicada a 4.000 m.s.n.m., la temperatura media anual es de 3 grados centígrados, pocas horas de sol, humedad relativa alta, frecuencia de nieblas, vientos fuertes y lluvias de poca intensidad. Herd (1982) calculó la isoterma anual a 0 grados centígrados para la región del parque situándola a los 4705 m.s.n.m. (Plan de manejo Parque Nacional Natural Los Nevados, 1998). El IDEAM proporciona datos de temperaturas máximas y mínimas, velocidad y dirección del viento y humedad tomados en la estación meteorológica de Brisas. Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados",
+   "resp": "En Brisas, la temperatura promedio anual es de 2,24 grados centígrados.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|norte-ficha-tecnica",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿A cuántos municipios les da agua el parque?",
+   "ficha": "norte-ficha-tecnica",
+   "fuente": "Ficha Técnica General del PNN Los Nevados. Extensión total: 62,142 hectáreas. Área de páramos protegida: 53,532 hectáreas (86% del total). Importancia hídrica: Abastece a 37 municipios y beneficia a cerca de 3 millones de personas en el Eje Cafetero. Geología base: El Complejo Volcánico Nevado del Ruiz (CVNR) está compuesto por cuatro estructuras: Nereidas, Olleta, Piraña y Arenas. Roca predominante: Andesita (roca volcánica común de los Andes). Extensión total: 62,142 hectáreas. Área de páramos protegida: 53,532 hectáreas (86% del total).",
+   "resp": "El parque abastece agua a 62,142 hectáreas, de las cuales 53,532 hectáreas son áreas de páramos protegidas (86% del total).",
+   "error": "responde hectáreas en vez de municipios"
+  },
+  {
+   "id": "q25-1.5b-breve|uton-aguacerales-nombre",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Por qué se llama Aguacerales?",
+   "ficha": "uton-aguacerales-nombre",
+   "fuente": "En el sitio \"Aguacerales\" encontramos diversa vegetación. Estas plantas desempeñan un papel crucial en la captación y regulación del agua. Las gotas que precipitan se unen para formar riachuelos que alimentan la cuenca del río Chinchiná. La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales. Aquí se puede apreciar cómo el agua contenida en las nubes es capturada por la vegetación (condensación) y pasa a formar pequeñas gotas que descienden y llegan a los musgos que crecen sobre la roca; estas gotas se juntan formando hilos de agua que al caer van formando un riachuelo que irá a la quebrada. Este fenómeno de condensación se da durante las 24 horas del día, todos los días del año. Durante las noches frías, los hilos de agua se congelan y forman carámbanos (habitualmente ocurre en temporada seca). La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales.",
+   "resp": "Por la caída constante de agua que escuchamos y observamos.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|uton-aguacerales-ficha",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿A qué altura estamos?",
+   "ficha": "uton-aguacerales-ficha",
+   "fuente": "1. Aguacerales. Altura: 4.160 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 5.2 km aproximadamente del Cráter Arenas. Ecosistema o bioma: páramo propiamente dicho. Fauna característica: conejo, águila, cusumbos, taira, venados, colibríes, dantas, comadreja, guagua, zorro, puma, patos. Plantas características: pajonal, romeros, frailejón, valeriana, senecios, mortiños, musgo. Estructuras geológicas/geomorfológicas: lavas con relieve invertido, depósitos de caída piroclástica, valle en U, paleosuelos. Altura: 4.160 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 5.2 km aproximadamente del Cráter Arenas.",
+   "resp": "Aproximadamente 4.160 metros sobre el nivel del mar.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|uton-frailejon-especies",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿qué especie de frailejon hay en el parque",
+   "ficha": "uton-frailejon-especies",
+   "fuente": "Existen más de 100 especies de frailejones, en Colombia se tienen cerca de 60 de estas especies y para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana. El nombre genérico \"Espeletia\" fue nombrado en honor a José Manuel de Ezpeleta, el virrey del Nuevo Reino de Granada. para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana.",
+   "resp": "Hay solo la especie de Frailejón Espeletia hartwegiana en el parque.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|norte-aguacerales-niebla",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Por qué las plantas tienen pelitos blancos?",
+   "ficha": "norte-aguacerales-niebla",
+   "fuente": "\"Bienvenidos a Aguacerales. Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'. Observen los frailejones: su importancia radica en que son ingenieros hídricos. Sus hojas están cubiertas de pubescencia (pelos blancos), es una adaptación evolutiva para protegerse de la alta radiación UV y retener calor. Este es el inicio del ciclo que alimenta los ríos que vemos en las zonas bajas: rompen la gota de niebla, la condensan y la dirigen al suelo. Ese suelo, compuesto por ceniza volcánica y materia orgánica, funciona como una esponja que libera el agua lentamente hacia las cuencas de los ríos Chinchiná y Gualí. Sin este proceso microscópico que ocurre aquí, no habría agua potable en las ciudades de abajo\". Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'.",
+   "resp": "Las plantas tienen pelitos blancos para atrapar la humedad de la niebla o condensación.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|uton-arenales-historia-esqui",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Por qué ya no se esquía en el Ruiz?",
+   "ficha": "uton-arenales-historia-esqui",
+   "fuente": "El sector Arenales ha sido históricamente una zona de camping con varias construcciones para los visitantes, desde una bodega de papa en 1937 hasta el Chalet Arenales, diseñado por el arquitecto Simón Vélez, que se incendió en 2010. La actual cabaña exhibe pendones sobre la historia del esquí en el nevado del Ruiz en los años 50 y 60, cuando se realizaron campeonatos sudamericanos que llevaron a la creación del Club de Ski de Manizales. La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones. La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones.",
+   "resp": "Por la detención de la actividad debido al deshielo en las instalaciones.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|norte-lunar-importancia",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Por qué se llama Valle Lunar?",
+   "ficha": "norte-lunar-importancia",
+   "fuente": "Parada: Valle Lunar (La Fuerza de los Elementos). Concepto clave: gelifracción y oxidación. Importancia: Es la estación técnica por excelencia. Aquí se explica cómo se \"descompone\" la montaña. Características únicas: formaciones rocosas angulares, ausencia casi total de vegetación y colores minerales intensos. \"Este es el Valle Lunar, llamado así por su aspecto estéril y desolado. La importancia de este punto es entender la fuerza física del clima. Este es el Valle Lunar, llamado así por su aspecto estéril y desolado.",
+   "resp": "Por su aspecto estéril y desolado.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|uton-lunares-estrias",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Qué son esos rayones en las rocas?",
+   "ficha": "uton-lunares-estrias",
+   "fuente": "También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares y son el resultado del movimiento del mismo; su acción abrasiva sobre la roca deja como evidencia estas marcas que sirven como herramienta para determinar la dirección del movimiento del glaciar. También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares",
+   "resp": "Son estrías glaciares, marcadas en las rocas por las huellas de los glaciares.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|uton-tumbas-nombre",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Por qué se llama Valle de las Tumbas?",
+   "ficha": "uton-tumbas-nombre",
+   "fuente": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes. Algunas comunidades cercanas al PNNN usaban rocas con esta forma para construir tumbas de cancel (esto no quiere decir que fueran extraídas del Ruiz, es solo una similitud); estas rocas están hoy cubiertas por arena. El nombre de Valle de las Tumbas, así como el de las anteriores estaciones, es heredado por tradición oral, y hay registros de que en los 80's ya recibía este nombre. El sitio también es conocido como \"Desierto de la Soledad\", nombres que reflejan tanto el tranquilo paisaje del lugar como su significado místico y cultural. El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes.",
+   "resp": "El Valle de las Tumbas se llama así porque las rocas largas y planas que hay en el lugar se asemejan a ataúdes.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|uton-tumbas-restriccion",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Por qué no podemos seguir subiendo al cráter?",
+   "ficha": "uton-tumbas-restriccion",
+   "fuente": "Por seguridad, el ascenso a la parte alta del Nevado del Ruiz está restringido debido al alto riesgo de lahares, flujos de lodo y escombros volcánicos que podrían dificultar la evacuación en caso de erupción. La razón de la restricción de continuar del Valle de las Tumbas es principalmente el riesgo de los lahares. La razón de la restricción de continuar del Valle de las Tumbas es principalmente el riesgo de los lahares.",
+   "resp": "No podemos subir al cráter debido a la posibilidad de los lahares.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-breve|uton-armero-1985",
+   "origen": "q25-1.5b-breve",
+   "pregunta": "¿Qué pasó en Armero en 1985?",
+   "ficha": "uton-armero-1985",
+   "fuente": "Erupción del Nevado del Ruiz: el 13 de noviembre de 1985, el volcán Nevado del Ruiz entró en erupción, provocando uno de los desastres volcánicos más catastróficos del siglo XX. El calor de la erupción derritió el glaciar del volcán, generando lahares (flujos de lodo volcánico) que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos (Poa y Nereidas). Estos flujos devastaron las poblaciones de Armero, Tolima, Villamaría y Chinchiná, causando la muerte de más de 23,000 personas. El calor de la erupción derritió el glaciar del volcán, generando lahares (flujos de lodo volcánico) que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos (Poa y Nereidas).",
+   "resp": "En 1985, Armero fue devastado por las haresas, flujos de lodo volcánico, que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos.",
+   "error": "«haresas» (palabra deformada) y atribución a Armero no dicha en el texto dado"
+  },
+  {
+   "id": "q25-1.5b-ficha|norte-aguacerales-niebla",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Qué papel cumple el frailejón en este lugar?",
+   "ficha": "norte-aguacerales-niebla",
+   "fuente": "\"Bienvenidos a Aguacerales. Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'. Observen los frailejones: su importancia radica en que son ingenieros hídricos. Sus hojas están cubiertas de pubescencia (pelos blancos), es una adaptación evolutiva para protegerse de la alta radiación UV y retener calor. Este es el inicio del ciclo que alimenta los ríos que vemos en las zonas bajas: rompen la gota de niebla, la condensan y la dirigen al suelo. Ese suelo, compuesto por ceniza volcánica y materia orgánica, funciona como una esponja que libera el agua lentamente hacia las cuencas de los ríos Chinchiná y Gualí. Sin este proceso microscópico que ocurre aquí, no habría agua potable en las ciudades de abajo\". Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'.",
+   "resp": "El frailejón es un ingeniero hídrico que dirige la condensación de niebla hacia los ríos, alimentando la tierra y liberando el agua lentamente para uso humano.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|uton-dunas-no-pisar",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Por qué debemos evitar pisar las dunas?",
+   "ficha": "uton-dunas-no-pisar",
+   "fuente": "Las dunas entran en las zonas de carácter intangible del PNNN, es parte del patrimonio geológico, debido a que estas dunas en algunas ocasiones tienen una alta carga de humedad; si son pisadas, las huellas pueden perdurar meses. Por esta razón y por la particularidad de su formación no deben ser intervenidas. si son pisadas, las huellas pueden perdurar meses. Por esta razón y por la particularidad de su formación no deben ser intervenidas.",
+   "resp": "Las dunas deben ser protegidas debido a su alta carga de humedad y la posibilidad de que sus huellas se mantengan durante meses.",
+   "error": "causa cambiada: protegidas «debido a su alta carga de humedad»"
+  },
+  {
+   "id": "q25-1.5b-ficha|norte-lunar-gelifraccion-oxidacion",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Qué proceso explica las fracturas y cuál explica el color?",
+   "ficha": "norte-lunar-gelifraccion-oxidacion",
+   "fuente": "El paisaje aquí se torna 'lunar' debido a la gelifracción. El agua se filtra en las grietas de la roca, se congela por la noche aumentando su volumen y las estalla desde adentro: actúa como una cuña que rompe las rocas andesíticas en pedazos angulares. Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos: es oxidación de hierro y azufre presentes en la lava vieja al entrar en contacto con el oxígeno y la humedad ambiental. Estamos caminando sobre flujos de lava antiguos que están siendo transformados por la atmósfera. El paisaje aquí se torna 'lunar' debido a la gelifracción. Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos",
+   "resp": "El proceso que explica las fracturas es la gelifracción, donde la roca se rompe debido a la presión de la agua y la temperatura. El color rojizo es el resultado de la oxidación de minerales ferrosos en contacto con el oxígeno y la humedad ambiental.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|uton-lunares-gelifraccion",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Por qué se fracturan las rocas en Lunares?",
+   "ficha": "uton-lunares-gelifraccion",
+   "fuente": "Los visitantes pueden observar de cerca los procesos geológicos que han dado forma al paisaje, como las grietas producidas por el congelamiento y descongelamiento del agua en las rocas; este proceso es conocido como gelifracción, que es un tipo de meteorización. Ocurre cuando el agua se congela: el agua tiene la propiedad de aumentar su volumen al congelarse; si el agua está confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen; por esta razón las rocas están llenas de grietas. Estas fracturas contribuyen a la formación de suelo arenoso y la llegada de vegetación pionera. el agua tiene la propiedad de aumentar su volumen al congelarse; si el agua está confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen; por esta razón las rocas están llenas de grietas.",
+   "resp": "Los visitantes pueden observar cómo las grietas en las rocas son producidas por el congelamiento y descongelamiento del agua, lo que aumenta su volumen y fractura las rocas.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|norte-brisas-introduccion",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Dónde estamos y qué es este parque?",
+   "ficha": "norte-brisas-introduccion",
+   "fuente": "Introducción: Sector Brisas (Puerta de Entrada). Concepto clave: ubicación geográfica e importancia hídrica. \"Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios. Nos encontramos en el flanco norte del Complejo Volcánico Nevado del Ruiz (CVNR), una estructura compuesta por cuatro domos principales: Nereidas, Olleta, Piraña y el cráter activo Arenas. Este ecosistema de páramo es un 'regulador hídrico' vital para el Eje Cafetero\". Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+   "resp": "Estamos en el Parque Nacional Natural Los Nevados, ubicado en el flanco norte del Complejo Volcánico Nevado del Ruiz. Este ecosistema de páramo es un regulador hídrico crucial para el Eje Cafetero.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|uton-temperatura-brisas",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Qué temperatura promedio hace en Brisas?",
+   "ficha": "uton-temperatura-brisas",
+   "fuente": "El PNN Los Nevados presenta un rango altitudinal entre los 2600 msnm y los 5321 m.s.n.m. en la cumbre del Volcán Nevado del Ruiz. Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados, y en la estación La Laguna, ubicada a 4.000 m.s.n.m., la temperatura media anual es de 3 grados centígrados, pocas horas de sol, humedad relativa alta, frecuencia de nieblas, vientos fuertes y lluvias de poca intensidad. Herd (1982) calculó la isoterma anual a 0 grados centígrados para la región del parque situándola a los 4705 m.s.n.m. (Plan de manejo Parque Nacional Natural Los Nevados, 1998). El IDEAM proporciona datos de temperaturas máximas y mínimas, velocidad y dirección del viento y humedad tomados en la estación meteorológica de Brisas. Para la estación Brisas, localizada a una altitud de 4.110 m.s.n.m., la temperatura media anual es de 2,24 grados centígrados",
+   "resp": "En Brisas, la temperatura promedio anual es de 2,24 grados centígrados.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|norte-ficha-tecnica",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿A cuántos municipios les da agua el parque?",
+   "ficha": "norte-ficha-tecnica",
+   "fuente": "Ficha Técnica General del PNN Los Nevados. Extensión total: 62,142 hectáreas. Área de páramos protegida: 53,532 hectáreas (86% del total). Importancia hídrica: Abastece a 37 municipios y beneficia a cerca de 3 millones de personas en el Eje Cafetero. Geología base: El Complejo Volcánico Nevado del Ruiz (CVNR) está compuesto por cuatro estructuras: Nereidas, Olleta, Piraña y Arenas. Roca predominante: Andesita (roca volcánica común de los Andes). Extensión total: 62,142 hectáreas. Área de páramos protegida: 53,532 hectáreas (86% del total).",
+   "resp": "El parque abastece agua a 37 municipios y beneficia a más de 3 millones de personas en el Eje Cafetero.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|uton-aguacerales-nombre",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Por qué se llama Aguacerales?",
+   "ficha": "uton-aguacerales-nombre",
+   "fuente": "En el sitio \"Aguacerales\" encontramos diversa vegetación. Estas plantas desempeñan un papel crucial en la captación y regulación del agua. Las gotas que precipitan se unen para formar riachuelos que alimentan la cuenca del río Chinchiná. La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales. Aquí se puede apreciar cómo el agua contenida en las nubes es capturada por la vegetación (condensación) y pasa a formar pequeñas gotas que descienden y llegan a los musgos que crecen sobre la roca; estas gotas se juntan formando hilos de agua que al caer van formando un riachuelo que irá a la quebrada. Este fenómeno de condensación se da durante las 24 horas del día, todos los días del año. Durante las noches frías, los hilos de agua se congelan y forman carámbanos (habitualmente ocurre en temporada seca). La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales.",
+   "resp": "El nombre \"Aguacerales\" se deriva de la condensación de agua en las plantas, que se refleja en la caída constante de gotas y el crecimiento de musgos sobre la roca.",
+   "error": "origen del nombre inventado (condensación en las plantas)"
+  },
+  {
+   "id": "q25-1.5b-ficha|uton-aguacerales-ficha",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿A qué altura estamos?",
+   "ficha": "uton-aguacerales-ficha",
+   "fuente": "1. Aguacerales. Altura: 4.160 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 5.2 km aproximadamente del Cráter Arenas. Ecosistema o bioma: páramo propiamente dicho. Fauna característica: conejo, águila, cusumbos, taira, venados, colibríes, dantas, comadreja, guagua, zorro, puma, patos. Plantas características: pajonal, romeros, frailejón, valeriana, senecios, mortiños, musgo. Estructuras geológicas/geomorfológicas: lavas con relieve invertido, depósitos de caída piroclástica, valle en U, paleosuelos. Altura: 4.160 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 5.2 km aproximadamente del Cráter Arenas.",
+   "resp": "Aguacerales, ubicado en el flanco occidental del volcán, está a 4.160 msnm y es un páramo propiamente dicho.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|uton-frailejon-especies",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿qué especie de frailejon hay en el parque",
+   "ficha": "uton-frailejon-especies",
+   "fuente": "Existen más de 100 especies de frailejones, en Colombia se tienen cerca de 60 de estas especies y para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana. El nombre genérico \"Espeletia\" fue nombrado en honor a José Manuel de Ezpeleta, el virrey del Nuevo Reino de Granada. para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana.",
+   "resp": "Hay más de 100 especies de frailejones en el parque, y para el PNNN se reporta únicamente la especie de Frailejón Espeletia hartwegiana.",
+   "error": "«más de 100 especies de frailejones en el parque»"
+  },
+  {
+   "id": "q25-1.5b-ficha|norte-aguacerales-niebla",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Por qué las plantas tienen pelitos blancos?",
+   "ficha": "norte-aguacerales-niebla",
+   "fuente": "\"Bienvenidos a Aguacerales. Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'. Observen los frailejones: su importancia radica en que son ingenieros hídricos. Sus hojas están cubiertas de pubescencia (pelos blancos), es una adaptación evolutiva para protegerse de la alta radiación UV y retener calor. Este es el inicio del ciclo que alimenta los ríos que vemos en las zonas bajas: rompen la gota de niebla, la condensan y la dirigen al suelo. Ese suelo, compuesto por ceniza volcánica y materia orgánica, funciona como una esponja que libera el agua lentamente hacia las cuencas de los ríos Chinchiná y Gualí. Sin este proceso microscópico que ocurre aquí, no habría agua potable en las ciudades de abajo\". Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'.",
+   "resp": "Las plantas tienen pelitos blancos para protegerse de la radiación UV y retener calor.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|uton-arenales-origen-arena",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿De dónde sale tanta arena?",
+   "ficha": "uton-arenales-origen-arena",
+   "fuente": "¿De dónde sale todo este material arenoso? 1. El viento funciona como agente erosivo sobre las rocas (fricción por el viento cargado de partículas) generando otras pequeñas partículas de polvo y arena. 2. El viento transporta partículas de otros lugares hacia el edificio volcánico y viceversa. 3. Hay formación de material particulado por la meteorización tanto química como mecánica que se encarga de destruir la roca en material más fino. 4. Sumado a la abundante ceniza generada en el complejo volcánico. Todo este material es transportado por el viento, siendo llevado en suspensión o arrastrado hasta toparse con la barrera de rocas que hay detrás de la cabaña de Arenales, acumulándose allí, dando paso a la formación de estas dunas. Todo este material es transportado por el viento, siendo llevado en suspensión o arrastrado hasta toparse con la barrera de rocas que hay detrás de la cabaña de Arenales, acumulándose allí, dando paso a la formación de estas dunas.",
+   "resp": "El viento es el principal agente erosivo, moviendo partículas de rocas y generando arena.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|uton-arenales-historia-esqui",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Por qué ya no se esquía en el Ruiz?",
+   "ficha": "uton-arenales-historia-esqui",
+   "fuente": "El sector Arenales ha sido históricamente una zona de camping con varias construcciones para los visitantes, desde una bodega de papa en 1937 hasta el Chalet Arenales, diseñado por el arquitecto Simón Vélez, que se incendió en 2010. La actual cabaña exhibe pendones sobre la historia del esquí en el nevado del Ruiz en los años 50 y 60, cuando se realizaron campeonatos sudamericanos que llevaron a la creación del Club de Ski de Manizales. La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones. La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones.",
+   "resp": "Por la detención de la actividad debido al deshielo que afectó las instalaciones.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|norte-lunar-importancia",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Por qué se llama Valle Lunar?",
+   "ficha": "norte-lunar-importancia",
+   "fuente": "Parada: Valle Lunar (La Fuerza de los Elementos). Concepto clave: gelifracción y oxidación. Importancia: Es la estación técnica por excelencia. Aquí se explica cómo se \"descompone\" la montaña. Características únicas: formaciones rocosas angulares, ausencia casi total de vegetación y colores minerales intensos. \"Este es el Valle Lunar, llamado así por su aspecto estéril y desolado. La importancia de este punto es entender la fuerza física del clima. Este es el Valle Lunar, llamado así por su aspecto estéril y desolado.",
+   "resp": "El Valle Lunar se llama así porque es un lugar desolado y desértico, caracterizado por su aspecto estéril y desolado.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|uton-lunares-estrias",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Qué son esos rayones en las rocas?",
+   "ficha": "uton-lunares-estrias",
+   "fuente": "También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares y son el resultado del movimiento del mismo; su acción abrasiva sobre la roca deja como evidencia estas marcas que sirven como herramienta para determinar la dirección del movimiento del glaciar. También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares",
+   "resp": "Son estrías glaciares, resultado del movimiento abrasivo del glaciar.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|uton-tumbas-nombre",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Por qué se llama Valle de las Tumbas?",
+   "ficha": "uton-tumbas-nombre",
+   "fuente": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes. Algunas comunidades cercanas al PNNN usaban rocas con esta forma para construir tumbas de cancel (esto no quiere decir que fueran extraídas del Ruiz, es solo una similitud); estas rocas están hoy cubiertas por arena. El nombre de Valle de las Tumbas, así como el de las anteriores estaciones, es heredado por tradición oral, y hay registros de que en los 80's ya recibía este nombre. El sitio también es conocido como \"Desierto de la Soledad\", nombres que reflejan tanto el tranquilo paisaje del lugar como su significado místico y cultural. El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes.",
+   "resp": "El Valle de las Tumbas se llama así porque las rocas largas y planas, que parecen ataúdes, se asemejan a tumbas de cancel.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|uton-tumbas-restriccion",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Por qué no podemos seguir subiendo al cráter?",
+   "ficha": "uton-tumbas-restriccion",
+   "fuente": "Por seguridad, el ascenso a la parte alta del Nevado del Ruiz está restringido debido al alto riesgo de lahares, flujos de lodo y escombros volcánicos que podrían dificultar la evacuación en caso de erupción. La razón de la restricción de continuar del Valle de las Tumbas es principalmente el riesgo de los lahares. La razón de la restricción de continuar del Valle de las Tumbas es principalmente el riesgo de los lahares.",
+   "resp": "No podemos seguir subiendo al cráter porque el ascenso a la parte alta del Nevado del Ruiz está restringido debido al alto riesgo de lahares, flujos de lodo y escombros volcánicos que podrían dificultar la evacuación en caso de erupción.",
+   "error": null
+  },
+  {
+   "id": "q25-1.5b-ficha|uton-armero-1985",
+   "origen": "q25-1.5b-ficha",
+   "pregunta": "¿Qué pasó en Armero en 1985?",
+   "ficha": "uton-armero-1985",
+   "fuente": "Erupción del Nevado del Ruiz: el 13 de noviembre de 1985, el volcán Nevado del Ruiz entró en erupción, provocando uno de los desastres volcánicos más catastróficos del siglo XX. El calor de la erupción derritió el glaciar del volcán, generando lahares (flujos de lodo volcánico) que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos (Poa y Nereidas). Estos flujos devastaron las poblaciones de Armero, Tolima, Villamaría y Chinchiná, causando la muerte de más de 23,000 personas. El calor de la erupción derritió el glaciar del volcán, generando lahares (flujos de lodo volcánico) que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos (Poa y Nereidas).",
+   "resp": "En 1985, el Nevado del Ruiz entró en erupción, derritiendo el glaciar y generando haresas que devastaron poblaciones en Armero, Tolima, Villamaría y Chinchiná, causando la muerte de más de 23,000 personas.",
+   "error": "«haresas» (palabra deformada)"
+  },
+  {
+   "id": "sintetico-1",
+   "origen": "sintético",
+   "pregunta": "¿van a desaparecer los glaciares?",
+   "ficha": null,
+   "fuente": "Colombia tiene 6 glaciares. Según el IDEAM, 3 de los 6 glaciares podrían desaparecer en las próximas décadas por el calentamiento global.",
+   "resp": "Los 6 glaciares de Colombia llegarán a desaparecer en las próximas décadas.",
+   "error": "cuantificador perdido: 3 de los 6 → 6"
+  },
+  {
+   "id": "sintetico-2",
+   "origen": "sintético",
+   "pregunta": "¿van a desaparecer los glaciares?",
+   "ficha": null,
+   "fuente": "Colombia tiene 6 glaciares. Según el IDEAM, 3 de los 6 glaciares podrían desaparecer en las próximas décadas por el calentamiento global.",
+   "resp": "Según el IDEAM, 3 de los 6 glaciares podrían desaparecer en las próximas décadas.",
+   "error": null
+  },
+  {
+   "id": "sintetico-3",
+   "origen": "sintético",
+   "pregunta": "¿cuántos glaciares hay?",
+   "ficha": null,
+   "fuente": "Colombia tiene 6 glaciares. Según el IDEAM, 3 de los 6 glaciares podrían desaparecer en las próximas décadas por el calentamiento global.",
+   "resp": "Colombia tiene 6 glaciares.",
+   "error": null
+  },
+  {
+   "id": "sintetico-4",
+   "origen": "sintético",
+   "pregunta": "¿por qué se rompen las rocas?",
+   "ficha": null,
+   "fuente": "El agua aumenta su volumen al congelarse. Si el agua está en las grietas de la roca, al congelarse la fractura.",
+   "resp": "Las rocas se rompen porque el viento las golpea con mucha fuerza.",
+   "error": "causa inventada"
+  },
+  {
+   "id": "sintetico-5",
+   "origen": "sintético",
+   "pregunta": "¿por qué se rompen las rocas?",
+   "ficha": null,
+   "fuente": "El agua aumenta su volumen al congelarse. Si el agua está en las grietas de la roca, al congelarse la fractura.",
+   "resp": "Las rocas se rompen porque el agua de las grietas aumenta su volumen al congelarse.",
+   "error": null
+  },
+  {
+   "id": "sintetico-6",
+   "origen": "sintético",
+   "pregunta": "¿el glaciar se derrite?",
+   "ficha": null,
+   "fuente": "La retirada glaciar actual es el testimonio más crudo del cambio climático en Colombia.",
+   "resp": "El glaciar no se está retirando; está creciendo.",
+   "error": "negación/contrario"
+  },
+  {
+   "id": "sintetico-7",
+   "origen": "sintético",
+   "pregunta": "¿qué hace el frailejón?",
+   "ficha": null,
+   "fuente": "Su necromasa (hojas muertas que cubren el tallo) actúa como aislante térmico para que el agua en su interior no se congele.",
+   "resp": "El frailejón usa sus hojas muertas como aislante para que el agua no se congele, y además sirve de alimento al oso de anteojos.",
+   "error": "añade un dato que no está"
+  },
+  {
+   "id": "sintetico-8",
+   "origen": "sintético",
+   "pregunta": "¿qué hace el frailejón?",
+   "ficha": null,
+   "fuente": "Su necromasa (hojas muertas que cubren el tallo) actúa como aislante térmico para que el agua en su interior no se congele.",
+   "resp": "Sus hojas muertas cubren el tallo y funcionan como aislante térmico para que el agua de adentro no se congele.",
+   "error": null
+  }
+ ]
+}

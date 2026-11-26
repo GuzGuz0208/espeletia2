@@ -8,10 +8,14 @@
 // Cero red: solo habla con 127.0.0.1 (o con el mismo origen si la app la sirve el propio llama-server con --path).
 // La pregunta del visitante va como DATO en el mensaje de usuario, nunca en el prompt del sistema; si parece una
 // instrucción («ignora…», «system», «prompt»…) no se genera.
-import { verificar, NO_SE } from './verificador.js';
+import { verificar, NO_SE, frases, respaldo, fallasRespaldo, UMBRAL_LEXICO, UMBRAL_E5 } from './verificador.js';
 
 let BASE = 'http://127.0.0.1:8080';
-export function configurar({ base } = {}) { if (base) BASE = base.replace(/\/+$/, ''); }
+let EMBEBER = null;   // función e5 del motor (textos con prefijo → vectores); sin ella, respaldo léxico
+export function configurar({ base, embeber } = {}) {
+  if (base) BASE = base.replace(/\/+$/, '');
+  if (embeber !== undefined) EMBEBER = embeber;
+}
 
 // Prompt del sistema fijo (variante «A» del 25-nov adaptada a los guiones). Fijo = queda en la caché de llama-server
 // (cache_prompt) y solo se procesan los tokens nuevos de cada pregunta.
@@ -147,5 +151,12 @@ export async function reescribir(r, pregunta, { timeoutMs = 6000, alTrozo = null
   // entonces lo escribe también en respuestas de ciencia).
   if (relato && texto && !/tradici[oó]n oral/i.test(texto) && !/no tengo esa informaci/i.test(texto)) texto = conTradicion(texto, ctx);
   const v = verificar(texto, ctx, pregunta, { relato });
-  return { texto, ok: v.ok, fallas: v.fallas, ms: ms(), primeraMs: primera };
+  // Respaldo por frase contra el texto COMPLETO de la ficha (no solo el contexto que vio el modelo).
+  const fuente = frases((r.ampliar || '') + ' ' + (r.breve || ''));
+  const gen = frases(texto.replace(/^(S[ií], |No, )?Seg[uú]n la tradici[oó]n oral, /i, ''));
+  const res = await respaldo(gen, fuente, { embeber: EMBEBER, pregunta });
+  const fr = v.dijoNoSe ? [] : fallasRespaldo(res, { umbral: EMBEBER ? UMBRAL_E5 : UMBRAL_LEXICO });
+  const fallas = [...v.fallas, ...fr];
+  return { texto, ok: fallas.length === 0, fallas, ms: ms(), primeraMs: primera,
+    respaldo: res.map(({ frase, fraseFuente, sim }) => ({ frase, fraseFuente, sim })) };
 }

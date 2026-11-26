@@ -102,3 +102,74 @@ export function verificar(resp, fuenteTxt, pregunta, opciones = {}) {
   const fallas = [...b.fallas, ...reto];
   return { ok: fallas.length === 0, fallas, dijoNoSe: b.dijoNoSe || norm(resp).includes('no tengo esa informacion'), base: b.fallas, reto };
 }
+
+// ---------- 3. Respaldo por frase (anti-alucinación) ----------
+// Cada frase generada debe apoyarse en UNA frase del texto del guion. Con embeddings (e5: «query:» de la frase generada contra
+// «passage:» de las frases fuente, similitud coseno) si el motor los expone; si no, respaldo léxico: fracción de las palabras con
+// contenido de la frase generada (raíz de 5 letras) presentes en una sola frase fuente. Las palabras que vienen de la pregunta no
+// cuentan como afirmación nueva (se quitan del denominador). Además, cada cifra de la frase generada debe estar en su frase de
+// respaldo y no puede perder su cuantificador («3 de los 6 glaciares» ≠ «6 glaciares»).
+export const UMBRAL_LEXICO = 0.5;   // calibrado con pruebas/casos_respaldo.json: atrapa 12/15 errores, descarta 11/61 correctas (ver pruebas/resultados-generador.md)
+export const UMBRAL_E5 = 0.85;      // PENDIENTE de calibrar con el motor (e5-small en el navegador)
+
+const VACIAS = new Set(('que los las del por con una uno unos unas para como mas pero sus este esta estos estas ese esa eso esto ' +
+  'son fue ser era han hay muy tambien cual cuales donde cuando porque pues asi sobre entre desde hasta sin ante bajo tras ' +
+  'otro otra otros otras todo toda todos todas cada aqui alli ahi nos les lo le se su al el la de en y o a es un ya ha').split(' '));
+const NEGACION = new Set(['no', 'nunca', 'jamas', 'ningun', 'ninguna', 'ninguno', 'tampoco']);
+
+export const frases = (s) => String(s || '').split(/(?<=[.!?;])\s+|\n+/).map((x) => x.trim()).filter((x) => /[\p{L}\d]/u.test(x));
+const palabras = (s) => norm(s).replace(/(metros|m) sobre el nivel del mar|m\.\s?s\.\s?n\.\s?m\.?/g, 'msnm').replace(/[^a-z0-9ñ\s]/g, ' ').split(/\s+/)
+  .filter((w) => NEGACION.has(w) || (w.length >= 3 && !VACIAS.has(w))).map((w) => (/^\d/.test(w) ? w : w.slice(0, 5)));
+
+// Cláusulas: además de frases, se parte en «; », «, y », «, mientras que », «, pero », «, además» para que un dato añadido al
+// final de una frase bien respaldada («…, y además sirve de alimento al oso») tenga que respaldarse por sí solo.
+export const clausulas = (s) => frases(s).flatMap((f) => f.split(/;\s+|,\s+(?=y\s|e\s|mientras que\s|pero\s|además\s|aunque\s)/i))
+  .map((x) => x.trim()).filter((x) => palabras(x).length >= 2);
+
+// Respaldo léxico: la mejor frase fuente (ventana=1, la calibrada); ventana=2 admite dos frases consecutivas (menos rechazos, menos errores atrapados).
+export function respaldoLexico(frasesGen, frasesFuente, { pregunta = '', ventana = 1 } = {}) {
+  const deLaPregunta = new Set(palabras(pregunta));
+  const vent = [];
+  for (let i = 0; i < frasesFuente.length; i++) for (let k = 1; k <= ventana && i + k <= frasesFuente.length; k++) vent.push(frasesFuente.slice(i, i + k).join(' '));
+  const fuentes = vent.map((f) => new Set(palabras(f)));
+  return frasesGen.map((frase) => {
+    const W = [...new Set(palabras(frase))].filter((w) => !deLaPregunta.has(w) || /^\d/.test(w));
+    if (!W.length) return { frase, mejor: -1, sim: 1, fraseFuente: null };
+    let mejor = -1; let sim = 0;
+    fuentes.forEach((S, i) => { const s = W.filter((w) => S.has(w)).length / W.length; if (s > sim + 1e-9) { sim = s; mejor = i; } });
+    return { frase, mejor, sim: Math.round(sim * 100) / 100, fraseFuente: mejor >= 0 ? vent[mejor] : null };
+  });
+}
+
+const coseno = (a, b) => { let p = 0, na = 0, nb = 0; for (let i = 0; i < a.length; i++) { p += a[i] * b[i]; na += a[i] * a[i]; nb += b[i] * b[i]; } return p / Math.sqrt(na * nb || 1); };
+
+// respaldo(frasesGen, frasesFuente, { embeber, pregunta }) → [{ frase, mejor, sim, fraseFuente }]
+// embeber(textos) → Promise<number[][]>: función del motor (e5) que recibe los textos ya con prefijo «query: »/«passage: ».
+export async function respaldo(frasesGen, frasesFuente, { embeber = null, pregunta = '' } = {}) {
+  if (!embeber) return respaldoLexico(frasesGen, frasesFuente, { pregunta });
+  const [vg, vs] = await Promise.all([embeber(frasesGen.map((f) => 'query: ' + f)), embeber(frasesFuente.map((f) => 'passage: ' + f))]);
+  return frasesGen.map((frase, i) => {
+    let mejor = -1; let sim = -1;
+    vs.forEach((v, j) => { const s = coseno(vg[i], v); if (s > sim) { sim = s; mejor = j; } });
+    return { frase, mejor, sim: Math.round(sim * 1000) / 1000, fraseFuente: mejor >= 0 ? frasesFuente[mejor] : null };
+  });
+}
+
+// Fallas de respaldo: frase por debajo del umbral, cifra que no está en su frase de respaldo, cuantificador perdido.
+export function fallasRespaldo(res, { umbral = UMBRAL_LEXICO } = {}) {
+  const fallas = [];
+  for (const r of res) {
+    if (r.sim < umbral) { fallas.push(`frase sin respaldo (${r.sim}): «${r.frase.slice(0, 80)}»`); continue; }
+    if (!r.fraseFuente) continue;
+    const g = norm(guiones(r.frase)); const f = norm(guiones(r.fraseFuente));
+    const nf = new Set(numeros(f));
+    for (const n of numeros(g)) if (!nf.has(n)) fallas.push(`cifra ${n} no está en su frase de respaldo`);
+    for (const m of f.matchAll(/(\d+(?:[.,]\d+)*)\s+de\s+(?:los|las)\s+(\d+(?:[.,]\d+)*)/g)) {
+      const total = m[2].replace(/[.,]/g, '');
+      const enGen = [...g.matchAll(/(\d+(?:[.,]\d+)*)(?=\s|$|[^\d])/g)].some((x) => x[1].replace(/[.,]/g, '') === total &&
+        !/\d+\s+de\s+(los|las)\s+$/.test(g.slice(0, x.index)));
+      if (enGen) fallas.push(`la cifra ${total} pierde su cuantificador («${m[0]}» en el guion)`);
+    }
+  }
+  return fallas;
+}
