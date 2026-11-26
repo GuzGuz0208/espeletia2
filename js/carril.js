@@ -24,6 +24,7 @@
 export const MENSAJES = {
   emergencia: 'Esto puede ser una emergencia: avisa YA a tu guía o al personal del parque más cercano. No te separes del grupo, quédate en un lugar seguro y sigue sus indicaciones.',
   salud: 'No puedo dar consejos de salud ni recomendar medicamentos. Si tú o alguien del grupo se siente mal (mareo, dolor de cabeza, falta de aire, náuseas), avisa de inmediato a tu guía: él sabe qué hacer y cuándo descender.',
+  cazar: 'Los animales del páramo no se cazan, no se comen ni se alimentan: obsérvalos a distancia y en silencio. Si tienes dudas, pregúntale a tu guía.',
   comer: 'Por tu seguridad y la del páramo, no se come, no se prueba ni se arranca ninguna planta, fruto u hongo, ni se bebe agua de lagunas o quebradas. No puedo decirte si algo es comestible, tóxico o medicinal. Pregúntale a tu guía.',
   animales: 'No toques, persigas ni alimentes a los animales, y no toques ni arranques las plantas: obsérvalos a distancia y en silencio. Si tienes dudas, pregúntale a tu guía.',
   volcan: 'El estado y el nivel de alerta del volcán cambian y yo no los conozco. Pregúntale al personal del parque o a tu guía; la fuente oficial es el Servicio Geológico Colombiano.',
@@ -64,6 +65,8 @@ export const REGLAS = [
       '\\b(me|nos) (quede|quedamos) (atras|solo|sola|solos|solas|sin el grupo|sin guia)\\b',
       '\\bno (veo|vemos|encuentro|encontramos|oigo|escucho) (al|a mi|a nuestro|a la|a el|el|la|mi) (guia|grupo)\\b',
       '\\b(me|nos) (dejaron|dejo|abandonaron|abandono) (solo|sola|solos|solas|atras)\\b',
+      '\\b(estoy|estamos|quede|quedamos|me quede|nos quedamos|ando|andamos) (solo|sola|solos|solas|sin nadie|sin el grupo|sin guia)\\b',
+      '\\bsin nadie\\b', '\\b(no hay|no veo a|no encuentro a) nadie\\b', '\\b(i am|im|i m) (alone|by myself)\\b',
       '\\bperdi (al|a mi|el|mi) (grupo|guia)\\b', '\\blost (my|the|our) (group|guide)\\b',
       '\\b(golpe|golpeo|golpee) (en|la|su|mi) cabeza', '\\b(lo|la|me|nos) (pico|mordio|ataco) ',
       '\\bayuda urgente\\b', '\\bnecesito ayuda\\b', '\\bhelp\\b', '\\binjur', '\\bhurt\\b', '\\bbleed', '\\bfaint', '\\bunconscious',
@@ -89,6 +92,17 @@ export const REGLAS = [
       '\\b(la altura|la altitud) (me|nos|le|les|te) (afecta|da|hace|pega|marea)', '\\b(afecta|afectar|efectos?|efecto) (de )?(la )?(altura|altitud)\\b.*\\b(cuerpo|salud|persona|me|nos)\\b',
       '\\btratamiento', '\\bprimeros auxilios', '\\b(como|que) (se )?(cura|curo|alivio|calmo)\\b',
       '\\baltitude sickness', '\\bheadache', '\\bdizzy', '\\bnause', '\\bvomit', '\\bshort(ness)? of breath', '\\bmedicine', '\\bmedication', '\\bpills?\\b', '\\bsick\\b',
+    ],
+    salvo: [],
+  },
+  {
+    // Comer o cazar ANIMALES (prueba del 26-nov: «¿el cóndor se puede comer?» respondía sobre plantas). Antes que «comer».
+    // «¿qué come el cóndor?» es un DATO: no dispara (hace falta «se puede / puedo» o un verbo de cazar).
+    id: 'cazar',
+    si: [
+      '^(?=.*\\b' + ANIMAL + '\\b).*\\b(se puede|se pueden|puedo|podemos|me puedo|es bueno|esta bueno|sabe|se deja)\\b.*\\b(comer|comerse|comerlo|comerla|comerlos|comerlas|cazar|cazarlo|cazarla|cocinar|asar|probar)\\b',
+      '\\b(cazar|cazo|cazamos|matar|mato|atrapar|atrapo|comerme|comernos) (un |una |el |la |los |las |al |a la |a los |a las )?' + ANIMAL + '\\b',
+      '\\b(carne|huevos?) (de|del) ' + ANIMAL + '\\b',
     ],
     salvo: [],
   },

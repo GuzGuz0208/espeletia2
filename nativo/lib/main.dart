@@ -116,16 +116,36 @@ class _InicioState extends State<Inicio> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: SafeArea(
-          child: Column(children: [
-            if (_barraVisible)
-              _barra(context)
-            else
-              // Barra oculta: una franja de 4 px que se puede mantener pulsada para abrir los ajustes.
-              GestureDetector(onLongPress: _abrirAjustes, child: Container(height: 4, color: Theme.of(context).colorScheme.primaryContainer)),
-            Expanded(child: PantallaApp(controlador: _web)),
-          ]),
-        ),
-      );
+  Widget build(BuildContext context) {
+    _avisarTeclado(MediaQuery.viewInsetsOf(context).bottom);
+    return Scaffold(
+      // El teclado NO redimensiona el WebView cuadro a cuadro (se sentía lento): la página recibe su altura una vez,
+      // cuando termina de abrirse o cerrarse (--teclado y .con-teclado en styles.css).
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
+        child: Column(children: [
+          if (_barraVisible)
+            _barra(context)
+          else
+            // Barra oculta: una franja de 4 px que se puede mantener pulsada para abrir los ajustes.
+            GestureDetector(onLongPress: _abrirAjustes, child: Container(height: 4, color: Theme.of(context).colorScheme.primaryContainer)),
+          Expanded(child: PantallaApp(controlador: _web)),
+        ]),
+      ),
+    );
+  }
+
+  Timer? _relojTeclado;
+  double _tecladoAvisado = 0;
+  void _avisarTeclado(double alto) {
+    _relojTeclado?.cancel();
+    _relojTeclado = Timer(const Duration(milliseconds: 140), () {
+      if ((alto - _tecladoAvisado).abs() < 1) return;
+      _tecladoAvisado = alto;
+      final px = alto.round();
+      _web.web?.runJavaScript("document.documentElement.style.setProperty('--teclado','${px}px');"
+          "document.documentElement.classList.toggle('con-teclado',$px>0);"
+          "if($px>0){const a=document.activeElement;if(a&&a.scrollIntoView)a.scrollIntoView({block:'nearest'});}");
+    });
+  }
 }
