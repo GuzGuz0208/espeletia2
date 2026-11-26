@@ -58,6 +58,11 @@ export const REGLAS = [
       '\\b(se|ha|han) (perdido|perdio|extraviado|extravio|desaparecido|desaparecio) (mi|un|una|el|la|nuestro|nuestra|su) ' + PERSONA,
 '\\bperdid[oa]s? (en|por) (el|la) (paramo|camino|sendero|niebla|montana|nevado)',
       '\\bno (encuentro|encontramos|vemos|veo) a\\b', '\\bse (me|nos) perdio', '\\bextravi',
+      // Separado del grupo o sin ver al guía (prueba del 26-nov): es emergencia aunque nadie diga «perdido»
+      '\\b(me|nos) (separe|separamos|aleje|alejamos|adelante|adelantamos|atrase|atrasamos|desvie|desviamos)\\b',
+      '\\b(me|nos) (quede|quedamos) (atras|solo|sola|solos|solas|sin el grupo|sin guia)\\b',
+      '\\bno (veo|vemos|encuentro|encontramos|oigo|escucho) (al|a mi|a nuestro|a la|a el|el|la|mi) (guia|grupo)\\b',
+      '\\bperdi (al|a mi|el|mi) (grupo|guia)\\b', '\\blost (my|the|our) (group|guide)\\b',
       '\\b(golpe|golpeo|golpee) (en|la|su|mi) cabeza', '\\b(lo|la|me|nos) (pico|mordio|ataco) ',
       '\\bayuda urgente\\b', '\\bnecesito ayuda\\b', '\\bhelp\\b', '\\binjur', '\\bhurt\\b', '\\bbleed', '\\bfaint', '\\bunconscious',
       '\\bpassed out\\b', '\\b(i|we|he|she) (am|are|is|got|get) lost\\b', '\\b(fell|fallen)\\b', '\\bnot breathing\\b', '\\bhypotherm',
@@ -136,6 +141,7 @@ export const REGLAS = [
       '\\bcuando (va a|sera|habra|viene) (la )?(proxima |siguiente |otra |nueva )?(erupcion|explosion)', '\\b(proxima|siguiente|nueva|otra) (erupcion|explosion)',
       '\\b(hay|habra|cae|esta cayendo|caera|cayendo) (ceniza|cenizas|una erupcion|alerta)\\b',
       '\\b(caida|lluvia|nube) de ceniza', '\\bceniza(s)? (hoy|ahora)\\b', '\\b(hubo|hay|habra|senti|sentimos|se sintio|se siente) (un |una )?(sismo|temblor|temblores|sismos)\\b', '\\besta temblando',
+      '\\b(se siente|siento|sentimos|senti|se sintio|empezo a|empieza a|esta empezando a) (temblar|vibrar|mover el suelo|moverse el suelo|moverse la tierra)\\b', '\\b(tiembla|temblo|retumba|retumbo)\\b', '\\b(earthquake|tremor)\\b',
       '\\b(peligro|riesgo|peligroso|peligrosa)\\b.*\\b' + VOLCAN, '\\b' + VOLCAN + '\\b.*\\b(peligro|riesgo|peligroso|peligrosa)\\b',
       '\\bis the volcano (erupting|safe|dangerous)', '\\bvolcano (alert|status)', '\\b(alert level|eruption (today|now|soon))',
       // «¿cuál es el estado del volcán?» sin «hoy» también es ESTADO (hallado en la prueba de interfaz del 26-nov)
@@ -161,6 +167,8 @@ export const REGLAS = [
       '\\b(a|hasta) que hora (abren|cierran|abre|cierra|se puede|hay|sale|salen|termina|empieza)', '\\bhorario', '\\bcierre', '\\bcerrad[oa] (por|hoy|el|la)\\b',
       '\\b(acceso|via|carretera|camino|sendero|entrada)\\b.*\\b(abierto|abierta|cerrado|cerrada|habilitad|estado|hoy|ahora|bloquead|transitable)\\b',
       '\\b(se puede|puedo|podemos) (subir|entrar|ir|pasar|llegar) (hoy|manana|ahora)\\b',
+      // Subir o acercarse al cráter, la cumbre o el glaciar: lo decide el guía, nunca Fray
+      '\\b(puedo|podemos|se puede|me dejan|nos dejan|esta permitido|can i|can we)\\b.*\\b(subir\\w*|ir|llegar|acercar\\w*|asomar\\w*|bajar|entrar|caminar|escalar|climb|go|walk)\\b.*\\b(crater|cumbre|cima|glaciar|nieve|borde|fumarola|fumarolas|summit|glacier|rim)\\b',
       '\\b(es|esta|sera) (seguro|peligroso|riesgoso) (subir|ir|estar|visitar|acercarse|acercarnos|caminar|salir) (hoy|ahora|manana|al|a la|por)\\b',
       '\\bconfirm\\w*\\b.*\\bpersonal\\b', '\\bpersonal\\b.*\\bconfirm', '\\binformacion (cambiante|actualizada|del dia|de hoy)',
       '\\bweather (today|now|forecast|tomorrow)', '\\b(is it|is the park) (open|closed)', '\\bopening hours', '\\bwill it (rain|snow)',
