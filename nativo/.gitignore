@@ -45,8 +45,6 @@ app.*.map.json
 /android/app/release
 
 # Álbum del Páramo
-# Espejo de la PWA (lo genera herramientas/copiar_pwa.py al compilar): no se duplica en el repo
-/assets/pwa/
 # APK y modelos: nunca al repo
 *.apk
 *.aab

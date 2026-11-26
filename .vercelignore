@@ -16,3 +16,5 @@ README.md
 .playwright-mcp/
 publicado/
 datos/
+# Código de la app Android (el APK se sirve desde descargas/)
+nativo/
