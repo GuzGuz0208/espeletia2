@@ -225,6 +225,9 @@ function tarjeta(r, { pregunta = '', ia = null } = {}) {
     delGuion = h(`<p class="ficha-original" hidden><b>${esc(t('chat.delGuion'))}</b> ${esc(txt)}</p>`); card.appendChild(delGuion);
   }
   if ((r.citas || []).length) {
+    // Cita corta siempre visible (el jurado verifica «respuesta + página citada»); el detalle completo, a un toque
+    const c0 = r.citas[0], otras = r.citas.length - 1;
+    card.appendChild(h(`<p class="ficha-cita-corta">📖 ${esc(fray.fuentes()[c0.guion]?.titulo || c0.guion)} · p. ${esc(String(c0.pagina))}${otras > 0 ? ` (+${otras})` : ''}</p>`));
     fuente = h(`<div class="ficha-fuentes" hidden>${r.citas.map((c) => `<p class="ficha-fuente">${esc(citaTxt(c))}</p>`).join('')}</div>`);
     card.appendChild(fuente);
   }

@@ -151,7 +151,14 @@ class _PantallaAppState extends State<PantallaApp> {
         if (await web.canGoBack()) await web.goBack();
       },
       child: Stack(children: [
-        WebViewWidget(controller: web),
+        // Android: hybrid composition (el WebView es una vista nativa). Con la composición por textura (por defecto),
+        // cada cuadro se copia a Flutter y el teclado redimensiona la textura cuadro a cuadro: la app se sentía lenta.
+        if (web.platform is AndroidWebViewController)
+          WebViewWidget.fromPlatformCreationParams(
+            params: AndroidWebViewWidgetCreationParams(controller: web.platform, displayWithHybridComposition: true),
+          )
+        else
+          WebViewWidget(controller: web),
         if (_sinPagina)
           Positioned.fill(
             child: ColoredBox(
