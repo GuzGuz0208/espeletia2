@@ -13,7 +13,7 @@ Uso por consola:
 import hashlib, json, math, os, re, sys, unicodedata
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from carril_py import carril, MENSAJES  # noqa: E402
+from carril_py import carril, categoria, normalizar, MENSAJES  # noqa: E402
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ESQUEMA = 2
@@ -247,6 +247,218 @@ def decidir(idx, qv, texto, estacion=None, P=PARAMS_DEFECTO, r=None):
             'citas': _citas(f, fuentes), 'fichas': [f['id']], 'tipoContenido': f.get('tipo'), 'alternativas': [], 'aviso': None, '_diag': diag}
 
 
+# ---------- Conversación (copia de js/conversacion.js; herramientas/paridad.py exige diferencia 0) ----------
+# Orden en Motor.preguntar: carril → charla/seguimiento → búsqueda. Ver los comentarios de js/conversacion.js.
+# INTENCIONES, RELLENO y TEXTOS se copian tal cual de js/conversacion.js (paridad.py compara las listas).
+INTENCIONES = [
+  {'id': 'sencillo', 'p': [
+    'no (?:te |le )?(?:entendi|entiendo|comprendo|comprendi|capte)', 'no (?:me )?quedo claro', 'que (?:significa|quiere decir) (?:eso|esto)',
+    '(?:mas|muy) (?:sencillo|facil|simple|claro|corto)', 'en (?:palabras )?(?:sencillas|simples|pocas palabras)',
+    '(?:explicame|explicamelo|explicalo|dimelo|dilo|dime) (?:mas )?(?:sencillo|facil|simple|claro|corto)',
+    'resumelo', 'resume', 'resumen', 'como para un nino', 'que', 'como', 'i don t understand', 'i dont understand', 'simpler',
+  ]},
+  {'id': 'mas', 'p': [
+    'ampliame', 'amplialo', 'ampliala', 'amplia', 'ampliar', 'complementa', 'complementalo', 'complementala', 'complementame', 'complementar(?:lo|la)?',
+    'cuentame', 'cuentamelo', 'dime', 'quiero saber', 'explicame', 'explicamelo', 'explicalo', 'explica', 'profundiza', 'detalla', 'desarrolla',
+    'sigue', 'continua', 'mas detalles', 'mas informacion', 'mas info', 'mas datos', 'detalles', 'dame (?:mas )?(?:detalles|informacion|info|datos)',
+    'algo mas', 'hay mas', 'y que mas', 'otro dato', 'otra cosa', 'y eso', 'y eso por que', 'por que', 'como asi', 'en serio', 'ampliar informacion',
+    'tell me more', 'more', 'more details', 'go on', 'elaborate', 'and', 'why',
+  ]},
+  {'id': 'ayuda', 'p': [
+    'ayuda', 'ayudame', 'que (?:puedes|sabes|puedo) hacer', 'que haces', 'para que sirves', 'para que sirve (?:esto|esta app|la app)',
+    'como (?:funcionas|funciona|te uso|se usa|uso esto)', 'que (?:te )?(?:puedo|se puede) preguntar(?:te)?', 'que (?:sabes|preguntas)',
+    '(?:de|sobre) que (?:sabes|me puedes hablar|hablas)', 'que me puedes (?:contar|decir|explicar)', 'menu', 'opciones',
+    'what can you do', 'what do you know', 'how does this work', 'how do you work',
+  ]},
+  {'id': 'quien', 'p': [
+    'quien eres', 'quien sos', 'quien es fray', 'que eres', 'como te llamas', 'cual es tu nombre', 'tu nombre', 'eres (?:un |una )?(?:robot|ia|inteligencia artificial|humano|persona|real|guia)',
+    'who are you', 'what are you', 'what is your name', 'whats your name', 'are you (?:a )?(?:robot|human|ai)',
+  ]},
+  {'id': 'gracias', 'p': [
+    'gracias', 'muchas gracias', 'mil gracias', 'muchisimas gracias', 'te agradezco', 'que amable', 'muy amable', 'thanks', 'thank you', 'thx',
+  ]},
+  {'id': 'despedida', 'p': [
+    'adios', 'chao', 'chau', 'hasta luego', 'hasta pronto', 'hasta la proxima', 'nos vemos', 'me voy', 'bye', 'goodbye', 'see you',
+  ]},
+  {'id': 'saludo', 'p': [
+    'hola', 'holi', 'holis', 'ola', 'buenas', 'buenos dias', 'buen dia', 'buenas tardes', 'buenas noches', 'saludos', 'que tal', 'que mas',
+    'quiubo', 'quihubo', 'como estas', 'como esta', 'como vas', 'como te va', 'hello', 'hi', 'hey', 'good morning', 'good afternoon',
+    'good evening', 'how are you',
+  ]},
+  {'id': 'corta', 'p': [
+    'ok', 'okay', 'okey', 'oki', 'vale', 'listo', 'si', 'sii', 'siii', 'no', 'claro', 'perfecto', 'genial', 'chevere', 'bacano', 'super', 'excelente',
+    'entiendo', 'entendido', 'ya entendi', 'ya veo', 'interesante', 'que bien', 'que bueno', 'que chevere', 'que interesante', 'wow', 'guau', 'uau',
+    'ja(?:ja)+', 'je(?:je)+', 'ji(?:ji)+', 'ha(?:ha)+', 'jsjs(?:js)*', 'lol', 'xd', 'de acuerdo', 'bien', 'muy bien', 'aja', 'mm+', 'hm+', 'ah', 'oh',
+    'cool', 'nice', 'yes', 'yeah', 'sure', 'great', 'got it', 'i see',
+  ]},
+]
+RELLENO = ('(?:fray|por favor|porfa|porfavor|please|pues|bueno|oye|oiga|mira|y|e|eh|entonces|ya|amigo|amiga|muy|tu|usted|'
+           'mas|mejor|un poco|un poquito|poco|eso|esto|lo|la|me|te|le|sobre eso|de eso|acerca de eso|del tema|puedes|podrias|puede|podria|quiero que|'
+           'me puedes|me podrias|por fa|bien|ahora|otra vez|de nuevo|also|more|please|can you|could you|it|that|this)')
+TEXTOS = {
+  'saludo': '¡Hola! Soy Fray, tu compañero de ruta en el páramo. Pregúntame lo que veas; te respondo con los guiones oficiales del parque. Por ejemplo:',
+  'gracias': '¡Con gusto! Si te surge otra pregunta, aquí estoy. Por ejemplo:',
+  'despedida': '¡Que disfrutes la caminata! Sigue siempre las indicaciones de tu guía. Si vuelves a tener una duda, aquí estoy.',
+  'ayuda': 'Te explico lo que ves en el recorrido: plantas, animales, rocas, agua, historia y relatos del páramo, siempre con la página del guion oficial. Si me dices en qué estación estás, afino la respuesta. Lo que cambia cada día lo decide tu guía. Prueba con:',
+  'quien': 'Soy Fray, un asistente que funciona sin señal en tu teléfono. No invento: respondo con los guiones oficiales del parque y te digo la página. Tu guía va siempre primero. Puedes preguntarme:',
+  'corta': '¡Bien! ¿Quieres saber algo más? Puedes preguntarme:',
+  'sinUltima': '¿Sobre qué quieres saber más? Pregúntame algo del páramo, por ejemplo:',
+  'fin': 'Eso es todo lo que dicen los guiones sobre este tema; tu guía puede contarte más. También puedes preguntarme:',
+}
+_RE_INT = [(it['id'], [re.compile('^(?:' + p + ')(?: |$)') for p in it['p']]) for it in INTENCIONES]
+_RE_RELLENO = re.compile('^' + RELLENO + '(?: |$)')
+
+
+def intencion(texto):
+    t = normalizar(texto).strip()
+    vistas = []
+    vuelta = 0
+    while vuelta < 12 and t:
+        vuelta += 1
+        mejor, largo, prio = None, 0, 99
+        for i, (iid, pats) in enumerate(_RE_INT):
+            for rx in pats:
+                m = rx.match(t)
+                if m and len(m.group(0)) > largo:
+                    mejor, largo, prio = iid, len(m.group(0)), i
+        if mejor:
+            vistas.append(prio)
+            t = t[largo:]
+            continue
+        r = _RE_RELLENO.match(t)
+        if r:
+            t = t[len(r.group(0)):]
+            continue
+        return None
+    if t or not vistas:
+        return None
+    return INTENCIONES[min(vistas)]['id']
+
+
+_PREF = sorted([p for it in INTENCIONES if it['id'] in ('saludo', 'gracias') for p in it['p']] + ['fray'], key=lambda a: (-len(a), a))
+_RE_PREFIJO = re.compile('^(?:(?:' + '|'.join(_PREF) + ')(?: |$))+')
+
+
+def sin_charla(texto):
+    t = normalizar(texto).strip()
+    m = _RE_PREFIJO.match(t)
+    if not m:
+        return texto
+    n = len(m.group(0).strip().split(' '))
+    resto = re.sub(r'^(?:[\W_]*[^\W_]+){' + str(n) + r'}(?:(?![¿¡])[\W_])*', '', str(texto), count=1)
+    return resto if re.search(r'[^\W_]', resto) else texto
+
+
+def nueva_conversacion():
+    return {'ultima': None, 'vuelta': 0}
+
+
+def _utilizables(paquete):
+    return [f for f in (paquete or {}).get('fichas', []) if f and not f.get('bloqueada') and f.get('id') and (f.get('texto') or f.get('breve'))]
+
+
+def _clave(s):
+    return normalizar(s).strip()
+
+
+def sugerencias(paquete, estacion, vuelta=0, n=3):
+    fs = [f for f in _utilizables(paquete) if f.get('tema') != 'salud']
+    de_est = [f for f in fs if f.get('estacion') == estacion] if estacion else []
+    base = de_est or fs
+    cand = []
+    for f in base:
+        q = next((x for x in f.get('preguntas') or [] if x and not categoria(x) and not intencion(x)
+                  and not re.match(r'^(what|where|how|why|who|is|are|can|do|does) ', _clave(x) + ' ')), None)
+        if q and not any(_clave(c) == _clave(q) for c in cand):
+            cand.append(q)
+    if not cand:
+        return []
+    paso = max(1, len(cand) // n)
+    out = []
+    k = 0
+    while len(out) < min(n, len(cand)) and k < len(cand) * 2:
+        q = cand[(vuelta * n + k * paso + k // n) % len(cand)]
+        if q not in out:
+            out.append(q)
+        k += 1
+    return out
+
+
+def _charla(iid, paquete, estacion, estado):
+    sug = sugerencias(paquete, estacion, estado['vuelta'])
+    estado['vuelta'] += 1
+    return {'tipo': 'charla', 'intencion': iid, 'breve': TEXTOS[iid], 'ampliar': None, 'citas': [], 'fichas': [], 'tipoContenido': None,
+            'alternativas': [], 'aviso': None, 'sugerencias': sug}
+
+
+def _vistas_en(fr, texto):
+    return [k for k, s in enumerate(fr) if s in str(texto or '')]
+
+
+def _resp_ficha(f, paquete, breve, modo):
+    return {'tipo': 'respuesta', 'breve': breve, 'fraseRespaldo': breve, 'ampliar': f.get('texto') or f.get('breve') or None,
+            'citas': _citas(f, paquete.get('fuentes') or {}), 'fichas': [f['id']], 'tipoContenido': f.get('tipo'), 'alternativas': [],
+            'aviso': None, 'seguimiento': modo}
+
+
+def _seguir(iid, paquete, estacion, estado):
+    u = estado['ultima']
+    fs = _utilizables(paquete)
+    f = next((x for x in fs if x['id'] == u['id']), None) if u else None
+    if not f:
+        return {**_charla('sinUltima', paquete, estacion, estado), 'intencion': iid}
+    fr = frases(f.get('texto') or f.get('breve'))
+    if iid == 'sencillo':
+        k = 0
+        for i, s in enumerate(fr):
+            if len(s) < len(fr[k]):
+                k = i
+        breve = (fr[k] if fr else None) or f.get('breve') or f.get('texto')
+        if k not in u['vistas']:
+            u['vistas'].append(k)
+        return _resp_ficha(f, paquete, breve, 'sencillo')
+    vistos = {_clave(fr[k] if k < len(fr) else '') for k in u['vistas']}
+    pend = [k for k in range(len(fr)) if k not in u['vistas'] and _clave(fr[k]) not in vistos]
+    if pend:
+        tomadas = [pend[0]]
+        if len(pend) > 1 and len(fr[pend[0]]) < 220 and len(fr[pend[0]]) + len(fr[pend[1]]) <= 320:
+            tomadas.append(pend[1])
+        u['vistas'].extend(tomadas)
+        return _resp_ficha(f, paquete, ' '.join(fr[k] for k in tomadas), 'ampliar')
+    est = estacion or f.get('estacion') or None
+    libres = [x for x in fs if x['id'] not in u['cadena'] and x.get('tema') != 'salud']
+    sig = (next((x for x in libres if x.get('tema') and x.get('tema') == f.get('tema') and est and x.get('estacion') == est), None)
+           or next((x for x in libres if x.get('tema') and x.get('tema') == f.get('tema')), None)
+           or next((x for x in libres if est and x.get('estacion') == est), None))
+    if not sig:
+        return {**_charla('fin', paquete, estacion, estado), 'intencion': iid}
+    frs = frases(sig.get('texto') or sig.get('breve'))
+    breve = sig.get('breve') or (frs[0] if frs else None) or sig.get('texto')
+    estado['ultima'] = {'id': sig['id'], 'vistas': _vistas_en(frs, breve), 'cadena': u['cadena'] + [sig['id']]}
+    return _resp_ficha(sig, paquete, breve, 'relacionada')
+
+
+def conversar(texto, paquete, estacion=None, estado=None):
+    iid = intencion(texto)
+    if not iid:
+        return None
+    if iid in ('mas', 'sencillo'):
+        return _seguir(iid, paquete, estacion, estado)
+    return _charla(iid, paquete, estacion, estado)
+
+
+def anotar(estado, r, paquete):
+    if not r or r.get('tipo') not in ('respuesta', 'conflicto') or not (r.get('fichas') or []):
+        estado['ultima'] = None
+        return
+    f = next((x for x in _utilizables(paquete) if x['id'] == r['fichas'][0]), None)
+    if not f:
+        estado['ultima'] = None
+        return
+    fr = frases(f.get('texto') or f.get('breve'))
+    texto = (f.get('breve') or '') if r['tipo'] == 'conflicto' else r.get('breve')
+    estado['ultima'] = {'id': f['id'], 'vistas': _vistas_en(fr, texto), 'cadena': list(r['fichas'])}
+
 # ---------- embeddings con el mismo modelo que el navegador ----------
 class Embebedor:
     def __init__(self, cache_ruta=None):
@@ -303,6 +515,8 @@ class Motor:
         if params:
             self.P.update(params)
         self.idx = preparar(paquete)
+        self.paquete_conv = paquete
+        self.conv = nueva_conversacion()
         self.emb = None if solo_lexico else (emb or Embebedor())
         if self.emb:
             self.idx['vec'] = self.emb(self.idx['textos'])
@@ -319,7 +533,20 @@ class Motor:
         return {'frases': self.idx['frases'][fi], 'sim': (tv @ self.idx['vec'][filas].T).tolist(), 'modo': 'semantico'}
 
     def preguntar(self, texto, estacion=None, P=None):
-        return decidir(self.idx, self.vector(texto), texto, estacion, P or self.P)
+        # Igual que fray.preguntar (js/fray.js): carril → charla/seguimiento → búsqueda (sin el saludo del principio)
+        seg = carril(texto)
+        if seg:
+            return seg
+        ch = conversar(texto, self.paquete_conv, estacion or None, self.conv)
+        if ch:
+            return ch
+        q = sin_charla(texto)
+        r = decidir(self.idx, self.vector(q), q, estacion or None, P or self.P)
+        anotar(self.conv, r, self.paquete_conv)
+        return r
+
+    def reiniciar(self):
+        self.conv = nueva_conversacion()
 
 
 def escribir_indice(ruta_paquete, salida=None):
