@@ -1,0 +1,20 @@
+{
+ "params": {
+  "T": 0.88,
+  "M": 0.06,
+  "w": 0.05,
+  "da": 0.02,
+  "ds": 0.02,
+  "beta": 0.02,
+  "D": 0.01,
+  "L": 0.65,
+  "LD": 0.0,
+  "bonoBreve": 0.02,
+  "Tc": 0.92,
+  "Lc": 0.5,
+  "G": 1.0
+ },
+ "calibrado_con": "contenido/preguntas_desarrollo.json",
+ "paquete": "2026-11-26.3",
+ "fecha": "2026-11-26 10:22"
+}

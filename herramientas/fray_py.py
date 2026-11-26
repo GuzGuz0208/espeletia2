@@ -8,15 +8,16 @@ Uso como módulo:
     r = m.preguntar('¿por qué se rompen las rocas?', estacion='lunares')
 Uso por consola:
     python -X utf8 herramientas/fray_py.py contenido/paquete.json "¿qué es la gelifracción?" [estacion]
+    python -X utf8 herramientas/fray_py.py --indice [contenido/paquete.json]   # escribe contenido/indice.json (siembra la caché)
 """
 import hashlib, json, math, os, re, sys, unicodedata
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from carril_py import carril  # noqa: E402
+from carril_py import carril, MENSAJES  # noqa: E402
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ESQUEMA = 1
-PARAMS_DEFECTO = {'T': 0.84, 'M': 0.0, 'w': 0.1, 'da': 0.02, 'ds': 0.02, 'beta': 0.02, 'D': 0.01, 'L': 0.5, 'LD': 0.0, 'bonoBreve': 0.02}
+ESQUEMA = 2
+PARAMS_DEFECTO = {'T': 0.84, 'M': 0.0, 'w': 0.1, 'da': 0.02, 'ds': 0.02, 'beta': 0.02, 'D': 0.01, 'L': 0.5, 'LD': 0.0, 'bonoBreve': 0.02, 'Tc': 0.85, 'Lc': 0.3, 'G': 1}
 ABSTENCION = 'No tengo esa información en los guiones oficiales; pregúntale a tu guía o al personal del parque.'
 DUDA = '¿A cuál de estas te refieres?'
 AVISO_CONFLICTO = 'Los guiones difieren'
@@ -80,6 +81,10 @@ def preparar(paquete):
             items.append((i, 's', k)); textos.append('passage: ' + s)
     for q in FUERA:
         items.append((-1, 'n', -1)); textos.append('query: ' + q)
+    conflictos = paquete.get('conflictos') or []
+    for ci, c in enumerate(conflictos):
+        items.append((-1, 'c', ci)); textos.append('query: ' + (c.get('tema') or ''))
+    tema_tok = [set(tokens_lex(c.get('tema') or '')) for c in conflictos]
     docs = [set(tokens_lex(' '.join([f.get('titulo') or '', f.get('breve') or '', f.get('texto') or ''] + list(f.get('preguntas') or []))))
             for f in fichas]
     df = {}
@@ -88,11 +93,15 @@ def preparar(paquete):
             df[w] = df.get(w, 0) + 1
     idf = {w: math.log(1 + len(fichas) / c) for w, c in df.items()}
     conflicto_de = {}
-    for c in paquete.get('conflictos') or []:
+    for ci, c in enumerate(conflictos):
         for fid in c.get('fichas') or []:
-            conflicto_de[fid] = c
-    return {'fichas': fichas, 'frases': frs, 'items': items, 'textos': textos, 'docs': docs, 'idf': idf,
-            'conflicto_de': conflicto_de, 'fuentes': paquete.get('fuentes') or {}, 'vec': None}
+            conflicto_de.setdefault(fid, ci)
+    return {'fichas': fichas, 'frases': frs, 'items': items, 'textos': textos, 'docs': docs, 'idf': idf, 'conflictos': conflictos,
+            'conflicto_de': conflicto_de, 'tema_tok': tema_tok, 'fuentes': paquete.get('fuentes') or {}, 'vec': None}
+
+
+def cobertura(qt, tema):
+    return sum(1 for w in tema if w in qt) / len(tema) if tema else 0.0
 
 
 def _lex(qt, conj, idf, defecto):
@@ -121,6 +130,7 @@ def puntuar(idx, qv, texto, estacion, P):
     n = len(fichas)
     sem = np.full(n, -1.0)
     sim_frase = [-1.0] * len(items)
+    sim_tema = [-1.0] * len(idx['conflictos'])
     neg = -1.0
     semantico = qv is not None and idx['vec'] is not None
     if semantico:
@@ -129,6 +139,8 @@ def puntuar(idx, qv, texto, estacion, P):
             s = float(sims[k])
             if t == 'n':
                 neg = max(neg, s); continue
+            if t == 'c':
+                sim_tema[items[k][2]] = s; continue
             sim_frase[k] = s
             s2 = s if t == 'q' else s - (P['da'] if t == 'p' else P['ds'])
             if s2 > sem[fi]:
@@ -141,7 +153,7 @@ def puntuar(idx, qv, texto, estacion, P):
         bono = P['beta'] if estacion and fichas[i].get('estacion') == estacion else 0.0
         score[i] = (sem[i] + P['w'] * lex[i] if semantico else lex[i]) + bono
     orden = sorted(range(n), key=lambda i: (-score[i], i))
-    return {'semantico': semantico, 'sem': sem, 'lex': lex, 'score': score, 'neg': neg, 'orden': orden, 'sim_frase': sim_frase, 'qt': qt}
+    return {'semantico': semantico, 'sem': sem, 'lex': lex, 'score': score, 'neg': neg, 'orden': orden, 'sim_frase': sim_frase, 'sim_tema': sim_tema, 'qt': qt}
 
 
 def _misma(a, b):
@@ -197,9 +209,20 @@ def decidir(idx, qv, texto, estacion=None, P=PARAMS_DEFECTO, r=None):
             'modo': 'semantico' if r['semantico'] else 'lexico'}
     if not responde:
         return {**_base(), '_diag': diag, '_mejor': fichas[b]['id']}
+    if P.get('G') and r['semantico'] and r['qt'] and r['lex'][b] == 0:
+        alt = [i for i in r['orden'][1:4] if r['lex'][i] > 0 and r['sem'][i] >= P['T'] - 0.03]
+        if alt:
+            return {**_base(), 'tipo': 'duda', 'breve': DUDA, 'fichas': [fichas[i]['id'] for i in alt],
+                    'alternativas': [{'id': fichas[i]['id'], 'titulo': fichas[i].get('titulo')} for i in alt], '_diag': {**diag, 'guarda': 'sin-palabras'}}
+        return {**_base(), '_diag': {**diag, 'guarda': 'sin-palabras'}, '_mejor': fichas[b]['id']}
     f = fichas[b]
-    c = idx['conflicto_de'].get(f['id'])
-    if c:
+    if f.get('tema') == 'salud':
+        return {'tipo': 'seguridad', 'categoria': 'salud', 'breve': MENSAJES['salud'], 'ampliar': None, 'citas': [], 'fichas': [f['id']],
+                'tipoContenido': 'norma', 'alternativas': [], 'aviso': None, '_diag': diag}
+    ci = idx['conflicto_de'].get(f['id'])
+    c = idx['conflictos'][ci] if ci is not None else None
+    relevante = bool(c) and (r['sim_tema'][ci] >= P['Tc'] if r['semantico'] else cobertura(r['qt'], idx['tema_tok'][ci]) >= P['Lc'])
+    if relevante:
         vers = [x for fid in c.get('fichas') or [] for x in fichas if x['id'] == fid]
         if len(vers) >= 2:
             def etiqueta(v):
@@ -219,7 +242,8 @@ def decidir(idx, qv, texto, estacion=None, P=PARAMS_DEFECTO, r=None):
         if margen > 0 and b2ok and r['score'][b] - r['score'][b2] < margen:
             return {**_base(), 'tipo': 'duda', 'breve': DUDA, 'fichas': [f['id'], fichas[b2]['id']],
                     'alternativas': [{'id': x['id'], 'titulo': x.get('titulo')} for x in (f, fichas[b2])], '_diag': diag}
-    return {'tipo': 'respuesta', 'breve': extraer(idx, b, r, P), 'ampliar': f.get('texto') or f.get('breve'),
+    frase = extraer(idx, b, r, P)
+    return {'tipo': 'respuesta', 'breve': frase, 'fraseRespaldo': frase, 'ampliar': f.get('texto') or f.get('breve'),
             'citas': _citas(f, fuentes), 'fichas': [f['id']], 'tipoContenido': f.get('tipo'), 'alternativas': [], 'aviso': None, '_diag': diag}
 
 
@@ -286,11 +310,39 @@ class Motor:
     def vector(self, texto):
         return self.emb(['query: ' + texto])[0] if self.emb else None
 
+    def similitud(self, textos, ficha_id):
+        fi = next(i for i, f in enumerate(self.idx['fichas']) if f['id'] == ficha_id)
+        filas = [k for k, it in enumerate(self.idx['items']) if it[0] == fi and it[1] == 's']
+        if not self.emb:
+            return {'frases': self.idx['frases'][fi], 'sim': None, 'modo': 'lexico'}
+        tv = self.emb(['passage: ' + t for t in textos])
+        return {'frases': self.idx['frases'][fi], 'sim': (tv @ self.idx['vec'][filas].T).tolist(), 'modo': 'semantico'}
+
     def preguntar(self, texto, estacion=None, P=None):
         return decidir(self.idx, self.vector(texto), texto, estacion, P or self.P)
 
 
+def escribir_indice(ruta_paquete, salida=None):
+    """Genera contenido/indice.json: vectores de todos los textos del paquete con el mismo modelo, para sembrar la caché del
+    dispositivo (js/fray-worker.js). Es opcional: si falta o no coincide, el dispositivo calcula lo que le falte."""
+    import base64, numpy as np
+    paq = json.load(open(ruta_paquete, encoding='utf8'))
+    idx = preparar(paq)
+    emb = Embebedor()
+    V = emb(idx['textos']).astype(np.float32)
+    emb.guardar()
+    man = json.load(open(os.path.join(RAIZ, 'models', 'partes.json'), encoding='utf8'))['models/e5_small_latino.onnx']
+    salida = salida or os.path.join(os.path.dirname(os.path.abspath(ruta_paquete)), 'indice.json')
+    json.dump({'paquete': paq.get('version'), 'modelo': man['sha256'], 'dim': int(V.shape[1]), 'esquema': ESQUEMA,
+               'textos': idx['textos'], 'vectores': base64.b64encode(V.tobytes()).decode()},
+              open(salida, 'w', encoding='utf8'), ensure_ascii=False, separators=(',', ':'))
+    print(f"índice: {len(idx['textos'])} vectores -> {salida}")
+
+
 if __name__ == '__main__':
+    if sys.argv[1] == '--indice':
+        escribir_indice(sys.argv[2] if len(sys.argv) > 2 else os.path.join(RAIZ, 'contenido', 'paquete.json'))
+        sys.exit(0)
     paq = json.load(open(sys.argv[1], encoding='utf8'))
     m = Motor(paq)
     r = m.preguntar(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else None)

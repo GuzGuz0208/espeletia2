@@ -8,11 +8,11 @@
 //   responde si sem[b] ≥ T y score[b] − neg ≥ M      (neg = parecido con preguntas de fuera del parque, FUERA)
 //   modo solo léxico (si el modelo no carga): responde si lex[b] + beta·[estación] ≥ L
 // La respuesta es EXTRACTIVA: la frase (o dos) de la ficha más parecida a la pregunta; `ampliar` es el texto completo.
-import { carril } from './carril.js';
+import { carril, MENSAJES } from './carril.js';
 
-export const ESQUEMA = 1; // súbelo si cambia cómo se construye el índice (invalida la caché de IndexedDB)
+export const ESQUEMA = 2; // súbelo si cambia cómo se construye el índice (invalida la caché de IndexedDB)
 
-export const PARAMS_DEFECTO = { T: 0.84, M: 0.0, w: 0.1, da: 0.02, ds: 0.02, beta: 0.02, D: 0.01, L: 0.5, LD: 0.0, bonoBreve: 0.02 };
+export const PARAMS_DEFECTO = { T: 0.84, M: 0.0, w: 0.1, da: 0.02, ds: 0.02, beta: 0.02, D: 0.01, L: 0.5, LD: 0.0, bonoBreve: 0.02, Tc: 0.85, Lc: 0.3, G: 1 };
 
 export const ABSTENCION = 'No tengo esa información en los guiones oficiales; pregúntale a tu guía o al personal del parque.';
 export const DUDA = '¿A cuál de estas te refieres?';
@@ -69,14 +69,18 @@ export function preparar(paquete) {
     f._frases.forEach((s, k) => { items.push([i, 's', k]); textos.push('passage: ' + s); });
   });
   for (const q of FUERA) { items.push([-1, 'n', -1]); textos.push('query: ' + q); }
+  // Tema de cada conflicto: el conflicto solo se muestra si la pregunta trata de ESE tema (no basta con caer en la ficha)
+  const conflictos = paquete.conflictos || [];
+  conflictos.forEach((c, ci) => { items.push([-1, 'c', ci]); textos.push('query: ' + (c.tema || '')); });
+  const temaTok = conflictos.map((c) => new Set(tokensLex(c.tema || '')));
   const docs = fichas.map((f) => new Set(tokensLex([f.titulo, f.breve, f.texto, ...(f.preguntas || [])].join(' '))));
   const df = new Map();
   for (const d of docs) for (const w of d) df.set(w, (df.get(w) || 0) + 1);
   const idf = {};
   for (const [w, c] of df) idf[w] = Math.log(1 + fichas.length / c);
   const conflictoDe = new Map();
-  for (const c of paquete.conflictos || []) for (const id of c.fichas || []) conflictoDe.set(id, c);
-  return { fichas, items, textos, docs, idf, conflictoDe, fuentes: paquete.fuentes || {} };
+  conflictos.forEach((c, ci) => { for (const id of c.fichas || []) if (!conflictoDe.has(id)) conflictoDe.set(id, ci); });
+  return { fichas, items, textos, docs, idf, conflictos, conflictoDe, temaTok, fuentes: paquete.fuentes || {} };
 }
 
 function lexDe(qt, conjunto, idf, def) {
@@ -84,6 +88,13 @@ function lexDe(qt, conjunto, idf, def) {
   let tot = 0, s = 0;
   for (const w of qt) { const v = idf[w] ?? def; tot += v; if (conjunto.has(w)) s += idf[w] ?? 0; }
   return tot ? s / tot : 0;
+}
+
+// Fracción de las palabras del tema que aparecen en la pregunta (modo solo léxico)
+function cobertura(qt, tema) {
+  if (!tema.size) return 0;
+  let n = 0; for (const w of tema) if (qt.includes(w)) n++;
+  return n / tema.size;
 }
 
 // ---------- Puntaje ----------
@@ -94,6 +105,7 @@ export function puntuar(idx, qv, texto, estacion, P) {
   const n = fichas.length;
   const sem = new Float64Array(n).fill(-1);
   const simFrase = items.map(() => -1);
+  const simTema = (idx.conflictos || []).map(() => -1);
   let neg = -1;
   const semantico = !!(qv && idx.vec);
   if (semantico) {
@@ -103,6 +115,7 @@ export function puntuar(idx, qv, texto, estacion, P) {
       for (let d = 0; d < dim; d++) s += qv[d] * vec[o + d];
       const [fi, t] = items[k];
       if (t === 'n') { if (s > neg) neg = s; continue; }
+      if (t === 'c') { simTema[items[k][2]] = s; continue; }
       simFrase[k] = s;
       const s2 = t === 'q' ? s : s - (t === 'p' ? P.da : P.ds);
       if (s2 > sem[fi]) sem[fi] = s2;
@@ -118,7 +131,7 @@ export function puntuar(idx, qv, texto, estacion, P) {
     score[i] = (semantico ? sem[i] + P.w * lex[i] : lex[i]) + bono;
   }
   const orden = [...score.keys()].sort((a, b) => score[b] - score[a] || a - b);
-  return { semantico, sem, lex, score, neg, orden, simFrase, qt };
+  return { semantico, sem, lex, score, neg, orden, simFrase, simTema, qt };
 }
 
 // ---------- Respuesta extractiva ----------
@@ -160,10 +173,21 @@ export function decidir(idx, qv, texto, { estacion = null } = {}, P = PARAMS_DEF
   const responde = r.semantico ? (r.sem[b] >= P.T && r.score[b] - r.neg >= P.M) : (r.score[b] >= P.L);
   const diag = { sem: r.sem[b], lex: r.lex[b], score: r.score[b], neg: r.neg, modo: r.semantico ? 'semantico' : 'lexico' };
   if (!responde) return { ...base(), _diag: diag, _mejor: fichas[b].id };
+  // Guarda anti-alucinación: si la ficha elegida no comparte NINGUNA palabra con contenido de la pregunta (ni en su texto ni
+  // en sus `preguntas`), no se afirma: «¿te refieres a…?» con candidatas que sí la compartan, o abstención.
+  if (P.G && r.semantico && r.qt.length && r.lex[b] === 0) {
+    const alt = r.orden.slice(1, 4).filter((i) => r.lex[i] > 0 && r.sem[i] >= P.T - 0.03);
+    if (alt.length) return { ...base(), tipo: 'duda', breve: DUDA, fichas: alt.map((i) => fichas[i].id), alternativas: alt.map((i) => ({ id: fichas[i].id, titulo: fichas[i].titulo })), _diag: { ...diag, guarda: 'sin-palabras' } };
+    return { ...base(), _diag: { ...diag, guarda: 'sin-palabras' }, _mejor: fichas[b].id };
+  }
   const f = fichas[b];
+  // Fichas de salud (tema «salud»): nunca se responde con diagnóstico ni tratamiento, aunque lo diga el guion → carril de salud
+  if (f.tema === 'salud') return { tipo: 'seguridad', categoria: 'salud', breve: MENSAJES.salud, ampliar: null, citas: [], fichas: [f.id], tipoContenido: 'norma', alternativas: [], aviso: null, _diag: diag };
   // Conflicto entre guiones: se muestran las dos versiones con sus páginas
-  const c = idx.conflictoDe.get(f.id);
-  if (c) {
+  const ci = idx.conflictoDe.get(f.id);
+  const c = ci === undefined ? null : idx.conflictos[ci];
+  const temaRelevante = c && (r.semantico ? r.simTema[ci] >= P.Tc : cobertura(r.qt, idx.temaTok[ci]) >= P.Lc);
+  if (temaRelevante) {
     const vers = (c.fichas || []).map((id) => fichas.find((x) => x.id === id)).filter(Boolean);
     if (vers.length >= 2) {
       const etiqueta = (v) => (v.citas || []).map((x) => `${fuentes[x.guion]?.titulo || x.guion}, p. ${x.pagina}`).join('; ');
@@ -191,9 +215,11 @@ export function decidir(idx, qv, texto, { estacion = null } = {}, P = PARAMS_DEF
       return { ...base(), tipo: 'duda', breve: DUDA, fichas: [f.id, fichas[b2].id], alternativas: [f, fichas[b2]].map((x) => ({ id: x.id, titulo: x.titulo })), _diag: diag };
     }
   }
+  const frase = extraer(idx, b, r, P);
   return {
     tipo: 'respuesta',
-    breve: extraer(idx, b, r, P),
+    breve: frase,
+    fraseRespaldo: frase, // frase(s) literal(es) del guion elegidas para `breve` (las usa el verificador del generador)
     ampliar: f.texto || f.breve || null,
     citas: citasDe(f, fuentes),
     fichas: [f.id],

@@ -3,6 +3,7 @@
 //   await fray.cargar(paquete, { alAvance })   // índice e5 en el dispositivo, cacheado en IndexedDB por versión del paquete
 //   const r = await fray.preguntar(texto, { estacion: 'lunares' })
 //   fray.sinRespuesta() / fray.limpiarSinRespuesta()
+//   await fray.similitud(['texto reescrito'], 'id-ficha')   // { frases, sim[texto][frase] } para el verificador
 // Todo lo pesado corre en un Web Worker (js/fray-worker.js). El carril crítico (js/carril.js) se evalúa AQUÍ primero, sin
 // esperar al modelo: una pregunta de seguridad se responde al instante aunque el índice aún esté cargando.
 import { carril } from './carril.js';
@@ -61,6 +62,14 @@ export async function preguntar(texto, { estacion = null } = {}) {
   const r = await pedir({ tipo: 'preguntar', texto, opciones: { estacion } });
   if (r.tipo === 'abstencion') anotarSinRespuesta(texto, estacion);
   return r;
+}
+
+// Similitud e5 de cada texto contra cada frase de la ficha: { frases: [..], sim: [[texto×frase]] | null (modo léxico), modo }.
+// La usa el verificador del generador para comprobar, frase a frase, que lo reescrito está respaldado por el guion.
+export async function similitud(textos, fichaId) {
+  if (!cargaP) throw new Error('llama a fray.cargar(paquete) antes');
+  await cargaP;
+  return pedir({ tipo: 'similitud', textos: [].concat(textos), fichaId });
 }
 
 export const estado = () => info;

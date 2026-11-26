@@ -40,11 +40,14 @@ $('f').onsubmit = async (e) => {
 $('ver').onclick = () => { $('sr').textContent = JSON.stringify(fray.sinRespuesta(), null, 1); };
 $('limpiar').onclick = () => { fray.limpiarSinRespuesta(); $('sr').textContent = '[]'; };
 if (url.searchParams.get('auto')) {
-  const qs = (url.searchParams.get('q') || '¿por qué se rompen las rocas?|¿qué significa Kumanday?|¿quién ganó el mundial?|me siento mareado|¿qué es el frailejón?|¿cuánto mide el parque?').split('|');
+  const banco = url.searchParams.get('banco');
+  const preguntas = banco ? (await (await fetch(banco)).json()).preguntas : null;
+  const qs = preguntas ? preguntas.map((x) => x.p) : (url.searchParams.get('q') || '¿por qué se rompen las rocas?|¿qué significa Kumanday?|¿quién ganó el mundial?|me siento mareado|¿qué es el frailejón?|¿cuánto mide el parque?').split('|');
   const res = [];
   for (const q of qs) {
     const t = performance.now();
-    const r = await fray.preguntar(q, { estacion: url.searchParams.get('estacion') });
+    const est = preguntas ? preguntas[res.length].estacion : url.searchParams.get('estacion');
+    const r = await fray.preguntar(q, { estacion: est || null });
     res.push({ q, ms: Math.round(performance.now() - t), tipo: r.tipo, fichas: r.fichas, breve: r.breve.slice(0, 90), diag: r._diag });
   }
   // segunda carga: debe salir de la caché de IndexedDB

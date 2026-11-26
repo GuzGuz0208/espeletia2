@@ -10,19 +10,21 @@ MENSAJES = {
   'volcan': 'El estado y el nivel de alerta del volcán cambian y yo no los conozco. Pregúntale al personal del parque o a tu guía; la fuente oficial es el Servicio Geológico Colombiano.',
   'condiciones': 'El clima, el acceso, los horarios y los cierres de hoy cambian y yo no los conozco. Pregúntale al personal del parque o a tu guía.',
 }
+# Palabras de apoyo (texto ya normalizado: sin tildes, minúsculas)
 PERSONA = '(?:nino|nina|ninos|ninas|hijo|hija|hijos|persona|alguien|amig[oa]s?|companer[oa]s?|turista|visitante|senor|senora|papa|mama|abuel[oa]|herman[oa]|espos[oa]|novi[oa]|guia|bebe)'
 ANIMAL = '(?:animal|animales|oso|osos|danta|dantas|tapir|venado|venados|ciervo|aves?|pajaro|pajaros|pajarito|pajaritos|colibri|condor|aguila|puma|zorro|conejo|raton|ratones|roedor|insecto|mariposa|lagartija|rana|sapo|perro|perros|gato|caballo|vaca|culebra|serpiente|pato|patos|curi|tigrillo|comadreja|bird|animals?)'
 PLANTA = '(?:planta|plantas|hongo|hongos|seta|setas|fruto|frutos|fruta|frutas|baya|bayas|mora|moras|hoja|hojas|flor|flores|frailejon|frailejones|semilla|semillas|raiz|raices|musgo|musgos|liquen|liquenes|hierba|hierbas|yerba|mortino|mortinos|plant|plants|mushroom|berry|berries)'
 VOLCAN = '(?:volcan|volcanes|ruiz|kumanday|crater|arenas|nevado|volcano)'
 HOY = '(?:hoy|ahora|ahorita|actualmente|en este momento|en estos dias|esta semana|today|now|right now|currently|tonight|tomorrow)'
 HOY_V = '(?:hoy|ahora|ahorita|en este momento|en estos dias|today|now|right now)'
+# Cada regla: { id, si: [patrones], salvo: [patrones] }. Casa si algún `si` casa y ningún `salvo` casa.
 REGLAS = [
   {
     'id': 'emergencia',
     'si': [
       '\\b(auxilio|socorro|emergencia|emergency|sos)\\b',
       '\\baccident', '\\bherid[oa]', '\\bherida', '\\blesionad', '\\bdesmay', '\\bdesvaneci', '\\binconscien', '\\bhipoterm',
-      '\\bconvulsi', '\\bfractur', '\\bsangr', '\\bhemorragi', '\\binfarto', '\\bataque (al corazon|cardiaco|de asma|de panico)',
+      '\\bconvulsi', '\\b(es|tiene|tengo|tenga) una fractura', '\\bfractura (de|en) (la |el |mi |su )?(pierna|brazo|tobillo|mano|pie|muneca|cadera|costilla|hueso|craneo|rodilla|espalda)','\\bsangr', '\\bhemorragi', '\\binfarto', '\\bataque (al corazon|cardiaco|de asma|de panico)',
       '\\bno (responde|reacciona|respira|se mueve|despierta)', '\\bno puede (respirar|moverse|caminar|levantarse)', '\\bno puedo respirar',
       '\\b(me|nos) (cai|caimos|caigo|resbale|resbalamos|desmaye|perdi|perdimos|golpee|golpeamos|torci|rompi|quebre|fracture|lastime|heri|corte|cortamos)\\b',
       '\\bse (cayo|cayeron|ha caido|han caido|resbalo|desmayo|golpeo|torcio|fracturo|lastimo|hirio)\\b',
@@ -75,6 +77,7 @@ REGLAS = [
       PLANTA + ' (se )?(puede|pueden|es|son) (comer|comestibles?|probar|venenos|toxic|medicinal)',
       '\\bedible', '\\bcan (i|we|you) (eat|drink|taste)\\b', '\\beat (it|this|that|the|these|those)\\b', '\\bpoison', '\\btoxic', '\\bdrink the water\\b',
     ],
+    # «¿qué comen los osos?» es un dato de fauna, no una pregunta de comer: sin persona del visitante, no dispara
     'salvo': [
       '^(?!.*\\b(puedo|podemos|se puede|se pueden|me|nos|yo|uno|debo|deberia|es bueno|es seguro|comestible|comible|venen|toxic|medicinal|alucin|remedio|cura|infusion|potable|edible|poison|can i|can we)\\b).*\\b' + ANIMAL + '\\b.*\\b(come|comen|comer|alimenta|alimentan|se alimenta|se alimentan|dieta)\\b',
       '^(?!.*\\b(puedo|podemos|se puede|se pueden|me|nos|yo|uno|debo|deberia|es bueno|es seguro|comestible|comible|venen|toxic|medicinal|alucin|remedio|cura|infusion|potable|edible|poison|can i|can we)\\b).*\\b(come|comen|comer|alimenta|alimentan|se alimenta|se alimentan|dieta)\\b.*\\b' + ANIMAL + '\\b',
@@ -91,6 +94,7 @@ REGLAS = [
       '\\b(touch|pet|feed|hold) (the |a |an |this |that )?(' + ANIMAL[3:-1] + '|' + PLANTA[3:-1] + ')\\b', '\\bcan (i|we) (touch|pet|feed|pick)\\b',
     ],
     'salvo': [
+      # «¿de qué se alimenta el oso?» es un dato de fauna (no lleva al visitante como sujeto)
       '^(?!.*\\b(puedo|podemos|se puede|se pueden|darle|darles|dar de|doy|echar|echarle|tirar|tirarle|alimentarlo|alimentarla|alimentarlos|alimentar a|feed|can i|can we)\\b).*\\b(alimenta|alimentan|alimento|alimentar)\\b',
     ],
   },
@@ -100,21 +104,24 @@ REGLAS = [
       '\\b(nivel|niveles|estado|semaforo) de (alerta|actividad)', '\\balerta (volcanica|amarilla|naranja|roja|verde)', '\\bsemaforo volcanico',
       '\\balerta\\b.*\\b' + VOLCAN, '\\b' + VOLCAN + '\\b.*\\balerta\\b',
       '\\b' + VOLCAN + '\\b.*\\b' + HOY_V + '\\b', '\\b' + HOY_V + '\\b.*\\b' + VOLCAN + '\\b',
-      '\\b' + VOLCAN + '\\b.*\\b(esta|sigue|estara|seguira|anda) (activo|en actividad|en erupcion|haciendo erupcion|botando|echando|emitiendo|expulsando|arrojando|despierto|dormido|tranquilo|calmado|inactivo|apagado|peligroso)',
-      '\\b(esta|sigue|estara|seguira|anda) (activo|en actividad|en erupcion|haciendo erupcion|botando|echando|emitiendo|despierto|dormido|inactivo|apagado|peligroso)\\b.*\\b' + VOLCAN,
-      '^ (y )?(el )?(esta|sigue) (activo|en erupcion|haciendo erupcion|despierto|dormido)( hoy| ahora| todavia| aun)? $',
-      '\\b(esta|sigue) (en erupcion|haciendo erupcion|botando ceniza|echando ceniza|emitiendo ceniza|echando humo|botando humo)',
-      '\\bactividad (volcanica|actual|reciente|del volcan|del ruiz|del crater|de hoy)', '\\bvolcan(es)? activo',
-      '\\b(va|van|puede|podria|pueden|podrian|vaya|esta por|esta a punto de) (a )?(explotar|estallar|hacer erupcion|erupcionar|entrar en erupcion|despertar)',
+      # «¿el volcán está activo / apagado / dormido?» sin «hoy» es un DATO del guion (es un volcán activo): no dispara.
+      # Sí disparan la actividad en curso, la predicción y el peligro de ir.
+      '\\b(esta|sigue) (en erupcion|haciendo erupcion|botando ceniza|echando ceniza|emitiendo ceniza|echando humo|botando humo|expulsando ceniza|arrojando ceniza)',
+      '\\b(esta|sigue|estara|anda) (activo|en actividad|despierto|peligroso|inestable) (hoy|ahora|ahorita|en este momento|estos dias|esta semana)\\b',
+      '\\bactividad (volcanica actual|actual|reciente|de hoy|de estos dias)', '\\b(como|que tal) (esta|anda|amanecio) (el |hoy el )?' + VOLCAN,
+      '\\b(va|van|vaya|esta por|esta a punto de) (a )?(explotar|estallar|hacer erupcion|erupcionar|entrar en erupcion|despertar)',
       '\\bcuando (va a|sera|habra|viene) (la )?(proxima |siguiente |otra |nueva )?(erupcion|explosion)', '\\b(proxima|siguiente|nueva|otra) (erupcion|explosion)',
-      '\\b(hay|habra|cae|esta cayendo|caera|cayendo) (ceniza|cenizas|erupcion|lava|gases|una erupcion|alerta)',
-      '\\b(caida|lluvia|nube) de ceniza', '\\bceniza(s)? (hoy|ahora)\\b', '\\bfumarol', '\\bsismo', '\\btemblor', '\\bsismicidad',
+      '\\b(hay|habra|cae|esta cayendo|caera|cayendo) (ceniza|cenizas|una erupcion|alerta)\\b',
+      '\\b(caida|lluvia|nube) de ceniza', '\\bceniza(s)? (hoy|ahora)\\b', '\\b(hubo|hay|habra|senti|sentimos|se sintio|se siente) (un |una )?(sismo|temblor|temblores|sismos)\\b', '\\besta temblando',
       '\\b(peligro|riesgo|peligroso|peligrosa)\\b.*\\b' + VOLCAN, '\\b' + VOLCAN + '\\b.*\\b(peligro|riesgo|peligroso|peligrosa)\\b',
-      '\\bis the volcano (active|erupting|safe|dangerous)', '\\bvolcano (alert|status|activity)', '\\b(alert level|eruption (today|now|soon))',
+      '\\bis the volcano (erupting|safe|dangerous)', '\\bvolcano (alert|status)', '\\b(alert level|eruption (today|now|soon))',
     ],
+    # Datos históricos o conceptuales del volcán NO son estado: van al guion (salvo que pregunten por hoy, alerta o lo próximo)
     'salvo': [
       '^(?!.*\\b(hoy|ahora|ahorita|actualmente|actual|proxima|va a|puede|podria|alerta|nivel|semaforo|today|now)\\b).*\\b(1985|1595|1845|armero|historia|historica|historico|hubo|ocurrio|paso en|sucedio|fue la|fue el|tragedia|antigua|antiguas|pasada|pasadas|ultima gran|history)\\b',
       '^(?!.*\\b(hoy|ahora|ahorita|actualmente|actual|alerta|nivel|semaforo|today|now)\\b).*\\b(que|cual) (es|era|significa|son|eran) (un |una |el |la |los |las )?(lahar|lahares|crater|fumarola|fumarolas|ceniza|cenizas|sismo|temblor)\\b',
+      # «¿cómo saben si va a hacer erupción?» pregunta por el monitoreo (dato), no por el estado
+      '^(?!.*\\b(hoy|ahora|ahorita|alerta|nivel|semaforo)\\b).*\\b(como|quien|quienes) (saben|sabe|se sabe|monitorea|monitorean|vigila|vigilan|mide|miden|estudia|estudian)\\b',
     ],
   },
   {
@@ -122,17 +129,18 @@ REGLAS = [
     'si': [
       '\\b(clima|tiempo|temperatura|lluvia|nieve|niebla|viento|pronostico|frio|calor|granizo|tormenta)\\b.*\\b' + HOY + '\\b',
       '\\b' + HOY + '\\b.*\\b(clima|tiempo|temperatura|llueve|llover|lluvia|nieva|nevar|nieve|niebla|viento|frio|calor|granizo|tormenta|despejado|nublado)\\b',
-      '\\b(va a|va a seguir|vaya a|ira a) (llover|nevar|granizar|hacer frio|hacer sol|despejar|haber tormenta)', '\\b(llovera|nevara|granizara)\\b', '\\bpronostico',
+      '\\b(va a|va a seguir|vaya a|ira a) (llover|nevar|granizar|hacer frio|hacer sol|despejar|haber tormenta)\\b(?! (menos|mas|cada))','\\b(llovera|nevara|granizara)\\b', '\\bpronostico',
       '\\bmanana (va a|abren|abre|estara|hay|habra|llueve|hace|se puede)\\b', '\\b(llueve|llovera|abren|abre|estara|habra|se puede subir|podemos subir) manana\\b',
       '\\b(esta|estara|sigue) (abierto|abierta|cerrado|cerrada|habilitad|disponible)', '\\b(abren|cierran|abre|cierra) (hoy|manana|el parque|la entrada|el acceso|la via|la carretera|el sendero)',
       '\\b(a|hasta) que hora (abren|cierran|abre|cierra|se puede|hay|sale|salen|termina|empieza)', '\\bhorario', '\\bcierre', '\\bcerrad[oa] (por|hoy|el|la)\\b',
       '\\b(acceso|via|carretera|camino|sendero|entrada)\\b.*\\b(abierto|abierta|cerrado|cerrada|habilitad|estado|hoy|ahora|bloquead|transitable)\\b',
-      '\\b(se puede|puedo|podemos) (subir|entrar|ir|pasar|llegar) (hoy|manana|ahora|al nevado|a la cima|al crater)',
+      '\\b(se puede|puedo|podemos) (subir|entrar|ir|pasar|llegar) (hoy|manana|ahora)\\b',
       '\\b(es|esta|sera) (seguro|peligroso|riesgoso) (subir|ir|estar|visitar|acercarse|acercarnos|caminar|salir) (hoy|ahora|manana|al|a la|por)\\b',
-      '\\b(cuanto cuesta|precio|tarifa|valor) (de )?(la )?(entrada|ingreso|tour|visita|recorrido|boleta)', '\\b(tarifa|tarifas|boleta|boletas)\\b',
+      '\\bconfirm\\w*\\b.*\\bpersonal\\b', '\\bpersonal\\b.*\\bconfirm', '\\binformacion (cambiante|actualizada|del dia|de hoy)',
       '\\bweather (today|now|forecast|tomorrow)', '\\b(is it|is the park) (open|closed)', '\\bopening hours', '\\bwill it (rain|snow)',
     ],
-    'salvo': [],
+    # Servicios (restaurante, baños, wifi, tarifas) no son información de seguridad: van a la abstención normal
+    'salvo': ['^(?!.*\\b(hoy|ahora|clima|via|carretera|acceso|parque|sendero|nevado|volcan)\\b).*\\b(restaurante|cafeteria|tienda|almuerzo|bano|banos|wifi|parqueadero|hotel|cajero)\\b'],
   },
 ]
 
