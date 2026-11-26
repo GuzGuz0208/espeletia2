@@ -22,6 +22,8 @@ export function iniciarLente({ onGanar, onPreguntar }) {
   $('#disparar').onclick = disparar;
   $('#foto-cancelar').onclick = () => { objetivo = null; ponerModo('reconocer'); };
   $('#foto-girar').onclick = async () => { frente = !frente; apagarStream(); await encender(); };
+  // Girar cámara en todos los modos (también Leer QR): algunos WebView de Android abren la frontal
+  $('#lente-girar').onclick = async () => { frente = !frente; apagarStream(); await encender(); };
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) apagarStream();
     else if (activa) encender(); // al volver a la app, la Lente se reactiva sola
@@ -164,11 +166,34 @@ export function ponerModo(m) {
   if (stream) arrancar();
 }
 
+// Cámara pedida (trasera por defecto). En el WebView de Android `facingMode` «ideal» a veces se ignora y abre la frontal:
+// primero se exige (exact); si no se puede, se pide como preferencia y, si aun así salió la otra, se busca por el nombre.
+async function abrirCamara(delantera) {
+  const quiere = delantera ? 'user' : 'environment';
+  const base = { width: { ideal: 1280 }, height: { ideal: 960 } };
+  const pedir = (video) => navigator.mediaDevices.getUserMedia({ video: { ...base, ...video }, audio: false });
+  let s;
+  try { s = await pedir({ facingMode: { exact: quiere } }); } catch { s = await pedir({ facingMode: quiere }); }
+  const ajustes = s.getVideoTracks()[0]?.getSettings?.() || {};
+  if (ajustes.facingMode && ajustes.facingMode === quiere) return s;
+  try {
+    const cams = (await navigator.mediaDevices.enumerateDevices()).filter((d) => d.kind === 'videoinput');
+    const re = delantera ? /front|user|frontal|delantera/i : /back|rear|environment|trasera|posterior/i;
+    const otra = cams.find((d) => re.test(d.label) && d.deviceId !== ajustes.deviceId)
+      || (!delantera && !ajustes.facingMode && cams.length > 1 ? cams[cams.length - 1] : null);
+    if (otra && otra.deviceId !== ajustes.deviceId) {
+      s.getTracks().forEach((t) => t.stop());
+      return await pedir({ deviceId: { exact: otra.deviceId } });
+    }
+  } catch { /* se queda con la que abrió */ }
+  return s;
+}
+
 async function encender() {
   if (!navigator.mediaDevices?.getUserMedia) { decir(t('lente.https')); return false; }
   const v = $('#video');
   try {
-    if (!stream) stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: frente ? 'user' : 'environment', width: { ideal: 1280 }, height: { ideal: 960 } }, audio: false });
+    if (!stream) stream = await abrirCamara(frente);
     v.srcObject = stream;
     v.classList.toggle('espejo', frente);
     await v.play().catch(() => {});

@@ -8,6 +8,7 @@
 // - Solo se navega dentro de ese origen; cualquier otro enlace se bloquea.
 // - Concede a la página cámara (QR), micrófono y GPS cuando los pide y Android lo permite.
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,22 @@ class _PantallaAppState extends State<PantallaApp> {
       await web.setJavaScriptMode(JavaScriptMode.unrestricted);
       await web.addJavaScriptChannel('FrayNativoCanal', onMessageReceived: (m) async {
         if (esDeLaApp(await web.currentUrl())) await puente.recibir(m.message);
+      });
+      // Descargas de la página (PDF del álbum, imagen del cromo, registro, Panel): el WebView no maneja `<a download>`.
+      // js/descarga-nativa.js manda {nombre, tipo, b64}; aquí se abre «Guardar como» de Android.
+      await web.addJavaScriptChannel('FrayArchivo', onMessageReceived: (m) async {
+        if (!esDeLaApp(await web.currentUrl())) return;
+        try {
+          final j = jsonDecode(m.message) as Map<String, dynamic>;
+          final nombre = (j['nombre'] as String? ?? 'archivo').replaceAll(RegExp(r'[\\/:*?"<>|]'), '_');
+          final uri = await FilePicker.saveFile(
+              fileName: nombre, bytes: base64Decode(j['b64'] as String), mimeType: j['tipo'] as String? ?? 'application/octet-stream');
+          if (mounted && uri != null) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Guardado: $nombre')));
+          }
+        } catch (e) {
+          if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('No se pudo guardar: $e')));
+        }
       });
       await web.setNavigationDelegate(NavigationDelegate(
         onNavigationRequest: (r) => esDeLaApp(r.url) || r.url.startsWith('about:') || r.url.startsWith('blob:') || r.url.startsWith('data:')

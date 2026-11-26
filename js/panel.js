@@ -1,6 +1,7 @@
 // Panel del parque: el personal edita, importa y exporta fichas sin tocar código.
 // Cada guardado crea una versión nueva del paquete en el dispositivo (IndexedDB) y reindexa el motor.
 
+import './descarga-nativa.js';
 import { TIPOS, TEMAS, ESTADOS } from './panel-config.js';
 import { hayPin, definirPin, comprobarPin, sesionActiva, restablecer, LARGO_MINIMO } from './panel-pin.js';
 import { cargarPaquete, paqueteBase, guardarVersion, versiones, avisarCambio } from './ui-paquete.js';

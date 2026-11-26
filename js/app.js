@@ -1,4 +1,5 @@
 // Arranque: carga el estado, arma las vistas y conecta la navegación.
+import './descarga-nativa.js';
 import * as est from './estado.js';
 import { E, bus } from './estado.js';
 import { t, traducir, citar } from './i18n.js';
