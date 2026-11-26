@@ -201,6 +201,7 @@ export async function borrarContenido() {
   try { await sync.borrarContenido(); res.sync = true; } catch (e) { console.warn('[vigencia] sync', e); }
   res.panel = await vaciarIDB('fray-paquete', 'versiones');
   res.vectores = await vaciarIDB('fray-vectores', 'v');
+  res.registro = await vaciarIDB('fray-registro', 'e');   // registro de la prueba (js/registro.js): vence con el contenido
   try { almacen().removeItem('fray.sinRespuesta'); res.sinRespuesta = true; } catch { /* nada */ }
   try { res.caches = await borrarCaches(); } catch (e) { console.warn('[vigencia] caches', e); }
   const r = leer();
@@ -222,6 +223,14 @@ export async function renovar() {
   } catch (e) {
     return { ok: false, motivo: `sin señal (${e?.message || e})` };
   }
+  return renovarCon(paquete);
+}
+
+/**
+ * Reinicia la vigencia con un paquete que acaba de llegar por red y ya fue verificado (js/sync.js: firma y sha256).
+ * Es la misma renovación que renovar(), sin volver a descargar: cada descarga correcta cuenta 24 h desde ese momento.
+ */
+export function renovarCon(paquete) {
   if (!paquete || typeof paquete.version !== 'string' || !Array.isArray(paquete.fichas)) return { ok: false, motivo: 'paquete inválido' };
   const e = iniciarVigencia(paquete.vigenciaHoras);
   return { ok: true, version: paquete.version, venceEn: e.venceEn };

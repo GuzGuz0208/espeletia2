@@ -1,0 +1,1040 @@
+{
+ "version": "0.2-poc",
+ "actualizado": "2026-11-26",
+ "estado": {
+  "es": "Borrador: textos y coordenadas por validar con PNN Los Nevados y UTON",
+  "en": "Draft: texts and coordinates pending validation with PNN Los Nevados and UTON"
+ },
+ "camara": {
+  "umbral": 0.5,
+  "simMin": 0.5,
+  "simOk": 0.68,
+  "minPorClase": 5
+ },
+ "guia": {
+  "franjaMin": 5,
+  "clave": "b19f6b6d26ce41c3c5a6e5edbd04b01a",
+  "nota": {
+   "es": "Prueba de concepto: la clave está en este archivo público. En producción, cada guía recibe su propia clave al registrarse.",
+   "en": "Proof of concept: the key is in this public file. In production each guide gets their own key when registering."
+  }
+ },
+ "fuentes": {
+  "pnn2019": {
+   "titulo": "Descripción PNN Los Nevados (Parques Nacionales, DTAO, 2019)",
+   "url": "https://old.parquesnacionales.gov.co/portal/wp-content/uploads/2017/12/Descripcion-PNN-Los-Nevados.pdf"
+  },
+  "procolombia": {
+   "titulo": "Camino al Nevado del Ruiz (Colombia Travel)",
+   "url": "https://colombia.travel/es/blog/camino-al-nevado-del-ruiz-la-montana-aguarda-en-silencio"
+  },
+  "osm": {
+   "titulo": "OpenStreetMap: carreteable Brisas – Valle de las Tumbas (© colaboradores de OpenStreetMap, ODbL)",
+   "url": "https://www.openstreetmap.org/way/824243975"
+  },
+  "pnn2023": {
+   "titulo": "Anexo · Reglamentación transitoria ecoturismo PNN Los Nevados (Parques Nacionales, dic. 2023)",
+   "url": "https://parquesnacionales.gov.co/wp-content/uploads/2023/12/ANEXO-PNN-NEVADOS.pdf"
+  },
+  "uton2024": {
+   "titulo": "Guion Ecoturístico Zona Norte, UTON (Unión Temporal Operación Nevados), 2024",
+   "url": ""
+  },
+  "uton_norte": {
+   "titulo": "Guion turístico zona norte, UTON",
+   "url": ""
+  },
+  "osm_estaciones": {
+   "titulo": "OpenStreetMap: nodos «Primera estación», «Segunda estación», «The 3rd station» (Moon valley) y fin del carreteable (vía 824243975)",
+   "url": "https://www.openstreetmap.org/node/11501045270"
+  }
+ },
+ "estaciones": [
+  {
+   "id": "e1",
+   "nombre": "Brisas",
+   "lat": 4.9336,
+   "lon": -75.3501,
+   "radio": 80,
+   "altura": 4107,
+   "idea": {
+    "es": "Puerta de entrada: el parque y el agua",
+    "en": "Gateway: the park and its water"
+   },
+   "fuente": "uton_norte",
+   "pagina": "5"
+  },
+  {
+   "id": "e2",
+   "nombre": "Aguacerales",
+   "lat": 4.92776,
+   "lon": -75.3506,
+   "radio": 80,
+   "altura": 4160,
+   "ecosistema": {
+    "es": "Páramo propiamente dicho",
+    "en": "Páramo proper"
+   },
+   "aCrater": 5.2,
+   "idea": {
+    "es": "Génesis hídrica: el páramo atrapa el agua de las nubes",
+    "en": "Where water is born: the páramo catches water from the clouds"
+   },
+   "fuente": "uton2024",
+   "pagina": "5"
+  },
+  {
+   "id": "e3",
+   "nombre": "Arenales",
+   "lat": 4.91934,
+   "lon": -75.35476,
+   "radio": 80,
+   "altura": 4290,
+   "ecosistema": {
+    "es": "Transición de páramo a superpáramo",
+    "en": "Transition from páramo to super-páramo"
+   },
+   "aCrater": 4.7,
+   "idea": {
+    "es": "Memoria y cambio climático: dunas, viento y la historia del esquí",
+    "en": "Memory and climate change: dunes, wind and the skiing era"
+   },
+   "fuente": "uton2024",
+   "pagina": "6"
+  },
+  {
+   "id": "e5",
+   "nombre": "Lunares",
+   "alias": "Valle Lunar",
+   "lat": 4.91736,
+   "lon": -75.35705,
+   "radio": 80,
+   "altura": 4350,
+   "ecosistema": {
+    "es": "Superpáramo",
+    "en": "Super-páramo"
+   },
+   "aCrater": 4.8,
+   "idea": {
+    "es": "Fuerzas geológicas: el hielo rompe la roca y el hierro la tiñe",
+    "en": "Geological forces: ice breaks the rock and iron stains it"
+   },
+   "fuente": "uton2024",
+   "pagina": "8"
+  },
+  {
+   "id": "e4",
+   "nombre": "Valle de las Tumbas",
+   "alias": "Desierto de la Soledad",
+   "lat": 4.909401,
+   "lon": -75.354817,
+   "radio": 100,
+   "altura": 4460,
+   "finAutorizado": true,
+   "ecosistema": {
+    "es": "Superpáramo con transición a zona nival",
+    "en": "Super-páramo grading into the snow zone"
+   },
+   "aCrater": 4.1,
+   "idea": {
+    "es": "Respeto y riesgo: memoria del territorio y límite del recorrido",
+    "en": "Respect and risk: the land’s memory and the end of the route"
+   },
+   "fuente": "uton2024",
+   "pagina": "9"
+  }
+ ],
+ "sendero": {
+  "nombre": "Carreteable Brisas – Valle de las Tumbas",
+  "fuente": "osm",
+  "nota": "Trazado de OpenStreetMap (vía 824243975), simplificado y hasta el final del carreteable, donde se ubica la parada de Valle de las Tumbas. Estaciones: «Primera estación» (Aguacerales), «Segunda estación»/Refugio Arenales y «The 3rd station»/Moon valley (Lunares) de OSM; el orden Aguacerales–Arenales–Lunares–Valle de las Tumbas es el de los guiones de UTON. Alturas de los guiones (UTON 2024, pp. 5–9); el mapa usa el relieve Copernicus.",
+  "puntos": [
+   [
+    4.93365,
+    -75.35004
+   ],
+   [
+    4.9334,
+    -75.35024
+   ],
+   [
+    4.93303,
+    -75.35144
+   ],
+   [
+    4.93304,
+    -75.35205
+   ],
+   [
+    4.93259,
+    -75.35223
+   ],
+   [
+    4.93224,
+    -75.35217
+   ],
+   [
+    4.93176,
+    -75.35167
+   ],
+   [
+    4.93119,
+    -75.35165
+   ],
+   [
+    4.92991,
+    -75.35076
+   ],
+   [
+    4.92814,
+    -75.35066
+   ],
+   [
+    4.92686,
+    -75.35032
+   ],
+   [
+    4.92589,
+    -75.3505
+   ],
+   [
+    4.92529,
+    -75.35133
+   ],
+   [
+    4.92569,
+    -75.35177
+   ],
+   [
+    4.92566,
+    -75.3519
+   ],
+   [
+    4.92524,
+    -75.35229
+   ],
+   [
+    4.92489,
+    -75.35233
+   ],
+   [
+    4.92458,
+    -75.35263
+   ],
+   [
+    4.92371,
+    -75.3528
+   ],
+   [
+    4.92386,
+    -75.35408
+   ],
+   [
+    4.92347,
+    -75.35484
+   ],
+   [
+    4.92159,
+    -75.35519
+   ],
+   [
+    4.92041,
+    -75.35498
+   ],
+   [
+    4.91948,
+    -75.35508
+   ],
+   [
+    4.91962,
+    -75.35534
+   ],
+   [
+    4.92047,
+    -75.35545
+   ],
+   [
+    4.92061,
+    -75.35567
+   ],
+   [
+    4.92059,
+    -75.35584
+   ],
+   [
+    4.92016,
+    -75.35623
+   ],
+   [
+    4.9203,
+    -75.35664
+   ],
+   [
+    4.9202,
+    -75.35726
+   ],
+   [
+    4.92035,
+    -75.35849
+   ],
+   [
+    4.92025,
+    -75.35901
+   ],
+   [
+    4.92009,
+    -75.35912
+   ],
+   [
+    4.91965,
+    -75.35903
+   ],
+   [
+    4.9176,
+    -75.35725
+   ],
+   [
+    4.91667,
+    -75.3569
+   ],
+   [
+    4.91624,
+    -75.35643
+   ],
+   [
+    4.91576,
+    -75.35633
+   ],
+   [
+    4.91523,
+    -75.35568
+   ],
+   [
+    4.91513,
+    -75.35455
+   ],
+   [
+    4.91492,
+    -75.35398
+   ],
+   [
+    4.91464,
+    -75.354
+   ],
+   [
+    4.91451,
+    -75.35415
+   ],
+   [
+    4.91417,
+    -75.35517
+   ],
+   [
+    4.91359,
+    -75.35539
+   ],
+   [
+    4.91244,
+    -75.35551
+   ],
+   [
+    4.912,
+    -75.35538
+   ],
+   [
+    4.9117,
+    -75.35509
+   ],
+   [
+    4.9113,
+    -75.3552
+   ],
+   [
+    4.911227,
+    -75.355167
+   ],
+   [
+    4.911155,
+    -75.355101
+   ],
+   [
+    4.911025,
+    -75.35503
+   ],
+   [
+    4.910894,
+    -75.355025
+   ],
+   [
+    4.91074,
+    -75.355079
+   ],
+   [
+    4.910645,
+    -75.355092
+   ],
+   [
+    4.910468,
+    -75.355075
+   ],
+   [
+    4.909694,
+    -75.354913
+   ],
+   [
+    4.909401,
+    -75.354817
+   ]
+  ]
+ },
+ "volcan": {
+  "nombre": "Nevado del Ruiz",
+  "lat": 4.892,
+  "lon": -75.324
+ },
+ "clases": [
+  {
+   "id": "frailejon",
+   "es": "Frailejón",
+   "en": "Frailejón"
+  },
+  {
+   "id": "pajonal",
+   "es": "Pajonal",
+   "en": "Bunchgrass"
+  },
+  {
+   "id": "laguna",
+   "es": "Laguna o humedal",
+   "en": "Lagoon or wetland"
+  },
+  {
+   "id": "roca",
+   "es": "Roca volcánica",
+   "en": "Volcanic rock"
+  },
+  {
+   "id": "nevado",
+   "es": "Nevado del Ruiz",
+   "en": "Nevado del Ruiz"
+  },
+  {
+   "id": "musgo",
+   "es": "Musgos y líquenes",
+   "en": "Mosses and lichens"
+  },
+  {
+   "id": "sietecueros",
+   "es": "Siete cueros",
+   "en": "Siete cueros (Polylepis)"
+  },
+  {
+   "id": "otro",
+   "es": "Otra cosa",
+   "en": "Something else",
+   "ayuda": {
+    "es": "personas, carro, cielo, piso",
+    "en": "people, cars, sky, ground"
+   }
+  }
+ ],
+ "capitulos": [
+  {
+   "id": "sendero",
+   "num": "I",
+   "es": "El sendero",
+   "en": "The trail"
+  },
+  {
+   "id": "flora",
+   "num": "II",
+   "es": "Flora y paisaje",
+   "en": "Plants and landscape"
+  },
+  {
+   "id": "fauna",
+   "num": "III",
+   "es": "Fauna",
+   "en": "Wildlife"
+  },
+  {
+   "id": "historias",
+   "num": "IV",
+   "es": "Historias del guía",
+   "en": "Guide's stories"
+  }
+ ],
+ "cromos": [
+  {
+   "n": 1,
+   "id": "brisas",
+   "ficha": "parque",
+   "tema": {
+    "es": "Brisas",
+    "en": "Brisas"
+   },
+   "capitulo": "sendero",
+   "tipo": "gps",
+   "estacion": "e1",
+   "personaje": "fray",
+   "es": {
+    "nombre": "Brisas"
+   },
+   "en": {
+    "nombre": "Brisas"
+   },
+   "guion": {
+    "ficha": "norte-brisas-introduccion",
+    "cromo": "brisas-agua"
+   }
+  },
+  {
+   "n": 2,
+   "id": "e2",
+   "ficha": "aguacerales",
+   "tema": {
+    "es": "el agua del páramo",
+    "en": "the páramo’s water"
+   },
+   "capitulo": "sendero",
+   "tipo": "gps",
+   "estacion": "e2",
+   "personaje": "fray",
+   "es": {
+    "nombre": "El agua que no para"
+   },
+   "en": {
+    "nombre": "Water that never stops"
+   },
+   "guion": {
+    "ficha": "uton-aguacerales-nombre",
+    "cromo": "aguacerales-condensacion"
+   }
+  },
+  {
+   "n": 3,
+   "id": "e3",
+   "ficha": "dunas",
+   "tema": {
+    "es": "las dunas de Arenales",
+    "en": "the Arenales dunes"
+   },
+   "capitulo": "sendero",
+   "tipo": "gps",
+   "estacion": "e3",
+   "personaje": "condor",
+   "es": {
+    "nombre": "Dunas del viento"
+   },
+   "en": {
+    "nombre": "Wind dunes"
+   },
+   "guion": {
+    "ficha": "uton-arenales-dunas"
+   }
+  },
+  {
+   "n": 4,
+   "id": "lunares",
+   "ficha": "gelifraccion",
+   "tema": {
+    "es": "las rocas de Lunares",
+    "en": "the Lunares rocks"
+   },
+   "capitulo": "sendero",
+   "tipo": "gps",
+   "estacion": "e5",
+   "personaje": "magma",
+   "es": {
+    "nombre": "La roca que se rompe"
+   },
+   "en": {
+    "nombre": "The rock that splits"
+   },
+   "guion": {
+    "ficha": "uton-lunares-gelifraccion",
+    "cromo": "lunares-gelifraccion"
+   }
+  },
+  {
+   "n": 5,
+   "id": "tumbas",
+   "ficha": "tumbas",
+   "tema": {
+    "es": "el Valle de las Tumbas",
+    "en": "the Valley of the Tombs"
+   },
+   "capitulo": "sendero",
+   "tipo": "gps",
+   "estacion": "e4",
+   "personaje": "magma",
+   "brillante": true,
+   "es": {
+    "nombre": "Valle de las Tumbas"
+   },
+   "en": {
+    "nombre": "Valley of the Tombs"
+   },
+   "guion": {
+    "ficha": "uton-tumbas-nombre",
+    "cromo": "tumbas-nombre"
+   }
+  },
+  {
+   "n": 6,
+   "id": "mirada",
+   "ficha": "paramo",
+   "tema": {
+    "es": "el páramo",
+    "en": "the páramo"
+   },
+   "capitulo": "sendero",
+   "tipo": "contemplacion",
+   "segundos": 120,
+   "lugar": true,
+   "personaje": "condor",
+   "brillante": true,
+   "es": {
+    "nombre": "Mirada larga"
+   },
+   "en": {
+    "nombre": "Long look"
+   },
+   "guion": {
+    "ficha": "uton-biomas-parque"
+   }
+  },
+  {
+   "n": 7,
+   "id": "grupo",
+   "ficha": "grupo",
+   "tema": {
+    "es": "el grupo",
+    "en": "the group"
+   },
+   "capitulo": "sendero",
+   "tipo": "grupo",
+   "personaje": "fray",
+   "brillante": true,
+   "requiere": 3,
+   "lugar": true,
+   "es": {
+    "nombre": "Cromo de grupo"
+   },
+   "en": {
+    "nombre": "Group sticker"
+   },
+   "guion": {
+    "ficha": "uton-paramo-socioecosistema"
+   }
+  },
+  {
+   "n": 8,
+   "id": "frailejon",
+   "ficha": "frailejon",
+   "tema": {
+    "es": "el frailejón",
+    "en": "the frailejón"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "frailejon",
+   "personaje": "fray",
+   "es": {
+    "nombre": "Frailejón"
+   },
+   "en": {
+    "nombre": "Frailejón"
+   },
+   "guion": {
+    "ficha": "uton-frailejon-especies",
+    "cromo": "aguacerales-frailejon"
+   }
+  },
+  {
+   "n": 9,
+   "id": "hojas",
+   "ficha": "frailejon_hojas",
+   "tema": {
+    "es": "el frailejón",
+    "en": "the frailejón"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "frailejon",
+   "personaje": "fray",
+   "despuesDe": "frailejon",
+   "otraPlanta": "frailejon",
+   "es": {
+    "nombre": "Chaqueta de hojas"
+   },
+   "en": {
+    "nombre": "Leaf jacket"
+   },
+   "guion": {
+    "ficha": "norte-frailejon-necromasa"
+   }
+  },
+  {
+   "n": 10,
+   "id": "pajonal",
+   "ficha": "pajonal",
+   "tema": {
+    "es": "el pajonal",
+    "en": "the bunchgrass"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "pajonal",
+   "personaje": "fray",
+   "es": {
+    "nombre": "Pajonal"
+   },
+   "en": {
+    "nombre": "Bunchgrass"
+   },
+   "guion": {
+    "ficha": "uton-bosques-matorrales"
+   }
+  },
+  {
+   "n": 11,
+   "id": "sietecueros",
+   "ficha": "siete_cueros",
+   "tema": {
+    "es": "el siete cueros",
+    "en": "the siete cueros tree"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "sietecueros",
+   "personaje": "fray",
+   "es": {
+    "nombre": "Siete cueros"
+   },
+   "en": {
+    "nombre": "Polylepis"
+   },
+   "guion": {
+    "ficha": "uton-bosques-matorrales",
+    "clave": "Polylepis"
+   }
+  },
+  {
+   "n": 12,
+   "id": "musgo",
+   "ficha": "musgos",
+   "tema": {
+    "es": "los musgos",
+    "en": "the mosses"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "musgo",
+   "personaje": "fray",
+   "es": {
+    "nombre": "Musgos y líquenes"
+   },
+   "en": {
+    "nombre": "Mosses and lichens"
+   },
+   "guion": {
+    "ficha": "uton-aguacerales-nombre",
+    "clave": "musgos"
+   }
+  },
+  {
+   "n": 13,
+   "id": "laguna",
+   "ficha": "humedales",
+   "tema": {
+    "es": "la laguna",
+    "en": "the lake"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "laguna",
+   "personaje": "condor",
+   "es": {
+    "nombre": "Laguna"
+   },
+   "en": {
+    "nombre": "Lake"
+   },
+   "guion": {
+    "ficha": "uton-bachue-lugares-sagrados"
+   }
+  },
+  {
+   "n": 14,
+   "id": "roca",
+   "ficha": "andesita",
+   "tema": {
+    "es": "la roca volcánica",
+    "en": "the volcanic rock"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "roca",
+   "personaje": "magma",
+   "es": {
+    "nombre": "Roca volcánica"
+   },
+   "en": {
+    "nombre": "Volcanic rock"
+   },
+   "guion": {
+    "ficha": "uton-andesitas-edad"
+   }
+  },
+  {
+   "n": 15,
+   "id": "nevado",
+   "ficha": "glaciares",
+   "tema": {
+    "es": "el Nevado del Ruiz",
+    "en": "Nevado del Ruiz"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "nevado",
+   "personaje": "magma",
+   "brillante": true,
+   "es": {
+    "nombre": "Nevado del Ruiz"
+   },
+   "en": {
+    "nombre": "Nevado del Ruiz"
+   },
+   "guion": {
+    "ficha": "norte-glaciar-cumbre"
+   }
+  },
+  {
+   "n": 16,
+   "id": "condor",
+   "ficha": "condor",
+   "tema": {
+    "es": "el cóndor",
+    "en": "the condor"
+   },
+   "capitulo": "fauna",
+   "tipo": "qr",
+   "codigo": "PARAMO-QR-15",
+   "personaje": "condor",
+   "brillante": true,
+   "es": {
+    "nombre": "Cóndor de los Andes"
+   },
+   "en": {
+    "nombre": "Andean condor"
+   },
+   "guion": {
+    "ficha": "norte-fauna-condor-danta",
+    "cromo": "condor"
+   }
+  },
+  {
+   "n": 17,
+   "id": "puma",
+   "ficha": "mamiferos",
+   "tema": {
+    "es": "el puma",
+    "en": "the puma"
+   },
+   "capitulo": "fauna",
+   "tipo": "qr",
+   "codigo": "PARAMO-QR-16",
+   "personaje": "condor",
+   "es": {
+    "nombre": "Puma"
+   },
+   "en": {
+    "nombre": "Puma"
+   },
+   "guion": {
+    "ficha": "uton-grandes-mamiferos",
+    "clave": "Puma"
+   }
+  },
+  {
+   "n": 18,
+   "id": "danta",
+   "ficha": "danta",
+   "tema": {
+    "es": "la danta",
+    "en": "the tapir"
+   },
+   "capitulo": "fauna",
+   "tipo": "qr",
+   "codigo": "PARAMO-QR-17",
+   "personaje": "condor",
+   "es": {
+    "nombre": "Danta de montaña"
+   },
+   "en": {
+    "nombre": "Mountain tapir"
+   },
+   "guion": {
+    "ficha": "norte-fauna-condor-danta",
+    "clave": "dispersor"
+   }
+  },
+  {
+   "n": 19,
+   "id": "periquito",
+   "ficha": "periquito",
+   "tema": {
+    "es": "el periquito de los nevados",
+    "en": "the rufous-fronted parakeet"
+   },
+   "capitulo": "fauna",
+   "tipo": "qr",
+   "codigo": "PARAMO-QR-18",
+   "personaje": "condor",
+   "es": {
+    "nombre": "Periquito de los Nevados"
+   },
+   "en": {
+    "nombre": "Rufous-fronted parakeet"
+   },
+   "guion": {
+    "ficha": "uton-aves-endemicas"
+   }
+  },
+  {
+   "n": 20,
+   "id": "pato",
+   "ficha": "pato_andino",
+   "tema": {
+    "es": "el pato andino",
+    "en": "the Andean duck"
+   },
+   "capitulo": "fauna",
+   "tipo": "qr",
+   "codigo": "PARAMO-QR-19",
+   "personaje": "condor",
+   "es": {
+    "nombre": "Pato andino"
+   },
+   "en": {
+    "nombre": "Andean duck"
+   },
+   "guion": {
+    "ficha": "uton-aves-endemicas",
+    "clave": "pato"
+   }
+  },
+  {
+   "n": 21,
+   "id": "aguila",
+   "ficha": "aguila",
+   "tema": {
+    "es": "el águila de páramo",
+    "en": "the black-chested buzzard-eagle"
+   },
+   "capitulo": "fauna",
+   "tipo": "qr",
+   "codigo": "PARAMO-QR-20",
+   "personaje": "condor",
+   "es": {
+    "nombre": "Águila"
+   },
+   "en": {
+    "nombre": "Eagle"
+   },
+   "guion": {
+    "ficha": "uton-lunares-ficha",
+    "clave": "águila"
+   }
+  },
+  {
+   "n": 22,
+   "id": "agua",
+   "ficha": "agua",
+   "tema": {
+    "es": "el agua del páramo",
+    "en": "páramo water"
+   },
+   "capitulo": "historias",
+   "tipo": "guia",
+   "personaje": "fray",
+   "es": {
+    "nombre": "Fábrica de agua"
+   },
+   "en": {
+    "nombre": "Water factory"
+   },
+   "guion": {
+    "ficha": "norte-clima-bimodal-suelo",
+    "clave": "esponja"
+   }
+  },
+  {
+   "n": 23,
+   "id": "armero",
+   "ficha": "armero",
+   "tema": {
+    "es": "la erupción de 1985",
+    "en": "the 1985 eruption"
+   },
+   "capitulo": "historias",
+   "tipo": "guia",
+   "personaje": "magma",
+   "es": {
+    "nombre": "Noviembre de 1985"
+   },
+   "en": {
+    "nombre": "November 1985"
+   },
+   "guion": {
+    "ficha": "uton-armero-1985"
+   }
+  },
+  {
+   "n": 24,
+   "id": "esqui",
+   "ficha": "esqui",
+   "tema": {
+    "es": "el esquí en el Ruiz",
+    "en": "skiing on the Ruiz"
+   },
+   "capitulo": "historias",
+   "tipo": "guia",
+   "personaje": "fray",
+   "es": {
+    "nombre": "Pistas de esquí"
+   },
+   "en": {
+    "nombre": "Ski slopes"
+   },
+   "guion": {
+    "ficha": "uton-arenales-historia-esqui",
+    "cromo": "arenales-esqui"
+   }
+  },
+  {
+   "n": 25,
+   "id": "nombres",
+   "ficha": "nombres",
+   "tema": {
+    "es": "los nombres de las estaciones",
+    "en": "the station names"
+   },
+   "capitulo": "historias",
+   "tipo": "guia",
+   "personaje": "condor",
+   "es": {
+    "nombre": "Nombres de boca en boca"
+   },
+   "en": {
+    "nombre": "Names passed by word of mouth"
+   },
+   "guion": {
+    "ficha": "uton-aguacerales-nombre",
+    "clave": "de allí el nombre"
+   }
+  }
+ ],
+ "paradas": []
+}

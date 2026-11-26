@@ -1,0 +1,26 @@
+{
+ "nota": "Banco de DESARROLLO de charla y seguimiento (js/conversacion.js). No es ciego. `previa`: preguntas que se hacen antes en la misma sesión; `misma`: la respuesta debe ser de la misma ficha que la última previa. Lo mide herramientas/evaluar.py.",
+ "version": "2026-11-26.1",
+ "preguntas": [
+  { "p": "Hola", "estacion": "lunares", "esperado": { "tipo": "charla" } },
+  { "p": "buenas tardes, Fray", "estacion": null, "esperado": { "tipo": "charla" } },
+  { "p": "¡Muchas gracias!", "estacion": "brisas", "esperado": { "tipo": "charla" } },
+  { "p": "chao, nos vemos", "estacion": null, "esperado": { "tipo": "charla" } },
+  { "p": "¿Qué puedes hacer?", "estacion": null, "esperado": { "tipo": "charla" } },
+  { "p": "¿Quién eres?", "estacion": "aguacerales", "esperado": { "tipo": "charla" } },
+  { "p": "jajaja", "estacion": null, "esperado": { "tipo": "charla" } },
+  { "p": "ok", "estacion": null, "esperado": { "tipo": "charla" } },
+  { "p": "thank you!", "estacion": null, "esperado": { "tipo": "charla" } },
+  { "p": "amplía", "estacion": null, "esperado": { "tipo": "charla" } },
+  { "p": "¿Puedes complementarlo mejor?", "estacion": "lunares", "previa": ["¿Por qué se fracturan las rocas en Lunares?"], "misma": true, "esperado": { "tipo": "respuesta" } },
+  { "p": "explícame más", "estacion": null, "previa": ["¿Qué es un frailejón?"], "misma": true, "esperado": { "tipo": "respuesta" } },
+  { "p": "cuéntame más", "estacion": "aguacerales", "previa": ["¿Por qué se llama Aguacerales?"], "misma": true, "esperado": { "tipo": "respuesta" } },
+  { "p": "¿y eso?", "estacion": "arenales", "previa": ["¿Por qué debemos evitar pisar las dunas?"], "misma": true, "esperado": { "tipo": "respuesta" } },
+  { "p": "no entendí", "estacion": "lunares", "previa": ["¿Qué es la gelifracción?"], "misma": true, "esperado": { "tipo": "respuesta" } },
+  { "p": "más sencillo, por favor", "estacion": null, "previa": ["¿Qué pasó en la erupción de 1985?"], "misma": true, "esperado": { "tipo": "respuesta" } },
+  { "p": "hola, ¿qué es el frailejón?", "estacion": null, "esperado": { "tipo": "respuesta" } },
+  { "p": "hola, me siento mareado", "estacion": null, "esperado": { "tipo": "seguridad" } },
+  { "p": "gracias, ¿me puedo comer esta planta?", "estacion": "aguacerales", "esperado": { "tipo": "seguridad" } },
+  { "p": "amplía", "estacion": null, "previa": ["¿Cuál es la alerta del volcán hoy?"], "esperado": { "tipo": "charla" } }
+ ]
+}

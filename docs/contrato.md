@@ -48,21 +48,39 @@ import * as fray from './js/fray.js';
 await fray.cargar(paquete);                 // construye el índice en el dispositivo (e5-small) y lo cachea en IndexedDB
 const r = await fray.preguntar(texto, { estacion: 'lunares' });   // estacion opcional
 // r = {
-//   tipo: 'respuesta' | 'abstencion' | 'seguridad' | 'conflicto' | 'duda' | 'vencido',
+//   tipo: 'respuesta' | 'abstencion' | 'seguridad' | 'conflicto' | 'duda' | 'vencido' | 'charla',
 //   breve: string,            // respuesta corta (siempre texto del guion o mensaje fijo de seguridad/abstención)
 //   ampliar: string | null,   // texto completo de la ficha
 //   citas: [{ guion: 'UTON2024', titulo: 'Guion Ecoturístico UTON 2024', pagina: 8 }],
 //   fichas: ['lunares-gelifraccion'],
 //   tipoContenido: 'ciencia' | 'relato' | ...,   // para la etiqueta «Relato de tradición oral»
 //   alternativas: [{ id, titulo }],              // si tipo === 'duda'
-//   aviso: string | null      // p. ej. «Los guiones difieren»
+//   aviso: string | null,     // p. ej. «Los guiones difieren»
+//   sugerencias: [string],    // solo tipo 'charla': 3 preguntas de ejemplo (de la estación si la hay; si no, de toda la ruta)
+//   intencion: string,        // solo 'charla': saludo | gracias | despedida | ayuda | quien | corta | mas | sencillo
+//   seguimiento: 'ampliar' | 'relacionada' | 'sencillo',   // solo si la respuesta sale de «amplía» / «no entendí»
+//   registro: string          // id de la entrada del registro de la prueba (§8); generador.reescribir la enlaza
 // }
+fray.reiniciarConversacion(); // olvida la última respuesta (el siguiente «amplía» pide un tema)
 fray.sinRespuesta();          // [{ texto, estacion, fecha }] preguntas que terminaron en abstención (local, sin datos personales)
 fray.limpiarSinRespuesta();
 ```
 - `seguridad`: carril crítico (emergencia, síntomas o salud, comer o tocar plantas y animales, estado del volcán, clima o acceso de
   hoy). Mensaje fijo que remite al guía, con cita solo si el guion lo respalda.
 - `abstencion`: sin respaldo suficiente, fuera de tema o premisa falsa no cubierta por los guiones.
+- **Orden dentro de `preguntar`:** carril de seguridad (siempre primero) → vigencia → charla y seguimiento
+  (`js/conversacion.js`, determinista) → búsqueda. «hola, me siento mareado» es `seguridad`; «hola, ¿qué es el frailejón?» va a
+  la búsqueda (sin el «hola»: `sinCharla`). Copia en Python en `herramientas/fray_py.py` (paridad en `herramientas/paridad.py`).
+- `charla`: «hola», «gracias», «chao», «¿qué puedes hacer?», «¿quién eres?», «ok», «jaja»… (es y en) cuando TODA la frase es
+  charla. Texto fijo de Fray en `breve` (sin datos del parque ni cifras, sin cita) + `sugerencias` (la interfaz las muestra como
+  botones que preguntan). No pasa por el generador.
+- Seguimiento: «amplía», «complementa», «cuéntame más», «explícame mejor», «¿y eso?», «más detalles» → `tipo: 'respuesta'` con
+  las frases de la última ficha aún no mostradas (`seguimiento: 'ampliar'`) o, si ya se mostró toda, la ficha relacionada
+  siguiente de la misma estación/tema con su cita (`'relacionada'`). «no entendí», «más sencillo» → la frase más corta de la
+  misma ficha (`'sencillo'`). Es una respuesta normal con cita: el generador y el verificador la tratan igual. Sin última
+  respuesta (o tras una abstención o seguridad) es `charla` con sugerencias.
+- `estacion` es opcional: vacía o `null` busca en toda la ruta (la estación solo da un bono pequeño, `beta`). Medido con
+  `python -X utf8 herramientas/evaluar.py --sin-estacion`: mismos aciertos que con estación.
 - `vencido`: la vigencia del contenido terminó (§7). Sin fichas ni citas; la interfaz muestra su propio texto. El carril crítico
   se evalúa antes, así que `seguridad` sigue funcionando. `fray.descargar()` suelta el índice de la memoria.
 
@@ -83,7 +101,7 @@ cuando ve la base (wifi local de Brisas o nube) las sube → el personal las rev
 (o un documento oficial nuevo), valida y publica un paquete nuevo **firmado** + avisos del día → el dispositivo lo descarga,
 verifica la firma **sin red**, lo activa (`fray.cargar`, reindexa) y conserva la versión anterior para volver atrás.
 
-**Cero red en la demostración.** `sync.js` solo hace peticiones si se configura `urlBase`. En la demo en modo avión no se configura:
+**Por defecto la app revisa `{origen}/publicado` (§5.8, decisión 12).** `sync.js` solo hace peticiones si hay `urlBase`. En la demo en modo avión no se configura:
 no hace nada, y el ciclo se muestra en la base (servidor + panel) o por USB. Nunca bloquea responder (todo va en segundo plano).
 
 ### 5.1 `manifest.json` (lo escribe `firmar_paquete.py`)
@@ -102,7 +120,8 @@ pública va en `contenido/clave_publica.json` (JWK) y viaja con la app; la priva
 base: `--claves`, variable `FRAY_CLAVES` o, por omisión, `C:\Users\danna\espeletia-llm\claves\fray_privada.pem`). Si cambia la
 clave, los dispositivos necesitan la nueva pública (se actualiza la app).
 
-Se publica en `publicado/` (fuera de git): `manifest.json`, `paquete.json`, `avisos.json` y `fray-paquete-usb.json`
+Se publica en `publicado/`: `manifest.json`, `paquete.json` y `avisos.json` van en git y se despliegan (§5.8); `fray-paquete-usb.json`
+(fuera de git)
 (`{formato: "fray-usb-1", manifest, paquete: "<texto>", avisos: "<texto>"}`, para copiar por USB). `firmar_paquete.py` se niega a
 publicar si el paquete no pasa `validar_paquete.py`, si hay un aviso prohibido, o si el paquete cambió sin subir la versión.
 
@@ -184,6 +203,49 @@ oficial no se publica abierto, ver `.vercelignore`). La firma se sigue haciendo 
 salen agrupadas en `/bandeja` → v2 con una ficha nueva se descarga y verifica → firma alterada, versión cambiada y paquete alterado
 se rechazan → volver atrás → aviso vencido oculto → plan USB. Todo en una carpeta temporal y en `127.0.0.1`.
 
+### 5.8 Actualizaciones obligatorias y automáticas (`js/actualizar.js`, decisión 12)
+El personal publica en Brisas (internet completo) y **todo teléfono que reciba señal baja la versión nueva y la activa solo**.
+Starlink da internet completo en Brisas e intermitente en las demás estaciones; en el sendero no hay nada.
+
+**Nube por defecto: publicación estática en el propio despliegue.** `publicado/manifest.json`, `publicado/paquete.json` y
+`publicado/avisos.json` (formato §5.1) van en git y Vercel los sirve con `Cache-Control: no-store`; `sw.js` no los cachea.
+`urlBase` por defecto = `location.origin + '/publicado'` (mismo origen). En el Panel se puede cambiar por el servidor de la base.
+Publicar: Panel → «Exportar para publicar» → doble clic en `herramientas\Publicar.cmd` (firma, copia a `publicado/`, commit y
+push a main; Vercel redespliega en ~1 min). Paso a paso: `docs/operacion-base.md`.
+
+**API para la interfaz (una sola llamada):**
+```js
+import { iniciarActualizaciones } from './js/actualizar.js';
+iniciarActualizaciones({
+  alPaqueteNuevo: (paquete, { version, origen }) => fray.cargar(paquete),  // origen: 'red' | 'usb' | 'volver'
+  alAvisos: (avisosVigentes) => pintarBanner(avisosVigentes),
+  cajaTexto: '#pregunta',              // selector, elemento o función: no se recarga mientras tenga texto
+  versionLocal: paqueteIncluido.version,
+  textoActualizado: (v) => `Contenido actualizado: versión ${v}`,   // opcional (i18n)
+});   // → promesa de { sincronizar, detener, estado } (js/sync.js)
+```
+- **Contenido:** revisa al abrir (1,5 s), con el evento `online`, al volver a la app (`visibilitychange`, como mucho cada 30 s) y
+  cada 10 min mientras haya señal; timeout de 8 s por petición. Si el manifest trae una versión mayor y la firma valida, baja el
+  paquete, verifica el sha256 y lo **activa sin preguntar**: renueva la vigencia (`vigencia.renovarCon`, §7), llama a
+  `alPaqueteNuevo` y muestra unos segundos «Contenido actualizado: versión …». Con señal intermitente reintenta con backoff
+  corto (15 s, 30 s, 1 min…; techo 10 min, y 60 s si ya se sabe que hay una versión nueva pendiente). Toda versión nueva es
+  obligatoria salvo `"obligatoria": false` en el manifest (campo no firmado: solo cambia la prisa del reintento, nunca qué se
+  acepta). Sin señal (`navigator.onLine === false`) no intenta nada.
+- **Código de la app:** `sw.js` hace `skipWaiting` + `clients.claim`. Al llegar un service worker nuevo (`controllerchange`) la
+  página se recarga **una vez**, solo con la caja de texto vacía (si el visitante escribe, espera) y nunca dos veces en 60 s. Con
+  la app abierta busca código nuevo (`reg.update()`) con `online`, al volver a la app y cada 10 min.
+- **Preguntas sin respuesta:** `urlSubida` (Panel → «Dónde se suben las preguntas»; p. ej. el servidor de la base en la wifi de
+  Brisas, `servidor/sync_base.py`). Un despliegue estático no recibe POST: sin `urlSubida` las preguntas **se quedan en cola en el
+  teléfono** (máx. 500) hasta que haya dónde subirlas, o se exportan por USB. Si la subida falla, igual se baja la actualización.
+  Roadmap: función serverless en el despliegue (`/api/sin-respuesta`, `/api/bandeja`) con almacenamiento (Vercel Blob o KV) y
+  token del panel; con eso `urlSubida = location.origin + '/api'`.
+- `js/sync.js` cambia en: `urlSubida` (nuevo), `reintentoSeg: 15` (antes `reintentoMin`), `maxMin: 10`, `intervaloMin: 10`,
+  `timeoutMs: 8000`, `maxObligatoriaSeg: 60`, `minVisibleMs: 30000`, `fetch` (solo pruebas) y `esperaTras(ok)`.
+
+Prueba: `node pruebas/test_actualizaciones.mjs` (servidor estático solo GET): v1 publicada → el cliente la activa solo al abrir →
+se publica v2 → con el evento `online` la activa sola → cero POST y la cola se conserva → firma alterada rechazada → con la
+descarga fallando 2 veces termina activando → vigencia renovada.
+
 ## 6. Avisos del día (`avisos.json`, firmado con el paquete)
 ```jsonc
 [
@@ -223,7 +285,8 @@ años no se quede en los teléfonos), no DRM: quien controla el dispositivo pued
    `contenido/paquete.json?renovar=<ts>` con `cache: 'no-store'`. Si responde un paquete válido, la vigencia se reinicia (24 h desde
    ese momento) y la app recarga el paquete y reindexa (los vectores salen de `contenido/indice.json` o se recalculan). Si hay
    `urlBase`, `sync.js` además baja el paquete y los avisos firmados (§5); un paquete firmado que llega con la vigencia vencida solo
-   se acepta si la renovación funciona; si no, se borra. Mientras está vigente no se renueva (las 24 h cuentan desde la activación).
+   se acepta si la renovación funciona; si no, se borra. Mientras está vigente no se renueva con `contenido/`; **cada paquete firmado nuevo que se descarga (§5.8) sí renueva las 24 h**
+   desde ese momento (`vigencia.renovarCon(paquete)`, misma lógica que `renovar()`, sin volver a descargar).
 
 **Qué se borra y qué se conserva.**
 
@@ -278,3 +341,22 @@ reloj atrasado = vencido → `vigenciaHoras` configurable.
 `const r = JSON.parse(localStorage['fray.vigencia']); r.venceEn = Date.now() - 1; localStorage['fray.vigencia'] = JSON.stringify(r)`
 y recargar en modo avión (DevTools → Network → Offline): aparece la pantalla de vencido, «¿qué es la gelifracción?» no responde,
 «me siento mareado» sí remite al guía; en Application → Cache Storage ya no hay `contenido/`. Al quitar el modo avión, renueva solo.
+
+## 8. Registro de la prueba (`js/registro.js`)
+Cada `fray.preguntar` escribe una entrada `{ evento: 'pregunta', ref, fecha, estacion, pregunta, tipo, categoria, intencion,
+seguimiento, fichas, citas, breve, modo, ms, paquete, dispositivo }` y cada `generador.reescribir` otra `{ evento: 'ia', ref,
+pregunta, fichas, texto, ok, fallas, ms, primeraMs, motor }` (misma `ref`). La interfaz no tiene que hacer nada.
+```js
+import * as registro from './js/registro.js';
+await registro.exportarRegistro();   // descarga fray-registro-AAAAMMDD-HHMM.json (botón «Exportar registro de la prueba»)
+await registro.leerRegistro();       // [entradas], más viejas primero
+await registro.limpiarRegistro();
+```
+- IndexedDB `fray-registro` (máx. 500, rota) + `console.info('FRAYLOG ' + json)`. `globalThis.frayRegistro.leer()` para DevTools.
+- Sin datos personales: texto de la pregunta, respuesta, tiempos y un id aleatorio del dispositivo. Vence con el contenido:
+  `vigencia.borrarContenido()` vacía `fray-registro`.
+- Sacarlo del teléfono por USB: `powershell -File herramientasegistros_adb.ps1 -Serial <serial>` (o `herramientas/registros_adb.sh`)
+  → `pruebas/registros/registro-<fecha>.json` + `.md`. Lee IndexedDB por el DevTools del WebView
+  (`adb forward tcp:9222 localabstract:webview_devtools_remote_<pid>`), las líneas `FRAYLOG` de `adb logcat -d` (el WebView de la
+  APK no las manda a logcat: queda como respaldo para Chrome/otros WebView) y el último `/sdcard/Download/fray-registro-*.json`.
+  `-Probar "hola|¿qué es la gelifracción?"` hace esas preguntas en la página del teléfono antes de juntar.

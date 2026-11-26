@@ -8,6 +8,7 @@
   <link rel="icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="styles.css">
   <style>
+    :root { --hoja: var(--papel-2); --linea: var(--papel-3); --radio: 16px; }
     main { width: min(100% - 2rem, 40rem); margin: 1.5rem auto; display: grid; gap: 1.2rem; }
     h1 { font: 800 1.8rem/1.1 var(--display); font-stretch: 85%; color: var(--verde); margin: 0; }
     fieldset { border: 2px solid var(--linea); border-radius: var(--radio); padding: .8rem 1rem 1rem; display: grid; gap: .6rem; }
@@ -22,11 +23,10 @@
 <body>
   <main>
     <h1>Prueba de cromos</h1>
-    <p>Página de pruebas sin motor ni interfaz principal: dispara el evento <code>fray:cromo</code> igual que lo hará
-      <code>js/ui.js</code>. Sin sonido. No se publica en el despliegue.</p>
+    <p>Prueba local del sobre y los cromos de exposición. Sin sonido.</p>
 
     <fieldset>
-      <legend>Como lo dispara la interfaz: <code>{ estacion }</code></legend>
+      <legend>Por estación</legend>
       <div class="fila" id="por-estacion"></div>
     </fieldset>
 
@@ -55,9 +55,17 @@
   </main>
 
   <script type="module">
-    import { ganados, olvidar } from './js/cromos.js';
+    import { ganados, olvidar } from './js/cromos-demo.js';
+    import { asegurarVigencia } from './js/vigencia.js';
+    import { cargarPaquete } from './js/ui-paquete.js';
     const raiz = document.documentElement;
     const disparar = (detail) => document.dispatchEvent(new CustomEvent('fray:cromo', { detail }));
+    await asegurarVigencia();
+    await cargarPaquete();
+    if (!(await asegurarVigencia()).vigente) {
+      document.querySelector('main').replaceChildren(document.createTextNode('El contenido del parque venció.'));
+      throw new Error('Contenido del parque vencido');
+    }
     const r = await fetch('contenido/cromos.json');
     const { cromos } = await r.json();
     const estaciones = [...new Set(cromos.map((c) => c.estacion).filter(Boolean))];

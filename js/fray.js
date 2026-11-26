@@ -9,10 +9,13 @@
 import { carril } from './carril.js';
 import { ABSTENCION } from './nucleo.js';
 import { verificarVigencia } from './vigencia.js';
+import { conversar, anotar, nuevaConversacion, sinCharla } from './conversacion.js';
+import { registrar, configurarRegistro } from './registro.js';
 
 export { carril, categoriaCarril, MENSAJES as MENSAJES_SEGURIDAD } from './carril.js';
 
-let w = null, n = 0, local = null, cargaP = null, info = null;
+let w = null, n = 0, local = null, cargaP = null, info = null, paq = null;
+let conv = nuevaConversacion();   // estado de la conversación de esta sesión (última respuesta, para «amplía» / «no entendí»)
 const pend = new Map();
 const CLAVE_SR = 'fray.sinRespuesta';
 
@@ -51,20 +54,44 @@ async function pedir(msg, alAvance) {
 
 // Construye (o recupera de IndexedDB) el índice del paquete. Devuelve { modo: 'semantico'|'lexico', fichas, vectores, tiempos }.
 export function cargar(paquete, { alAvance, params } = {}) {
+  paq = paquete; conv = nuevaConversacion();
+  configurarRegistro({ versionPaquete: paquete?.version || null });
   cargaP = pedir({ tipo: 'cargar', paquete, opciones: { params } }, alAvance).then((r) => (info = r));
   return cargaP;
 }
 
+// Orden: carril de seguridad (siempre primero) → vigencia → charla y seguimiento (js/conversacion.js) → búsqueda.
+// `estacion` es opcional: sin ella se busca en toda la ruta (con ella, las fichas de esa estación tienen un pequeño bono).
 export async function preguntar(texto, { estacion = null } = {}) {
+  const t0 = (globalThis.performance || Date).now();
+  const fin = (r) => { r.registro = anotarRegistro(texto, estacion, r, t0); return r; };
   const seg = carril(texto);
-  if (seg) return seg;
+  if (seg) return fin(seg);
   // Vigencia (contrato §7): con el contenido vencido no se responde con fichas (el carril de arriba sí sigue)
-  if (verificarVigencia().estado === 'vencido') { descargar(); return { ...RESP_VENCIDO }; }
+  if (verificarVigencia().estado === 'vencido') { descargar(); return fin({ ...RESP_VENCIDO }); }
   if (!cargaP) throw new Error('llama a fray.cargar(paquete) antes de preguntar');
+  const ch = conversar(texto, { paquete: paq, estacion: estacion || null, estado: conv });
+  if (ch) return fin(ch);
   await cargaP;
-  const r = await pedir({ tipo: 'preguntar', texto, opciones: { estacion } });
+  const r = await pedir({ tipo: 'preguntar', texto: sinCharla(texto), opciones: { estacion: estacion || null } });
+  anotar(conv, r, paq);
   if (r.tipo === 'abstencion') anotarSinRespuesta(texto, estacion);
-  return r;
+  return fin(r);
+}
+
+/** Olvida la última respuesta (el siguiente «amplía» pedirá un tema). */
+export function reiniciarConversacion() { conv = nuevaConversacion(); }
+
+// Registro de la prueba (js/registro.js): una entrada por pregunta; generador.js añade otra con lo de la IA (misma `ref`).
+function anotarRegistro(texto, estacion, r, t0) {
+  try {
+    const ref = 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    registrar({ evento: 'pregunta', ref, estacion: estacion || null, pregunta: texto, tipo: r.tipo, categoria: r.categoria || null,
+      intencion: r.intencion || null, seguimiento: r.seguimiento || null, fichas: r.fichas || [],
+      citas: (r.citas || []).map((c) => `${c.guion} p. ${c.pagina}`), breve: r.breve, modo: info?.modo || null,
+      ms: Math.round((globalThis.performance || Date).now() - t0) });
+    return ref;
+  } catch (e) { return null; }
 }
 
 // Similitud e5 de cada texto contra cada frase de la ficha: { frases: [..], sim: [[texto×frase]] | null (modo léxico), modo }.
@@ -85,7 +112,7 @@ export function descargar() {
   try { w?.terminate(); } catch (e) { /* nada */ }
   for (const p of pend.values()) p.no(new Error('contenido vencido'));
   pend.clear();
-  w = null; local = null; cargaP = null; info = null;
+  w = null; local = null; cargaP = null; info = null; paq = null; conv = nuevaConversacion();
 }
 export const ABSTENCION_TEXTO = ABSTENCION;
 

@@ -1,19 +1,19 @@
 // Cromos de estación (spec docs/specs/cromos.md). Módulo independiente de la interfaz: escucha el evento global
 //   document.dispatchEvent(new CustomEvent('fray:cromo', { detail: { id } }))          → ese cromo
 //   document.dispatchEvent(new CustomEvent('fray:cromo', { detail: { estacion } }))    → el siguiente cromo de la estación
-// y abre el sobre (js/sobre.js). Guarda solo los ids ganados en este dispositivo (sin datos personales).
+// y abre el sobre de la demostración. Guarda solo los ids ganados (sin datos personales).
 // Los textos son literales de los guiones (contenido/cromos.json) y siguen la vigencia del contenido (contrato §7).
 //
-//   import { abrirSobre, ganados, total } from './js/cromos.js';
+//   import { abrirSobre, ganados, total } from './js/cromos-demo.js';
 //   await abrirSobre('aguacerales-frailejon');  // si ya lo tiene: «Ya lo tienes», sin repetir la animación
 //   await abrirAlbum();                         // o el evento 'fray:album': los 10 cromos, los que faltan en silueta
 // Fotos: img/cromos/<id>.jpg (Wikimedia Commons; autor y licencia en img/cromos/creditos.json, se muestran en el cromo).
 
 import * as vig from './vigencia.js';
 import { paqueteBase } from './ui-paquete.js';
-import { revelar, album } from './sobre.js';
+import { revelar, album } from './sobre-demo.js';
 
-const CLAVE = 'fray-cromos-ganados';
+const CLAVE = 'fray-cromos-demo-ganados';
 let ids;
 try { ids = new Set(JSON.parse(localStorage.getItem(CLAVE) || '[]')); }
 catch { ids = new Set(); }

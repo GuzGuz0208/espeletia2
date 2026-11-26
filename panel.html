@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#2f6b4f">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icons/icon-192.png">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="panel.css">
 </head>
 <body>
   <!-- Entrada con PIN: uno por dispositivo, lo define el personal en el primer uso (js/panel-pin.js) -->
@@ -107,6 +107,11 @@
       <h2 style="margin-top:28px">Exportar el paquete</h2>
       <p>Descarga el paquete con todas las fichas para llevarlo por USB a los otros dispositivos (en Brisas, antes de subir).</p>
       <button class="btn btn-verde" id="btn-exportar">Exportar paquete (JSON)</button>
+      <h2 style="margin-top:28px">Publicar para todos los teléfonos</h2>
+      <p>En el PC de Brisas: 1) «Exportar para publicar» → 2) doble clic en «Publicar» en el escritorio → en 1-2 minutos todo
+        teléfono con señal recibe y activa la versión nueva solo. Paso a paso en <code>docs/operacion-base.md</code>.</p>
+      <button class="btn btn-flor" id="btn-exportar-publicar">Exportar para publicar</button>
+      <p id="export-resultado" role="status"></p>
     </section>
 
     <!-- Preguntas sin respuesta -->
@@ -159,11 +164,19 @@
       </div>
       <p id="sync-resultado" role="status"></p>
 
-      <h3 style="margin-top:24px">Dirección de la base</h3>
-      <p>Por ejemplo <code>http://192.168.4.1:8090</code> (wifi local de Brisas). Vacío = sin red: solo USB.</p>
+      <h3 style="margin-top:24px">De dónde se bajan las actualizaciones</h3>
+      <p>Vacío = lo publicado en este mismo sitio (<code>/publicado</code>, por defecto). O el servidor de la base, p. ej.
+        <code>http://192.168.4.1:8090</code> (wifi local de Brisas).</p>
       <div class="filtros">
         <input id="sync-url" type="url" placeholder="http://192.168.4.1:8090" aria-label="Dirección de la base">
         <button class="btn btn-verde" id="btn-sync-url">Guardar dirección</button>
+      </div>
+      <h3 style="margin-top:24px">Dónde se suben las preguntas sin respuesta</h3>
+      <p>El servidor de la base (<code>servidor/sync_base.py</code>, p. ej. <code>http://192.168.4.1:8090</code>). Vacío = las
+        preguntas se quedan en cola en el teléfono hasta que haya dónde subirlas (el sitio publicado no recibe preguntas).</p>
+      <div class="filtros">
+        <input id="sync-subida" type="url" placeholder="http://192.168.4.1:8090" aria-label="Servidor para subir preguntas">
+        <button class="btn btn-verde" id="btn-sync-subida">Guardar servidor</button>
       </div>
 
       <h3 style="margin-top:24px">Bandeja de la base: preguntas sin respuesta de todos los dispositivos</h3>

@@ -4,7 +4,7 @@
 import { TIPOS, TEMAS, ESTADOS } from './panel-config.js';
 import { hayPin, definirPin, comprobarPin, sesionActiva, restablecer, LARGO_MINIMO } from './panel-pin.js';
 import { cargarPaquete, paqueteBase, guardarVersion, versiones, avisarCambio } from './ui-paquete.js';
-import { urlBase, guardarUrlBase, arrancarSync, sync } from './ui-sync.js';
+import { urlBase, urlBaseGuardada, urlPorDefecto, urlSubida, guardarUrlBase, guardarUrlSubida, arrancarSync, sync } from './ui-sync.js';
 import { fray as cargarFray, claveQR } from './ui-motor.js';
 import { generarQR } from './qr-estacion.js';
 import { asegurarVigencia, estadoVigencia } from './vigencia.js';
@@ -368,6 +368,13 @@ function exportar() {
   if (!exigirSesion()) return;
   descargar(`paquete-${P.paquete.version || 'fray'}.json`, JSON.stringify(P.paquete, null, 2), 'application/json');
 }
+// Nombre fijo: herramientas/Publicar.cmd lo busca en Descargas (docs/operacion-base.md)
+function exportarParaPublicar() {
+  if (!exigirSesion()) return;
+  descargar('paquete-publicar.json', JSON.stringify({ ...P.paquete, exportadoEn: new Date().toISOString() }, null, 2), 'application/json');
+  $('#export-resultado').textContent = `Listo: paquete-publicar.json (versión ${P.paquete.version}) en Descargas. ` +
+    'Ahora haz doble clic en «Publicar» en el escritorio del PC de Brisas.';
+}
 
 // ---------- Preguntas sin respuesta ----------
 async function pintarSinRespuesta() {
@@ -461,10 +468,13 @@ async function pintarSync() {
     `Versión actual: ${e.versionActual || '—'}`,
     `anterior: ${e.versionAnterior || '—'}`,
     `preguntas pendientes por subir: ${e.pendientes}`,
-    e.activo ? `base: ${e.urlBase}` : 'sin dirección de la base (solo USB)',
+    e.activo ? `actualizaciones desde: ${e.urlBase}` : 'sin dirección (solo USB)',
+    `subida de preguntas: ${e.urlSubida || 'sin servidor (se quedan en cola en el teléfono)'}`,
     e.ultimoError ? `último error: ${e.ultimoError}` : '',
   ].filter(Boolean).join(' · ');
-  $('#sync-url').value = urlBase() || '';
+  $('#sync-url').value = urlBaseGuardada() || '';
+  $('#sync-url').placeholder = urlPorDefecto() || 'http://192.168.4.1:8090';
+  $('#sync-subida').value = urlSubida() || '';
 }
 
 async function alPaqueteSync(p) {
@@ -484,8 +494,8 @@ async function pintarBandeja() {
   const tb = $('#tbody-bandeja');
   tb.replaceChildren();
   const fila = (txt) => { const tr = el('tr'); const td = el('td', null, txt); td.colSpan = 5; tr.append(td); tb.append(tr); };
-  const base = urlBase();
-  if (!base) return fila('Configura primero la dirección de la base.');
+  const base = urlSubida();
+  if (!base) return fila('Configura primero el servidor de la base (subida de preguntas).');
   let j;
   try {
     const r = await fetch(`${base}/bandeja`, { headers: tokenPanel ? { Authorization: `Bearer ${tokenPanel}` } : {} });
@@ -549,7 +559,16 @@ function conectarSync() {
     try {
       const u = guardarUrlBase($('#sync-url').value);
       await arrancar();
-      $('#sync-resultado').textContent = u ? `Dirección guardada: ${u}.` : 'Sin dirección: solo USB, sin red.';
+      $('#sync-resultado').textContent = u ? `Dirección guardada: ${u}.` : `Vacío: actualizaciones desde ${urlBase() || 'ningún lado (solo USB)'}.`;
+    } catch (err) { $('#sync-resultado').textContent = err.message; }
+    pintarSync();
+  };
+  $('#btn-sync-subida').onclick = async () => {
+    if (!exigirSesion()) return;
+    try {
+      const u = guardarUrlSubida($('#sync-subida').value);
+      await arrancar();
+      $('#sync-resultado').textContent = u ? `Las preguntas se subirán a ${u}.` : 'Sin servidor: las preguntas se quedan en cola en el teléfono.';
     } catch (err) { $('#sync-resultado').textContent = err.message; }
     pintarSync();
   };
@@ -623,6 +642,7 @@ async function entrar() {
   $('#btn-plantilla-csv').onclick = plantillaCSV;
   $('#btn-plantilla-json').onclick = plantillaJSON;
   $('#btn-exportar').onclick = exportar;
+  $('#btn-exportar-publicar').onclick = exportarParaPublicar;
   $('#btn-sin-csv').onclick = async () => {
     if (!exigirSesion()) return;
     const l = await P.motor.sinRespuesta();

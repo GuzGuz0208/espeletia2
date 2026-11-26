@@ -12,7 +12,11 @@ Acierto por tipo:
 PUERTA: toda pregunta con esperado «seguridad» debe dar tipo «seguridad», en modo semántico Y en modo solo léxico (100 %).
 Además ninguna respuesta puede citar una ficha bloqueada. Si falla, sale con código 1.
 
-Uso:  python -X utf8 herramientas/evaluar.py [--calibrar] [--ver] [--ciego] [--paquete contenido/paquete.json]
+Charla y seguimiento: contenido/preguntas_charla.json (desarrollo). `previa` se pregunta antes en la misma sesión; `misma`
+exige que el seguimiento responda con la misma ficha que la previa. Cada pregunta empieza una sesión nueva (Motor.reiniciar).
+
+Uso:  python -X utf8 herramientas/evaluar.py [--calibrar] [--ver] [--ciego] [--sin-estacion] [--paquete contenido/paquete.json]
+  --sin-estacion  todas las preguntas sin estación (el chat sirve en cualquier lado; la estación solo da un pequeño bono)
   --calibrar  busca umbrales SOLO con contenido/preguntas_desarrollo.json y los guarda en models/fray-params.json
 """
 import glob, itertools, json, os, sys, time
@@ -27,6 +31,8 @@ import fray_py as fp  # noqa: E402
 from carril_py import categoria  # noqa: E402
 
 DESARROLLO = os.path.join(RAIZ, 'contenido', 'preguntas_desarrollo.json')
+CHARLA = os.path.join(RAIZ, 'contenido', 'preguntas_charla.json')  # charla y seguimiento (desarrollo, no ciego)
+SIN_ESTACION = '--sin-estacion' in sys.argv  # pregunta sin estación (chat en cualquier lado): toda la ruta
 
 
 def arg(nombre, defecto=None):
@@ -39,7 +45,8 @@ def cargar_banco(ruta):
     for p in (d.get('preguntas', []) if isinstance(d, dict) else d):
         e = p.get('esperado')
         e = {'tipo': e} if isinstance(e, str) else (e or {'tipo': p.get('tipo')})
-        out.append({'p': p.get('p') or p.get('pregunta') or p.get('texto'), 'estacion': p.get('estacion'), 'esperado': e})
+        out.append({'p': p.get('p') or p.get('pregunta') or p.get('texto'), 'estacion': None if SIN_ESTACION else p.get('estacion'),
+                    'esperado': e, 'previa': p.get('previa') or [], 'misma': bool(p.get('misma'))})
     return out
 
 
@@ -68,10 +75,18 @@ def evaluar(motor, banco, P=None, ver=False, etiqueta=''):
     PP = P or motor.P
     ids = [f['id'] for f in motor.idx['fichas']]
     for q in banco:
+        # Cada pregunta empieza una sesión nueva; `previa` se pregunta antes (para el seguimiento: «amplía», «no entendí»)
+        if hasattr(motor, 'reiniciar'):
+            motor.reiniciar()
+        rprev = None
+        for pv in q.get('previa') or []:
+            rprev = motor.preguntar(pv, q.get('estacion'), P)
         r = motor.preguntar(q['p'], q.get('estacion'), P)
         e = q['esperado']
+        if q.get('misma') and rprev is not None:
+            e = {**e, 'fichas': (rprev.get('fichas') or [])[:1] or ['(la previa no respondió)']}
         # Recuperación (independiente de la decisión final): ¿la ficha correcta queda 1.ª / entre las 3 primeras?
-        if e.get('tipo') in ('respuesta', 'conflicto') and not categoria(q['p']):
+        if e.get('tipo') in ('respuesta', 'conflicto') and not categoria(q['p']) and not q.get('previa') and not fp.intencion(q['p']):
             if e.get('fichas'):
                 pr = fp.puntuar(motor.idx, motor.vector(q['p']), q['p'], q.get('estacion'), PP)
                 top = [ids[i] for i in pr['orden'][:3]]
@@ -245,6 +260,8 @@ def main():
     bancos = {}
     if os.path.exists(DESARROLLO):
         bancos['desarrollo'] = cargar_banco(DESARROLLO)
+    if os.path.exists(CHARLA):
+        bancos['charla'] = cargar_banco(CHARLA)
     for r in sorted(glob.glob(os.path.join(RAIZ, 'pruebas', '*.json'))):
         nombre = os.path.basename(r)
         if nombre.startswith('ciego') and '--ciego' not in sys.argv:

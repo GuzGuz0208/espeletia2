@@ -5,9 +5,9 @@ estación con su altitud y, debajo, el dato literal del guion con la cita visibl
 de tradición oral». Sin sonido; con «menos movimiento» todo es un fundido. El botón «Pegar» queda fijo abajo, a la vista
 en 360 px y con letra grande.
 
-- `js/sobre.js` (animación) y `js/cromos-arte.js` (ilustraciones), copiados y simplificados del Álbum del Páramo.
+- `js/sobre-demo.js` (animación) y `js/cromos-arte.js` (ilustraciones), copiados y simplificados del Álbum del Páramo.
   Loricaria y Kumanday tienen dibujo nuevo.
-- `css/cromos.css`: los estilos salen de `styles.css`. `js/cromos.js` los carga solo, sin tocar `index.html`.
+- `css/cromos.css`: `js/cromos-demo.js` carga los estilos en la página de pruebas.
 - El evento acepta también la estación: `fray:cromo` con `{ estacion }` da el siguiente cromo de esa estación, y
   el cóndor cuando ya tiene los de la estación. Así se pueden ganar los 10. Con `{ id }` sigue igual.
 - Al pegar se emite `fray:cromo-pegado` con `{ id, total, de }`. Cerrar con Escape antes de pegar no guarda el cromo.
@@ -21,6 +21,6 @@ en 360 px y con letra grande.
   (filtro SVG local), destellos angulares, la franja clara inclinada y «Se gana en …». Colores: Brisas azul cielo,
   Aguacerales verde agua, Arenales ocre, Lunares rojo óxido, Tumbas violeta y el cóndor azul noche. Tocar uno ganado lo
   muestra en grande. El sobre deja ver, en duotono, el cromo que trae.
-- `cromos.html`: página de pruebas sin motor ni interfaz (no se publica en el despliegue).
+- `cromos.html`: página de pruebas local. La app principal usa el flujo del álbum integrado en `main`.
 
 Spec [Cromos y apertura de sobres](../specs/cromos.md).
