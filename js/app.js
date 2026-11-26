@@ -349,8 +349,16 @@ async function iniciar() {
   // Las geocercas funcionan en cualquier pantalla, pero el permiso solo se pide al abrir el Mapa
   // (o se activa solo si el visitante ya lo había dado).
   try { const pr = await navigator.permissions?.query({ name: 'geolocation' }); if (pr?.state === 'granted') mapa.iniciarGPS(); } catch (e) { /* sin API */ }
+  // Ajustes → «Preparar mapa y cámara al abrir» (activado por defecto): GPS, permiso de cámara y modelo, sin entrar a cada pestaña
+  if (E.ajustes.preparar !== false) prepararAlAbrir();
   if (est.pendientes().length) setTimeout(() => aviso(t('album.sobres', { n: est.pendientes().length })), 600);
   iniciarAtras();
+}
+
+// GPS (pide el permiso si hace falta), mapa pintado y cámara + modelo listos. No bloquea el arranque.
+export async function prepararAlAbrir() {
+  try { mapa.iniciarGPS(); mapa.pintar(); } catch (e) { console.warn('preparar mapa', e); }
+  await lente.preparar();
 }
 
 // ---------- Botón «atrás» del teléfono ----------

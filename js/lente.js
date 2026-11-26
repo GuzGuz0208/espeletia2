@@ -49,6 +49,20 @@ export async function entrar(m) {
 }
 export function salir() { activa = false; apagarStream(); }
 
+// Al abrir la app (Ajustes → «Preparar mapa y cámara al abrir»): pide el permiso de la cámara una sola vez y la apaga
+// enseguida (no se deja encendida fuera de la Lente: gasta batería), y precarga el modelo de reconocimiento.
+// Así, al entrar a la Lente, la imagen y el reconocimiento salen de inmediato.
+export async function preparar() {
+  try {
+    const p = await navigator.permissions?.query({ name: 'camera' }).catch(() => null);
+    if (p?.state !== 'granted' && p?.state !== 'denied' && navigator.mediaDevices?.getUserMedia && !stream) {
+      const s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+      if (!activa) s.getTracks().forEach((k) => k.stop()); else { stream = s; }
+    }
+  } catch (e) { console.warn('preparar cámara', e); }
+  if (!ml.ready() && !ahorro()) ml.load().catch((e) => console.warn('preparar modelo', e));
+}
+
 export function pedirFoto(id, msg) {
   objetivo = { id, msg };
   if (frente) { frente = false; apagarStream(); }

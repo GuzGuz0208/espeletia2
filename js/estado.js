@@ -14,7 +14,7 @@ export const E = {
   album: {},      // id -> { fecha, estacion, altura, foto, abierto }
   visitadas: {},  // estacionId -> fecha
   fijadas: {},    // estacionId -> { lat, lon, altura } fijadas en campo por el equipo
-  ajustes: { tema: 'auto', voz: true, vibrar: true, demo: false, texto: 'n', contraste: false, ahorro: 'auto', tono: 'normal' },
+  ajustes: { tema: 'auto', voz: true, vibrar: true, demo: false, texto: 'n', contraste: false, ahorro: 'auto', tono: 'normal', preparar: true },
   posicion: null, // { lat, lon, precision, altitud }
   parque: {},     // models/parque.json: Lente y estaciones publicadas por el equipo para todos los teléfonos
   aqui: 0,        // última vez que el guía confirmó que el grupo está en el parque
