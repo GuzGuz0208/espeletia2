@@ -77,6 +77,9 @@ class _PantallaAppState extends State<PantallaApp> {
           if (mounted && _sinPagina) setState(() => _sinPagina = false);
           _inyectar(web, url);
         },
+        // En Android, un script corrido en onPageStarted a veces cae en el documento anterior: se repite mientras carga
+        // (el script no hace nada si FrayNativo ya existe) y al terminar.
+        onProgress: (_) async => _inyectar(web, await web.currentUrl() ?? ''),
         onPageFinished: (url) => _inyectar(web, url),
         onWebResourceError: (e) {
           // Primera apertura sin señal (la PWA aún no está guardada): se avisa y se ofrece reintentar.
