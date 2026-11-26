@@ -215,6 +215,7 @@ function comoConseguir(c) {
   } else if (c.como === 'pregunta') {
     txt.textContent = c.estacion ? t('como.preguntaEst', { est: nombreEstacion(c.estacion) }) : t('como.pregunta');
     if (c.estacion) boton(t('accion.irEstacion'), () => { cerrarDetalle(); acc.irEstacion(c.estacion); });
+    else if (enParque()) boton(t('det.preguntar'), () => { cerrarDetalle(); acc.preguntar(c.id); });
     planB(`h:${c.id}`);
   } else if (c.como === 'pausa') {
     if (!enParque()) { txt.textContent = t('como.pausaLugar'); cont.appendChild(formCodigo('aqui', alGuia)); }

@@ -18,8 +18,13 @@ import { botonPDF } from './album-pdf.js';
 import { lluvia } from './album-celebrar.js';
 import * as pin from './panel-pin.js';
 
+// El paquete puede llegar antes de que el álbum termine de cargar: se guarda el último y se aplica al estar listo
+let paqueteUltimo = window.frayPaquete ?? null;
+document.addEventListener('fray:paquete', (e) => { paqueteUltimo = e.detail?.paquete || null; listo.then(() => est.ponerPaquete(paqueteUltimo)); });
+
 const listo = (async () => {
   await est.cargar();
+  await est.ponerPaquete(paqueteUltimo);
   iniciarAlbum({ abrirSobres: () => abrirSobres(), preguntar, irEstacion, pausa });
   iniciarSobres({ irA: (v) => { if (v === 'album' && location.hash !== '#/album') location.hash = '#/album'; }, preguntar });
   conectar();
@@ -142,7 +147,7 @@ async function pedirPin() {
 }
 
 function conectar() {
-  bus.addEventListener('cambio', pintarNombre);
+  bus.addEventListener('cambio', () => { pintarNombre(); if (!$('#vista-mapa').hidden) pintarMapa(irEstacion); });
   bus.addEventListener('capitulo', (e) => {
     const k = est.capitulos().find((c) => c.id === e.detail.cap);
     setTimeout(() => { aviso(t('cel.capitulo', { cap: k.es }), 3500); lluvia(2200); vibrar([60, 60, 60, 60, 120]); }, 400);
@@ -161,7 +166,6 @@ function conectar() {
     else location.hash = '#/';
   };
 
-  document.addEventListener('fray:paquete', (e) => est.ponerPaquete(e.detail?.paquete));
   document.addEventListener('fray:vista', (e) => listo.then(() => entrarVista(e.detail.vista)));
   document.addEventListener('fray:respuesta', (e) => alResponder(e.detail || {}).catch((err) => console.warn('[album]', err)));
   document.addEventListener('fray:qr-guia', async (e) => {

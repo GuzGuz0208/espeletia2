@@ -96,7 +96,10 @@ function darCromo(estacion) {
 // ---------- Navegación ----------
 // Vistas del Álbum del Páramo (js/album-app.js): se pintan allá al recibir 'fray:vista'
 const VISTAS_ALBUM = ['album', 'mapa', 'guia'];
-const emitir = (tipo, detail) => document.dispatchEvent(new CustomEvent(tipo, { detail }));
+const emitir = (tipo, detail) => {
+  if (tipo === 'fray:paquete') window.frayPaquete = detail.paquete; // por si el álbum aún no escucha
+  document.dispatchEvent(new CustomEvent(tipo, { detail }));
+};
 
 function mostrar(vista) {
   for (const v of ['inicio', 'qr', 'chat', 'vencido', ...VISTAS_ALBUM]) { const n = $(`#vista-${v}`); if (n) n.hidden = v !== vista; }

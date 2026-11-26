@@ -294,7 +294,7 @@ body[data-vista="chat"], body[data-vista="vencido"] { padding-bottom: calc(8rem 
 .perfil-pin text { fill: #2f6b4f; font: 800 13px var(--display); }
 .perfil-pin.hecha circle { fill: #2f6b4f; stroke: #f4c431; }
 .perfil-pin.hecha text { fill: #f4c431; }
-.perfil-pin .perfil-alt { fill: #1d2b38; font: 700 12px var(--texto); paint-order: stroke; stroke: #eef2ef; stroke-width: 4; }
+.perfil-pin .perfil-alt, .perfil-pin.hecha .perfil-alt { fill: #1d2b38; font: 700 12px var(--texto); paint-order: stroke; stroke: #eef2ef; stroke-width: 4; }
 .mapa-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .mapa-est { width: 100%; display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 10px 14px; border-radius: 14px; border: 0; background: var(--hoja); color: var(--tinta); text-align: left; box-shadow: 0 2px 0 var(--linea); }
 .mapa-num { width: 40px; height: 40px; flex: 0 0 auto; border-radius: 50%; display: grid; place-items: center; background: var(--amarillo); color: #2f6b4f; font: 800 1.1rem var(--display); }
