@@ -51,7 +51,9 @@ Respaldo (medido): banco ciego 102/115 semántico, 85/115 léxico; puerta de seg
 > coma ocho a treinta y cinco coma nueve grados: no se recalienta. Las licencias cuestan cero: todo es MIT o Apache, con uso
 > comercial permitido.
 
-Medido: temperatura de batería 33,8 → 35,9 °C (REDMI Note 15 Pro). Estimado, no medido: consumo en vatios y autonomía.
+Medido: 0,22 mAh por pregunta con la IA (estimación de Android para la app, 20 preguntas) y batería 33,8 → 36,7 °C
+(REDMI Note 15 Pro). Estimado: 100 preguntas ≈ 0,4 % de la batería, más la pantalla. Evidencia por criterio de la rúbrica:
+[rubrica.md](rubrica.md).
 
 Respaldo: [energia.md](energia.md) y [ficha-una-pagina.md](ficha-una-pagina.md).
 
