@@ -467,6 +467,37 @@
    "pregunta": "¿a qué altura está Aguacerales?",
    "fuente": "Nodo 1: Aguacerales (4.160 msnm).",
    "resp": "Aguacerales está a 4.290 m.s.n.m."
+  },
+  {
+   "id": "fray_cifra_otra_unidad",
+   "esperado": "bloquea",
+   "falla_contiene": [
+    "4160"
+   ],
+   "pregunta": "¿cuántos visitantes vienen al año?",
+   "fuente": "Nodo 1: Aguacerales (4.160 msnm).",
+   "resp": "Alrededor de 4.160 visitantes vienen al año."
+  },
+  {
+   "id": "fray_volcan_enojado",
+   "esperado": "bloquea",
+   "falla_contiene": [
+    "estado del volcán"
+   ],
+   "pregunta": "¿el volcán está enojado?",
+   "fuente": "Para ellos, el volcán era un ser vivo.",
+   "resp": "Según la tradición oral, el volcán está enojado.",
+   "relato": true
+  },
+  {
+   "id": "fray_tradicion_en_ciencia",
+   "esperado": "bloquea",
+   "falla_contiene": [
+    "no es relato"
+   ],
+   "pregunta": "¿qué es un glaciar?",
+   "fuente": "Un glaciar es una masa de hielo de origen terrestre.",
+   "resp": "Según la tradición oral, un glaciar es una masa de hielo."
   }
  ]
 }
