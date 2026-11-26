@@ -3,7 +3,7 @@
 import { E, cromo as getCromo, texto, fotoBlob, estacion, capitulos, cromosDe, abierto, total, pegados } from './estado.js';
 import { ilustracion, personajes } from './art.js';
 import { t, citar } from './i18n.js';
-import { fecha, alturaTxt, num } from './cromo.js';
+import { fecha, alturaTxt, num, fotoParque } from './cromo.js';
 
 const C = { papel: '#e6ece8', papel2: '#f1f4f1', verde: '#2f6b4f', amarillo: '#f4c431', noche: '#1d2b38', sello: '#d8492b', gris: '#5d6f68' };
 const ESTILO = `<style>.ink-y{fill:${C.amarillo}}.ink-g{fill:${C.verde};mix-blend-mode:multiply}.ink-p{fill:${C.papel2}}.l{fill:none!important;stroke-width:3;stroke-linecap:round}.ink-y .l{stroke:${C.amarillo}}.ink-g .l{stroke:${C.verde}}.ink-p .l{stroke:${C.papel2};stroke-width:2.2}</style>`;
@@ -15,6 +15,9 @@ export function svgImg(svg) {
     const img = new Image(); img.onload = () => ok(img); img.onerror = mal;
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
   });
+}
+function urlImg(src) {
+  return new Promise((ok, mal) => { const i = new Image(); i.onload = () => ok(i); i.onerror = mal; i.src = src; });
 }
 function blobImg(b) {
   return new Promise((ok, mal) => { const u = URL.createObjectURL(b); const i = new Image(); i.onload = () => { ok(i); URL.revokeObjectURL(u); }; i.onerror = mal; i.src = u; });
@@ -49,7 +52,11 @@ async function frente(ctx, id, x, y, w) {
   ctx.fillStyle = C.papel2; ctx.beginPath(); ctx.roundRect(x, y, w, hgt, 3 * u); ctx.fill();
   ctx.save(); ctx.beginPath(); ctx.roundRect(x + 4 * u, y + 4 * u, w - 8 * u, hgt - 30 * u, 2 * u); ctx.clip();
   const foto = r?.foto ? await fotoBlob(id) : null;
+  // Foto real del cromo (Wikimedia Commons, como en la app); si no carga, la ilustración
+  const fp = foto ? null : await fotoParque(c);
+  const imgParque = fp ? await urlImg(fp.src).catch(() => null) : null;
   if (foto) cubrir(ctx, await blobImg(foto), x + 4 * u, y + 4 * u, w - 8 * u, hgt - 30 * u);
+  else if (imgParque) cubrir(ctx, imgParque, x + 4 * u, y + 4 * u, w - 8 * u, hgt - 30 * u);
   else { ctx.fillStyle = '#dfe7e2'; ctx.fillRect(x, y, w, hgt); ctx.drawImage(await svgImg(ilustracion(id)), x + 10 * u, y + 10 * u, w - 20 * u, w - 20 * u); }
   ctx.restore();
   if (c.brillante) {
@@ -436,6 +443,14 @@ async function creditos(n) {
   bloque(t('pdf.datos'), Object.values(E.paquete.fuentes || {}).map((f) => [f.titulo, f.url || '']));
   const rel = await (await import('./relieve.js')).cargar();
   if (rel) bloque(t('pdf.relieveTit'), [[rel.meta.atribucion, rel.meta.descargo || '']]);
+  // Fotos de los cromos pegados: autor y licencia (CC BY / BY-SA lo exigen)
+  const fotosC = [];
+  for (const id of Object.keys(E.album || {})) {
+    const c = getCromo(id);
+    const fp = c && !E.album[id]?.foto ? await fotoParque(c) : null;
+    if (fp) fotosC.push([`${num(c.n)} ${texto(c).nombre}`, `${fp.autor} · ${fp.licencia} · Wikimedia Commons`]);
+  }
+  if (fotosC.length) bloque(t('pdf.fotosTit'), fotosC);
   bloque(t('pdf.hecho'), [[t('pdf.ilustraciones'), ''], [t('pdf.privado'), '']]);
   pie(p, n);
   return p;
@@ -489,7 +504,10 @@ export function armarPDF(paginas, { titulo = '' } = {}) {
 }
 
 // Genera el PDF completo. alAvanzar(f) recibe el avance (0–1) para mostrarlo.
+// Cede el turno hasta que la pantalla se redibuje (con setTimeout(0) el WebView no pintaba el porcentaje)
+const respirar = () => new Promise((ok) => requestAnimationFrame(() => setTimeout(ok, 0)));
 export async function albumPDF({ alAvanzar = () => {} } = {}) {
+  alAvanzar(0); await respirar();
   await fuentes();
   const fotos = await fotosDelVisitante();
   const caps = capitulos();
@@ -510,7 +528,7 @@ export async function albumPDF({ alAvanzar = () => {} } = {}) {
     listas.push({ jpeg: new Uint8Array(await blob.arrayBuffer()), w: PW, h: PH, textos: p.textos.filter(Boolean) });
     p.cv.width = p.cv.height = 0; // libera memoria del lienzo (importante en iPhone)
     alAvanzar((i + 1) / pasos.length);
-    await new Promise((ok) => setTimeout(ok, 0)); // deja respirar la pantalla
+    await respirar();
   }
   return armarPDF(listas, { titulo: `${t('titulo')}${E.nombre ? ` · ${E.nombre}` : ''}` });
 }
