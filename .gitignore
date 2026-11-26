@@ -13,3 +13,6 @@ build/
 .cache_emb.npz
 publicado/
 datos/
+
+# APK de la app Android con IA local (solo si pesa < 95 MB; ver nativo/README.md)
+!descargas/fray-paramo-arm64.apk
