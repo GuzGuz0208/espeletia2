@@ -12,6 +12,7 @@ case "$modelo" in
   q25-1.5b) archivo=qwen2.5-1.5b-instruct-q4_k_m.gguf ;;
   q35-2b) archivo=Qwen3.5-2B-Q4_K_M.gguf ;;
   q25-0.5b) archivo=qwen2.5-0.5b-instruct-q4_k_m.gguf ;;
+  q35-0.8b) archivo=Qwen3.5-0.8B-Q4_K_M.gguf ;;
   *) echo "modelo desconocido: $modelo"; exit 1 ;;
 esac
 gguf="$RAIZ/gguf/$modelo/$archivo"

@@ -4,14 +4,14 @@
 # Imprime llama-bench (-p 64,256 -n 48), 5 preguntas de extremo a extremo (primera palabra y total) y RAM.
 # Guarda todo en pruebas\bench-<equipo>-<fecha>.txt.
 param(
-  [ValidateSet('q25-1.5b', 'q35-2b', 'q25-0.5b')] [string]$Modelo = 'q25-1.5b',
+  [ValidateSet('q25-1.5b', 'q35-2b', 'q25-0.5b', 'q35-0.8b')] [string]$Modelo = 'q25-1.5b',
   [string]$Raiz = "$env:USERPROFILE\espeletia-llm",
   [int]$Hilos = 0,
   [int]$Puerto = 8080
 )
 $ErrorActionPreference = 'Continue'
 $repo = Split-Path -Parent $PSScriptRoot
-$archivos = @{ 'q25-1.5b' = 'qwen2.5-1.5b-instruct-q4_k_m.gguf'; 'q35-2b' = 'Qwen3.5-2B-Q4_K_M.gguf'; 'q25-0.5b' = 'qwen2.5-0.5b-instruct-q4_k_m.gguf' }
+$archivos = @{ 'q25-1.5b' = 'qwen2.5-1.5b-instruct-q4_k_m.gguf'; 'q35-2b' = 'Qwen3.5-2B-Q4_K_M.gguf'; 'q25-0.5b' = 'qwen2.5-0.5b-instruct-q4_k_m.gguf'; 'q35-0.8b' = 'Qwen3.5-0.8B-Q4_K_M.gguf' }
 $gguf = Join-Path $Raiz "gguf\$Modelo\$($archivos[$Modelo])"
 $bin = Join-Path $Raiz 'bin\llama-b12738'
 $salida = Join-Path $repo ("pruebas\bench-$env:COMPUTERNAME-" + (Get-Date -Format 'yyyyMMdd-HHmm') + '.txt')
