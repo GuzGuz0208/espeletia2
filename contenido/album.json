@@ -1,0 +1,450 @@
+{
+ "nota": "Generado por herramientas/album_cromos.py. Cada dato es literal de un guion con su página (PDF). No editar a mano.",
+ "version": "2026-11-26.3",
+ "capitulos": [
+  {
+   "id": "sendero",
+   "num": "I",
+   "es": "El sendero",
+   "en": "The trail"
+  },
+  {
+   "id": "flora",
+   "num": "II",
+   "es": "Flora y paisaje",
+   "en": "Plants and landscape"
+  },
+  {
+   "id": "fauna",
+   "num": "III",
+   "es": "Fauna",
+   "en": "Wildlife"
+  },
+  {
+   "id": "historias",
+   "num": "IV",
+   "es": "Historias del guía",
+   "en": "Guide's stories"
+  }
+ ],
+ "cromos": [
+  {
+   "id": "brisas-agua",
+   "n": 1,
+   "capitulo": "sendero",
+   "como": "estacion",
+   "estacion": "brisas",
+   "arte": "brisas",
+   "nombre": "Brisas, puerta del agua",
+   "tipo": "ciencia",
+   "dato": "Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+   "cita": {
+    "guion": "NORTE",
+    "pagina": 5
+   },
+   "ficha": "norte-brisas-introduccion",
+   "fichas": [
+    "norte-brisas-introduccion"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "aguacerales-frailejon",
+   "n": 2,
+   "capitulo": "sendero",
+   "como": "estacion",
+   "estacion": "aguacerales",
+   "arte": "frailejon",
+   "nombre": "Frailejón",
+   "tipo": "ciencia",
+   "dato": "Existen más de 100 especies de frailejones, en Colombia se tienen cerca de 60 de estas especies y para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana.",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 5
+   },
+   "ficha": "uton-frailejon-especies",
+   "fichas": [
+    "uton-frailejon-especies"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "arenales-dunas",
+   "n": 3,
+   "capitulo": "sendero",
+   "como": "estacion",
+   "estacion": "arenales",
+   "arte": "e3",
+   "nombre": "Dunas de arena",
+   "tipo": "ciencia",
+   "dato": "Las dunas entran en las zonas de carácter intangible del PNNN, es parte del patrimonio geológico, debido a que estas dunas en algunas ocasiones tienen una alta carga de humedad, si son pisadas, la huellas pueden perdurar meses.",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 7
+   },
+   "ficha": "uton-dunas-no-pisar",
+   "fichas": [
+    "uton-dunas-no-pisar"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "lunares-gelifraccion",
+   "n": 4,
+   "capitulo": "sendero",
+   "como": "estacion",
+   "estacion": "lunares",
+   "arte": "roca",
+   "nombre": "Gelifracción",
+   "tipo": "ciencia",
+   "dato": "El agua tiene la propiedad de aumentar su volumen al congelarse, si el agua esta confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen, por esta razón las rocas están llenas de grietas.",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 8
+   },
+   "ficha": "uton-lunares-gelifraccion",
+   "fichas": [
+    "uton-lunares-gelifraccion"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "tumbas-nombre",
+   "n": 5,
+   "capitulo": "sendero",
+   "como": "estacion",
+   "estacion": "tumbas",
+   "arte": "tumbas",
+   "nombre": "Valle de las Tumbas",
+   "tipo": "ciencia",
+   "dato": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes.",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 9
+   },
+   "ficha": "uton-tumbas-nombre",
+   "fichas": [
+    "uton-tumbas-nombre"
+   ],
+   "brillante": true,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "mirada",
+   "n": 6,
+   "capitulo": "sendero",
+   "como": "pausa",
+   "estacion": null,
+   "arte": "mirada",
+   "nombre": "Mirada larga",
+   "tipo": "ciencia",
+   "dato": "El bioma con mayor representatividad en el Área Protegida es el Páramo, seguido por el bosque Altoandino y finalmente el Glaciar.",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 38
+   },
+   "ficha": "uton-biomas-parque",
+   "fichas": [
+    "uton-biomas-parque"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-biomas-parque",
+   "segundos": 120
+  },
+  {
+   "id": "aguacerales-condensacion",
+   "n": 7,
+   "capitulo": "flora",
+   "como": "pregunta",
+   "estacion": "aguacerales",
+   "arte": "agua",
+   "nombre": "El agua que se atrapa",
+   "tipo": "ciencia",
+   "dato": "Este fenómeno de condensación se da durante las 24 horas del día, todos los días del año, durante las noches frías, los hilos de agua se congelan y forman carámbanos.",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 5
+   },
+   "ficha": "uton-aguacerales-nombre",
+   "fichas": [
+    "uton-aguacerales-nombre",
+    "norte-aguacerales-niebla"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "frailejon-necromasa",
+   "n": 8,
+   "capitulo": "flora",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "hojas",
+   "nombre": "Abrigo de hojas",
+   "tipo": "ciencia",
+   "dato": "El frailejón (Espeletia) es el ingeniero de este lugar. Su estructura está diseñada para la guerra climática: sus hojas peludas atrapan la humedad y su 'necromasa' (hojas muertas que cubren el tallo) actúa como un aislante térmico para que el agua en su interior no se congele.",
+   "cita": {
+    "guion": "NORTE",
+    "pagina": 2
+   },
+   "ficha": "norte-frailejon-necromasa",
+   "fichas": [
+    "norte-frailejon-necromasa",
+    "uton-frailejon-adaptaciones"
+   ],
+   "brillante": false,
+   "origen": "paquete:norte-frailejon-necromasa"
+  },
+  {
+   "id": "lunares-loricaria",
+   "n": 9,
+   "capitulo": "flora",
+   "como": "pregunta",
+   "estacion": "lunares",
+   "arte": "musgo",
+   "nombre": "Coral de páramo",
+   "tipo": "ciencia",
+   "dato": "Las loricarias, son llamadas cacho de venado, o coral de paramo.",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 9
+   },
+   "ficha": "uton-lunares-vegetacion-tiempo",
+   "fichas": [
+    "uton-lunares-vegetacion-tiempo",
+    "uton-loricarias",
+    "uton-lunares-paisaje"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "pajonal",
+   "n": 10,
+   "capitulo": "flora",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "pajonal",
+   "nombre": "Pajonal",
+   "tipo": "ciencia",
+   "dato": "Pastizales-pajonales: vegetación herbácea dominada por gramíneas en macolla",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 39
+   },
+   "ficha": "uton-bosques-matorrales",
+   "fichas": [
+    "uton-bosques-matorrales"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-bosques-matorrales"
+  },
+  {
+   "id": "andesitas",
+   "n": 11,
+   "capitulo": "flora",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "roca",
+   "nombre": "Andesitas",
+   "tipo": "ciencia",
+   "dato": "Las rocas que rodean la estación tienen cerca de 100 mil años, y se llaman Andesitas (la roca más común de los Andes).",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 6
+   },
+   "ficha": "uton-andesitas-edad",
+   "fichas": [
+    "uton-andesitas-edad"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-andesitas-edad"
+  },
+  {
+   "id": "glaciar",
+   "n": 12,
+   "capitulo": "flora",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "nevado",
+   "nombre": "El glaciar del Ruiz",
+   "tipo": "ciencia",
+   "dato": "Está compuesto por una única masa de hielo, cuya área, para el 2022, se calculó en 7,68 ±0,26 km², que, comparada con la del 2021 (7,96 ±0,29 km²), muestra una reducción de 0,28 km² (3.5 %).",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 29
+   },
+   "ficha": "uton-glaciar-ruiz-2022",
+   "fichas": [
+    "uton-glaciar-ruiz-2022",
+    "norte-glaciar-cumbre"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-glaciar-ruiz-2022"
+  },
+  {
+   "id": "condor",
+   "n": 13,
+   "capitulo": "fauna",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "condor",
+   "nombre": "Cóndor de los Andes",
+   "tipo": "ciencia",
+   "dato": "Somos el territorio del Cóndor de los Andes, el ave que utiliza las corrientes térmicas generadas por el calor del volcán para planear sin esfuerzo.",
+   "cita": {
+    "guion": "NORTE",
+    "pagina": 2
+   },
+   "ficha": "norte-fauna-condor-danta",
+   "fichas": [
+    "norte-fauna-condor-danta"
+   ],
+   "brillante": true,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "danta",
+   "n": 14,
+   "capitulo": "fauna",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "danta",
+   "nombre": "Danta de páramo",
+   "tipo": "ciencia",
+   "dato": "entre las especies más llamativas que se pueden observar en el PNN Los Nevados se encuentra la Danta de Páramo (Tapirus pinchaque)",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 42
+   },
+   "ficha": "uton-grandes-mamiferos",
+   "fichas": [
+    "uton-grandes-mamiferos"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-grandes-mamiferos"
+  },
+  {
+   "id": "periquito",
+   "n": 15,
+   "capitulo": "fauna",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "periquito",
+   "nombre": "Periquito de los Nevados",
+   "tipo": "ciencia",
+   "dato": "Una de las especies de aves restringidas estrictamente a los páramos es el periquito de los Nevados (Bolborhynchus ferrugineifrons)",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 41
+   },
+   "ficha": "uton-aves-endemicas",
+   "fichas": [
+    "uton-aves-endemicas"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-aves-endemicas"
+  },
+  {
+   "id": "agua",
+   "n": 16,
+   "capitulo": "historias",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "laguna",
+   "nombre": "Esponjas gigantes",
+   "tipo": "ciencia",
+   "dato": "Los páramos son ecosistemas únicos y vitales para Colombia y el planeta. Actúan como esponjas gigantes, regulando el suministro de agua y capturando carbono, lo que ayuda a mitigar el cambio climático.",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 5
+   },
+   "ficha": "uton-pnn-agua",
+   "fichas": [
+    "uton-pnn-agua"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-pnn-agua"
+  },
+  {
+   "id": "arenales-esqui",
+   "n": 17,
+   "capitulo": "historias",
+   "como": "pregunta",
+   "estacion": "arenales",
+   "arte": "huella",
+   "nombre": "Memoria del esquí",
+   "tipo": "ciencia",
+   "dato": "La actual cabaña exhibe pendones sobre la historia del esquí en el nevado del Ruiz en los años 50 y 60, cuando se realizaron campeonatos sudamericanos que llevaron a la creación del Club de Ski de Manizales.",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 7
+   },
+   "ficha": "uton-arenales-historia-esqui",
+   "fichas": [
+    "uton-arenales-historia-esqui"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  },
+  {
+   "id": "complejo-volcanico",
+   "n": 18,
+   "capitulo": "historias",
+   "como": "pregunta",
+   "estacion": null,
+   "arte": "tumbas",
+   "nombre": "Cuatro volcanes en uno",
+   "tipo": "ciencia",
+   "dato": "el Nevado del Ruiz es un complejo volcánico compuesto por cuatro estructuras (Nereidas, Olleta, Piraña y Arenas)",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 10
+   },
+   "ficha": "uton-complejo-volcanico",
+   "fichas": [
+    "uton-complejo-volcanico"
+   ],
+   "brillante": false,
+   "origen": "paquete:uton-complejo-volcanico"
+  },
+  {
+   "id": "tumbas-kumanday",
+   "n": 19,
+   "capitulo": "historias",
+   "como": "pregunta",
+   "estacion": "tumbas",
+   "arte": "volcanes",
+   "nombre": "Kumanday",
+   "tipo": "relato",
+   "dato": "Si bien es conocido el nombre indígena de Kumandai, Kumanday o Cumanday, para referirse al Volcán Nevado del Ruiz, no existe la suficiente investigación para delimitar la procedencia de la palabra.",
+   "cita": {
+    "guion": "UTON2024",
+    "pagina": 34
+   },
+   "ficha": "uton-kumanday",
+   "fichas": [
+    "uton-kumanday",
+    "norte-kumanday"
+   ],
+   "brillante": false,
+   "origen": "eduardo/cromos"
+  }
+ ],
+ "noEntran": {
+  "e2 Frío de altura": "el dato venía de PNN 2019; no hay ficha con ese dato",
+  "grupo Cromo de grupo": "necesita la cámara (foto de grupo); sin dato de los guiones",
+  "sietecueros Siete cueros": "los guiones solo nombran Polylepis de pasada; sin ficha propia",
+  "musgo Musgos y líquenes": "solo aparece en listas de plantas de las fichas de estación",
+  "laguna Laguna": "solo hay una definición de glosario",
+  "oso Oso de anteojos": "no aparece en los guiones",
+  "pato Pato andino": "los guiones no traen una frase propia del pato",
+  "aguila Águila de páramo": "solo aparece en listas de fauna de las estaciones",
+  "sombrilla Especies sombrilla": "no aparece en los guiones",
+  "volcanes Tres volcanes": "la fecha de creación venía de PNN 2019"
+ }
+}
