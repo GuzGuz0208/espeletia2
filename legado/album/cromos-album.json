@@ -1,0 +1,564 @@
+{
+ "nota": "Copia de referencia de los 24 cromos del Álbum del Páramo (repo anterior). Sus datos NO salen de los guiones: no usarlos tal cual en la demo.",
+ "capitulos": [
+  {
+   "id": "sendero",
+   "num": "I",
+   "es": "El sendero",
+   "en": "The trail"
+  },
+  {
+   "id": "flora",
+   "num": "II",
+   "es": "Flora y paisaje",
+   "en": "Plants and landscape"
+  },
+  {
+   "id": "fauna",
+   "num": "III",
+   "es": "Fauna",
+   "en": "Wildlife"
+  },
+  {
+   "id": "historias",
+   "num": "IV",
+   "es": "Historias del guía",
+   "en": "Guide's stories"
+  }
+ ],
+ "cromos": [
+  {
+   "n": 1,
+   "id": "brisas",
+   "ficha": "brisas",
+   "tema": {
+    "es": "Brisas",
+    "en": "Brisas"
+   },
+   "capitulo": "sendero",
+   "tipo": "gps",
+   "estacion": "e1",
+   "personaje": "fray",
+   "fuente": "procolombia",
+   "es": {
+    "nombre": "Brisas",
+    "dato": "Brisas es la entrada autorizada al sector del Nevado del Ruiz, a unos 4.100 m de altura."
+   },
+   "en": {
+    "nombre": "Brisas",
+    "dato": "Brisas is the authorized entrance to the Nevado del Ruiz sector, at about 4,100 m above sea level."
+   }
+  },
+  {
+   "n": 2,
+   "id": "e2",
+   "ficha": "temperatura",
+   "tema": {
+    "es": "el frío de altura",
+    "en": "the cold at altitude"
+   },
+   "capitulo": "sendero",
+   "tipo": "gps",
+   "estacion": "e2",
+   "personaje": "magma",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Frío de altura",
+    "dato": "En el parque la temperatura va de 14 °C a 4 °C y puede bajar de 0 °C. Abrígate y protégete del sol."
+   },
+   "en": {
+    "nombre": "High-altitude cold",
+    "dato": "Temperatures in the park range from 14 °C to 4 °C and can drop below 0 °C. Dress warmly and protect yourself from the sun."
+   }
+  },
+  {
+   "n": 3,
+   "id": "e3",
+   "ficha": "paramo",
+   "tema": {
+    "es": "el páramo",
+    "en": "the páramo"
+   },
+   "capitulo": "sendero",
+   "tipo": "gps",
+   "estacion": "e3",
+   "personaje": "condor",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Mar de páramo",
+    "dato": "El páramo es el ecosistema más representativo del parque: pajonal, turberas, arbustales y lagunas."
+   },
+   "en": {
+    "nombre": "Sea of páramo",
+    "dato": "Páramo is the park's most representative ecosystem: bunchgrass, peat bogs, shrublands and lagoons."
+   }
+  },
+  {
+   "n": 4,
+   "id": "tumbas",
+   "ficha": "tumbas",
+   "tema": {
+    "es": "el Valle de las Tumbas",
+    "en": "the Valley of the Tombs"
+   },
+   "capitulo": "sendero",
+   "tipo": "gps",
+   "estacion": "e4",
+   "personaje": "magma",
+   "fuente": "procolombia",
+   "brillante": true,
+   "es": {
+    "nombre": "Valle de las Tumbas",
+    "dato": "El recorrido autorizado desde Brisas llega hasta aquí. No está permitido subir a la cima ni al glaciar."
+   },
+   "en": {
+    "nombre": "Valle de las Tumbas",
+    "dato": "The authorized route from Brisas ends here. Climbing to the summit or the glacier is not allowed."
+   }
+  },
+  {
+   "n": 5,
+   "id": "mirada",
+   "ficha": "paramo",
+   "tema": {
+    "es": "el páramo",
+    "en": "the páramo"
+   },
+   "capitulo": "sendero",
+   "tipo": "contemplacion",
+   "segundos": 120,
+   "lugar": true,
+   "personaje": "condor",
+   "fuente": null,
+   "brillante": true,
+   "es": {
+    "nombre": "Mirada larga",
+    "dato": "Dos minutos sin pantalla: el viento, la niebla y el silencio también son el páramo."
+   },
+   "en": {
+    "nombre": "Long look",
+    "dato": "Two minutes without a screen: wind, fog and silence are part of the páramo too."
+   }
+  },
+  {
+   "n": 6,
+   "id": "grupo",
+   "ficha": "grupo",
+   "tema": {
+    "es": "el grupo",
+    "en": "the group"
+   },
+   "capitulo": "sendero",
+   "tipo": "grupo",
+   "personaje": "fray",
+   "fuente": null,
+   "brillante": true,
+   "requiere": 3,
+   "lugar": true,
+   "es": {
+    "nombre": "Cromo de grupo",
+    "dato": "Lo logramos juntos. Este álbum se completa en grupo y sin prisa."
+   },
+   "en": {
+    "nombre": "Group sticker",
+    "dato": "We made it together. This album is completed as a group, with no rush."
+   }
+  },
+  {
+   "n": 7,
+   "id": "frailejon",
+   "ficha": "frailejon",
+   "tema": {
+    "es": "el frailejón",
+    "en": "the frailejón"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "frailejon",
+   "personaje": "fray",
+   "fuente": "wcs",
+   "es": {
+    "nombre": "Frailejón",
+    "dato": "Espeletia hartwegiana es una planta en roseta que puede vivir hasta 40 años y llegar a 5 o 6 metros."
+   },
+   "en": {
+    "nombre": "Frailejón",
+    "dato": "Espeletia hartwegiana is a rosette plant that can live up to 40 years and reach 5 to 6 meters."
+   }
+  },
+  {
+   "n": 8,
+   "id": "hojas",
+   "ficha": "frailejon_hojas",
+   "tema": {
+    "es": "el frailejón",
+    "en": "the frailejón"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "frailejon",
+   "personaje": "fray",
+   "fuente": "wcsfrailejon",
+   "despuesDe": "frailejon",
+   "otraPlanta": "frailejon",
+   "es": {
+    "nombre": "Abrigo de hojas",
+    "dato": "Muchos frailejones guardan sus hojas muertas pegadas al tallo: así conservan calor y nutrientes."
+   },
+   "en": {
+    "nombre": "Coat of leaves",
+    "dato": "Many frailejones keep their dead leaves attached to the stem to stay warm and reuse nutrients."
+   }
+  },
+  {
+   "n": 9,
+   "id": "pajonal",
+   "ficha": "pajonal",
+   "tema": {
+    "es": "el pajonal",
+    "en": "the bunchgrass"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "pajonal",
+   "personaje": "fray",
+   "fuente": "wcs",
+   "es": {
+    "nombre": "Pajonal",
+    "dato": "El pajonal es un pasto de la familia Poaceae y suele dominar el paisaje del páramo."
+   },
+   "en": {
+    "nombre": "Bunchgrass",
+    "dato": "Bunchgrass belongs to the Poaceae family and usually dominates the páramo landscape."
+   }
+  },
+  {
+   "n": 10,
+   "id": "sietecueros",
+   "ficha": "siete_cueros",
+   "tema": {
+    "es": "el siete cueros",
+    "en": "the siete cueros tree"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "sietecueros",
+   "personaje": "fray",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Siete cueros",
+    "dato": "Polylepis sericea, el siete cueros, es una especie prioritaria de conservación del parque."
+   },
+   "en": {
+    "nombre": "Siete cueros",
+    "dato": "Polylepis sericea, known as siete cueros, is a conservation priority species in the park."
+   }
+  },
+  {
+   "n": 11,
+   "id": "musgo",
+   "ficha": "musgos",
+   "tema": {
+    "es": "los musgos",
+    "en": "the mosses"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "musgo",
+   "personaje": "fray",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Musgos y líquenes",
+    "dato": "En el páramo, junto a los frailejones, crecen muchos musgos y líquenes. Míralos sin pisarlos."
+   },
+   "en": {
+    "nombre": "Mosses and lichens",
+    "dato": "Many mosses and lichens grow next to the frailejones. Look at them without stepping on them."
+   }
+  },
+  {
+   "n": 12,
+   "id": "laguna",
+   "ficha": "humedales",
+   "tema": {
+    "es": "la laguna",
+    "en": "the lake"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "laguna",
+   "personaje": "condor",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Laguna",
+    "dato": "Los humedales altoandinos son un valor objeto de conservación del parque."
+   },
+   "en": {
+    "nombre": "Lagoon",
+    "dato": "High Andean wetlands are one of the park's conservation priorities."
+   }
+  },
+  {
+   "n": 13,
+   "id": "roca",
+   "ficha": "superparamo",
+   "tema": {
+    "es": "la roca volcánica",
+    "en": "the volcanic rock"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "roca",
+   "personaje": "magma",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Roca volcánica",
+    "dato": "En el superpáramo hay rocas, cenizas, arenales y poca vegetación: un paisaje casi lunar."
+   },
+   "en": {
+    "nombre": "Volcanic rock",
+    "dato": "The super-páramo has rocks, ash, sandy flats and little vegetation: an almost lunar landscape."
+   }
+  },
+  {
+   "n": 14,
+   "id": "nevado",
+   "ficha": "glaciares",
+   "tema": {
+    "es": "el Nevado del Ruiz",
+    "en": "Nevado del Ruiz"
+   },
+   "capitulo": "flora",
+   "tipo": "camara",
+   "clase": "nevado",
+   "personaje": "magma",
+   "fuente": "utp",
+   "brillante": true,
+   "es": {
+    "nombre": "Nevado del Ruiz",
+    "dato": "El parque protege 3 de los 6 glaciares que le quedan a Colombia: Ruiz, Santa Isabel y Tolima."
+   },
+   "en": {
+    "nombre": "Nevado del Ruiz",
+    "dato": "The park protects 3 of Colombia's 6 remaining glaciers: Ruiz, Santa Isabel and Tolima."
+   }
+  },
+  {
+   "n": 15,
+   "id": "condor",
+   "ficha": "condor",
+   "tema": {
+    "es": "el cóndor",
+    "en": "the condor"
+   },
+   "capitulo": "fauna",
+   "tipo": "qr",
+   "codigo": "PARAMO-QR-15",
+   "personaje": "condor",
+   "fuente": "pnn2019",
+   "brillante": true,
+   "es": {
+    "nombre": "Cóndor andino",
+    "dato": "Vultur gryphus, el cóndor andino, está en la lista de aves del parque."
+   },
+   "en": {
+    "nombre": "Andean condor",
+    "dato": "Vultur gryphus, the Andean condor, is on the park's bird list."
+   }
+  },
+  {
+   "n": 16,
+   "id": "oso",
+   "ficha": "oso",
+   "tema": {
+    "es": "el oso de anteojos",
+    "en": "the spectacled bear"
+   },
+   "capitulo": "fauna",
+   "tipo": "qr",
+   "codigo": "PARAMO-QR-16",
+   "personaje": "condor",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Oso de anteojos",
+    "dato": "El oso andino es una especie sombrilla: al cuidarlo se protegen muchas otras especies."
+   },
+   "en": {
+    "nombre": "Spectacled bear",
+    "dato": "The Andean bear is an umbrella species: protecting it protects many other species."
+   }
+  },
+  {
+   "n": 17,
+   "id": "danta",
+   "ficha": "danta",
+   "tema": {
+    "es": "la danta",
+    "en": "the tapir"
+   },
+   "capitulo": "fauna",
+   "tipo": "qr",
+   "codigo": "PARAMO-QR-17",
+   "personaje": "condor",
+   "fuente": "cenicafe",
+   "es": {
+    "nombre": "Danta de montaña",
+    "dato": "Funcionarios, vecinos y visitantes han confirmado la presencia de la danta de páramo en el parque."
+   },
+   "en": {
+    "nombre": "Mountain tapir",
+    "dato": "Park staff, neighbors and visitors have confirmed the mountain tapir lives in the park."
+   }
+  },
+  {
+   "n": 18,
+   "id": "periquito",
+   "ficha": "periquito",
+   "tema": {
+    "es": "el periquito de los nevados",
+    "en": "the rufous-fronted parakeet"
+   },
+   "capitulo": "fauna",
+   "tipo": "qr",
+   "codigo": "PARAMO-QR-18",
+   "personaje": "condor",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Periquito de los Nevados",
+    "dato": "Bolborhynchus ferrugineifrons lleva el nombre del parque y es un valor objeto de conservación."
+   },
+   "en": {
+    "nombre": "Rufous-fronted parakeet",
+    "dato": "Bolborhynchus ferrugineifrons is named after the park in Spanish and is a conservation priority."
+   }
+  },
+  {
+   "n": 19,
+   "id": "pato",
+   "ficha": "pato_andino",
+   "tema": {
+    "es": "el pato andino",
+    "en": "the Andean duck"
+   },
+   "capitulo": "fauna",
+   "tipo": "qr",
+   "codigo": "PARAMO-QR-19",
+   "personaje": "condor",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Pato andino",
+    "dato": "Oxyura jamaicensis, el pato andino, es una especie prioritaria de conservación del parque."
+   },
+   "en": {
+    "nombre": "Andean duck",
+    "dato": "Oxyura jamaicensis, the Andean duck, is a conservation priority species in the park."
+   }
+  },
+  {
+   "n": 20,
+   "id": "aguila",
+   "ficha": "aguila",
+   "tema": {
+    "es": "el águila de páramo",
+    "en": "the black-chested buzzard-eagle"
+   },
+   "capitulo": "fauna",
+   "tipo": "qr",
+   "codigo": "PARAMO-QR-20",
+   "personaje": "condor",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Águila de páramo",
+    "dato": "Geranoaetus melanoleucus, el águila de páramo, vuela sobre el parque."
+   },
+   "en": {
+    "nombre": "Black-chested buzzard-eagle",
+    "dato": "Geranoaetus melanoleucus, the páramo eagle, soars over the park."
+   }
+  },
+  {
+   "n": 21,
+   "id": "agua",
+   "ficha": "agua",
+   "tema": {
+    "es": "el agua del páramo",
+    "en": "páramo water"
+   },
+   "capitulo": "historias",
+   "tipo": "guia",
+   "personaje": "fray",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Fábrica de agua",
+    "dato": "El parque protege las cuencas altas de los ríos Chinchiná, Otún, Quindío y Combeima."
+   },
+   "en": {
+    "nombre": "Water factory",
+    "dato": "The park protects the upper basins of the Chinchiná, Otún, Quindío and Combeima rivers."
+   }
+  },
+  {
+   "n": 22,
+   "id": "volcanes",
+   "ficha": "volcanes",
+   "tema": {
+    "es": "los volcanes",
+    "en": "the volcanoes"
+   },
+   "capitulo": "historias",
+   "tipo": "guia",
+   "personaje": "magma",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Tres volcanes",
+    "dato": "El parque se creó en 1974 en el Macizo del Ruiz, con los volcanes Ruiz, Santa Isabel y Tolima."
+   },
+   "en": {
+    "nombre": "Three volcanoes",
+    "dato": "The park was created in 1974 in the Ruiz massif, home to the Ruiz, Santa Isabel and Tolima volcanoes."
+   }
+  },
+  {
+   "n": 23,
+   "id": "huella",
+   "ficha": "que_llevar",
+   "tema": {
+    "es": "la huella mínima",
+    "en": "leave no trace"
+   },
+   "capitulo": "historias",
+   "tipo": "guia",
+   "personaje": "fray",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Huella mínima",
+    "dato": "Lleva ropa abrigadora, impermeable, protección solar y calzado de montaña. Camina solo por el sendero."
+   },
+   "en": {
+    "nombre": "Leave no trace",
+    "dato": "Bring warm and waterproof clothing, sun protection and hiking boots. Stay on the trail."
+   }
+  },
+  {
+   "n": 24,
+   "id": "sombrilla",
+   "ficha": "oso",
+   "tema": {
+    "es": "las especies sombrilla",
+    "en": "umbrella species"
+   },
+   "capitulo": "historias",
+   "tipo": "guia",
+   "personaje": "condor",
+   "fuente": "pnn2019",
+   "es": {
+    "nombre": "Especies sombrilla",
+    "dato": "Danta, oso, puma y venados son especies sombrilla: protegerlas ayuda a muchas más."
+   },
+   "en": {
+    "nombre": "Umbrella species",
+    "dato": "Tapir, bear, puma and deer are umbrella species: protecting them helps many more."
+   }
+  }
+ ]
+}
