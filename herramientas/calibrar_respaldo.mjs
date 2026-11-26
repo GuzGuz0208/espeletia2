@@ -14,7 +14,7 @@ console.log(`${evaluados.length} casos: ${buenos} correctos, ${malos} con error\
 console.log('umbral | falsos rechazos (correctas descartadas) | errores atrapados');
 for (const u of [0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.7]) {
   let fr = 0, at = 0;
-  for (const c of evaluados) { const rechaza = fallasRespaldo(c.res, { umbral: u }).length > 0; if (c.error && rechaza) at++; if (!c.error && rechaza) fr++; }
+  for (const c of evaluados) { const rechaza = fallasRespaldo(c.res, { umbral: u, pregunta: c.pregunta }).length > 0; if (c.error && rechaza) at++; if (!c.error && rechaza) fr++; }
   console.log(`${u.toFixed(2).padStart(6)} | ${String(fr).padStart(3)}/${buenos} (${Math.round(100 * fr / buenos)} %) | ${at}/${malos}`);
 }
 const i = process.argv.indexOf('--detalle');
@@ -22,7 +22,7 @@ if (i > 0) {
   const u = Number(process.argv[i + 1]);
   console.log(`\nDetalle con umbral ${u}:`);
   for (const c of evaluados) {
-    const f = fallasRespaldo(c.res, { umbral: u });
+    const f = fallasRespaldo(c.res, { umbral: u, pregunta: c.pregunta });
     const tag = c.error ? (f.length ? 'ATRAPA ' : 'SE ESCAPA') : (f.length ? 'RECHAZO' : 'ok     ');
     if (tag !== 'ok     ') console.log(`${tag} ${c.id} [${c.res.map((r) => r.sim).join(',')}] ${c.resp.slice(0, 110)}${c.error ? '\n          error: ' + c.error : ''}${f.length ? '\n          falla: ' + f.join('; ') : ''}`);
   }

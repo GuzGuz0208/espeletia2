@@ -8,7 +8,7 @@
 # Sin -Preparar no usa la red. Busca el binario y el GGUF en -Raiz (por defecto %USERPROFILE%\espeletia-llm, la carpeta
 # que ya existe en el PC del equipo) y verifica el SHA-256 del GGUF antes de arrancar.
 param(
-  [ValidateSet('q25-1.5b', 'q35-2b', 'q25-0.5b')] [string]$Modelo = 'q25-1.5b',
+  [ValidateSet('q25-1.5b', 'q35-2b', 'q25-0.5b', 'q35-0.8b')] [string]$Modelo = 'q25-1.5b',
   [string]$Raiz = "$env:USERPROFILE\espeletia-llm",
   [int]$Hilos = 0,
   [int]$Puerto = 8080,
@@ -22,6 +22,7 @@ $Build = 'b12738'
 $Modelos = @{
   'q25-1.5b' = @{ repo = 'Qwen/Qwen2.5-1.5B-Instruct-GGUF'; archivo = 'qwen2.5-1.5b-instruct-q4_k_m.gguf'; sha = '6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e' }
   'q35-2b'   = @{ repo = 'unsloth/Qwen3.5-2B-GGUF'; archivo = 'Qwen3.5-2B-Q4_K_M.gguf'; sha = 'aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223' }
+  'q35-0.8b' = @{ repo = 'unsloth/Qwen3.5-0.8B-GGUF'; archivo = 'Qwen3.5-0.8B-Q4_K_M.gguf'; sha = 'bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517' }
   'q25-0.5b' = @{ repo = 'Qwen/Qwen2.5-0.5B-Instruct-GGUF'; archivo = 'qwen2.5-0.5b-instruct-q4_k_m.gguf'; sha = '74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db' }
 }
 $Zips = @{

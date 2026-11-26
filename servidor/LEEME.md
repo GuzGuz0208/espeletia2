@@ -14,6 +14,7 @@ Dos fases:
 |---|---|---|---|---|
 | ≥ 4 GB (recomendado) | **Qwen2.5-1.5B-Instruct Q4_K_M** (`q25-1.5b`, por defecto: más rápido) | `qwen2.5-1.5b-instruct-q4_k_m.gguf` (repo `Qwen/Qwen2.5-1.5B-Instruct-GGUF`) | 1,12 GB | `6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e` |
 | ≥ 4 GB y CPU rápida | **Qwen3.5-2B Q4_K_M** (`q35-2b`: mejor calidad, más lento) | `Qwen3.5-2B-Q4_K_M.gguf` (repo `unsloth/Qwen3.5-2B-GGUF`) | 1,28 GB | `aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223` |
+| **Celular gama media / 2-3 GB** | **Qwen3.5-0.8B Q4_K_M** (`q35-0.8b`: recomendado para el celular, ver pruebas/resultados-modelos-guion.md) | `Qwen3.5-0.8B-Q4_K_M.gguf` (repo `unsloth/Qwen3.5-0.8B-GGUF`) | 0,53 GB | `bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517` |
 | 2 GB | Qwen2.5-0.5B-Instruct Q4_K_M (`q25-0.5b`, **sin evaluar en calidad**) | `qwen2.5-0.5b-instruct-q4_k_m.gguf` (repo `Qwen/Qwen2.5-0.5B-Instruct-GGUF`) | 0,49 GB | `74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db` |
 | < 2 GB | sin modelo generativo: la app responde con el texto del guion (extractivo) | — | — | — |
 

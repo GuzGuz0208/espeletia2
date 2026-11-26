@@ -118,7 +118,7 @@ const VACIAS = new Set(('que los las del por con una uno unos unas para como mas
 const NEGACION = new Set(['no', 'nunca', 'jamas', 'ningun', 'ninguna', 'ninguno', 'tampoco']);
 
 export const frases = (s) => String(s || '').split(/(?<=[.!?;])\s+|\n+/).map((x) => x.trim()).filter((x) => /[\p{L}\d]/u.test(x));
-const palabras = (s) => norm(s).replace(/(metros|m) sobre el nivel del mar|m\.\s?s\.\s?n\.\s?m\.?/g, 'msnm').replace(/[^a-z0-9ñ\s]/g, ' ').split(/\s+/)
+const palabras = (s) => norm(s).replace(/(metros|m) sobre el nivel del mar|\bm\.\s?s\.\s?n\.\s?m\.?/g, 'msnm').replace(/[^a-z0-9ñ\s]/g, ' ').split(/\s+/)
   .filter((w) => NEGACION.has(w) || (w.length >= 3 && !VACIAS.has(w))).map((w) => (/^\d/.test(w) ? w : w.slice(0, 5)));
 
 // Cláusulas: además de frases, se parte en «; », «, y », «, mientras que », «, pero », «, además» para que un dato añadido al
@@ -155,14 +155,19 @@ export async function respaldo(frasesGen, frasesFuente, { embeber = null, pregun
   });
 }
 
-// Fallas de respaldo: frase por debajo del umbral, cifra que no está en su frase de respaldo, cuantificador perdido.
-export function fallasRespaldo(res, { umbral = UMBRAL_LEXICO } = {}) {
+// Fallas de respaldo: frase por debajo del umbral, cifra que no está en su frase de respaldo (ni en la pregunta), cuantificador
+// perdido, y polaridad: si la frase del guion niega y la generada no («estas rocas NO fueron arrojadas por el volcán» → «sí, las
+// dejó el volcán»), o al revés.
+const NIEGA = /(^|[^a-z])(no|nunca|jamas|ningun|ninguna|ninguno|tampoco)(?![a-z])/;
+export function fallasRespaldo(res, { umbral = UMBRAL_LEXICO, pregunta = '' } = {}) {
   const fallas = [];
   for (const r of res) {
     if (r.sim < umbral) { fallas.push(`frase sin respaldo (${r.sim}): «${r.frase.slice(0, 80)}»`); continue; }
     if (!r.fraseFuente) continue;
     const g = norm(guiones(r.frase)); const f = norm(guiones(r.fraseFuente));
-    const nf = new Set(numeros(f));
+    if (NIEGA.test(f) && !NIEGA.test(g)) fallas.push(`pierde una negación del guion: «${r.frase.slice(0, 60)}»`);
+    if (!NIEGA.test(f) && NIEGA.test(g)) fallas.push(`añade una negación que el guion no tiene: «${r.frase.slice(0, 60)}»`);
+    const nf = new Set([...numeros(f), ...numeros(norm(pregunta))]);
     for (const n of numeros(g)) if (!nf.has(n)) fallas.push(`cifra ${n} no está en su frase de respaldo`);
     for (const m of f.matchAll(/(\d+(?:[.,]\d+)*)\s+de\s+(?:los|las)\s+(\d+(?:[.,]\d+)*)/g)) {
       const total = m[2].replace(/[.,]/g, '');

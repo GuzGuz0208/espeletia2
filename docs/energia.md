@@ -91,3 +91,12 @@ puede duplicar el consumo (`--pantalla 3`). Una **laptop** (reposo ~10-15 W, car
 - [ ] t_consulta del bench (`pruebas/bench-<host>-<fecha>.txt`).
 - [ ] Volver a correr `energia.py --medido` y pegar la tabla aquí y en la ficha de 1 página.
 - [ ] Cotizar panel, batería y controlador (los precios de arriba son supuestos).
+
+## Escenario celular (decisión 10: el dispositivo de la demo es el celular)
+Con el LLM en el propio teléfono, la energía de una consulta generada es la del SoC durante unos segundos:
+`python -X utf8 herramientas/energia.py --reposo 0.6 --carga 5 --t-consulta 4` → **~5 mWh por consulta** (ESTIMADO con potencias
+SUPUESTAS: 0,6 W en reposo con pantalla apagada, 5 W generando; t_consulta ≈ 4 s es el ESTIMADO para Qwen3.5-0.8B en gama media de
+pruebas/resultados-modelos-guion.md). 20 consultas en un recorrido ≈ 0,1 Wh, **<1 % de una batería de 5.000 mAh (≈19 Wh)**; lo que
+más gasta en el recorrido es la pantalla, no el modelo. La estación ya no alimenta un computador: solo carga celulares (y la antena
+Starlink, que es del parque y queda fuera de este cálculo). PENDIENTE: medir con `adb shell dumpsys batterystats` o el % de batería
+antes y después de 50 consultas en el celular real.

@@ -19,6 +19,8 @@ const usables = paquete.fichas.filter((f) => !f.bloqueada && (f.preguntas || [])
 
 let casos = [];
 const archivoPreg = arg('preguntas');
+// --respuestas pruebas/respuestas_motor.json: r tal como lo da el motor real (herramientas/respuestas_motor.py), sin trampas.
+const archivoResp = arg('respuestas');
 if (archivoPreg) {
   const raw = JSON.parse(readFileSync(archivoPreg, 'utf8'));
   const lista = Array.isArray(raw) ? raw : raw.preguntas || raw.casos || [];
@@ -46,7 +48,11 @@ const TRAMPAS = [
   ['¿cuánto pesa un cóndor adulto?', 'fauna'], ['¿cuántos frailejones hay en el parque?', 'flora'],
   ['¿a qué temperatura está el agua de la laguna hoy?', 'agua'], ['¿cuántos visitantes vienen al año?', 'normas'],
 ];
-for (const [p, tema] of TRAMPAS) {
+if (archivoResp) {
+  casos = JSON.parse(readFileSync(archivoResp, 'utf8')).casos.map((c, i) => ({ id: `${i + 1}-${(c.r.fichas || ['-'])[0]}`, pregunta: c.pregunta,
+    r: c.r, esperado: c.esperado, ficha_correcta: c.ficha_correcta, trampa: false }));
+}
+for (const [p, tema] of archivoResp ? [] : TRAMPAS) {
   const f = usables.find((x) => x.tema === tema && x.tipo !== 'relato') || usables[0];
   casos.push({ id: 'trampa-' + tema, pregunta: p, ficha: f.id, trampa: true });
 }
@@ -56,10 +62,10 @@ if (!d.listo) { console.error('No hay llama-server en 127.0.0.1:8080'); process.
 await g.calentar();
 const out = [];
 for (const c of casos) {
-  const f = fichas[c.ficha];
-  const r = { tipo: 'respuesta', breve: f.breve, ampliar: f.texto, tipoContenido: f.tipo, citas: f.citas, fichas: [f.id] };
+  const f = c.r ? null : fichas[c.ficha];
+  const r = c.r || { tipo: 'respuesta', breve: f.breve, ampliar: f.texto, tipoContenido: f.tipo, citas: f.citas, fichas: [f.id] };
   const res = await g.reescribir(r, c.pregunta, { timeoutMs: 60000, contexto });
-  out.push({ ...c, tipo: f.tipo, breve: f.breve, ...res });
+  out.push({ ...c, tipo: r.tipoContenido, breve: r.breve, ...res });
   console.log(`${res.ok ? 'PASA ' : 'GUION'} ${c.trampa ? '[T] ' : ''}${c.id.slice(0, 28).padEnd(28)} ${String(res.primeraMs).padStart(5)} / ${String(res.ms).padStart(5)} ms  ${c.pregunta}\n      → ${res.texto}${res.ok ? '' : '\n        fallas: ' + res.fallas.join('; ')}`);
 }
 const med = (a) => { const s = [...a].sort((x, y) => x - y); return s.length ? s[Math.floor(s.length / 2)] : null; };
