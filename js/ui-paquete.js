@@ -60,7 +60,9 @@ export function siguienteVersion(anterior) {
 
 /** Guarda una nueva versión del paquete y avisa a las otras pestañas. Devuelve el paquete guardado. */
 export async function guardarVersion(paquete, nota = '') {
-  const nuevo = { ...structuredClone(paquete), version: siguienteVersion(paquete.version), actualizado: new Date().toISOString().slice(0, 10) };
+  // El número sigue a la versión vigente (también al volver a una vieja: nunca se repite un número)
+  const anterior = (await vigente())?.version || paquete.version;
+  const nuevo = { ...structuredClone(paquete), version: siguienteVersion(anterior), actualizado: new Date().toISOString().slice(0, 10) };
   delete nuevo.ejemplo;
   await tx('readwrite', (s) => s.add({ version: nuevo.version, fecha: new Date().toISOString(), nota, paquete: nuevo }));
   // Recorta versiones viejas

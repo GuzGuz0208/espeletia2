@@ -1,0 +1,17 @@
+{
+  "name": "Fray · guía del páramo · PNN Los Nevados",
+  "short_name": "Fray",
+  "description": "Asistente de las estaciones del sector norte. Funciona sin internet y responde con los guiones oficiales, citando guion y página.",
+  "lang": "es-CO",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#dfe6e2",
+  "theme_color": "#2f6b4f",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

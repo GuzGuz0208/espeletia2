@@ -141,7 +141,7 @@ function sugerenciasDe(estacion) {
   const fs = E.paquete.fichas.filter((f) => usable(f) && f.preguntas?.length);
   const propias = fs.filter((f) => f.estacion === estacion);
   const generales = fs.filter((f) => !f.estacion);
-  return [...propias, ...generales].slice(0, 4).map((f) => f.preguntas[0]);
+  return [...new Set([...propias, ...generales].map((f) => f.preguntas[0]))].slice(0, 4);
 }
 
 function abrirEstacion(id, { conservar = false } = {}) {

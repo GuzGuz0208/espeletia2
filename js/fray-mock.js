@@ -14,7 +14,7 @@ const MSG_ABSTENCION = 'No tengo esa información en los guiones oficiales; preg
 // Carril crítico de ejemplo (el real está en js/fray.js y es más completo).
 const SEGURIDAD = [
   /emergencia|auxilio|ayuda urgente|accidente|herid|sangr|desmay|perdid[oa]/,
-  /mare[oa]|mal de altura|soroche|dolor|respirar|vomit|me siento mal|sintoma|medicina|remedio|tratamiento|cura/,
+  /mare[oa]|mal de altura|soroche|dolor|duele|frio extremo|hipotermia|respirar|vomit|me siento mal|sintoma|medicina|remedio|tratamiento|cura/,
   /se come|comer|comest|toxic|venen|tocar|lamer|beber agua de/,
   /volcan.*(hoy|estado|alerta|activo|erupcion)|alerta|erupcion/,
   /clima de hoy|va a llover|temperatura hoy|abierto hoy|horario|acceso|cerrad[oa]/,
