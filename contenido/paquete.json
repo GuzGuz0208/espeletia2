@@ -1,5 +1,5 @@
 {
- "version": "2026-11-26.2",
+ "version": "2026-11-26.3",
  "actualizado": "2026-11-26",
  "fuentes": {
   "UTON2024": {
@@ -1750,6 +1750,32 @@
     "¿fue la peor erupción de la historia?",
     "¿qué erupción fue peor que la del Ruiz?",
     "¿cuántos murieron en Caldas?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-introduccion-guion",
+   "estacion": "brisas",
+   "tema": "normas",
+   "tipo": "norma",
+   "titulo": "De dónde sale esta información: el guion UTON 2024",
+   "texto": "Este guion ecoturístico, diseñado específicamente para la zona norte del parque bajo la concesión de la Unión Temporal de Operación Los Nevados, ofrece una visión integral que abarca desde los aspectos geológicos hasta los culturales. A través de un enfoque multidimensional, que incluye geología, geomorfología, biología, ecosistemas, fisiopatología, así como componentes socioculturales, antropológicos y folclóricos, este guion busca proporcionar a los turistas y guías las herramientas necesarias para una comprensión más completa del parque. La primera parte corresponde al guion base, que proporciona la información esencial para transmitir a los turistas. Posteriormente, encontrarán un glosario. A continuación, está el guion de profundización, que aborda de manera más detallada y técnica diversos aspectos; esta parte es más compleja y está fundamentada en literatura científica: 120 artículos y libros, de los cuales se trabajó directamente con 31 para la construcción del guion.",
+   "breve": "este guion busca proporcionar a los turistas y guías las herramientas necesarias para una comprensión más completa del parque.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 4
+    }
+   ],
+   "preguntas": [
+    "¿de dónde sale esta información?",
+    "¿qué fuentes usas?",
+    "¿quién escribió el guion?",
+    "¿esta información es confiable?",
+    "¿en qué te basas para responder?",
+    "where does this information come from?"
    ],
    "bloqueada": false,
    "motivo": null,
