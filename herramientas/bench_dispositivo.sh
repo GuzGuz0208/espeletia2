@@ -54,6 +54,8 @@ if ! curl -sf "http://127.0.0.1:$PUERTO/health" >/dev/null 2>&1; then
   for i in $(seq 1 120); do curl -sf "http://127.0.0.1:$PUERTO/health" >/dev/null 2>&1 && break; sleep 1; done
 fi
 echo "--- RAM con el modelo cargado"; ram
+cpu() { awk '/^cpu /{print $2+$3+$4+$6+$7+$8, $2+$3+$4+$5+$6+$7+$8}' /proc/stat; }
+read -r ocup0 tot0 <<< "$(cpu)"
 for f in herramientas/bench_cuerpos/*.json; do
   t0=$(date +%s%N)
   r=$(curl -s "http://127.0.0.1:$PUERTO/v1/chat/completions" -H 'Content-Type: application/json' -d @"$f")
@@ -67,6 +69,8 @@ for f in herramientas/bench_cuerpos/*.json; do
   echo "$(basename "$f" .json): 1.ª palabra ≈ ${primera} ms · total ${total} ms · prompt nuevo ${pn:-?} tok · generó ${gn:-?} tok a ${tgs} t/s"
   echo "    $txt"
 done
+read -r ocup1 tot1 <<< "$(cpu)"
+echo "--- CPU media durante las 5 preguntas: $(awk -v a=$((ocup1-ocup0)) -v b=$((tot1-tot0)) 'BEGIN{printf "%.0f", b>0 ? 100*a/b : 0}') % (para docs/energia.md, método B)"
 echo "--- RAM tras las preguntas"; ram; echo "--- temperatura final"; temp
 [ "$propio" -gt 0 ] && kill "$propio" 2>/dev/null
 echo; echo "Guardado en $salida"

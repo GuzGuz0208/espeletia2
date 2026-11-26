@@ -27,7 +27,8 @@ todo lo que dice SUPUESTO o PENDIENTE se reemplaza con la medición en el dispos
 **B. Sin medidor** (estimación, marcarla como tal):
 1. Potencia nominal del dispositivo de la ficha del fabricante (W máximos) y reposo típico de la ficha o de una fuente citada.
 2. % de CPU durante una consulta: Linux `top -b -n 5 -d 1 | grep llama-server`; Windows Administrador de tareas (o
-   `Get-Counter '\Processor(_Total)\% Processor Time' -SampleInterval 1 -MaxSamples 10`) mientras corre el bench.
+   `1..10 | % { (Get-CimInstance Win32_PerfFormattedData_PerfOS_Processor -Filter "Name='_Total'").PercentProcessorTime; sleep 1 }`;
+   `Get-Counter` falla en Windows en español porque el nombre del contador está traducido) mientras corre el bench.
 3. `python -X utf8 herramientas/energia.py --reposo R --nominal N --cpu-pct C --t-consulta t`
    (P_carga = R + (N − R) × C/100). En laptops con batería: alternativa `powercfg /batteryreport` antes y después de 100 consultas.
 

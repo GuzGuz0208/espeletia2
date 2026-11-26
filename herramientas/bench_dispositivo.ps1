@@ -41,6 +41,8 @@ try { Invoke-RestMethod "http://127.0.0.1:$Puerto/health" -TimeoutSec 2 | Out-Nu
   for ($i = 0; $i -lt 120; $i++) { try { Invoke-RestMethod "http://127.0.0.1:$Puerto/health" -TimeoutSec 2 | Out-Null; break } catch { Start-Sleep 1 } }
 }
 "--- RAM con el modelo cargado: $(Show-Ram)"
+$srv = Get-Process llama-server -ErrorAction SilentlyContinue | Select-Object -First 1
+$cpu0 = if ($srv) { $srv.TotalProcessorTime.TotalSeconds } else { 0 }; $reloj = [Diagnostics.Stopwatch]::StartNew()
 foreach ($f in Get-ChildItem (Join-Path $repo 'herramientas\bench_cuerpos\*.json') | Sort-Object Name) {
   $cuerpo = [IO.File]::ReadAllBytes($f.FullName)
   $sw = [Diagnostics.Stopwatch]::StartNew()
@@ -52,6 +54,8 @@ foreach ($f in Get-ChildItem (Join-Path $repo 'herramientas\bench_cuerpos\*.json
   "$($f.BaseName): 1.ª palabra ≈ $primera ms · total $($sw.ElapsedMilliseconds) ms · prompt nuevo $($t.prompt_n) tok · generó $($t.predicted_n) tok a $tgs t/s"
   "    $($r.choices[0].message.content)"
 }
+if ($srv) { $srv.Refresh(); $logicos = ($cpu | Measure-Object NumberOfLogicalProcessors -Sum).Sum
+  "--- CPU media de llama-server durante las 5 preguntas: {0:N0} % del equipo (para docs/energia.md, método B)" -f (100 * ($srv.TotalProcessorTime.TotalSeconds - $cpu0) / ($reloj.Elapsed.TotalSeconds * $logicos)) }
 "--- RAM tras las preguntas: $(Show-Ram)"
 if ($proc) { Stop-Process -Id $proc.Id -Force }
 Stop-Transcript | Out-Null
