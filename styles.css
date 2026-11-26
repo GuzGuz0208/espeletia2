@@ -33,6 +33,35 @@
 :root[data-contraste="alto"] .resp, :root[data-contraste="alto"] .estacion, :root[data-contraste="alto"] .chip { border: 2px solid #fff; }
 
 * { box-sizing: border-box; }
+
+.sobre-cromo {
+  width: min(25rem, calc(100% - 2rem));
+  max-height: calc(100% - 2rem);
+  padding: 1rem;
+  border: 2px solid var(--verde);
+  border-radius: var(--radio);
+  background: var(--hoja);
+  color: var(--tinta);
+  overflow-wrap: anywhere;
+}
+.sobre-cromo::backdrop { background: rgb(0 0 0 / 55%); }
+.sobre-cromo h2 { margin-top: 0; }
+.sobre-cromo button {
+  min-height: 56px;
+  width: 100%;
+  border: 2px solid var(--tinta);
+  border-radius: var(--radio);
+  background: var(--amarillo);
+  color: #1d2b38;
+  font: inherit;
+  font-weight: bold;
+}
+.sobre-cromo[data-abierto] { animation: revelar-cromo 220ms ease-out; }
+@keyframes revelar-cromo { from { opacity: 0; transform: translateY(.4rem); } }
+@media (prefers-reduced-motion: reduce) {
+  .sobre-cromo[data-abierto] { animation-name: disolver-cromo; }
+  @keyframes disolver-cromo { from { opacity: 0; } }
+}
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; min-height: 100dvh; background: var(--papel); color: var(--tinta);
