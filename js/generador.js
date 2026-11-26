@@ -124,7 +124,10 @@ export async function reescribir(r, pregunta, { timeoutMs = 6000, alTrozo = null
   clearTimeout(reloj);
   texto = limpiar(texto);
   // El relato siempre se presenta como tradición oral: si el modelo no lo hizo, se antepone (regla determinista).
-  if (relato && texto && !/tradici[oó]n oral/i.test(texto)) texto = 'Según la tradición oral, ' + texto[0].toLowerCase() + texto.slice(1);
+  if (relato && texto && !/tradici[oó]n oral/i.test(texto)) {
+    const comun = /^(El|La|Los|Las|Lo|Un|Una|Unos|Unas|Se|Es|Este|Esta|Estos|Estas|Ese|Esa|En|Para|Su|Sus|Significa|Dicen|Cuentan)\b/.test(texto);
+    texto = 'Según la tradición oral, ' + (comun ? texto[0].toLowerCase() + texto.slice(1) : texto);
+  }
   const v = verificar(texto, ctx, pregunta, { relato });
   return { texto, ok: v.ok, fallas: v.fallas, ms: ms(), primeraMs: primera };
 }
