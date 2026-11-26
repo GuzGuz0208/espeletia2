@@ -8,6 +8,7 @@ import { E, cromo as getCromo, cromos, nombreClase } from './estado.js';
 import { t, citar } from './i18n.js';
 import { $, h, esc, animar, vibrar, escuchar, aviso } from './util.js';
 import { personajes } from './art.js';
+import { sync } from './ui-sync.js';
 
 let iniciado = false;
 let tema = null; // { id, ficha, es, en }: de qué se está hablando (Lente, cromo o foto)
@@ -88,7 +89,9 @@ async function queEsEsto(archivo) {
     const nuevo = c && temaDeCromo(c.id);
     if (nuevo) {
       await abrirConTema(nuevo, { intro: t('chat.fotoEs', { cosa: nombreClase(r.clase).toLowerCase(), p: Math.round(r.certeza * 100) }) });
-      window.__ultimoChat = { foto: true, clase: r.clase, tema: nuevo.id };
+      // Cola para la base (contrato §5.2): sin datos personales, solo texto, estación y día
+  if (r.tipo === 'abstencion') sync.registrarSinRespuesta(texto, fray.estacionActual()).catch(() => {});
+  window.__ultimoChat = { foto: true, clase: r.clase, tema: nuevo.id };
       return;
     }
   }
