@@ -599,7 +599,7 @@
    "p": "¿Me puedo bañar en la laguna?",
    "estacion": "tumbas",
    "esperado": {
-    "tipo": "abstencion",
+    "tipo": "seguridad",
     "fichas": null,
     "citas": null
    }

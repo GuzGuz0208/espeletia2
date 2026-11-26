@@ -268,6 +268,8 @@ INTENCIONES = [
     'ayuda', 'ayudame', 'que (?:puedes|sabes|puedo) hacer', 'que haces', 'para que sirves', 'para que sirve (?:esto|esta app|la app)',
     'como (?:funcionas|funciona|te uso|se usa|uso esto)', 'que (?:te )?(?:puedo|se puede) preguntar(?:te)?', 'que (?:sabes|preguntas)',
     '(?:de|sobre) que (?:sabes|me puedes hablar|hablas)', 'que me puedes (?:contar|decir|explicar)', 'menu', 'opciones',
+    'que (?:me )?(?:ensenas|vas a ensenar(?:me)?|me vas a mostrar)', 'que (?:vamos a|voy a) (?:ver|descubrir|aprender|conocer|hacer)',
+    '(?:entonces )?no me (?:puedes|sabes) (?:responder|contestar|decir) nada',
     'what can you do', 'what do you know', 'how does this work', 'how do you work',
   ]},
   {'id': 'quien', 'p': [
