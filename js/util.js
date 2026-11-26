@@ -210,6 +210,18 @@ addEventListener('pointerdown', (e) => {
     const o = (vv ? vv.offsetTop : 0) + (altoLibre - innerHeight);
     const v = `${Math.max(0, Math.round(k - o))}px`;
     if (raiz.style.getPropertyValue('--tecladoForm') !== v) raiz.style.setProperty('--tecladoForm', v);
+    // Casilla dentro de una capa (portada «¿de quién es el álbum?», PIN, Ajustes): se sube el contenido de la capa lo justo
+    // para que la casilla quede sobre el teclado, solo con transform (sin redimensionar: fluido como el chat)
+    const el = document.activeElement;
+    const capa = el?.matches?.('input, textarea') ? el.closest('.capa:not([hidden])') : null;
+    if (capa) {
+      const ya = parseFloat(capa.style.getPropertyValue('--subir')) || 0;
+      const fondo = el.getBoundingClientRect().bottom + ya; // posición sin el desplazamiento actual
+      const sube = Math.max(0, Math.round(fondo + 16 - (innerHeight - Math.max(0, k - o))));
+      if (ya !== sube) capa.style.setProperty('--subir', `${sube}px`);
+    } else {
+      document.querySelectorAll('.capa[style*="--subir"]').forEach((c) => c.style.removeProperty('--subir'));
+    }
   };
   new MutationObserver(ajustar).observe(raiz, { attributes: true, attributeFilter: ['style'] });
   vv?.addEventListener('scroll', ajustar); vv?.addEventListener('resize', ajustar);
