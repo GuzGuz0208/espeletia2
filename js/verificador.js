@@ -28,9 +28,10 @@ const propios = (s) => {
 // Cifra + unidad: «2026 pesos» no vale si en la fuente 2026 es un año. Solo se comparan unidades de medida o de dinero.
 const MEDIDA = new Set(['$', '%', '°', 'c', 'm', 'km', 'cm', 'ha', 'anos', 'ano', 'am', 'pm', 'metros', 'horas', 'hora', 'min', 'minutos', 'msnm']);
 // Sinónimos de unidad: «4.450 metros» vale si la fuente dice «4.450 m».
-const UNI = { metros: 'm', ano: 'anos', horas: 'hora', minutos: 'min' };
+// Extensión del 26-nov (no está en slm.html): «msnm» y «m.s.n.m.» cuentan como «m» («4.160 metros sobre el nivel del mar»).
+const UNI = { metros: 'm', ano: 'anos', horas: 'hora', minutos: 'min', msnm: 'm' };
 function unidades(s) {
-  const t = norm(s).replace(/\b([ap])\.\s?m\./g, '$1m').replace(/\bpesos\b|\bcop\b/g, '$');
+  const t = norm(s).replace(/\bm\.\s?s\.\s?n\.\s?m\.?/g, 'msnm').replace(/\b([ap])\.\s?m\./g, '$1m').replace(/\bpesos\b|\bcop\b/g, '$');
   const out = [];
   for (const m of t.matchAll(/(\$\s?)?(\d+(?:[.,:]\d+)*)\s*([%°]|\$|[a-z]+)?/g)) {
     const u0 = m[1] ? '$' : (m[3] || ''); const u = UNI[u0] || u0;

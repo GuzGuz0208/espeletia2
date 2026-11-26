@@ -449,6 +449,24 @@
    "pregunta": "¿qué es la gelifracción?",
    "fuente": "El Nevado del Ruiz es un estratovolcán activo. En el sector de Lunares las rocas se rompen por gelifracción, porque el agua se congela en las grietas.",
    "resp": "La gelifracción rompe las rocas сон el hielo."
+  },
+  {
+   "id": "fray_msnm_metros",
+   "esperado": "pasa",
+   "falla_contiene": [],
+   "pregunta": "¿a qué altura está Aguacerales?",
+   "fuente": "Nodo 1: Aguacerales (4.160 msnm).",
+   "resp": "Aguacerales está a 4.160 metros sobre el nivel del mar."
+  },
+  {
+   "id": "fray_msnm_cifra_mala",
+   "esperado": "bloquea",
+   "falla_contiene": [
+    "4290"
+   ],
+   "pregunta": "¿a qué altura está Aguacerales?",
+   "fuente": "Nodo 1: Aguacerales (4.160 msnm).",
+   "resp": "Aguacerales está a 4.290 m.s.n.m."
   }
  ]
 }
