@@ -1,0 +1,12 @@
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.gguf
+*.apk
+.playwright-mcp/
+.vercel/
+.DS_Store
+build/
+.dart_tool/

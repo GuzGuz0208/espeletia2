@@ -1,0 +1,12 @@
+# Decisiones (26-nov-2026)
+
+| # | Decisión | Por qué |
+|---|---|---|
+| 1 | **Solo los dos guiones** como base de conocimiento, partidos en fichas por página; cada respuesta cita guion y página. | Requisito 2; fidelidad vale 25 puntos. |
+| 2 | **Recuperar primero, generar después.** e5-small encuentra la ficha y la frase (respuesta extractiva instantánea); un LLM local (Qwen3.5-2B o Qwen2.5-1.5B, Apache-2.0) la reescribe en tono de guía; un verificador determinista revisa cifras, nombres y palabras prohibidas; si falla o tarda, queda el texto del guion. | Medido el 25-nov: los LLM pequeños inventan en preguntas trampa; el verificador atrapó todos esos inventos. |
+| 3 | **Carril crítico determinista** (emergencia, salud, comer o tocar, volcán hoy, clima o acceso de hoy) que prevalece sobre todo, **también sobre el propio guion** (alerta del volcán en zona norte p. 7; tratamientos en UTON p. 54). | Requisito 3; seguridad vale 25 puntos; la presentación del reto (diap. 12 y 18) lo pide. |
+| 4 | **Relato ≠ ciencia y conflictos visibles.** Fichas `relato` con etiqueta; si los guiones difieren, se muestran ambos con su página. | Ficha técnica p. 2; diap. 11 (Kumanday). |
+| 5 | **Actualización sin código.** Panel del parque con PIN: editar o importar fichas (formulario, CSV o JSON), índice recalculado en el dispositivo, versión y vuelta atrás. Las preguntas sin respuesta se guardan en el dispositivo (sin datos personales) para que el personal cree fichas. La sincronización se hace en Brisas antes de subir. | Requisito 4; pregunta de los participantes sobre cómo sincronizar sin red. |
+| 6 | **Agnóstico de hardware.** App web estática + servidor local del modelo (llama.cpp) si el dispositivo lo permite; APK Flutter con llamadart para Android. | El dispositivo se conoce a las 10:20. |
+| 7 | **QR de estación firmados y verificables sin red** (jsQR + HMAC). | Elegir estación sin GPS ni red; un QR ajeno no hace nada. |
+| 8 | **El álbum de cromos, la Lente y el mapa pasan al roadmap.** | No los puntúa el reto; restan foco en 6 horas. |
