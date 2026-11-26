@@ -1,5 +1,5 @@
-// Almacenamiento local del álbum (IndexedDB). Todo queda en el celular, sin internet. Copiado de espeletia-ai/js/db.js.
-const DB_NAME = 'fray-album';
+// Almacenamiento local (IndexedDB). Todo queda en el celular, sin internet.
+const DB_NAME = 'paramo-cromos';
 const VERSION = 1;
 let dbPromise;
 
