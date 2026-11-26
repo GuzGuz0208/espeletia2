@@ -1,5 +1,6 @@
 // Exporta un cromo (su frente) o el álbum completo como imagen PNG, y el PDF del álbum. Sin textos de los guiones
 // (vigencia de 24 h, contrato §7): solo nombre, cromos, recorrido, fecha y certificado.
+import { lienzoBlob } from './util.js';
 import { E, cromo as getCromo, texto, fotoBlob, estacion, capitulos, cromosDe, abierto, total, pegados } from './estado.js';
 import { ilustracion, personajes } from './art.js';
 import { t, citar } from './i18n.js';
@@ -96,7 +97,7 @@ export async function cromoPNG(id) {
   ctx.fillStyle = C.gris; ctx.font = '400 28px "Atkinson Hyperlegible"';
   const est = r?.estacion ? estacion(r.estacion) : null;
   lineas(ctx, [est ? est.nombre : null, r ? fecha(r.fecha) : null].filter(Boolean).join(' — '), 100, y + 160, 880, 34, 2);
-  return new Promise((ok) => cv.toBlob(ok, 'image/png'));
+  return lienzoBlob(cv, 'image/png');
 }
 
 export async function albumPNG() {
@@ -135,7 +136,7 @@ export async function albumPNG() {
     y += Math.ceil(lista.length / cols) * (ch + gap) + 20;
   }
   ctx.drawImage(await svgImg(personajes.fray(100)), W - 230, 30, 150, 165);
-  return new Promise((ok) => cv.toBlob(ok, 'image/png'));
+  return lienzoBlob(cv, 'image/png');
 }
 
 export function descargar(blob, nombre) {
@@ -313,7 +314,7 @@ export async function collageImagen() {
   ctx.fillStyle = C.gris; ctx.font = '400 28px "Atkinson Hyperlegible"';
   ctx.fillText(`${E.nombre ? t('de', { nombre: E.nombre }) + ' · ' : ''}${t('parque')}`, 60, 145);
   await dibujarCollage(ctx, fotos, 30, 180, W - 60, H - 230);
-  return new Promise((ok) => cv.toBlob(ok, 'image/jpeg', 0.88));
+  return lienzoBlob(cv, 'image/jpeg', 0.88);
 }
 
 // ---------- Tu recorrido: relieve real, rastro, datos y perfil ----------
@@ -532,7 +533,7 @@ export async function albumPDF({ alAvanzar = () => {} } = {}) {
   const listas = [];
   for (let i = 0; i < pasos.length; i++) {
     const p = await pasos[i]();
-    const blob = await new Promise((ok) => p.cv.toBlob(ok, 'image/jpeg', 0.84));
+    const blob = await lienzoBlob(p.cv, 'image/jpeg', 0.84);
     listas.push({ jpeg: new Uint8Array(await blob.arrayBuffer()), w: PW, h: PH, textos: p.textos.filter(Boolean) });
     p.cv.width = p.cv.height = 0; // libera memoria del lienzo (importante en iPhone)
     alAvanzar((i + 1) / pasos.length);
