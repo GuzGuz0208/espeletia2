@@ -101,6 +101,6 @@ Veredicto verificar(String resp, String fuenteTxt, String pregunta, {String idio
   if (resp.trim().isEmpty) fallas.add('vacía');
   if (_rePreguntaFinal.hasMatch(resp.trim())) fallas.add('responde con una pregunta');
   if (rn.contains('no puedo responder')) fallas.add('esquiva la pregunta');
-  final dijoNoSe = rn.contains('no tengo esa informacion oficial') || rn.contains("i don't have that official information");
+  final dijoNoSe = rn.contains('no tengo esa informacion') || rn.contains("i don't have that");
   return Veredicto(fallas.isEmpty, fallas, dijoNoSe);
 }

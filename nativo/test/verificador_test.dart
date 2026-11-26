@@ -3,8 +3,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:album_paramo/critico.dart';
-import 'package:album_paramo/verificador.dart';
+import 'package:fray_paramo/critico.dart';
+import 'package:fray_paramo/verificador.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -35,26 +35,25 @@ void main() {
     });
   });
 
-  group('carril crítico', () {
-    final catalogo = CatalogoFichas.desdeJson({
-      'fichas': [
-        {'id': 'emergencia', 'urgente': true},
-        {'id': 'servicios', 'abstencion': true},
-        {'id': 'otra_abstencion', 'abstencion': true},
-        {'id': 'horario'},
-      ],
-    });
-    test('fichas fijas siempre se rechazan, aun sin catálogo', () {
-      for (final id in ['emergencia', 'mal_altura', 'comer_plantas', 'volcan_estado', 'servicios']) {
-        expect(motivoRechazo(id, null), isNotNull, reason: id);
-        expect(motivoRechazo(id, catalogo), isNotNull, reason: id);
+  group('carril crítico nativo (sin catálogo propio)', () {
+    test('fichas de categorías críticas se rechazan', () {
+      for (final id in ['emergencia', 'volcan', 'comer', 'salud', 'norte-volcan-nivel-alerta', 'uton-hipoxia-terapias',
+        'uton-mam-diagnostico-tratamiento']) {
+        expect(motivoRechazo(id), isNotNull, reason: id);
       }
     });
-    test('abstención del catálogo se rechaza', () => expect(motivoRechazo('otra_abstencion', catalogo), isNotNull));
-    test('ficha normal pasa', () => expect(motivoRechazo('horario', catalogo), isNull));
-    test('ficha desconocida o vacía se rechaza', () {
-      expect(motivoRechazo('no_existe', catalogo), isNotNull);
-      expect(motivoRechazo('', catalogo), isNotNull);
+    test('fichas normales del paquete pasan (también las nuevas que llegan por sync)', () {
+      for (final id in ['uton-aguacerales-ficha', 'norte-volcan-activo', 'uton-complejo-volcanico', 'ficha-nueva-de-hoy']) {
+        expect(motivoRechazo(id), isNull, reason: id);
+      }
     });
+    test('tipo distinto de respuesta o ficha vacía se rechaza', () {
+      expect(motivoRechazo('uton-aguacerales-ficha', tipo: 'seguridad'), isNotNull);
+      expect(motivoRechazo(''), isNotNull);
+    });
+  });
+
+  test('la abstención nueva de la PWA cuenta como «no sé»', () {
+    expect(verificar('No tengo esa información en los guiones oficiales; pregúntale a tu guía o al personal del parque.', 'x', 'y').dijoNoSe, isTrue);
   });
 }

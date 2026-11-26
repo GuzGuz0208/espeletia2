@@ -1,38 +1,24 @@
-// Carril crítico: fichas que NUNCA van al modelo (AGENTS.md, decisión carril-critico-determinista).
-// Se rechazan sin llamar al LLM y la PWA deja la frase oficial.
+// Defensa extra del lado nativo (AGENTS.md). El carril crítico y el verificador corren en la PWA (js/carril.js,
+// js/verificador.js) y js/generador.js solo llama a FrayNativo.generar para r.tipo === 'respuesta'. Aquí NO hay catálogo
+// propio de fichas (el contenido llega con la PWA y cambia): solo se rechaza, sin llamar al modelo, un fichaId de una
+// categoría crítica que la PWA nunca debería enviar (carril de js/carril.js o fichas bloqueadas de alerta y salud), o un
+// tipo distinto de 'respuesta' si viene.
 
-/// Fichas fijas del contrato de window.FrayNativo. Valen aunque no se haya podido leer chat.json.
-const fichasCriticas = {'emergencia', 'mal_altura', 'comer_plantas', 'volcan_estado', 'servicios'};
+/// Ids del carril crítico de js/carril.js y los fijos del contrato v1.
+const fichasCriticas = {
+  'emergencia', 'salud', 'comer', 'animales', 'volcan', 'condiciones', 'servicios', 'premisa', //
+  'mal_altura', 'comer_plantas', 'volcan_estado', 'seguridad', 'abstencion',
+};
 
-/// Lo mínimo de chat.json que necesita el lado nativo: qué fichas existen y cuáles son urgentes o de abstención.
-class CatalogoFichas {
-  CatalogoFichas._(this._todas, this._noGenerar);
-  final Set<String> _todas;
-  final Set<String> _noGenerar;
+/// Categorías críticas por nombre de ficha (p. ej. norte-volcan-nivel-alerta, uton-hipoxia-terapias,
+/// uton-mam-diagnostico-tratamiento: fichas bloqueadas del paquete).
+final _reFichaCritica = RegExp(r'(nivel-alerta|alerta-volcan|emergencia|terapia|tratamiento|diagnostico|toxic|venen|comestible)');
 
-  factory CatalogoFichas.desdeJson(Map<String, dynamic> chat) {
-    final todas = <String>{}, noGenerar = <String>{};
-    for (final f in (chat['fichas'] as List? ?? const []).cast<Map<String, dynamic>>()) {
-      final id = f['id'] as String?;
-      if (id == null) continue;
-      todas.add(id);
-      if (f['abstencion'] == true || f['urgente'] == true) noGenerar.add(id);
-    }
-    return CatalogoFichas._(todas, noGenerar);
-  }
-
-  bool existe(String id) => _todas.contains(id);
-  bool noGenerar(String id) => _noGenerar.contains(id);
-}
-
-/// Devuelve por qué no se puede generar para esta ficha, o null si se puede.
-/// Con catálogo, además rechaza las fichas urgentes, las de abstención y las que no existen (falla cerrado).
-String? motivoRechazo(String fichaId, CatalogoFichas? catalogo) {
-  final id = fichaId.trim();
+/// Por qué no se puede generar para esta ficha, o null si se puede.
+String? motivoRechazo(String fichaId, {String? tipo}) {
+  final id = fichaId.trim().toLowerCase();
+  if (tipo != null && tipo != 'respuesta') return 'tipo «$tipo»: solo se genera para respuestas';
   if (id.isEmpty) return 'ficha vacía';
-  if (fichasCriticas.contains(id)) return 'ficha del carril crítico';
-  if (catalogo == null) return null;
-  if (!catalogo.existe(id)) return 'ficha desconocida';
-  if (catalogo.noGenerar(id)) return 'ficha urgente o de abstención';
+  if (fichasCriticas.contains(id) || _reFichaCritica.hasMatch(id)) return 'ficha de una categoría crítica';
   return null;
 }

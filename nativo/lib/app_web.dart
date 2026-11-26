@@ -1,9 +1,15 @@
-// Pantalla «App»: la PWA del Álbum del Páramo en un WebView, servida desde la propia app (sin red) y con el
-// puente window.FrayNativo. Concede a la página cámara, micrófono y GPS cuando los pide (y Android lo permite).
+// La PWA de Fray en un WebView. La página se carga desde https://espeletia2.vercel.app/ (la primera vez con señal: Brisas,
+// hotel o una estación con Starlink); su service worker la deja guardada y desde ahí funciona en modo avión. El contenido
+// del parque llega y vence con la PWA (24 h); el APK no lo trae.
+//
+// - window.FrayNativo se inyecta solo si la página es del origen de la app, al empezar a cargar y otra vez al terminar
+//   (el adaptador de js/generador.js lo busca cuando la app ya arrancó). Los mensajes del canal se atienden solo si la
+//   página actual es de ese origen.
+// - Solo se navega dentro de ese origen; cualquier otro enlace se bloquea.
+// - Concede a la página cámara (QR), micrófono y GPS cuando los pide y Android lo permite.
 import 'dart:async';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -11,23 +17,36 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 import 'puente.dart';
-import 'servidor.dart';
+
+const urlApp = 'https://espeletia2.vercel.app/';
+final origenApp = Uri.parse(urlApp).origin;
+
+bool esDeLaApp(String? url) {
+  if (url == null) return false;
+  try {
+    return Uri.parse(url).origin == origenApp;
+  } catch (_) {
+    return false;
+  }
+}
 
 class PantallaApp extends StatefulWidget {
-  const PantallaApp({super.key});
+  const PantallaApp({super.key, required this.controlador});
+  final ControladorWeb controlador;
   @override
   State<PantallaApp> createState() => _PantallaAppState();
 }
 
-class _PantallaAppState extends State<PantallaApp> with AutomaticKeepAliveClientMixin {
-  final _servidor = ServidorPwa(scriptPuente);
-  WebViewController? _web;
-  PuenteFray? _puente;
-  String? _error;
-  Uri? _origen;
+/// Lo que la barra de estado necesita del WebView (recargar cuando la IA queda lista).
+class ControladorWeb {
+  WebViewController? web;
+  Future<void> recargar() async => web?.reload();
+}
 
-  @override
-  bool get wantKeepAlive => true;
+class _PantallaAppState extends State<PantallaApp> {
+  WebViewController? _web;
+  String? _error;
+  bool _sinPagina = false;
 
   @override
   void initState() {
@@ -35,19 +54,34 @@ class _PantallaAppState extends State<PantallaApp> with AutomaticKeepAliveClient
     _arrancar();
   }
 
+  Future<void> _inyectar(WebViewController web, String url) async {
+    if (!esDeLaApp(url)) return;
+    try {
+      await web.runJavaScript(scriptPuente);
+    } catch (_) {}
+  }
+
   Future<void> _arrancar() async {
     try {
-      final origen = await _servidor.iniciar();
       final web = WebViewController(onPermissionRequest: _permisoPagina);
-      final puente = PuenteFray(ejecutarJs: (js) => web.runJavaScript(js));
-      await puente.iniciar();
+      final puente = PuenteFray(ejecutarJs: (js) => web.runJavaScript(js), prompts: await Prompts.leer());
       await web.setJavaScriptMode(JavaScriptMode.unrestricted);
-      await web.addJavaScriptChannel('FrayNativoCanal', onMessageReceived: (m) => puente.recibir(m.message));
+      await web.addJavaScriptChannel('FrayNativoCanal', onMessageReceived: (m) async {
+        if (esDeLaApp(await web.currentUrl())) await puente.recibir(m.message);
+      });
       await web.setNavigationDelegate(NavigationDelegate(
-        // Solo se navega dentro de la PWA local; nada sale a la red desde aquí.
-        onNavigationRequest: (r) => Uri.parse(r.url).origin == origen.origin || r.url.startsWith('about:') || r.url.startsWith('blob:') || r.url.startsWith('data:')
+        onNavigationRequest: (r) => esDeLaApp(r.url) || r.url.startsWith('about:') || r.url.startsWith('blob:') || r.url.startsWith('data:')
             ? NavigationDecision.navigate
             : NavigationDecision.prevent,
+        onPageStarted: (url) {
+          if (mounted && _sinPagina) setState(() => _sinPagina = false);
+          _inyectar(web, url);
+        },
+        onPageFinished: (url) => _inyectar(web, url),
+        onWebResourceError: (e) {
+          // Primera apertura sin señal (la PWA aún no está guardada): se avisa y se ofrece reintentar.
+          if (e.isForMainFrame == true && mounted) setState(() => _sinPagina = true);
+        },
       ));
       final p = web.platform;
       if (p is AndroidWebViewController) {
@@ -55,18 +89,14 @@ class _PantallaAppState extends State<PantallaApp> with AutomaticKeepAliveClient
         await p.setMediaPlaybackRequiresUserGesture(false);
         await p.setGeolocationEnabled(true);
         await p.setGeolocationPermissionsPromptCallbacks(onShowPrompt: (req) async {
-          final ok = await Permission.locationWhenInUse.request().isGranted;
+          final ok = esDeLaApp(req.origin) && await Permission.locationWhenInUse.request().isGranted;
           return GeolocationPermissionsResponse(allow: ok, retain: ok);
         });
         await p.setOnShowFileSelector(_elegirArchivo);
       }
-      await web.loadRequest(origen);
-      if (!mounted) return;
-      setState(() {
-        _web = web;
-        _puente = puente;
-        _origen = origen;
-      });
+      widget.controlador.web = web;
+      await web.loadRequest(Uri.parse(urlApp));
+      if (mounted) setState(() => _web = web);
     } catch (e) {
       if (mounted) setState(() => _error = '$e');
     }
@@ -77,7 +107,7 @@ class _PantallaAppState extends State<PantallaApp> with AutomaticKeepAliveClient
       if (req.types.contains(WebViewPermissionResourceType.camera)) Permission.camera,
       if (req.types.contains(WebViewPermissionResourceType.microphone)) Permission.microphone,
     ];
-    if (pedir.isEmpty) return req.deny();
+    if (pedir.isEmpty || !esDeLaApp(await _web?.currentUrl())) return req.deny();
     final estados = await pedir.request();
     if (estados.values.every((s) => s.isGranted)) {
       await req.grant();
@@ -86,7 +116,7 @@ class _PantallaAppState extends State<PantallaApp> with AutomaticKeepAliveClient
     }
   }
 
-  // <input type="file"> de la PWA: foto con la cámara (capture) o un archivo (imagen o JSON del equipo).
+  // <input type="file"> de la PWA: foto con la cámara (capture) o un archivo (paquete USB, JSON del equipo).
   Future<List<String>> _elegirArchivo(FileSelectorParams params) async {
     final soloImagen = params.acceptTypes.isNotEmpty && params.acceptTypes.every((t) => t.startsWith('image/'));
     if (params.isCaptureEnabled && soloImagen) {
@@ -105,19 +135,9 @@ class _PantallaAppState extends State<PantallaApp> with AutomaticKeepAliveClient
   }
 
   @override
-  void dispose() {
-    unawaited(_servidor.detener());
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     if (_error != null) {
-      return Center(
-          child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Text('No pude abrir la PWA: $_error\n\n¿Corriste herramientas/copiar_pwa.py antes de compilar?')));
+      return Center(child: Padding(padding: const EdgeInsets.all(24), child: Text('No pude abrir Fray: $_error')));
     }
     final web = _web;
     if (web == null) return const Center(child: CircularProgressIndicator());
@@ -129,8 +149,28 @@ class _PantallaAppState extends State<PantallaApp> with AutomaticKeepAliveClient
       },
       child: Stack(children: [
         WebViewWidget(controller: web),
-        if (kDebugMode && _origen != null && _puente != null)
-          Positioned(right: 4, bottom: 4, child: Text('$_origen', style: const TextStyle(fontSize: 9))),
+        if (_sinPagina)
+          Positioned.fill(
+            child: ColoredBox(
+              color: Theme.of(context).colorScheme.surface,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    const Icon(Icons.wifi_off, size: 48),
+                    const SizedBox(height: 12),
+                    const Text(
+                      'Abre Fray una vez con señal (Brisas, el hotel o una estación con Starlink). '
+                      'Después funciona en modo avión durante todo el recorrido.',
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    FilledButton(onPressed: () => web.loadRequest(Uri.parse(urlApp)), child: const Text('Reintentar')),
+                  ]),
+                ),
+              ),
+            ),
+          ),
       ]),
     );
   }
