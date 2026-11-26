@@ -1,0 +1,60 @@
+{
+  "nota": "Modelos del laboratorio nativo. sha256 y bytes salen de la API de Hugging Face (lfs.sha256) el 2026-11-25. Para agregar uno: copia una entrada y llena sus campos con herramientas/huella_hf.py.",
+  "modelos": [
+    {
+      "id": "qwen2.5-0.5b-q4km",
+      "nombre": "Qwen2.5-0.5B-Instruct Q4_K_M (prueba de humo)",
+      "archivo": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/qwen2.5-0.5b-instruct-q4_k_m.gguf",
+      "sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+      "bytes": 491400032,
+      "licencia": "Apache-2.0",
+      "motor": "gguf",
+      "sinRazonar": false
+    },
+    {
+      "id": "qwen2.5-1.5b-q4km",
+      "nombre": "Qwen2.5-1.5B-Instruct Q4_K_M",
+      "archivo": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+      "url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/main/qwen2.5-1.5b-instruct-q4_k_m.gguf",
+      "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+      "bytes": 1117320736,
+      "licencia": "Apache-2.0",
+      "motor": "gguf",
+      "sinRazonar": false
+    },
+    {
+      "id": "qwen3.5-0.8b-q4km",
+      "nombre": "Qwen3.5-0.8B Q4_K_M (unsloth)",
+      "archivo": "Qwen3.5-0.8B-Q4_K_M.gguf",
+      "url": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/Qwen3.5-0.8B-Q4_K_M.gguf",
+      "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+      "bytes": 532517120,
+      "licencia": "Apache-2.0",
+      "motor": "gguf",
+      "sinRazonar": true
+    },
+    {
+      "id": "qwen3.5-2b-q4km",
+      "nombre": "Qwen3.5-2B Q4_K_M (unsloth)",
+      "archivo": "Qwen3.5-2B-Q4_K_M.gguf",
+      "url": "https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/Qwen3.5-2B-Q4_K_M.gguf",
+      "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+      "bytes": 1280835840,
+      "licencia": "Apache-2.0",
+      "motor": "gguf",
+      "sinRazonar": true
+    },
+    {
+      "id": "gemma-4-e2b-litertlm",
+      "nombre": "Gemma 4 E2B (LiteRT-LM, CPU y GPU)",
+      "archivo": "gemma-4-E2B-it.litertlm",
+      "url": "https://huggingface.co/litert-community/gemma-4-E2B-it-litert-lm/resolve/main/gemma-4-E2B-it.litertlm",
+      "sha256": "181938105e0eefd105961417e8da75903eacda102c4fce9ce90f50b97139a63c",
+      "bytes": 2588147712,
+      "licencia": "Apache-2.0",
+      "motor": "litertlm",
+      "sinRazonar": true
+    }
+  ]
+}

@@ -1,0 +1,400 @@
+{
+ "nota": "Casos de paridad del verificador. «esperado» lo calcula laboratorio/slm.html (node herramientas/paridad_verificador.mjs --escribir). No editar a mano.",
+ "casos": [
+  {
+   "nombre": "horario_bien",
+   "resp": "Puedes entrar a Brisas-Kumanday de 8:00 a. m. a 2:00 p. m., todos los días.",
+   "fuente": "El sector Brisas-Kumanday abre todos los días de 8:00 a. m. a 2:00 p. m.",
+   "pregunta": "¿hasta qué hora puedo entrar a Brisas?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "horario_hora_inventada",
+   "resp": "Puedes entrar hasta las 3:00 p. m.",
+   "fuente": "El sector Brisas-Kumanday abre todos los días de 8:00 a. m. a 2:00 p. m.",
+   "pregunta": "¿hasta qué hora puedo entrar a Brisas?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "cifra 300 no está en la fuente"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "horario_am_pm_cambiado",
+   "resp": "Abre de 8:00 p. m. a 2:00 a. m.",
+   "fuente": "El sector Brisas-Kumanday abre todos los días de 8:00 a. m. a 2:00 p. m.",
+   "pregunta": "¿hasta qué hora puedo entrar a Brisas?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "la cifra 800 no va con «pm» en la fuente",
+     "la cifra 200 no va con «am» en la fuente"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "tarifa_bien",
+   "resp": "Un extranjero no residente paga $68.000.",
+   "fuente": "Tarifas 2026 en Brisas-Kumanday: menores de 25 años, $12.500; mayores de 25, $24.500; extranjeros no residentes, $68.000.",
+   "pregunta": "¿cuánto paga un extranjero por entrar?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "tarifa_pesos",
+   "resp": "Un extranjero paga 68.000 pesos.",
+   "fuente": "Tarifas 2026 en Brisas-Kumanday: menores de 25 años, $12.500; mayores de 25, $24.500; extranjeros no residentes, $68.000.",
+   "pregunta": "¿cuánto paga un extranjero por entrar?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "tarifa_anio_como_dinero",
+   "resp": "La entrada cuesta 2026 pesos.",
+   "fuente": "Tarifas 2026 en Brisas-Kumanday: menores de 25 años, $12.500; mayores de 25, $24.500; extranjeros no residentes, $68.000.",
+   "pregunta": "¿cuánto paga un extranjero por entrar?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "la cifra 2026 no va con «$» en la fuente"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "tarifa_cifra_inventada",
+   "resp": "Un extranjero paga $70.000.",
+   "fuente": "Tarifas 2026 en Brisas-Kumanday: menores de 25 años, $12.500; mayores de 25, $24.500; extranjeros no residentes, $68.000.",
+   "pregunta": "¿cuánto paga un extranjero por entrar?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "cifra 70000 no está en la fuente"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "glaciares_bien",
+   "resp": "A Colombia le quedan 6 glaciares y el parque protege 3.",
+   "fuente": "Los glaciares ocupan cerca del 1,82 % del parque, que protege 3 de los 6 glaciares que le quedan a Colombia.",
+   "pregunta": "¿cuántos glaciares le quedan a Colombia?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "glaciares_porcentaje",
+   "resp": "Los glaciares ocupan cerca del 1,82 % del parque.",
+   "fuente": "Los glaciares ocupan cerca del 1,82 % del parque, que protege 3 de los 6 glaciares que le quedan a Colombia.",
+   "pregunta": "¿qué tanto ocupan los glaciares?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "glaciares_porcentaje_mal",
+   "resp": "Los glaciares ocupan el 6 % del parque.",
+   "fuente": "Los glaciares ocupan cerca del 1,82 % del parque, que protege 3 de los 6 glaciares que le quedan a Colombia.",
+   "pregunta": "¿qué tanto ocupan los glaciares?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "la cifra 6 no va con «%» en la fuente"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "glaciares_nombre_inventado",
+   "resp": "El Nevado del Ruiz tiene 3 glaciares.",
+   "fuente": "Los glaciares ocupan cerca del 1,82 % del parque, que protege 3 de los 6 glaciares que le quedan a Colombia.",
+   "pregunta": "¿cuántos glaciares le quedan a Colombia?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "nombre «Nevado» no está en la fuente",
+     "nombre «Ruiz» no está en la fuente"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "drones_bien",
+   "resp": "No, los drones están prohibidos por la Resolución 0543 de 2018.",
+   "fuente": "Los drones están prohibidos (Resolución 0543 de 2018).",
+   "pregunta": "¿puedo llevar mi dron?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "drones_resolucion_mal",
+   "resp": "No, los drones están prohibidos por la Resolución 0544 de 2018.",
+   "fuente": "Los drones están prohibidos (Resolución 0543 de 2018).",
+   "pregunta": "¿puedo llevar mi dron?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "cifra 0544 no está en la fuente"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "trampa_no_se",
+   "resp": "No tengo esa información oficial; pregúntale a tu guía.",
+   "fuente": "El sector Brisas-Kumanday abre todos los días de 8:00 a. m. a 2:00 p. m.",
+   "pregunta": "¿hay restaurante en Brisas?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": true
+   }
+  },
+  {
+   "nombre": "trampa_inventa",
+   "resp": "Sí, hay un restaurante en Brisas que abre a las 8:00 a. m.",
+   "fuente": "El sector Brisas-Kumanday abre todos los días de 8:00 a. m. a 2:00 p. m.",
+   "pregunta": "¿hay restaurante en Brisas?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "pregunta_final",
+   "resp": "¿Quieres saber el horario de Brisas?",
+   "fuente": "El sector Brisas-Kumanday abre todos los días de 8:00 a. m. a 2:00 p. m.",
+   "pregunta": "¿hasta qué hora puedo entrar a Brisas?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "responde con una pregunta"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "esquiva",
+   "resp": "Lo siento, no puedo responder eso.",
+   "fuente": "El sector Brisas-Kumanday abre todos los días de 8:00 a. m. a 2:00 p. m.",
+   "pregunta": "¿hasta qué hora puedo entrar a Brisas?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "esquiva la pregunta"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "vacia",
+   "resp": "   ",
+   "fuente": "El sector Brisas-Kumanday abre todos los días de 8:00 a. m. a 2:00 p. m.",
+   "pregunta": "¿hasta qué hora puedo entrar a Brisas?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "vacía"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "larga",
+   "resp": "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
+   "fuente": "El sector Brisas-Kumanday abre todos los días de 8:00 a. m. a 2:00 p. m.",
+   "pregunta": "¿hasta qué hora puedo entrar a Brisas?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "demasiado larga (61 palabras)"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "comestible",
+   "resp": "El frailejón es comestible.",
+   "fuente": "El frailejón del parque es Espeletia hartwegiana, la única especie de frailejón que hay en él.",
+   "pregunta": "¿se puede comer el frailejón?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "dice algo prohibido (comer, tóxico o alerta del volcán)"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "toxica",
+   "resp": "Esa planta es tóxica, no la toques.",
+   "fuente": "El frailejón del parque es Espeletia hartwegiana, la única especie de frailejón que hay en él.",
+   "pregunta": "¿es venenosa esta planta?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "dice algo prohibido (comer, tóxico o alerta del volcán)"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "venenosa",
+   "resp": "La planta es venenosa.",
+   "fuente": "El frailejón del parque es Espeletia hartwegiana, la única especie de frailejón que hay en él.",
+   "pregunta": "¿es venenosa esta planta?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "dice algo prohibido (comer, tóxico o alerta del volcán)"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "alerta_volcan",
+   "resp": "El volcán está en alerta naranja.",
+   "fuente": "Los glaciares ocupan cerca del 1,82 % del parque, que protege 3 de los 6 glaciares que le quedan a Colombia.",
+   "pregunta": "¿está activo el volcán?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "dice algo prohibido (comer, tóxico o alerta del volcán)"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "nivel_volcan",
+   "resp": "El Ruiz sigue en nivel amarillo.",
+   "fuente": "Los glaciares ocupan cerca del 1,82 % del parque, que protege 3 de los 6 glaciares que le quedan a Colombia.",
+   "pregunta": "¿está activo el volcán?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "nombre «Ruiz» no está en la fuente",
+     "dice algo prohibido (comer, tóxico o alerta del volcán)"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "fray_permitido",
+   "resp": "Hola, soy Fray. El frailejón del parque es Espeletia hartwegiana.",
+   "fuente": "El frailejón del parque es Espeletia hartwegiana, la única especie de frailejón que hay en él.",
+   "pregunta": "¿qué frailejón hay?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "nombre_con_tilde",
+   "resp": "La especie es Espeletia hartwegiana, según Parques Nacionales.",
+   "fuente": "El frailejón del parque es Espeletia hartwegiana, la única especie de frailejón que hay en él.",
+   "pregunta": "¿qué frailejón hay?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "nombre «Parques» no está en la fuente",
+     "nombre «Nacionales» no está en la fuente"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "primera_palabra_no_cuenta",
+   "resp": "Colombia conserva 6 glaciares. Brisas no los tiene.",
+   "fuente": "Los glaciares ocupan cerca del 1,82 % del parque, que protege 3 de los 6 glaciares que le quedan a Colombia.",
+   "pregunta": "¿cuántos glaciares le quedan a Colombia?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "guion_en_nombre",
+   "resp": "Brisas-Kumanday abre de 8:00 a. m. a 2:00 p. m.",
+   "fuente": "El sector Brisas-Kumanday abre todos los días de 8:00 a. m. a 2:00 p. m.",
+   "pregunta": "¿a qué hora abre?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "numero_en_pregunta",
+   "resp": "Sí, tu grupo de 8 personas puede entrar de 8:00 a. m. a 2:00 p. m.",
+   "fuente": "El sector Brisas-Kumanday abre todos los días de 8:00 a. m. a 2:00 p. m.",
+   "pregunta": "¿podemos entrar 8 personas?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "metros_inventados",
+   "resp": "Brisas está a 4.100 m de altura.",
+   "fuente": "El sector Brisas-Kumanday abre todos los días de 8:00 a. m. a 2:00 p. m.",
+   "pregunta": "¿a qué altura está Brisas?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "cifra 4100 no está en la fuente"
+    ],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "anos_unidad",
+   "resp": "Los menores de 25 años pagan $12.500.",
+   "fuente": "Tarifas 2026 en Brisas-Kumanday: menores de 25 años, $12.500; mayores de 25, $24.500; extranjeros no residentes, $68.000.",
+   "pregunta": "¿cuánto pagan los jóvenes?",
+   "esperado": {
+    "ok": true,
+    "fallas": [],
+    "dijoNoSe": false
+   }
+  },
+  {
+   "nombre": "anos_unidad_mal",
+   "resp": "Los menores de 12.500 años pagan $25.",
+   "fuente": "Tarifas 2026 en Brisas-Kumanday: menores de 25 años, $12.500; mayores de 25, $24.500; extranjeros no residentes, $68.000.",
+   "pregunta": "¿cuánto pagan los jóvenes?",
+   "esperado": {
+    "ok": false,
+    "fallas": [
+     "la cifra 12500 no va con «anos» en la fuente",
+     "la cifra 25 no va con «$» en la fuente"
+    ],
+    "dijoNoSe": false
+   }
+  }
+ ]
+}
