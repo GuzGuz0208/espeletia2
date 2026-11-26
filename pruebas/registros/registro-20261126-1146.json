@@ -1,0 +1,131 @@
+{
+ "formato": "fray-registro/1",
+ "juntado": "2026-11-26T16:46:54.681Z",
+ "telefono": "25080RABDG",
+ "app": "co.fray.paramo",
+ "fuentes": {
+  "indexeddb": 6,
+  "logcat": 0,
+  "exportado": 0
+ },
+ "entradas": [
+  {
+   "fecha": "2026-11-26T16:46:55.268Z",
+   "dispositivo": "d-oairyl39",
+   "paquete": null,
+   "evento": "pregunta",
+   "ref": "pmwxsby1u",
+   "origen": "probar",
+   "estacion": null,
+   "pregunta": "hola",
+   "tipo": "abstencion",
+   "categoria": null,
+   "intencion": null,
+   "fichas": [],
+   "citas": [],
+   "breve": "No tengo esa información en los guiones oficiales; pregúntale a tu guía o al personal del parque.",
+   "modo": "semantico",
+   "ms": 210
+  },
+  {
+   "fecha": "2026-11-26T16:46:55.360Z",
+   "dispositivo": "d-oairyl39",
+   "paquete": null,
+   "evento": "pregunta",
+   "ref": "pmwxsby4g",
+   "origen": "probar",
+   "estacion": null,
+   "pregunta": "¿Por qué se fracturan las rocas en Lunares?",
+   "tipo": "respuesta",
+   "categoria": null,
+   "intencion": null,
+   "fichas": [
+    "norte-lunar-gelifraccion-oxidacion"
+   ],
+   "citas": [
+    "NORTE p. 6"
+   ],
+   "breve": "El paisaje aquí se torna 'lunar' debido a la gelifracción. El agua se filtra en las grietas de la roca, se congela por la noche aumentando su volumen y las estalla desde adentro: actúa como una cuña que rompe las rocas andesíticas en pedazos angulares.",
+   "modo": "semantico",
+   "ms": 86
+  },
+  {
+   "fecha": "2026-11-26T16:47:00.252Z",
+   "dispositivo": "d-oairyl39",
+   "paquete": null,
+   "evento": "ia",
+   "ref": "pmwxsby4g",
+   "origen": "probar",
+   "pregunta": "¿Por qué se fracturan las rocas en Lunares?",
+   "fichas": [
+    "norte-lunar-gelifraccion-oxidacion"
+   ],
+   "texto": "Las rocas se fracturan en Lunares por la gelifracción del agua que se congela en las grietas, creando una cuña que rompe las rocas angulares.",
+   "ok": true,
+   "fallas": [],
+   "ms": 4889,
+   "primeraMs": 2410,
+   "motor": "nativo"
+  },
+  {
+   "fecha": "2026-11-26T16:47:00.334Z",
+   "dispositivo": "d-oairyl39",
+   "paquete": null,
+   "evento": "pregunta",
+   "ref": "pmwxsc1ym",
+   "origen": "probar",
+   "estacion": null,
+   "pregunta": "¿a qué altura está Aguacerales?",
+   "tipo": "respuesta",
+   "categoria": null,
+   "intencion": null,
+   "fichas": [
+    "uton-aguacerales-ficha"
+   ],
+   "citas": [
+    "UTON2024 p. 5"
+   ],
+   "breve": "1. Aguacerales. Altura: 4.160 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 5.2 km aproximadamente del Cráter Arenas.",
+   "modo": "semantico",
+   "ms": 82
+  },
+  {
+   "fecha": "2026-11-26T16:47:04.364Z",
+   "dispositivo": "d-oairyl39",
+   "paquete": null,
+   "evento": "ia",
+   "ref": "pmwxsc1ym",
+   "origen": "probar",
+   "pregunta": "¿a qué altura está Aguacerales?",
+   "fichas": [
+    "uton-aguacerales-ficha"
+   ],
+   "texto": "Aguacerales está a 4.160 msnm y se encuentra en el flanco occidental del edificio volcánico a 5.2 km del Cráter Arenas.",
+   "ok": false,
+   "fallas": [
+    "cifra 4160 no está en su frase de respaldo"
+   ],
+   "ms": 4029,
+   "primeraMs": 1394,
+   "motor": "nativo"
+  },
+  {
+   "fecha": "2026-11-26T16:47:04.370Z",
+   "dispositivo": "d-oairyl39",
+   "paquete": null,
+   "evento": "pregunta",
+   "ref": "pmwxsc52p",
+   "origen": "probar",
+   "estacion": null,
+   "pregunta": "¿me puedo comer el frailejón?",
+   "tipo": "seguridad",
+   "categoria": "comer",
+   "intencion": null,
+   "fichas": [],
+   "citas": [],
+   "breve": "Por tu seguridad y la del páramo, no se come, no se prueba ni se arranca ninguna planta, fruto u hongo, ni se bebe agua de lagunas o quebradas. No puedo decirte si algo es comestible, tóxico o medicinal. Pregúntale a tu guía.",
+   "modo": "semantico",
+   "ms": 4
+  }
+ ]
+}

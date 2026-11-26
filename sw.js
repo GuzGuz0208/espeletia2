@@ -7,7 +7,7 @@
 // Vigencia (contrato §7): contenido/ y ejemplo/ (información del parque) NO se sirven desde caché si la vigencia venció
 // (registro 'estado' en IndexedDB 'fray-vigencia', que escribe js/vigencia.js); van solo por red y no se guardan.
 // Al cambiar archivos de la app, sube VERSION.
-const VERSION = 'fray-v8-2026-11-26';
+const VERSION = 'fray-v9-2026-11-26';
 const CONTENIDO = /\/(contenido|ejemplo)\//;
 
 const APP = [
@@ -24,7 +24,7 @@ const APP = [
 ];
 
 const OPCIONALES = [
-  'js/fray.js', 'js/fray-worker.js', 'js/nucleo.js', 'js/generador.js', 'js/verificador.js',
+  'js/fray.js', 'js/fray-worker.js', 'js/nucleo.js', 'js/generador.js', 'js/verificador.js', 'js/conversacion.js', 'js/registro.js',
   'contenido/paquete.json', 'contenido/indice.json', 'contenido/clave_publica.json', 'contenido/qr_clave_demo.json', 'contenido/cromos.json',
   'models/fray-params.json', 'ejemplo/paquete-ejemplo.json',
   'lib/ort.wasm.min.js', 'lib/ort-wasm-simd-threaded.js', 'lib/ort-wasm-simd-threaded.wasm', 'lib/tokenizers.min.js',
@@ -91,6 +91,8 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET' || url.origin !== self.location.origin) return;
+  // descargas/ (la APK de 18 MB) no se guarda en caché: va directo por red
+  if (url.pathname.startsWith('/descargas/') || url.pathname.includes('/descargas/')) return;
   const fijo = /\/(models|lib|fonts)\//.test(url.pathname);
   if (CONTENIDO.test(url.pathname)) {
     e.respondWith((async () => {

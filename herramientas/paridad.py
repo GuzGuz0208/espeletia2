@@ -48,12 +48,42 @@ CASOS = [
     '¿Hay wifi en el parque?', '¿Qué pasa en el Parque Tayrona?', '¿qué es un frailejón?', '¿por qué las rocas son rojas?', '¿dónde estamos?',
 ]
 
+# Conversación (js/conversacion.js ↔ fray_py): intención y sinCharla de cada frase, las listas INTENCIONES/RELLENO/TEXTOS y
+# DIÁLOGOS completos (carril → charla → búsqueda léxica → anotar): tipo, breve, fichas, citas, sugerencias de cada turno.
+DIALOGOS = [
+    [('hola', 'lunares'), ('¿qué puedes hacer?', None), ('¿quién eres?', None), ('amplía', None), ('gracias', 'brisas'), ('chao', None)],
+    [('hola, ¿qué es la gelifracción?', 'lunares'), ('¿puedes complementarlo mejor?', 'lunares'), ('cuéntame más', 'lunares'),
+     ('no entendí', 'lunares'), ('más sencillo', 'lunares')] + [('más detalles', 'lunares')] * 8 + [('jaja', None), ('¿y eso?', None)],
+    [('¿qué es un frailejón?', None), ('explícame mejor', None), ('ok', None), ('dime más', None), ('hola, me siento mareado', None), ('amplía', None)],
+    [('¿por qué se llama Aguacerales?', 'aguacerales'), ('no te entendí', 'aguacerales'), ('¿qué significa Kumanday?', None), ('amplía', None),
+     ('¿puedo comer frailejón?', None), ('cuéntame más', None), ('buenas tardes fray', 'tumbas'), ('ok gracias', 'tumbas')],
+]
+CHARLA = ['hola', 'Hola!', 'holaaa', 'buenas', 'buenos días', 'qué tal', '¿qué más?', 'gracias', 'muchas gracias, Fray', 'chao', 'adiós',
+          '¿qué puedes hacer?', '¿para qué sirves?', '¿quién eres?', '¿cómo te llamas?', '¿eres un robot?', 'ok', 'jajaja', 'sí', 'no',
+          'amplía', '¿puedes complementarlo mejor?', 'explícame más', 'no entendí', 'más sencillo', '¿y eso?', 'más detalles', 'cuéntame más',
+          'hola, ¿qué es el frailejón?', 'hola, me siento mareado', 'gracias, ¿puedo comer esto?', 'hello', 'thanks!', 'what can you do?',
+          'who are you?', 'tell me more', 'hola fray buenas tardes', 'explícame más sencillo por favor', '¿qué?', 'dime qué es el frailejón']
+
 NODE = r"""
 const carril = await import(process.argv[1]);
 const nucleo = await import(process.argv[2]);
+const conv = await import(process.argv[3]);
 let datos = ''; for await (const c of process.stdin) datos += c;
-const { frases, textos } = JSON.parse(datos);
+const { frases, textos, dialogos, paquete, params } = JSON.parse(datos);
+const idx = nucleo.preparar(paquete);
+const P = { ...nucleo.PARAMS_DEFECTO, ...params };
+const turnos = dialogos.map((d) => {
+  const estado = conv.nuevaConversacion();
+  return d.map(([t, est]) => {
+    let r = carril.carril(t);
+    if (!r) r = conv.conversar(t, { paquete, estacion: est || null, estado });
+    if (!r) { const q = conv.sinCharla(t); r = nucleo.decidir(idx, null, q, { estacion: est || null }, P); conv.anotar(estado, r, paquete); }
+    return [r.tipo, r.breve, r.fichas || [], (r.citas || []).map((c) => [c.guion, c.pagina]), r.sugerencias || null, r.intencion || null, r.seguimiento || null];
+  });
+});
 console.log(JSON.stringify({
+  intencion: frases.map((t) => conv.intencion(t)), sinCharla: frases.map((t) => conv.sinCharla(t)), turnos,
+  INTENCIONES: conv.INTENCIONES, RELLENO: conv.RELLENO, TEXTOS: conv.TEXTOS,
   carril: frases.map((t) => carril.categoriaCarril(t)),
   norm: frases.map((t) => carril.normalizarCarril(t)),
   lex: frases.map((t) => nucleo.tokensLex(t)),
@@ -102,9 +132,17 @@ def main():
     import importlib, carril_py, fray_py
     importlib.reload(carril_py)
     frases, textos = frases_de_prueba()
+    frases = list(dict.fromkeys(frases + CHARLA))
+    paquete = json.load(open(os.path.join(RAIZ, 'contenido', 'paquete.json'), encoding='utf8'))
+    rp = os.path.join(RAIZ, 'models', 'fray-params.json')
+    params = {}
+    if os.path.exists(rp):
+        params = json.load(open(rp, encoding='utf8'))
+        params = params.get('params', params)
     url = lambda p: 'file:///' + os.path.join(RAIZ, 'js', p).replace('\\', '/')
-    out = subprocess.run(['node', '--input-type=module', '-e', NODE, url('carril.js'), url('nucleo.js')],
-                         input=json.dumps({'frases': frases, 'textos': textos}), capture_output=True, text=True, encoding='utf8')
+    out = subprocess.run(['node', '--input-type=module', '-e', NODE, url('carril.js'), url('nucleo.js'), url('conversacion.js')],
+                         input=json.dumps({'frases': frases, 'textos': textos, 'dialogos': DIALOGOS, 'paquete': paquete, 'params': params}),
+                         capture_output=True, text=True, encoding='utf8')
     if out.returncode:
         print(out.stderr); sys.exit(2)
     js = json.loads(out.stdout)
@@ -118,8 +156,27 @@ def main():
         if fray_py.frases(t) != js['frases'][i]: dif.append(('frases', t[:60], len(js['frases'][i]), len(fray_py.frases(t))))
     if sorted(fray_py.STOP) != js['STOP']: dif.append(('STOP', '', '', ''))
     if fray_py.FUERA != js['FUERA']: dif.append(('FUERA', '', '', ''))
+    # Conversación
+    for i, t in enumerate(frases):
+        if fray_py.intencion(t) != js['intencion'][i]: dif.append(('intencion', t, js['intencion'][i], fray_py.intencion(t)))
+        if fray_py.sin_charla(t) != js['sinCharla'][i]: dif.append(('sinCharla', t, js['sinCharla'][i], fray_py.sin_charla(t)))
+    if fray_py.INTENCIONES != js['INTENCIONES']: dif.append(('INTENCIONES', '', '', ''))
+    if fray_py.RELLENO != js['RELLENO']: dif.append(('RELLENO', '', '', ''))
+    if fray_py.TEXTOS != js['TEXTOS']: dif.append(('TEXTOS', '', '', ''))
+    m = fray_py.Motor(paquete, solo_lexico=True)
+    n_turnos = 0
+    for d, tj in zip(DIALOGOS, js['turnos']):
+        m.reiniciar()
+        for (t, est), rj in zip(d, tj):
+            r = m.preguntar(t, est)
+            rpy = [r['tipo'], r['breve'], r.get('fichas') or [], [[c['guion'], c['pagina']] for c in r.get('citas') or []],
+                   r.get('sugerencias'), r.get('intencion'), r.get('seguimiento')]
+            n_turnos += 1
+            if rpy != rj: dif.append(('dialogo', t, rj, rpy))
     disp = sum(1 for c in js['carril'] if c)
-    print(f'paridad: {len(frases)} frases ({disp} disparan el carril), {len(textos)} textos de fichas -> diferencias: {len(dif)}')
+    n_charla = sum(1 for c in js['intencion'] if c)
+    print(f'paridad: {len(frases)} frases ({disp} disparan el carril, {n_charla} son charla), {len(textos)} textos de fichas, '
+          f'{n_turnos} turnos de diálogo -> diferencias: {len(dif)}')
     for d in dif[:30]:
         print('  DIF', d)
     if '--ver' in sys.argv:
