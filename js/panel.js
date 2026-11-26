@@ -3,7 +3,8 @@
 
 import { TIPOS, TEMAS, ESTADOS } from './panel-config.js';
 import { hayPin, definirPin, comprobarPin, sesionActiva, restablecer, LARGO_MINIMO } from './panel-pin.js';
-import { cargarPaquete, paqueteBase, guardarVersion, versiones } from './ui-paquete.js';
+import { cargarPaquete, paqueteBase, guardarVersion, versiones, avisarCambio } from './ui-paquete.js';
+import { urlBase, guardarUrlBase, arrancarSync, sync } from './ui-sync.js';
 import { fray as cargarFray, claveQR, CLAVE_QR_DEMO } from './ui-motor.js';
 import { textoQR } from './qr-estacion.js';
 
@@ -449,6 +450,115 @@ async function pintarQR() {
   caja.append(tarjeta);
 }
 
+// ---------- Sincronización con la base (contrato §5.5) ----------
+let tokenPanel = ''; // solo en memoria: no se guarda en el dispositivo
+
+async function pintarSync() {
+  const e = await sync.estadoSync();
+  $('#sync-estado').textContent = e.texto;
+  $('#sync-detalle').textContent = [
+    `Versión actual: ${e.versionActual || '—'}`,
+    `anterior: ${e.versionAnterior || '—'}`,
+    `preguntas pendientes por subir: ${e.pendientes}`,
+    e.activo ? `base: ${e.urlBase}` : 'sin dirección de la base (solo USB)',
+    e.ultimoError ? `último error: ${e.ultimoError}` : '',
+  ].filter(Boolean).join(' · ');
+  $('#sync-url').value = urlBase() || '';
+}
+
+async function alPaqueteSync(p) {
+  P.paquete = p;
+  P.origen = 'sync';
+  pintarTodo();
+  avisarCambio(p.version);
+  // Reindexa en segundo plano: la sincronización no espera al índice
+  cargarFray().then((m) => { P.motor = m; return m.cargar(p); }).catch((e) => console.error(e));
+}
+
+function arrancar() {
+  return arrancarSync({ versionLocal: P.incluido?.version, alPaqueteNuevo: alPaqueteSync, alAvisos: () => {} });
+}
+
+async function pintarBandeja() {
+  const tb = $('#tbody-bandeja');
+  tb.replaceChildren();
+  const fila = (txt) => { const tr = el('tr'); const td = el('td', null, txt); td.colSpan = 5; tr.append(td); tb.append(tr); };
+  const base = urlBase();
+  if (!base) return fila('Configura primero la dirección de la base.');
+  let j;
+  try {
+    const r = await fetch(`${base}/bandeja`, { headers: tokenPanel ? { Authorization: `Bearer ${tokenPanel}` } : {} });
+    if (r.status === 401 || r.status === 403) return fila('La base pide el token del panel.');
+    j = await r.json();
+  } catch (e) {
+    return fila(`No pude hablar con la base (${e.message}).`);
+  }
+  const grupos = j?.grupos || [];
+  for (const g of grupos) {
+    const tr = el('tr');
+    tr.append(el('td', null, String(g.conteo)), el('td', null, g.texto), el('td', null, nombreEstacion(g.estacion)), el('td', null, g.ultima || ''));
+    const td = el('td');
+    const b = el('button', 'btn btn-mini btn-flor', 'Crear ficha desde esta pregunta');
+    b.onclick = () => {
+      cambiarTab('fichas');
+      const variantes = (g.variantes || []).map((v) => (typeof v === 'string' ? v : v?.texto)).filter((v) => v && v !== g.texto);
+      abrirEditor({ preguntas: [g.texto, ...variantes.slice(0, 4)], estacion: g.estacion, estado: 'borrador', citas: [] }, { nueva: true });
+    };
+    td.append(b);
+    tr.append(td);
+    tb.append(tr);
+  }
+  if (!grupos.length) fila('La bandeja está vacía.');
+}
+
+function conectarSync() {
+  $('#btn-sync-ahora').onclick = async () => {
+    if (!exigirSesion()) return;
+    $('#sync-resultado').textContent = 'Sincronizando…';
+    const r = await sync.sincronizar();
+    $('#sync-resultado').textContent = r.ok
+      ? `Listo: ${r.subidas} preguntas subidas${r.paqueteNuevo ? `, paquete nuevo ${r.paqueteNuevo}` : ''}${r.avisosNuevos ? ', avisos actualizados' : ''}.`
+      : `No se pudo: ${r.error}`;
+    pintarSync();
+  };
+  $('#btn-sync-atras').onclick = async () => {
+    if (!exigirSesion() || !confirm('¿Volver a la versión anterior del paquete firmado?')) return;
+    const r = await sync.volverAtras();
+    $('#sync-resultado').textContent = r.ok ? `Listo: Fray responde otra vez con la versión ${r.version}.` : `No se pudo: ${r.motivo}`;
+    pintarSync();
+  };
+  $('#archivo-usb').onchange = async (e) => {
+    const a = e.target.files[0];
+    e.target.value = '';
+    if (!a || !exigirSesion()) return;
+    const r = await sync.importarPaquete(a);
+    $('#sync-resultado').textContent = r.ok ? `Listo: paquete ${r.version} verificado e instalado. Fray ya responde con él.` : `No se instaló: ${r.motivo}`;
+    pintarSync();
+  };
+  $('#btn-sync-exportar').onclick = async () => {
+    if (!exigirSesion()) return;
+    const vaciar = confirm('¿Vaciar la cola del dispositivo después de exportar? (Acepta solo si vas a llevar el archivo a la base.)');
+    const r = await sync.exportarCola({ vaciar });
+    descargar(r.nombre, r.texto, 'application/json');
+    $('#sync-resultado').textContent = `Exportadas ${r.cantidad} preguntas en ${r.nombre}.`;
+    pintarSync();
+  };
+  $('#btn-sync-url').onclick = async () => {
+    if (!exigirSesion()) return;
+    try {
+      const u = guardarUrlBase($('#sync-url').value);
+      await arrancar();
+      $('#sync-resultado').textContent = u ? `Dirección guardada: ${u}.` : 'Sin dirección: solo USB, sin red.';
+    } catch (err) { $('#sync-resultado').textContent = err.message; }
+    pintarSync();
+  };
+  $('#btn-bandeja').onclick = () => {
+    if (!exigirSesion()) return;
+    tokenPanel = $('#sync-token').value;
+    pintarBandeja();
+  };
+}
+
 // ---------- Pestañas y arranque ----------
 function cambiarTab(nombre) {
   document.querySelectorAll('[role="tab"]').forEach((b) => b.setAttribute('aria-selected', b.dataset.tab === nombre));
@@ -456,13 +566,14 @@ function cambiarTab(nombre) {
   if (nombre === 'sin') pintarSinRespuesta();
   if (nombre === 'versiones') pintarVersiones();
   if (nombre === 'qr') pintarQR();
+  if (nombre === 'sync') pintarSync();
 }
 
 function pintarTodo() {
   const p = P.paquete;
   const n = p.fichas.length;
   const val = p.fichas.filter((f) => f.estado === 'validado' && !f.bloqueada).length;
-  $('#resumen').textContent = `Paquete ${p.version} · ${n} fichas (${val} validadas y activas) · origen: ${P.origen === 'dispositivo' ? 'guardado en este dispositivo' : P.origen === 'ejemplo' ? 'paquete de ejemplo' : 'contenido/paquete.json'}`;
+  $('#resumen').textContent = `Paquete ${p.version} · ${n} fichas (${val} validadas y activas) · origen: ${({ dispositivo: 'guardado en este dispositivo (Panel)', sync: 'paquete firmado de la base', ejemplo: 'paquete de ejemplo' })[P.origen] || 'contenido/paquete.json'}`;
   const aviso = $('#aviso-ejemplo');
   aviso.hidden = !p.ejemplo;
   aviso.textContent = 'Estás viendo el PAQUETE DE EJEMPLO (ejemplo/paquete-ejemplo.json). Llegará el paquete oficial en contenido/paquete.json.';
@@ -476,9 +587,12 @@ async function entrar() {
   $('#panel').hidden = false;
   if (iniciado) return; // volver tras una sesión caducada: no se recarga ni se duplican eventos
   iniciado = true;
-  const { paquete, origen } = await cargarPaquete();
+  const { paquete, origen, incluido } = await cargarPaquete();
   P.paquete = paquete;
   P.origen = origen;
+  P.incluido = incluido;
+  conectarSync();
+  arrancar().catch((e) => console.warn('Sync:', e));
   pintarTodo();
   // El motor se carga en segundo plano: la lista se puede usar ya
   P.motor = await cargarFray();

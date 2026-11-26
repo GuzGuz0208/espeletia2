@@ -35,6 +35,7 @@
       <button role="tab" data-tab="sin">Preguntas sin respuesta</button>
       <button role="tab" data-tab="versiones">Versiones</button>
       <button role="tab" data-tab="qr">QR de estación</button>
+      <button role="tab" data-tab="sync">Sincronización</button>
       <a class="btn btn-mini btn-linea" href="./" style="margin-left:auto">Ver como visitante</a>
     </nav>
 
@@ -143,6 +144,37 @@
       </div>
       <p class="aviso-demo" id="qr-aviso" hidden>Este paquete no trae clave propia: el QR usa la clave de demostración.</p>
       <div class="imprimible" id="qr-tarjeta"></div>
+    </section>
+
+    <!-- Sincronización con la base (contrato §5) -->
+    <section data-panel="sync" hidden>
+      <h2>Sincronización con la base</h2>
+      <p id="sync-estado" class="estado"></p>
+      <p id="sync-detalle"></p>
+      <div class="acciones">
+        <button class="btn btn-flor" id="btn-sync-ahora">Sincronizar ahora</button>
+        <button class="btn btn-linea" id="btn-sync-atras">Volver a la versión anterior</button>
+        <label class="btn btn-linea">Importar paquete (USB)… <input type="file" id="archivo-usb" accept=".json,application/json" hidden></label>
+        <button class="btn btn-linea" id="btn-sync-exportar">Exportar preguntas (USB)</button>
+      </div>
+      <p id="sync-resultado" role="status"></p>
+
+      <h3 style="margin-top:24px">Dirección de la base</h3>
+      <p>Por ejemplo <code>http://192.168.4.1:8090</code> (wifi local de Brisas). Vacío = sin red: solo USB.</p>
+      <div class="filtros">
+        <input id="sync-url" type="url" placeholder="http://192.168.4.1:8090" aria-label="Dirección de la base">
+        <button class="btn btn-verde" id="btn-sync-url">Guardar dirección</button>
+      </div>
+
+      <h3 style="margin-top:24px">Bandeja de la base: preguntas sin respuesta de todos los dispositivos</h3>
+      <div class="filtros">
+        <input id="sync-token" type="password" placeholder="Token del panel (si la base lo pide)" aria-label="Token del panel" autocomplete="off">
+        <button class="btn btn-flor" id="btn-bandeja">Cargar bandeja</button>
+      </div>
+      <table class="tabla">
+        <thead><tr><th>Veces</th><th>Pregunta</th><th>Estación</th><th>Última</th><th></th></tr></thead>
+        <tbody id="tbody-bandeja"></tbody>
+      </table>
     </section>
   </div>
 

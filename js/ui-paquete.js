@@ -1,6 +1,11 @@
 // Paquete de contenido en el dispositivo: versiones en IndexedDB (con vuelta atrás) y carga inicial.
-// Orden de carga: última versión guardada por el Panel → contenido/paquete.json → ejemplo/paquete-ejemplo.json.
-// Nada sale del dispositivo: todo es local.
+// Al arrancar se usa el MÁS NUEVO (por número de versión) entre:
+//   1. el paquete firmado descargado por js/sync.js (contrato §5.5: sync.paqueteGuardado()),
+//   2. la última versión guardada por el Panel en este dispositivo,
+//   3. el que trae la app: contenido/paquete.json (o ejemplo/paquete-ejemplo.json si aún no existe).
+// Si empatan, gana el firmado. Nada sale del dispositivo desde aquí.
+
+import * as sync from './sync.js';
 
 const DB = 'fray-paquete';
 const STORE = 'versiones';
@@ -46,14 +51,18 @@ async function leerJSON(url) {
   return r.json();
 }
 
-/** Devuelve { paquete, origen } con el paquete que debe usarse ahora. */
+/** Devuelve { paquete, origen, incluido } con el paquete que debe usarse ahora (origen: sync | dispositivo | contenido | ejemplo). */
 export async function cargarPaquete() {
-  const v = await vigente();
-  // Lo editado en el Panel manda, salvo que se haya hecho sobre el paquete de ejemplo y ya exista el oficial
-  if (v && !v.paquete.ejemplo) return { paquete: v.paquete, origen: 'dispositivo' };
   const base = await paqueteBase();
-  if (v && base.origen === 'ejemplo') return { paquete: v.paquete, origen: 'dispositivo' };
-  return base;
+  const candidatos = [];
+  try { const p = await sync.paqueteGuardado(); if (p) candidatos.push({ paquete: p, origen: 'sync' }); } catch { /* sin IndexedDB */ }
+  const v = await vigente();
+  // Lo editado sobre el paquete de ejemplo no tapa al oficial cuando este ya existe
+  if (v && !(v.paquete.ejemplo && base.origen !== 'ejemplo')) candidatos.push({ paquete: v.paquete, origen: 'dispositivo' });
+  candidatos.push(base);
+  let mejor = candidatos[0];
+  for (const c of candidatos.slice(1)) if (sync.compararVersion(c.paquete.version, mejor.paquete.version) > 0) mejor = c;
+  return { ...mejor, incluido: base.paquete };
 }
 
 /** El paquete que viene con la app (sin cambios del Panel): contenido/paquete.json o, si aún no existe, el de ejemplo. */
@@ -82,6 +91,11 @@ export async function guardarVersion(paquete, nota = '') {
   for (const v of todas.slice(MAX_VERSIONES)) await tx('readwrite', (s) => s.delete(v.n));
   canal?.postMessage({ tipo: 'nueva-version', version: nuevo.version });
   return nuevo;
+}
+
+/** Avisa a las otras pestañas que cambió el paquete (p. ej. llegó uno firmado o se volvió atrás). */
+export function avisarCambio(version = null) {
+  canal?.postMessage({ tipo: 'nueva-version', version });
 }
 
 /** Escucha cuando el Panel guarda una versión nueva (en otra pestaña del mismo dispositivo). */

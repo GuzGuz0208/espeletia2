@@ -132,6 +132,12 @@ a { color: var(--verde); }
 }
 :root[data-contraste="alto"] .burbuja-visitante { color: #000; }
 
+/* Avisos del día (firmados, llegan con el paquete) */
+.avisos { display: grid; gap: 8px; margin: 4px 0 12px; }
+.aviso { padding: 10px 14px; border-radius: 12px; background: var(--amarillo); color: #1d2b38; }
+.aviso-texto { margin: 0; font-weight: 700; }
+.aviso-pie { margin: 4px 0 0; font-size: .8rem; }
+
 /* Tarjeta de respuesta */
 .resp { padding: 16px; border-radius: var(--radio); background: var(--hoja); box-shadow: 0 2px 0 var(--linea); scroll-margin-top: 80px; }
 .resp-texto { margin: 0; font-size: 1.1rem; line-height: 1.5; }

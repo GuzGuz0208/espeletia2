@@ -3,7 +3,8 @@
 // Contrato con el motor: docs/contrato.md §2-§4.
 
 import { fray as cargarFray, generador as cargarGenerador, info, claveQR } from './ui-motor.js';
-import { cargarPaquete, alCambiar } from './ui-paquete.js';
+import { cargarPaquete, alCambiar, avisarCambio } from './ui-paquete.js';
+import { arrancarSync, sync } from './ui-sync.js';
 import { verificarQR } from './qr-estacion.js';
 import { t, setIdioma, traducirDOM } from './ui-i18n.js';
 import { fray as dibujoFray, iconos } from './ui-art.js';
@@ -136,6 +137,23 @@ function pintarEstado() {
   $('#estado-carga').hidden = E.listo;
 }
 
+// ---------- Avisos del día (contrato §6): tal cual, con su hora y quién lo emite ----------
+const hora = (iso) => new Date(iso).toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+async function pintarAvisos() {
+  const caja = $('#avisos');
+  if (!E.estacion) { caja.hidden = true; return; }
+  let avisos = [];
+  try { avisos = await sync.avisosVigentes({ estacion: E.estacion }); } catch { /* sin almacenamiento */ }
+  caja.replaceChildren();
+  for (const a of avisos) {
+    const d = el('div', 'aviso');
+    d.append(el('p', 'aviso-texto', a.texto));
+    d.append(el('p', 'aviso-pie', `${a.emitidoPor} · ${hora(a.vigenteDesde)}–${hora(a.vigenteHasta)}`));
+    caja.append(d);
+  }
+  caja.hidden = !avisos.length;
+}
+
 // ---------- Chat ----------
 function sugerenciasDe(estacion) {
   const fs = E.paquete.fichas.filter((f) => usable(f) && f.preguntas?.length);
@@ -165,6 +183,7 @@ function abrirEstacion(id, { conservar = false } = {}) {
   }
   $('#sugerencias').hidden = !chips.children.length;
   if (cambio && !conservar) $('#conversacion').replaceChildren();
+  pintarAvisos();
   mostrar('chat');
 }
 
@@ -190,6 +209,8 @@ async function preguntar(texto) {
   }
   pintarRespuesta(tarjeta, r);
   tarjeta.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Cola para la base (contrato §5.2): sin datos personales, solo texto, estación y día
+  if (r.tipo === 'abstencion') sync.registrarSinRespuesta(texto, E.estacion).catch(() => {});
   if (r.tipo === 'respuesta') {
     darCromo(E.estacion);
     if (E.genListo) mejorarConIA(tarjeta, r, texto);
@@ -402,9 +423,10 @@ function avance(a) {
 }
 
 async function recargarPaquete() {
-  const { paquete, origen } = await cargarPaquete();
+  const { paquete, origen, incluido } = await cargarPaquete();
   E.paquete = paquete;
   E.origen = origen;
+  E.incluido = incluido;
   pintarEstaciones();
   prepararMotor();
   if (E.estacion) abrirEstacion(E.estacion, { conservar: true });
@@ -439,6 +461,20 @@ async function iniciar() {
   aplicarAjustes(leerAjustes());
   conectarEventos();
   await recargarPaquete().catch((e) => { console.error(e); $('#estado-carga').textContent = t('chat.error'); });
+  // Sincronización con la base (contrato §5.5). Sin urlBase configurada no usa la red.
+  arrancarSync({
+    versionLocal: E.incluido?.version,
+    alPaqueteNuevo: async (p) => {
+      E.paquete = p;
+      E.origen = 'sync';
+      pintarEstaciones();
+      avisarCambio(p.version);
+      if (E.estacion) abrirEstacion(E.estacion, { conservar: true });
+      prepararMotor(); // reindexa en segundo plano
+    },
+    alAvisos: () => pintarAvisos(),
+  }).catch((e) => console.warn('Sync:', e));
+  setInterval(pintarAvisos, 60000); // los avisos vencidos desaparecen solos
   rutaActual();
   try {
     E.gen = await cargarGenerador();
