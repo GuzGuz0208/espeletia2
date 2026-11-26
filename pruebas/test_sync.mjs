@@ -79,13 +79,13 @@ try {
   const cargados = [];
   const avisosRecibidos = [];
   const opciones = {
-    urlBase: servidor.url, clavePublicaJwk: jwk, almacen: sync.crearAlmacenMemoria(),
+    urlBase: servidor.url, urlSubida: servidor.url, clavePublicaJwk: jwk, almacen: sync.crearAlmacenMemoria(),
     primerIntentoMs: 3600e3, // en la prueba se llama a sincronizar() a mano
     alPaqueteNuevo: (p, info) => cargados.push(info.version), alAvisos: (a) => avisosRecibidos.push(a),
   };
 
   // --- sin base al alcance: la cola no se pierde
-  sync.iniciarSync({ ...opciones, urlBase: 'http://127.0.0.1:9' });
+  sync.iniciarSync({ ...opciones, urlBase: 'http://127.0.0.1:9', urlSubida: 'http://127.0.0.1:9' });
   for (const [t, e] of [['¿Hay restaurante en Brisas?', 'brisas'], ['hay restaurante en brisas', 'brisas'],
     ['¿Por qué se llama Valle de las Tumbas? escríbeme a ana@correo.com o al 3001234567', 'tumbas']]) {
     await sync.registrarSinRespuesta(t, e);
