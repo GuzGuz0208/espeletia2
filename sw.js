@@ -18,7 +18,7 @@ const APP = [
 ];
 
 const OPCIONALES = [
-  'js/fray.js', 'js/generador.js', 'contenido/paquete.json',
+  'js/fray.js', 'js/fray-worker.js', 'js/nucleo.js', 'js/carril.js', 'js/generador.js', 'contenido/paquete.json', 'models/fray-params.json',
   'lib/ort.wasm.min.js', 'lib/ort-wasm-simd-threaded.js', 'lib/ort-wasm-simd-threaded.wasm', 'lib/tokenizers.min.js',
   'models/e5_tokenizer.json', 'models/e5_tokenizer_config.json', 'models/partes.json',
 ];
