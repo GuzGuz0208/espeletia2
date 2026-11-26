@@ -61,15 +61,15 @@
 .sc-imagen img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.06) contrast(1.04); }
 .sc-imagen::after { content: ''; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 9cqw rgb(0 0 0 / 22%); }
 .sc-imagen .ilus { width: 88%; height: 88%; }
-.ilus .ink-y { fill: #f4c431; }
-.ilus .ink-g { fill: #2f6b4f; mix-blend-mode: multiply; }
-.ilus .ink-p { fill: #e2e9e4; }
-.ilus .l { fill: none !important; stroke-width: 3; stroke-linecap: round; }
-.ilus .ink-y .l { stroke: #f4c431; }
-.ilus .ink-g .l { stroke: #2f6b4f; }
-.ilus .ink-p .l { stroke: #e2e9e4; stroke-width: 2.2; }
-.silueta { width: 78%; height: 78%; color: #2c3a45; }
-.silueta .l { fill: none !important; stroke-width: 3; stroke-linecap: round; }
+.sc-imagen .ilus .ink-y { fill: #f4c431; }
+.sc-imagen .ilus .ink-g { fill: #2f6b4f; mix-blend-mode: multiply; }
+.sc-imagen .ilus .ink-p { fill: #e2e9e4; }
+.sc-imagen .ilus .l { fill: none !important; stroke-width: 3; stroke-linecap: round; }
+.sc-imagen .ilus .ink-y .l { stroke: #f4c431; }
+.sc-imagen .ilus .ink-g .l { stroke: #2f6b4f; }
+.sc-imagen .ilus .ink-p .l { stroke: #e2e9e4; stroke-width: 2.2; }
+:is(.sc-imagen, .sc-sobre-arte) .silueta { width: 78%; height: 78%; color: #2c3a45; }
+:is(.sc-imagen, .sc-sobre-arte) .silueta .l { fill: none !important; stroke-width: 3; stroke-linecap: round; }
 .sc-num { position: absolute; left: 5cqw; bottom: 7cqw; font: 800 17cqw/.8 var(--display); font-stretch: 75%; color: #2f6b4f; }
 .sc-nombre {
   position: absolute; left: 27cqw; right: 5cqw; bottom: 12cqw; font: 700 7.6cqw/1 var(--display); font-stretch: 85%;

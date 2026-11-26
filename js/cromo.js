@@ -4,6 +4,7 @@ import { E, texto, cromo as getCromo, fotoURL, estacion, capitulos } from './est
 import { ilustracion } from './art.js';
 import { t, citar } from './i18n.js';
 import { esc, h } from './util.js';
+import { cromoFrente, TONOS } from './sobre-demo.js';
 
 const MESES = { es: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'], en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] };
 export function fecha(ms) {
@@ -26,7 +27,16 @@ const creditos = () => (creditosP ??= fetch(new URL('../img/cromos/creditos.json
 export async function fotoParque(c) {
   const id = c?.guion?.cromo || FOTO_DE[c?.id];
   const f = id ? (await creditos())[id] : null;
-  return f ? { src: new URL(`../img/cromos/${id}.jpg`, import.meta.url).href, autor: f.autor, licencia: f.licencia } : null;
+  return f ? { id, src: new URL(`../img/cromos/${id}.jpg`, import.meta.url).href, autor: f.autor, licencia: f.licencia } : null;
+}
+
+export async function siluetaFotografica(c, pista = '') {
+  const foto = await fotoParque(c);
+  if (!foto) return null;
+  const estacion = foto.id.split('-')[0];
+  return cromoFrente({ id: foto.id, estacion: Object.hasOwn(TONOS, estacion) ? estacion : 'paso' }, {
+    numero: c.n, foto, bloqueado: true, pista,
+  });
 }
 
 export async function cromoEl(id, { tapado = false, mini = false } = {}) {

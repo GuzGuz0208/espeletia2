@@ -3,7 +3,7 @@ import { E, bus, cromo as getCromo, cromosDe, capitulos, texto, abierto, tiene, 
 import { t, traducir } from './i18n.js';
 import { $, $$, h, esc, animar, reducido, aviso, hablar, distancia, fmtDist, atraparFoco, vibrar, escuchar } from './util.js';
 import { ilustracion } from './art.js';
-import { cromoEl, activarBrillo, num } from './cromo.js';
+import { cromoEl, activarBrillo, num, siluetaFotografica } from './cromo.js';
 import { cromoPNG, descargar } from './exportar.js';
 import { formCodigo } from './guia.js';
 import { preguntasDeFicha } from './fray-chat.js';
@@ -117,7 +117,14 @@ async function ranura(c) {
   } else {
     const bl = bloqueo(c);
     const enSobre = tiene(c.id);
-    b.innerHTML = `${ilustracion(c.id, { silueta: true })}
+    const lugar = estacion(c.estacion)?.nombre;
+    const pista = enSobre ? t('sobre.titulo') : lugar ? t('album.seGanaEn', { estacion: lugar }) : t(`tipo.${c.tipo}`);
+    const silueta = await siluetaFotografica(c, pista);
+    if (silueta) {
+      b.classList.add('ranura-foto');
+      b.setAttribute('aria-label', `${num(c.n)}. ${tx.nombre}. ${pista}`);
+      b.append(silueta);
+    } else b.innerHTML = `${ilustracion(c.id, { silueta: true })}
       <span class="ranura-num">${num(c.n)}</span>
       <span class="ranura-como">${esc(enSobre ? t('sobre.titulo') : t(`tipo.${c.tipo}`))}</span>`;
     if (enSobre) b.classList.add('en-sobre');

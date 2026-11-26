@@ -2,7 +2,7 @@
 import { E, cromo as getCromo, texto, pendientes, abrir } from './estado.js';
 import { t } from './i18n.js';
 import { $, h, esc, animar, esperar, vibrar, hablar, reducido, atraparFoco, escuchar, quitarAviso } from './util.js';
-import { cromoEl, activarBrillo } from './cromo.js';
+import { cromoEl, activarBrillo, siluetaFotografica } from './cromo.js';
 import { irPagina, paginaDe, ranuraDe, esperarPintado } from './album.js';
 import { chispas } from './celebrar.js';
 import { preguntasDeFicha } from './fray-chat.js';
@@ -60,6 +60,12 @@ async function revelar(id, quedan) {
   const soltar = atraparFoco(capa);
   const mesa = $('.sobre-mesa', escena);
   const sobre = sobreHTML(c);
+  const silueta = await siluetaFotografica(c);
+  if (silueta) {
+    const arte = $('.sobre-arte', sobre);
+    arte.classList.add('sobre-arte-foto');
+    arte.append(silueta);
+  }
   const card = await cromoEl(id, { tapado: true });
   card.classList.add('grande', 'volteado', 'saliendo');
   mesa.append(card, sobre);
