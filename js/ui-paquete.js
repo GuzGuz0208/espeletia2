@@ -6,6 +6,7 @@
 // Si empatan, gana el firmado. Nada sale del dispositivo desde aquí.
 
 import * as sync from './sync.js';
+import { verificarVigencia, activarSiPrimeraVez } from './vigencia.js';
 
 const DB = 'fray-paquete';
 const STORE = 'versiones';
@@ -53,6 +54,8 @@ async function leerJSON(url) {
 
 /** Devuelve { paquete, origen, incluido } con el paquete que debe usarse ahora (origen: sync | dispositivo | contenido | ejemplo). */
 export async function cargarPaquete() {
+  // Vigencia (contrato §7): con el contenido vencido no se carga nada del parque
+  if (verificarVigencia().estado === 'vencido') throw Object.assign(new Error('contenido vencido'), { vencido: true });
   const base = await paqueteBase();
   const candidatos = [];
   try { const p = await sync.paqueteGuardado(); if (p) candidatos.push({ paquete: p, origen: 'sync' }); } catch { /* sin IndexedDB */ }
@@ -62,6 +65,7 @@ export async function cargarPaquete() {
   candidatos.push(base);
   let mejor = candidatos[0];
   for (const c of candidatos.slice(1)) if (sync.compararVersion(c.paquete.version, mejor.paquete.version) > 0) mejor = c;
+  activarSiPrimeraVez(mejor.paquete.vigenciaHoras ?? base.paquete.vigenciaHoras);
   return { ...mejor, incluido: base.paquete };
 }
 

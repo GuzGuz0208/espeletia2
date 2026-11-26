@@ -21,6 +21,9 @@
   </header>
 
   <main>
+    <!-- Vigencia del contenido (contrato §7): «Disponible hasta las HH:MM» y aviso 1 h antes -->
+    <p class="vigencia" id="vigencia" role="status" hidden></p>
+
     <!-- 1. Inicio: elegir estación -->
     <section class="vista" id="vista-inicio">
       <div class="saludo">
@@ -62,6 +65,19 @@
         <div class="chips" id="chips-sug"></div>
       </div>
       <div class="conversacion" id="conversacion" aria-live="polite"></div>
+    </section>
+
+    <!-- 4. Contenido vencido (contrato §7): solo queda el carril de seguridad -->
+    <section class="vista" id="vista-vencido" hidden>
+      <div class="saludo">
+        <div class="fray" id="fray-vencido"></div>
+        <div><h1 id="vencido-titulo"></h1></div>
+      </div>
+      <p class="estado" data-t="vencido.texto"></p>
+      <p class="mensaje" id="vencido-estado" role="status"></p>
+      <button class="btn btn-flor btn-grande btn-ancho" id="btn-renovar" data-t="vencido.renovar"></button>
+      <p class="nota-guia" data-t="vencido.seguridad"></p>
+      <div class="conversacion" id="conv-vencido" aria-live="polite"></div>
     </section>
   </main>
 

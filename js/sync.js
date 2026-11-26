@@ -383,6 +383,15 @@ export async function importarPaquete(archivo) {
   }
 }
 
+/**
+ * Vigencia (contrato §7): borra el contenido del parque guardado por sync (paquetes actual y anterior, avisos, estado).
+ * Conserva el id del dispositivo y la cola de preguntas aún NO enviadas (no tienen contenido del parque; se suben con la
+ * próxima señal). Tras esto versionActual() vuelve a la versión que trae la app.
+ */
+export async function borrarContenido() {
+  for (const k of ['paquete_actual', 'paquete_anterior', 'avisos', 'version_descartada', 'estado']) await st().del(k);
+}
+
 /** Para mostrar «Última sincronización: …» en el panel. */
 export async function estadoSync() {
   const est = await leerEstado();

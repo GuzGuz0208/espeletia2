@@ -1,12 +1,13 @@
 # Contrato entre contenido, motor e interfaz
 
-Versión 2 · 26-nov-2026 (agrega §5 Sincronización y §6 Avisos). Si cambias algo aquí, avisa en el PR.
+Versión 3 · 26-nov-2026 (agrega §5 Sincronización, §6 Avisos y §7 Vigencia). Si cambias algo aquí, avisa en el PR.
 
 ## 1. `contenido/paquete.json` (lo produce el pipeline de contenido; lo edita el personal desde el Panel)
 ```jsonc
 {
   "version": "2026-11-26.1",
   "actualizado": "2026-11-26",
+  "vigenciaHoras": 24,                  // opcional (§7): horas que el contenido vive en el teléfono tras activarse; por defecto 24
   "fuentes": {
     "UTON2024": { "titulo": "Guion Ecoturístico UTON 2024", "paginas": 57 },
     "NORTE":    { "titulo": "Guión turístico (zona norte)", "paginas": 7 }
@@ -47,7 +48,7 @@ import * as fray from './js/fray.js';
 await fray.cargar(paquete);                 // construye el índice en el dispositivo (e5-small) y lo cachea en IndexedDB
 const r = await fray.preguntar(texto, { estacion: 'lunares' });   // estacion opcional
 // r = {
-//   tipo: 'respuesta' | 'abstencion' | 'seguridad' | 'conflicto' | 'duda',
+//   tipo: 'respuesta' | 'abstencion' | 'seguridad' | 'conflicto' | 'duda' | 'vencido',
 //   breve: string,            // respuesta corta (siempre texto del guion o mensaje fijo de seguridad/abstención)
 //   ampliar: string | null,   // texto completo de la ficha
 //   citas: [{ guion: 'UTON2024', titulo: 'Guion Ecoturístico UTON 2024', pagina: 8 }],
@@ -62,6 +63,8 @@ fray.limpiarSinRespuesta();
 - `seguridad`: carril crítico (emergencia, síntomas o salud, comer o tocar plantas y animales, estado del volcán, clima o acceso de
   hoy). Mensaje fijo que remite al guía, con cita solo si el guion lo respalda.
 - `abstencion`: sin respaldo suficiente, fuera de tema o premisa falsa no cubierta por los guiones.
+- `vencido`: la vigencia del contenido terminó (§7). Sin fichas ni citas; la interfaz muestra su propio texto. El carril crítico
+  se evalúa antes, así que `seguridad` sigue funcionando. `fray.descargar()` suelta el índice de la memoria.
 
 ## 3. Generación opcional `js/generador.js`
 ```js
@@ -199,3 +202,79 @@ se rechazan → volver atrás → aviso vencido oculto → plan USB. Todo en una
   médico, medicamentos, mal de altura, evacuación, emergencia…). `firmar_paquete.py` los rechaza y `sync.js` los descarta aunque
   vengan firmados (la misma lista en los dos). Esas preguntas siguen en el carril crítico, que remite al personal. Un canal
   oficial para ese tipo de aviso es una **propuesta futura para validar con UTON** (roadmap), no implementada.
+
+## 7. Vigencia del contenido en el dispositivo (`js/vigencia.js`, decisión 11)
+Requisito de la organización (UTON): el contenido del parque —paquete de fichas, índice/vectores, avisos y textos de las
+respuestas— **se desactiva 24 horas después de activarse en el teléfono**. Es higiene de datos (que la información recopilada por
+años no se quede en los teléfonos), no DRM: quien controla el dispositivo puede copiar lo que ve mientras está vigente.
+
+**Ciclo.**
+1. **Activación:** la primera carga de un paquete en el dispositivo (`ui-paquete.js → cargarPaquete`, que usan la app y el Panel)
+   guarda `activadoEn` y `venceEn = activadoEn + vigenciaHoras` (del paquete, §1; por defecto 24). Las cargas siguientes no la
+   reinician. Se guarda en `localStorage` (`fray.vigencia`) y una copia `{ venceEn, vencido }` en IndexedDB `fray-vigencia` para el
+   service worker.
+2. **Vigente:** la pantalla de inicio muestra discreto «Disponible hasta las HH:MM» (o «mañana a las HH:MM»); en la última hora,
+   un aviso visible en todas las vistas. Se revisa cada 30 s, al volver a la app y al recuperar señal.
+3. **Vence:** `borrarContenido()` y pantalla «Tu acceso a la guía del parque terminó (24 h). Para usarla de nuevo, ábrela con
+   señal en la entrada del parque.» con botón «Intentar de nuevo». La caja de preguntas sigue: el **carril de seguridad** responde
+   (emergencia, salud, comer, volcán… remiten al guía, sin contenido del parque); cualquier otra pregunta recibe un texto fijo que
+   remite al guía. `fray.preguntar` también se niega (`tipo: 'vencido'`) aunque la interfaz no lo detecte.
+4. **Renovar (solo con red):** al vencer, al arrancar, al volver la señal (`online`) o con el botón, `renovar()` descarga
+   `contenido/paquete.json?renovar=<ts>` con `cache: 'no-store'`. Si responde un paquete válido, la vigencia se reinicia (24 h desde
+   ese momento) y la app recarga el paquete y reindexa (los vectores salen de `contenido/indice.json` o se recalculan). Si hay
+   `urlBase`, `sync.js` además baja el paquete y los avisos firmados (§5); un paquete firmado que llega con la vigencia vencida solo
+   se acepta si la renovación funciona; si no, se borra. Mientras está vigente no se renueva (las 24 h cuentan desde la activación).
+
+**Qué se borra y qué se conserva.**
+
+| Se borra (información del parque) | Se conserva (no es información del parque) |
+|---|---|
+| `fray-sync`: paquete actual y anterior, avisos, versión descartada, estado | `fray-sync`: id del dispositivo y la cola de preguntas **aún no enviadas** (se suben con la próxima señal; las enviadas ya se quitan al confirmarse, §5.2) |
+| `fray-paquete` (versiones guardadas por el Panel) | App: HTML, CSS, JS, iconos, fuentes |
+| `fray-vectores` (índice e5 en IndexedDB) y el índice en memoria del worker | Motor (`lib/`, ONNX Runtime) y modelo e5 (`models/`) |
+| `localStorage` `fray.sinRespuesta` (lista local de preguntas sin respuesta) | Ajustes (letra, contraste, idioma), PIN del Panel, `urlBase` |
+| Caché del service worker: todo `contenido/` (paquete, índice, clave pública, clave QR de demo) y `ejemplo/` (el paquete de ejemplo también trae textos de los guiones) | El registro de vigencia (para saber que venció) |
+
+Las bases de IndexedDB se **vacían** (no se eliminan): `deleteDatabase` quedaría bloqueado mientras el worker tenga conexiones
+abiertas.
+
+**Service worker (`sw.js`).** Para `contenido/` y `ejemplo/` consulta `fray-vigencia` en IndexedDB (y el mensaje
+`{ tipo: 'vigencia' }` de la página): si venció (o `Date.now() >= venceEn`), va **solo por red**, sin guardar; sin red responde 503.
+Al instalarse una versión nueva con la vigencia vencida, no precachea `contenido/`. `vercel.json` sirve `contenido/` y `ejemplo/`
+con `Cache-Control: no-store` (no queda copia en el caché HTTP del navegador).
+
+**No se puede renovar sin red con una copia vieja:** las copias del dispositivo se borraron, el SW no sirve `contenido/` desde caché
+con la vigencia vencida y la descarga usa `no-store` con `?renovar=<ts>`. Una vez vencido, solo `renovar()` lo saca de ahí:
+recargar la página, cambiar de pestaña o abrir el Panel no reactiva nada.
+
+**Reloj.** Se guarda la última hora vista (en cada revisión). Si al abrir la app el reloj está más de **10 min** antes de esa hora
+(o de la activación), se trata como **vencido** (motivo `reloj`); con red se renueva al instante. Con la app abierta se usa además
+un reloj monótono (`performance.now`): atrasar la hora no alarga la vigencia. Los retrocesos pequeños (ajuste de hora) no vencen.
+Si se borra `localStorage` pero queda el registro en IndexedDB, se respeta el vencimiento.
+
+**Panel del parque.** Vence igual y se renueva igual (decisión 11): con el contenido vencido, el Panel lo dice al entrar y pide
+conectarse. Se descartó el «dispositivo del personal» con PIN porque el PIN del Panel lo define el primer usuario de cada
+dispositivo: un visitante podría definir el suyo y quedar exento. **Consecuencia operativa:** las ediciones del Panel que no se
+hayan exportado o publicado (firmadas, §5) se borran a las 24 h; hay que exportarlas el mismo día.
+
+**APK.** El APK carga esta misma PWA en un WebView desde `https://espeletia2.vercel.app/`; la vigencia aplica igual. No se
+empaqueta contenido en el APK.
+
+**API (`js/vigencia.js`).**
+```js
+estadoVigencia()      // { estado: 'sin-activar'|'vigente'|'vencido', vigente, venceEn, restanteMs, activadoEn, motivo, pronto }
+verificarVigencia()   // igual, y guarda la última hora vista; si acaba de vencer lo registra y avisa (alCambiar)
+borrarContenido()     // borra lo de la tabla; idempotente
+renovar()             // { ok, version, venceEn } | { ok: false, motivo } — solo con red
+asegurarVigencia()    // al arrancar: verifica; si venció, borra e intenta renovar
+activarSiPrimeraVez(horas), alCambiar(fn), textoHora(ms, idioma)
+```
+
+**Prueba.** `node pruebas/test_vigencia.mjs` (reloj simulado): activar → responder → aviso a las 23,5 h → vencido a las 24 h →
+Fray no responde fichas y el carril de seguridad sí → borrado (y lo que se conserva) → sin red no renueva → con red renueva 24 h →
+reloj atrasado = vencido → `vigenciaHoras` configurable.
+
+**Prueba manual (navegador).** Abrir la app con red y ver «Disponible hasta…». En la consola:
+`const r = JSON.parse(localStorage['fray.vigencia']); r.venceEn = Date.now() - 1; localStorage['fray.vigencia'] = JSON.stringify(r)`
+y recargar en modo avión (DevTools → Network → Offline): aparece la pantalla de vencido, «¿qué es la gelifracción?» no responde,
+«me siento mareado» sí remite al guía; en Application → Cache Storage ya no hay `contenido/`. Al quitar el modo avión, renueva solo.
