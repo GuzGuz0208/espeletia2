@@ -35,6 +35,12 @@ const icoApp = '<img src="icons/icon-192.png" alt="" class="ins-ico ins-ico-app"
 
 // Pantalla «Instala tu álbum»: no se pasa al álbum desde aquí (salvo en computador o demo).
 // Se resuelve cuando el visitante elige seguir sin instalar; si instala, debe abrir la app desde el ícono.
+// App Android (APK con la IA local, nativo/): se ofrece desde el inicio en Android, salvo dentro de la propia app
+export const URL_APK = 'descargas/fray-paramo-arm64.apk';
+export const hayApk = () => esAndroid() && !window.FrayNativo;
+export const bloqueApk = () => `<div class="ins-apk"><a class="btn btn-flor btn-grande" href="${URL_APK}" download>${esc(t('apk.boton'))}</a>
+  <p class="ins-nota">${esc(t('apk.nota'))}</p></div>`;
+
 export function mostrarInstalar({ alSaltar, nota = null } = {}) {
   return new Promise((ok) => {
     const capa = $('#capa-portada');
@@ -66,6 +72,8 @@ export function mostrarInstalar({ alSaltar, nota = null } = {}) {
           [icoApp, esc(t('ins.abrirIcono'))],
         ]);
       }
+      // Android: la app Fray (APK con IA local) es la opción principal; instalar la web queda como alternativa
+      if (estado !== 'hecho' && hayApk()) cuerpo = `${bloqueApk()}<p class="ins-nota">${esc(t('apk.oWeb'))}</p>${cuerpo}`;
       capa.innerHTML = '';
       const tapa = h(`<div class="tapa tapa-instalar" role="dialog" aria-modal="true" aria-labelledby="ins-titulo">
           <div class="tapa-arte tapa-arte-chica" aria-hidden="true"><span class="tapa-pj tapa-fray">${personajes.fray(92)}</span></div>
@@ -146,6 +154,7 @@ export function mostrarPortada({ alAbrir, alCambiarIdioma }) {
             <input id="tapa-nombre" maxlength="24" autocomplete="given-name" placeholder="${esc(t('portada.nombre'))}" value="${esc(E.nombre)}">
             <button class="btn btn-flor btn-grande">${esc(t('portada.abrir'))}</button>
           </form>
+          ${hayApk() ? `<p class="tapa-apk"><a class="link" href="${URL_APK}" download>${esc(t('apk.boton'))}</a> · ${esc(t('apk.corta'))}</p>` : ''}
           <p class="tapa-offline" id="tapa-offline"><span class="punto"></span><span class="txt"></span></p>
           <p class="tapa-permisos">${esc(t('portada.permisos'))}</p>
         </div>`);

@@ -673,6 +673,51 @@
     "fichas": null,
     "citas": null
    }
+  },
+  {
+   "p": "Siento que el suelo empieza a temblar",
+   "estacion": "arenales",
+   "esperado": {
+    "tipo": "seguridad",
+    "fichas": null,
+    "citas": null
+   }
+  },
+  {
+   "p": "Nos alejamos del grupo y no vemos al guía",
+   "estacion": "lunares",
+   "esperado": {
+    "tipo": "seguridad",
+    "fichas": null,
+    "citas": null
+   }
+  },
+  {
+   "p": "Me quedé atrás del grupo",
+   "estacion": "aguacerales",
+   "esperado": {
+    "tipo": "seguridad",
+    "fichas": null,
+    "citas": null
+   }
+  },
+  {
+   "p": "¿Podemos acercarnos al borde del cráter?",
+   "estacion": "tumbas",
+   "esperado": {
+    "tipo": "seguridad",
+    "fichas": null,
+    "citas": null
+   }
+  },
+  {
+   "p": "¿Puedo ir a la nieve?",
+   "estacion": "tumbas",
+   "esperado": {
+    "tipo": "seguridad",
+    "fichas": null,
+    "citas": null
+   }
   }
  ]
 }

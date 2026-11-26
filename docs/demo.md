@@ -9,14 +9,31 @@ confirman en el ensayo con el dispositivo; si algo no sale así, se arregla el m
 
 ## Antes de empezar (lista de control, 10 min antes)
 - [ ] Dispositivo en **modo avión**, wifi y bluetooth apagados (se muestra el ícono al jurado).
-- [ ] App abierta desde el servidor local; comando de arranque: PENDIENTE (README, sprint 2).
-- [ ] Servidor del modelo en 127.0.0.1 encendido y **calentado** con una pregunta de prueba (el prompt del sistema queda en caché).
+- [ ] Fray (APK) abierto **con wifi** una vez desde https://espeletia2.vercel.app para bajar la versión y renovar la vigencia de 24 h;
+      luego modo avión.
+- [ ] IA local **calentada** con una pregunta de prueba.
+- [ ] Registros al final: `powershell -ExecutionPolicy Bypass -File herramientasegistros_adb.ps1 -Serial <serial>` (teléfono
+      desbloqueado y Fray abierto).
 - [ ] Versión del paquete visible en el panel; anotar cuál es (para mostrar que sube después de la actualización).
 - [ ] Lista de «preguntas sin respuesta» vacía (`fray.limpiarSinRespuesta()` desde el panel).
 - [ ] La ficha del paso 9 **no** está cargada todavía; el archivo para importarla, listo en el dispositivo (ver paso 9).
 - [ ] La persona que maneja el panel sabe el PIN (no se escribe en ningún documento).
 - [ ] Letra grande y brillo alto; cargador conectado.
 - [ ] Video del ensayo completo guardado en el dispositivo (plan C).
+
+## Abre y cierra el álbum (diferenciador)
+- **Apertura (0:00):** portada del Álbum del Páramo y los cromos por estación; se toca el cromo de Lunares: dato del guion con su
+  página (contenido/cromos.json). Después, «Pregúntale a Fray» desde el cromo.
+- **Cierre (2:40):** se vuelve al álbum con el cromo nuevo y se muestra el PDF/imagen del álbum: **sin textos de los guiones**
+  (vencen a las 24 h; el álbum se queda).
+
+## Cifras para decir (separadas)
+- **Medido** en REDMI Note 15 Pro, APK FrayNativo con Qwen3.5-0.8B, modo avión: 1,1-2 s a la primera palabra; 2,5-5,4 s por
+  respuesta; 12-16 tokens/s; batería 33,8 → 35,9 °C durante la prueba.
+- **Medido** en PC, banco ciego del reto (115 preguntas, una sola vez): 89 % semántico, 74 % léxico; la puerta de seguridad falla
+  en 3 preguntas de ese banco ([resultados](../pruebas/resultados/ciego-reto-2026-11-26.md)). No usar esas 3 en la demo como si
+  pasaran.
+- **Estimado, sin medir:** consumo en vatios y autonomía de batería.
 
 ## Las preguntas, en orden
 Tiempo total de la demo dentro del pitch: unos 70 s; el recorrido completo (para el jurado o para preguntas) dura unos 5 min.
