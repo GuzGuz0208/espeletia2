@@ -9,6 +9,7 @@
 // La pregunta del visitante va como DATO en el mensaje de usuario, nunca en el prompt del sistema; si parece una
 // instrucción («ignora…», «system», «prompt»…) no se genera.
 import { verificar, NO_SE, frases, respaldo, fallasRespaldo, UMBRAL_LEXICO, UMBRAL_E5 } from './verificador.js';
+import { registrar } from './registro.js';
 
 let BASE = 'http://127.0.0.1:8080';
 let EMBEBER = null;   // función e5 del motor (textos con prefijo → vectores); sin ella, respaldo léxico
@@ -166,7 +167,19 @@ async function generarServidor(messages, { timeoutMs, alTrozo, ms }) {
 // reescribir(r, pregunta, { timeoutMs, alTrozo, contexto }) → { texto, ok, fallas, ms, primeraMs, motor, respaldo }
 // alTrozo(textoParcial) recibe el texto SIN verificar mientras llega: la interfaz solo debe mostrar el definitivo si ok.
 // El verificador y el respaldo por frase se aplican igual con el motor nativo y con llama-server.
-export async function reescribir(r, pregunta, { timeoutMs = 6000, alTrozo = null, contexto = 'breve' } = {}) {
+export async function reescribir(r, pregunta, opciones = {}) {
+  const out = await reescribirSinRegistro(r, pregunta, opciones);
+  // Registro de la prueba (js/registro.js): la reescritura con IA, enlazada con la pregunta por `ref`
+  if (r && r.tipo === 'respuesta') {
+    try {
+      registrar({ evento: 'ia', ref: r.registro || null, pregunta, fichas: r.fichas || [], texto: out.texto, ok: out.ok, fallas: out.fallas,
+        ms: out.ms, primeraMs: out.primeraMs ?? null, motor: out.motor || (nativo() ? 'nativo' : 'llama.cpp') });
+    } catch (e) { /* nada */ }
+  }
+  return out;
+}
+
+async function reescribirSinRegistro(r, pregunta, { timeoutMs = 6000, alTrozo = null, contexto = 'breve' } = {}) {
   const t0 = (globalThis.performance || Date).now();
   const ms = () => Math.round((globalThis.performance || Date).now() - t0);
   const fallo = (falla, texto = '', primeraMs = null) => ({ texto, ok: false, fallas: [falla], ms: ms(), primeraMs });

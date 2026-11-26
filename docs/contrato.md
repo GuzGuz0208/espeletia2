@@ -48,21 +48,39 @@ import * as fray from './js/fray.js';
 await fray.cargar(paquete);                 // construye el índice en el dispositivo (e5-small) y lo cachea en IndexedDB
 const r = await fray.preguntar(texto, { estacion: 'lunares' });   // estacion opcional
 // r = {
-//   tipo: 'respuesta' | 'abstencion' | 'seguridad' | 'conflicto' | 'duda' | 'vencido',
+//   tipo: 'respuesta' | 'abstencion' | 'seguridad' | 'conflicto' | 'duda' | 'vencido' | 'charla',
 //   breve: string,            // respuesta corta (siempre texto del guion o mensaje fijo de seguridad/abstención)
 //   ampliar: string | null,   // texto completo de la ficha
 //   citas: [{ guion: 'UTON2024', titulo: 'Guion Ecoturístico UTON 2024', pagina: 8 }],
 //   fichas: ['lunares-gelifraccion'],
 //   tipoContenido: 'ciencia' | 'relato' | ...,   // para la etiqueta «Relato de tradición oral»
 //   alternativas: [{ id, titulo }],              // si tipo === 'duda'
-//   aviso: string | null      // p. ej. «Los guiones difieren»
+//   aviso: string | null,     // p. ej. «Los guiones difieren»
+//   sugerencias: [string],    // solo tipo 'charla': 3 preguntas de ejemplo (de la estación si la hay; si no, de toda la ruta)
+//   intencion: string,        // solo 'charla': saludo | gracias | despedida | ayuda | quien | corta | mas | sencillo
+//   seguimiento: 'ampliar' | 'relacionada' | 'sencillo',   // solo si la respuesta sale de «amplía» / «no entendí»
+//   registro: string          // id de la entrada del registro de la prueba (§8); generador.reescribir la enlaza
 // }
+fray.reiniciarConversacion(); // olvida la última respuesta (el siguiente «amplía» pide un tema)
 fray.sinRespuesta();          // [{ texto, estacion, fecha }] preguntas que terminaron en abstención (local, sin datos personales)
 fray.limpiarSinRespuesta();
 ```
 - `seguridad`: carril crítico (emergencia, síntomas o salud, comer o tocar plantas y animales, estado del volcán, clima o acceso de
   hoy). Mensaje fijo que remite al guía, con cita solo si el guion lo respalda.
 - `abstencion`: sin respaldo suficiente, fuera de tema o premisa falsa no cubierta por los guiones.
+- **Orden dentro de `preguntar`:** carril de seguridad (siempre primero) → vigencia → charla y seguimiento
+  (`js/conversacion.js`, determinista) → búsqueda. «hola, me siento mareado» es `seguridad`; «hola, ¿qué es el frailejón?» va a
+  la búsqueda (sin el «hola»: `sinCharla`). Copia en Python en `herramientas/fray_py.py` (paridad en `herramientas/paridad.py`).
+- `charla`: «hola», «gracias», «chao», «¿qué puedes hacer?», «¿quién eres?», «ok», «jaja»… (es y en) cuando TODA la frase es
+  charla. Texto fijo de Fray en `breve` (sin datos del parque ni cifras, sin cita) + `sugerencias` (la interfaz las muestra como
+  botones que preguntan). No pasa por el generador.
+- Seguimiento: «amplía», «complementa», «cuéntame más», «explícame mejor», «¿y eso?», «más detalles» → `tipo: 'respuesta'` con
+  las frases de la última ficha aún no mostradas (`seguimiento: 'ampliar'`) o, si ya se mostró toda, la ficha relacionada
+  siguiente de la misma estación/tema con su cita (`'relacionada'`). «no entendí», «más sencillo» → la frase más corta de la
+  misma ficha (`'sencillo'`). Es una respuesta normal con cita: el generador y el verificador la tratan igual. Sin última
+  respuesta (o tras una abstención o seguridad) es `charla` con sugerencias.
+- `estacion` es opcional: vacía o `null` busca en toda la ruta (la estación solo da un bono pequeño, `beta`). Medido con
+  `python -X utf8 herramientas/evaluar.py --sin-estacion`: mismos aciertos que con estación.
 - `vencido`: la vigencia del contenido terminó (§7). Sin fichas ni citas; la interfaz muestra su propio texto. El carril crítico
   se evalúa antes, así que `seguridad` sigue funcionando. `fray.descargar()` suelta el índice de la memoria.
 
@@ -323,3 +341,22 @@ reloj atrasado = vencido → `vigenciaHoras` configurable.
 `const r = JSON.parse(localStorage['fray.vigencia']); r.venceEn = Date.now() - 1; localStorage['fray.vigencia'] = JSON.stringify(r)`
 y recargar en modo avión (DevTools → Network → Offline): aparece la pantalla de vencido, «¿qué es la gelifracción?» no responde,
 «me siento mareado» sí remite al guía; en Application → Cache Storage ya no hay `contenido/`. Al quitar el modo avión, renueva solo.
+
+## 8. Registro de la prueba (`js/registro.js`)
+Cada `fray.preguntar` escribe una entrada `{ evento: 'pregunta', ref, fecha, estacion, pregunta, tipo, categoria, intencion,
+seguimiento, fichas, citas, breve, modo, ms, paquete, dispositivo }` y cada `generador.reescribir` otra `{ evento: 'ia', ref,
+pregunta, fichas, texto, ok, fallas, ms, primeraMs, motor }` (misma `ref`). La interfaz no tiene que hacer nada.
+```js
+import * as registro from './js/registro.js';
+await registro.exportarRegistro();   // descarga fray-registro-AAAAMMDD-HHMM.json (botón «Exportar registro de la prueba»)
+await registro.leerRegistro();       // [entradas], más viejas primero
+await registro.limpiarRegistro();
+```
+- IndexedDB `fray-registro` (máx. 500, rota) + `console.info('FRAYLOG ' + json)`. `globalThis.frayRegistro.leer()` para DevTools.
+- Sin datos personales: texto de la pregunta, respuesta, tiempos y un id aleatorio del dispositivo. Vence con el contenido:
+  `vigencia.borrarContenido()` vacía `fray-registro`.
+- Sacarlo del teléfono por USB: `powershell -File herramientasegistros_adb.ps1 -Serial <serial>` (o `herramientas/registros_adb.sh`)
+  → `pruebas/registros/registro-<fecha>.json` + `.md`. Lee IndexedDB por el DevTools del WebView
+  (`adb forward tcp:9222 localabstract:webview_devtools_remote_<pid>`), las líneas `FRAYLOG` de `adb logcat -d` (el WebView de la
+  APK no las manda a logcat: queda como respaldo para Chrome/otros WebView) y el último `/sdcard/Download/fray-registro-*.json`.
+  `-Probar "hola|¿qué es la gelifracción?"` hace esas preguntas en la página del teléfono antes de juntar.

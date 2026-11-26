@@ -371,7 +371,7 @@ function exportar() {
 // Nombre fijo: herramientas/Publicar.cmd lo busca en Descargas (docs/operacion-base.md)
 function exportarParaPublicar() {
   if (!exigirSesion()) return;
-  descargar('paquete-publicar.json', JSON.stringify(P.paquete, null, 2), 'application/json');
+  descargar('paquete-publicar.json', JSON.stringify({ ...P.paquete, exportadoEn: new Date().toISOString() }, null, 2), 'application/json');
   $('#export-resultado').textContent = `Listo: paquete-publicar.json (versión ${P.paquete.version}) en Descargas. ` +
     'Ahora haz doble clic en «Publicar» en el escritorio del PC de Brisas.';
 }

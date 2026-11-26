@@ -80,7 +80,8 @@ try {
   for (const f of ['manifest.json', 'paquete.json', 'avisos.json']) assert.ok(!ign(`publicado/${f}`), `publicado/${f} entra en git`);
   assert.ok(ign('publicado/fray-paquete-usb.json') && ign('publicado/fray_privada.pem'), 'el resto de publicado/ queda fuera de git');
   const sw = fs.readFileSync(path.join(RAIZ, 'sw.js'), 'utf8');
-  assert.match(sw, /startsWith\('\/publicado\/'\)\) return;/, 'sw.js deja pasar /publicado/ sin caché');
+  const nunca = /const NUNCA = (\/.+\/);/.exec(sw);
+  assert.ok(nunca && new Function(`return ${nunca[1]}`)().test('/publicado/manifest.json'), 'sw.js deja pasar /publicado/ sin caché');
   assert.match(sw, /skipWaiting\(\)/); assert.match(sw, /clients\.claim\(\)/);
   ok('vercel.json no-store, publicado/ en git (solo 3 archivos), sw.js sin caché para /publicado/, skipWaiting + claim');
 

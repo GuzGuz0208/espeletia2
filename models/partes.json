@@ -12,5 +12,13 @@
    "models/partes/e5_small_latino.onnx.ebc99db4.06.bin",
    "models/partes/e5_small_latino.onnx.ebc99db4.07.bin"
   ]
+ },
+ "models/mnv2_embed.onnx": {
+  "bytes": 8840787,
+  "sha256": "e0c667612bf8ee2549211be5c15aa89c1257d6f774026f2ed2b2580e5bf211d9",
+  "partes": [
+   "models/partes/mnv2_embed.onnx.e0c66761.00.bin",
+   "models/partes/mnv2_embed.onnx.e0c66761.01.bin"
+  ]
  }
 }

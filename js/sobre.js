@@ -1,11 +1,10 @@
-// Abrir sobres (de espeletia-ai/js/sobre.js, rama r2/instalar): el sobre se rasga, el cromo sale, se voltea y vuela a su
-// espacio en el álbum. Se abren cuando el visitante quiere (en una parada), nunca solos al caminar.
-import { cromo as getCromo, pendientes, abrir, datoDe } from './album-estado.js';
-import { t } from './album-textos.js';
-import { $, h, esc, animar, esperar, vibrar, hablar, hayVoz, reducido, atraparFoco } from './album-util.js';
-import { cromoEl, activarBrillo } from './album-cromo.js';
-import { irPagina, paginaDe, ranuraDe, esperarPintado } from './album-vista.js';
-import { chispas } from './album-celebrar.js';
+// Abrir sobres: el sobre se rasga, el cromo sale, se voltea y vuela a su espacio en el álbum.
+import { E, cromo as getCromo, texto, pendientes, abrir } from './estado.js';
+import { t } from './i18n.js';
+import { $, h, esc, animar, esperar, vibrar, hablar, reducido, atraparFoco, escuchar, quitarAviso } from './util.js';
+import { cromoEl, activarBrillo } from './cromo.js';
+import { irPagina, paginaDe, ranuraDe, esperarPintado } from './album.js';
+import { chispas } from './celebrar.js';
 
 let abriendo = false;
 let nav = () => {};
@@ -15,6 +14,7 @@ export function iniciarSobres({ irA, preguntar: pr }) { nav = irA; if (pr) pregu
 export async function abrirSobres() {
   if (abriendo) return;
   abriendo = true;
+  quitarAviso();
   try {
     while (pendientes().length) {
       const id = pendientes()[0];
@@ -40,7 +40,7 @@ function sobreHTML(c) {
 
 // Devuelve true si el visitante quiere seguir abriendo, false si cerró.
 async function revelar(id, quedan) {
-  const c = getCromo(id), d = datoDe(id), voz = `${c.nombre}. ${d ? d.dato : ''}`;
+  const c = getCromo(id), tx = texto(c);
   const capa = $('#capa-sobre');
   capa.innerHTML = '';
   capa.hidden = false;
@@ -49,7 +49,7 @@ async function revelar(id, quedan) {
       <div class="sobre-mesa"></div>
       <div class="sobre-acciones" hidden>
         <button class="btn btn-flor" data-a="pegar">${esc(t('sobre.pegar'))}</button>
-        ${hayVoz() ? `<button class="btn btn-claro" data-a="escuchar">${esc(t('det.escuchar'))}</button>` : ''}
+        <button class="btn btn-claro" data-a="escuchar">${esc(t('det.escuchar'))}</button>
         ${c.ficha ? `<button class="btn btn-claro" data-a="preguntar">${esc(t('sobre.preguntar'))}</button>` : ''}
       </div>
       <p class="sobre-quedan">${quedan > 0 ? esc(t('sobre.quedan', { n: quedan })) : ''}</p>
@@ -103,12 +103,12 @@ async function revelar(id, quedan) {
   titulo.textContent = c.brillante ? t('sobre.brillante') : t('sobre.nuevo');
   titulo.classList.add('grande');
   if (c.brillante) chispas(card);
+  escuchar({ texto: `${tx.nombre}. ${tx.dato}`, textoAudio: tx.dato, lang: E.lang, tipo: 'cromo', id: c.id, silencioso: true });
   const acc = $('.sobre-acciones', escena);
   acc.hidden = false;
   animar(acc, [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], { duration: 260 });
   card.onclick = () => card.classList.toggle('volteado');
-  const be = acc.querySelector('[data-a="escuchar"]');
-  if (be) be.onclick = () => hablar(voz);
+  acc.querySelector('[data-a="escuchar"]').onclick = () => escuchar({ texto: `${tx.nombre}. ${tx.dato}`, textoAudio: tx.dato, lang: E.lang, tipo: 'cromo', id: c.id });
   acc.querySelector('[data-a="pegar"]').focus({ preventScroll: true });
 
   const eleccion = await new Promise((ok) => {
