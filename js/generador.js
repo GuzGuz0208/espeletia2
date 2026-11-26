@@ -104,7 +104,7 @@ export async function reescribir(r, pregunta, { timeoutMs = 6000, alTrozo = null
 
   const ac = new AbortController();
   const reloj = setTimeout(() => ac.abort(), timeoutMs);
-  let texto = ''; let primera = null;
+  let texto = ''; let primera = null; let fin = null;
   try {
     const resp = await fetch(`${BASE}/v1/chat/completions`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ac.signal,
@@ -123,7 +123,9 @@ export async function reescribir(r, pregunta, { timeoutMs = 6000, alTrozo = null
         const dato = linea.slice(5).trim();
         if (dato === '[DONE]') continue;
         try {
-          const d = JSON.parse(dato).choices?.[0]?.delta?.content;
+          const ch = JSON.parse(dato).choices?.[0];
+          if (ch?.finish_reason) fin = ch.finish_reason;
+          const d = ch?.delta?.content;
           if (d) { if (primera === null) primera = ms(); texto += d; if (alTrozo) alTrozo(limpiar(texto)); }
         } catch { /* línea incompleta */ }
       }
@@ -135,6 +137,12 @@ export async function reescribir(r, pregunta, { timeoutMs = 6000, alTrozo = null
   }
   clearTimeout(reloj);
   texto = limpiar(texto);
+  // Cortada por max_tokens: se queda hasta la última frase completa; si no hay ninguna, no se usa.
+  if (fin === 'length') {
+    const k = Math.max(texto.lastIndexOf('. '), texto.lastIndexOf('! '), texto.endsWith('.') ? texto.length - 1 : -1);
+    if (k < 0) return { texto, ok: false, fallas: ['respuesta cortada por longitud'], ms: ms(), primeraMs: primera };
+    texto = texto.slice(0, k + 1).trim();
+  }
   // El relato siempre se presenta como tradición oral (se antepone de forma determinista; no se le pide al modelo porque
   // entonces lo escribe también en respuestas de ciencia).
   if (relato && texto && !/tradici[oó]n oral/i.test(texto) && !/no tengo esa informaci/i.test(texto)) texto = conTradicion(texto, ctx);
