@@ -1,5 +1,7 @@
-// Catálogo de modelos (assets/modelos.json), descarga única con wifi e importación de un archivo copiado con adb push.
-// Todo archivo se verifica por tamaño y SHA-256 antes de usarlo.
+// Modelo de la IA local: catálogo (assets/modelo.json o su reemplazo copiado con adb), descarga reanudable con verificación
+// de tamaño y SHA-256, e importación de un GGUF copiado por USB o adb push. Todo archivo se verifica antes de usarlo.
+//
+// La única conexión de la app es esta descarga (una vez, con señal: hotel, Brisas o una estación con Starlink).
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -16,22 +18,73 @@ class ModeloInfo {
         archivo = j['archivo'] as String,
         url = j['url'] as String,
         sha256 = (j['sha256'] as String).toLowerCase(),
-        bytes = j['bytes'] as int,
-        licencia = j['licencia'] as String,
-        motor = j['motor'] as String,
-        sinRazonar = j['sinRazonar'] as bool? ?? false;
+        bytes = (j['bytes'] as num).toInt(),
+        licencia = j['licencia'] as String? ?? '',
+        sinRazonar = j['sinRazonar'] as bool? ?? false,
+        nota = j['nota'] as String? ?? '' {
+    if (!RegExp(r'^[0-9a-f]{64}$').hasMatch(sha256)) throw FormatException('sha256 inválido en $id');
+    if (archivo.contains('/') || archivo.contains('\\') || archivo.contains('..')) {
+      throw FormatException('archivo inválido en $id');
+    }
+    if (!url.startsWith('https://')) throw FormatException('la url de $id debe ser https');
+  }
 
-  final String id, nombre, archivo, url, sha256, licencia, motor;
+  final String id, nombre, archivo, url, sha256, licencia, nota;
   final int bytes;
   final bool sinRazonar;
 
-  bool get esLiteRt => motor == 'litertlm';
-  String get tamano => '${(bytes / 1e9).toStringAsFixed(2)} GB';
+  String get tamano => '${(bytes / 1e6).toStringAsFixed(0)} MB';
 }
 
-Future<List<ModeloInfo>> leerCatalogo() async {
-  final j = jsonDecode(await rootBundle.loadString('assets/modelos.json')) as Map<String, dynamic>;
-  return (j['modelos'] as List).cast<Map<String, dynamic>>().map(ModeloInfo.fromJson).toList();
+/// Parámetros del motor (sección «motor» de modelo.json).
+class ParamsMotor {
+  ParamsMotor.fromJson(Map<String, dynamic> j)
+      : nCtx = (j['nCtx'] as num? ?? 2048).toInt(),
+        hilos = j['hilos'] is num ? (j['hilos'] as num).toInt() : null,
+        temperatura = (j['temperatura'] as num? ?? 0).toDouble(),
+        maxTokens = (j['maxTokens'] as num? ?? 70).toInt(),
+        timeoutMs = (j['timeoutMs'] as num? ?? 6000).toInt();
+  final int nCtx;
+  final int? hilos; // null = «auto» (núcleos grandes)
+  final double temperatura;
+  final int maxTokens, timeoutMs;
+}
+
+class Catalogo {
+  Catalogo._(this.modelos, this.porDefecto, this.motor, this.origen);
+  final List<ModeloInfo> modelos;
+  final String porDefecto;
+  final ParamsMotor motor;
+  final String origen; // 'app' o la ruta del reemplazo
+
+  ModeloInfo? porId(String? id) {
+    for (final m in modelos) {
+      if (m.id == id) return m;
+    }
+    return null;
+  }
+
+  static Catalogo _desde(Map<String, dynamic> j, String origen) {
+    final modelos = (j['modelos'] as List).cast<Map<String, dynamic>>().map(ModeloInfo.fromJson).toList();
+    if (modelos.isEmpty) throw const FormatException('sin modelos');
+    final pd = j['porDefecto'] as String? ?? modelos.first.id;
+    return Catalogo._(modelos, modelos.any((m) => m.id == pd) ? pd : modelos.first.id,
+        ParamsMotor.fromJson((j['motor'] as Map?)?.cast<String, dynamic>() ?? const {}), origen);
+  }
+
+  /// assets/modelo.json, o modelo.json en la carpeta de importación si alguien lo copió con adb (cambia el modelo sin
+  /// recompilar). Si el reemplazo no es válido se ignora.
+  static Future<Catalogo> leer() async {
+    final base = _desde(jsonDecode(await rootBundle.loadString('assets/modelo.json')) as Map<String, dynamic>, 'app');
+    final ext = Almacen.i.externo;
+    if (ext != null) {
+      final f = File('${ext.path}/modelo.json');
+      try {
+        if (await f.exists()) return _desde(jsonDecode(await f.readAsString()) as Map<String, dynamic>, f.path);
+      } catch (_) {/* reemplazo inválido: se usa el de la app */}
+    }
+    return base;
+  }
 }
 
 class _SumideroHuella implements Sink<Digest> {
@@ -42,7 +95,7 @@ class _SumideroHuella implements Sink<Digest> {
   void close() {}
 }
 
-/// SHA-256 de un archivo en otro isolate (un GGUF de 1-2 GB tarda decenas de segundos en el teléfono).
+/// SHA-256 de un archivo en otro isolate (un GGUF de 0,5-1 GB tarda unos segundos en el teléfono).
 Future<String> huellaArchivo(String ruta) => Isolate.run(() async {
       final sumidero = _SumideroHuella();
       final entrada = sha256.startChunkedConversion(sumidero);
@@ -62,18 +115,27 @@ class CancelarDescarga {
   }
 }
 
+/// Error que no se arregla reintentando (huella distinta, 404…).
+class ErrorDefinitivo implements Exception {
+  ErrorDefinitivo(this.mensaje);
+  final String mensaje;
+  @override
+  String toString() => mensaje;
+}
+
 class Almacen {
   Almacen._();
   static final Almacen i = Almacen._();
 
-  late Directory interno; // descargas: almacenamiento privado de la app
-  Directory? externo; // importación: /sdcard/Android/data/<paquete>/files (adb push sin permisos)
+  late Directory interno; // almacenamiento privado de la app (se borra al desinstalar)
+  Directory? externo; // /sdcard/Android/data/co.fray.paramo/files: adb push sin permisos
 
   Future<void> iniciar() async {
     interno = Directory('${(await getApplicationSupportDirectory()).path}/modelos');
     await interno.create(recursive: true);
     try {
       externo = await getExternalStorageDirectory();
+      await externo?.create(recursive: true);
     } catch (_) {
       externo = null;
     }
@@ -81,98 +143,201 @@ class Almacen {
 
   File _destino(ModeloInfo m) => File('${interno.path}/${m.archivo}');
   File _marca(ModeloInfo m) => File('${interno.path}/${m.archivo}.verificado');
+  File _parte(ModeloInfo m) => File('${interno.path}/${m.archivo}.part');
   File? _importable(ModeloInfo m) => externo == null ? null : File('${externo!.path}/${m.archivo}');
-  File? _marcaImportado(ModeloInfo m) => externo == null ? null : File('${interno.path}/${m.archivo}.importado');
+  File _marcaImportado(ModeloInfo m) => File('${interno.path}/${m.archivo}.importado');
 
-  /// Ruta lista para cargar (ya verificada), o null.
+  String get carpetaImportar => externo?.path ?? '(sin almacenamiento externo)';
+
+  /// Ruta lista para cargar (verificada con SHA-256 una vez; aquí solo se comprueba el tamaño), o null.
   Future<String?> rutaVerificada(ModeloInfo m) async {
-    final d = _destino(m);
-    if (await d.exists() && await _marca(m).exists() && (await _marca(m).readAsString()).trim() == m.sha256 &&
+    final d = _destino(m), marca = _marca(m);
+    if (await d.exists() && await marca.exists() && (await marca.readAsString()).trim() == m.sha256 &&
         await d.length() == m.bytes) {
       return d.path;
     }
     final imp = _importable(m), marcaImp = _marcaImportado(m);
-    if (imp != null && marcaImp != null && await imp.exists() && await marcaImp.exists() &&
+    if (imp != null && await imp.exists() && await marcaImp.exists() &&
         (await marcaImp.readAsString()).trim() == m.sha256 && await imp.length() == m.bytes) {
       return imp.path;
     }
     return null;
   }
 
+  /// Bytes ya descargados de una descarga a medias (para reanudar).
+  Future<int> parcial(ModeloInfo m) async {
+    final p = _parte(m);
+    return await p.exists() ? await p.length() : 0;
+  }
+
   /// Hay un archivo con el nombre esperado en la carpeta de importación (aún sin verificar).
   Future<bool> hayImportable(ModeloInfo m) async {
     final imp = _importable(m);
-    return imp != null && await imp.exists();
+    return imp != null && await imp.exists() && await imp.length() == m.bytes;
   }
 
-  String get carpetaImportar => externo?.path ?? '(sin almacenamiento externo)';
-
-  /// Verifica el archivo copiado con adb push y lo usa en su sitio (no se duplica: son 0,5-2,6 GB).
-  Future<String> importar(ModeloInfo m, void Function(String) estado) async {
+  /// Verifica el archivo copiado con adb push y lo usa en su sitio (no se duplica).
+  Future<String> importarDeCarpeta(ModeloInfo m, void Function(String) estado) async {
     final imp = _importable(m);
-    if (imp == null || !await imp.exists()) {
-      throw Exception('No encontré ${m.archivo} en $carpetaImportar');
-    }
+    if (imp == null || !await imp.exists()) throw ErrorDefinitivo('No encontré ${m.archivo} en $carpetaImportar');
     final largo = await imp.length();
-    if (largo != m.bytes) throw Exception('Tamaño $largo B, se esperaban ${m.bytes} B (¿copia incompleta?)');
-    estado('Verificando SHA-256…');
+    if (largo != m.bytes) throw ErrorDefinitivo('Tamaño $largo B, se esperaban ${m.bytes} B (¿copia incompleta?)');
+    estado('Verificando la huella SHA-256…');
     final h = await huellaArchivo(imp.path);
-    if (h != m.sha256) throw Exception('La huella SHA-256 no coincide ($h)');
-    await _marcaImportado(m)!.writeAsString(m.sha256);
+    if (h != m.sha256) throw ErrorDefinitivo('La huella SHA-256 no coincide: no es el archivo publicado');
+    await _marcaImportado(m).writeAsString(m.sha256);
     return imp.path;
   }
 
-  /// Descarga única (con wifi). Escribe en .part, verifica tamaño y huella y solo entonces lo deja listo.
+  /// Importa un GGUF elegido con el selector de archivos (USB, Descargas…). Se reconoce por su tamaño y su huella y se
+  /// copia a la memoria privada de la app. Devuelve el modelo reconocido.
+  Future<ModeloInfo> importarArchivo(int largo, Stream<List<int>> Function() abrir, List<ModeloInfo> catalogo,
+      void Function(String) estado) async {
+    final candidatos = catalogo.where((m) => m.bytes == largo).toList();
+    if (candidatos.isEmpty) throw ErrorDefinitivo('Ese archivo ($largo B) no es ninguno de los modelos de modelo.json');
+    final m = candidatos.first;
+    final tmp = File('${interno.path}/${m.archivo}.importando');
+    final sumidero = _SumideroHuella();
+    final huella = sha256.startChunkedConversion(sumidero);
+    final salida = tmp.openWrite();
+    var hecho = 0, ultimo = 0;
+    try {
+      await for (final t in abrir()) {
+        salida.add(t);
+        huella.add(t);
+        hecho += t.length;
+        if (hecho - ultimo > 16 << 20) {
+          ultimo = hecho;
+          estado('Copiando ${(hecho / 1e6).toStringAsFixed(0)} de ${(largo / 1e6).toStringAsFixed(0)} MB…');
+        }
+      }
+    } finally {
+      await salida.close();
+    }
+    huella.close();
+    if (hecho != m.bytes || sumidero.valor.toString() != m.sha256) {
+      await tmp.delete();
+      throw ErrorDefinitivo('La huella SHA-256 no coincide con ${m.nombre}');
+    }
+    await tmp.rename(_destino(m).path);
+    await _marca(m).writeAsString(m.sha256);
+    return m;
+  }
+
+  /// Descarga reanudable: escribe en .part y, si se corta, la próxima vez pide solo lo que falta (HTTP Range). Al terminar
+  /// verifica tamaño y SHA-256 y solo entonces deja el archivo listo. Los errores de red se reintentan; los de huella o
+  /// de URL son [ErrorDefinitivo] (la huella distinta borra lo descargado).
   Future<String> descargar(ModeloInfo m, void Function(int hecho, int total) progreso, void Function(String) estado,
       CancelarDescarga cancelar) async {
-    final parte = File('${_destino(m).path}.part');
-    final cliente = HttpClient()..connectionTimeout = const Duration(seconds: 30);
-    cancelar._cliente = cliente;
-    try {
-      final req = await cliente.getUrl(Uri.parse(m.url));
-      req.followRedirects = true;
-      req.maxRedirects = 10;
-      final res = await req.close();
-      if (res.statusCode != 200) throw Exception('HTTP ${res.statusCode} al descargar ${m.archivo}');
-      final total = res.contentLength > 0 ? res.contentLength : m.bytes;
-      final sumidero = _SumideroHuella();
-      final huella = sha256.startChunkedConversion(sumidero);
-      final salida = parte.openWrite();
-      var hecho = 0, ultimo = 0;
-      try {
-        await for (final trozo in res) {
-          if (cancelar.cancelado) throw Exception('Descarga cancelada');
-          salida.add(trozo);
-          huella.add(trozo);
-          hecho += trozo.length;
-          if (hecho - ultimo > 4 << 20) {
-            ultimo = hecho;
-            progreso(hecho, total);
-          }
-        }
-      } finally {
-        await salida.close();
-      }
-      huella.close();
-      progreso(hecho, total);
-      estado('Verificando…');
-      if (hecho != m.bytes) throw Exception('Llegaron $hecho B, se esperaban ${m.bytes} B');
-      final h = sumidero.valor.toString();
-      if (h != m.sha256) throw Exception('La huella SHA-256 no coincide ($h)');
-      await parte.rename(_destino(m).path);
-      await _marca(m).writeAsString(m.sha256);
-      return _destino(m).path;
-    } catch (e) {
-      if (await parte.exists()) await parte.delete();
-      rethrow;
-    } finally {
-      cliente.close(force: true);
+    final parte = _parte(m);
+    var inicio = await parte.exists() ? await parte.length() : 0;
+    if (inicio > m.bytes) {
+      await parte.delete();
+      inicio = 0;
     }
+    if (inicio < m.bytes) {
+      final cliente = HttpClient()
+        ..connectionTimeout = const Duration(seconds: 20)
+        ..idleTimeout = const Duration(seconds: 20)
+        ..userAgent = 'fray-paramo';
+      cancelar._cliente = cliente;
+      try {
+        // Redirecciones a mano: Hugging Face manda al CDN y hay que repetir el Range en cada salto.
+        var uri = Uri.parse(m.url);
+        HttpClientResponse? res;
+        for (var saltos = 0; saltos < 10; saltos++) {
+          final req = await cliente.getUrl(uri);
+          req.followRedirects = false;
+          if (inicio > 0) req.headers.set(HttpHeaders.rangeHeader, 'bytes=$inicio-');
+          final r = await req.close();
+          if (r.statusCode >= 300 && r.statusCode < 400) {
+            final loc = r.headers.value(HttpHeaders.locationHeader);
+            await r.drain<void>();
+            if (loc == null) throw Exception('Redirección sin destino');
+            uri = uri.resolve(loc);
+            continue;
+          }
+          res = r;
+          break;
+        }
+        if (res == null) throw Exception('Demasiadas redirecciones');
+        if (res.statusCode == 416) {
+          await res.drain<void>(); // ya estaba completo: se verifica abajo
+        } else {
+          if (res.statusCode == 404 || res.statusCode == 403 || res.statusCode == 401) {
+            await res.drain<void>();
+            throw ErrorDefinitivo('HTTP ${res.statusCode}: el modelo no está en ${m.url}');
+          }
+          if (res.statusCode != 200 && res.statusCode != 206) {
+            await res.drain<void>();
+            throw Exception('HTTP ${res.statusCode}');
+          }
+          var modo = FileMode.append;
+          if (res.statusCode == 200 || !_rangoEmpiezaEn(res, inicio)) {
+            inicio = 0; // el servidor no reanudó: se empieza de cero
+            modo = FileMode.write;
+          }
+          final salida = parte.openWrite(mode: modo);
+          var hecho = inicio, ultimo = 0;
+          final reloj = Stopwatch()..start();
+          try {
+            await for (final trozo in res.timeout(const Duration(seconds: 30))) {
+              if (cancelar.cancelado) throw Exception('Descarga en pausa');
+              salida.add(trozo);
+              hecho += trozo.length;
+              if (hecho > m.bytes) throw ErrorDefinitivo('Llegan más bytes de los esperados');
+              if (reloj.elapsedMilliseconds - ultimo > 300) {
+                ultimo = reloj.elapsedMilliseconds;
+                progreso(hecho, m.bytes);
+              }
+            }
+          } finally {
+            await salida.flush();
+            await salida.close();
+          }
+          progreso(hecho, m.bytes);
+        }
+      } on ErrorDefinitivo {
+        if (await parte.exists()) await parte.delete();
+        rethrow;
+      } finally {
+        cliente.close(force: true);
+      }
+    }
+    final largo = await parte.exists() ? await parte.length() : 0;
+    if (largo != m.bytes) throw Exception('Descarga incompleta: $largo de ${m.bytes} B (se reanuda)');
+    estado('Verificando la huella SHA-256…');
+    final h = await huellaArchivo(parte.path);
+    if (h != m.sha256) {
+      await parte.delete();
+      throw ErrorDefinitivo('La huella SHA-256 no coincide: se borró la descarga');
+    }
+    await parte.rename(_destino(m).path);
+    await _marca(m).writeAsString(m.sha256);
+    return _destino(m).path;
+  }
+
+  bool _rangoEmpiezaEn(HttpClientResponse r, int inicio) {
+    final cr = r.headers.value(HttpHeaders.contentRangeHeader); // bytes 123-456/789
+    final mm = cr == null ? null : RegExp(r'bytes\s+(\d+)-').firstMatch(cr);
+    return mm != null && int.parse(mm[1]!) == inicio;
   }
 
   Future<void> borrar(ModeloInfo m) async {
-    for (final f in [_destino(m), _marca(m), File('${_destino(m).path}.part'), if (_marcaImportado(m) != null) _marcaImportado(m)!]) {
+    for (final f in [_destino(m), _marca(m), _parte(m), _marcaImportado(m), File('${interno.path}/${m.archivo}.importando')]) {
       if (await f.exists()) await f.delete();
     }
   }
+
+  /// Preferencias pequeñas (modelo elegido, hilos) en un JSON propio: sin dependencias extra.
+  File get _prefs => File('${interno.path}/preferencias.json');
+  Future<Map<String, dynamic>> leerPrefs() async {
+    try {
+      return jsonDecode(await _prefs.readAsString()) as Map<String, dynamic>;
+    } catch (_) {
+      return {};
+    }
+  }
+
+  Future<void> guardarPrefs(Map<String, dynamic> p) => _prefs.writeAsString(jsonEncode(p));
 }

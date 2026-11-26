@@ -1,0 +1,37 @@
+{
+  "nota": "Modelo de la IA local de Fray. 'porDefecto' elige cuál se descarga al abrir la app por primera vez. sha256 y bytes salen de huggingface_hub (model_info files_metadata=True, lfs.sha256) el 2026-11-26: python nativo/herramientas/huella_hf.py <repo> <archivo>. Para cambiar el modelo sin recompilar: copia este archivo editado con adb push a /sdcard/Android/data/co.fray.paramo/files/modelo.json (ver nativo/README.md).",
+  "porDefecto": "qwen3.5-0.8b-q4km",
+  "motor": {
+    "nCtx": 2048,
+    "hilos": "auto",
+    "temperatura": 0,
+    "maxTokens": 70,
+    "timeoutMs": 6000
+  },
+  "modelos": [
+    {
+      "id": "qwen3.5-0.8b-q4km",
+      "nombre": "Qwen3.5-0.8B-Instruct Q4_K_M",
+      "repo": "unsloth/Qwen3.5-0.8B-GGUF",
+      "archivo": "Qwen3.5-0.8B-Q4_K_M.gguf",
+      "url": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/Qwen3.5-0.8B-Q4_K_M.gguf",
+      "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+      "bytes": 532517120,
+      "licencia": "Apache-2.0",
+      "sinRazonar": true,
+      "nota": "Para cualquier teléfono con 4 GB de RAM o más (~12,5 tokens/s publicados en un Redmi Note 15 Pro). Elegido con el contenido real: 25/28 correctas, 0,48 s a la primera palabra en PC (PR #10)."
+    },
+    {
+      "id": "qwen3.5-2b-q4km",
+      "nombre": "Qwen3.5-2B-Instruct Q4_K_M",
+      "repo": "unsloth/Qwen3.5-2B-GGUF",
+      "archivo": "Qwen3.5-2B-Q4_K_M.gguf",
+      "url": "https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/Qwen3.5-2B-Q4_K_M.gguf",
+      "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+      "bytes": 1280835840,
+      "licencia": "Apache-2.0",
+      "sinRazonar": true,
+      "nota": "Gama alta (8 GB de RAM o más). Con el contenido real acierta igual que el 0.8B (25/28) pero es más lento."
+    }
+  ]
+}
