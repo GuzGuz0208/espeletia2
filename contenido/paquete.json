@@ -1,0 +1,2244 @@
+{
+ "version": "2026-11-26.1",
+ "actualizado": "2026-11-26",
+ "fuentes": {
+  "UTON2024": {
+   "titulo": "Guion Ecoturístico UTON 2024",
+   "paginas": 57
+  },
+  "NORTE": {
+   "titulo": "Guión turístico (zona norte)",
+   "paginas": 7
+  }
+ },
+ "estaciones": [
+  {
+   "id": "brisas",
+   "nombre": "Brisas",
+   "orden": 0,
+   "altitud": null
+  },
+  {
+   "id": "aguacerales",
+   "nombre": "Aguacerales",
+   "orden": 1,
+   "altitud": {
+    "m": 4160,
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 5
+     },
+     {
+      "guion": "NORTE",
+      "pagina": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "arenales",
+   "nombre": "Arenales",
+   "orden": 2,
+   "altitud": {
+    "m": 4290,
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 6
+     },
+     {
+      "guion": "NORTE",
+      "pagina": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "lunares",
+   "nombre": "Lunares (Valle Lunar)",
+   "orden": 3,
+   "altitud": {
+    "m": 4350,
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 8
+     },
+     {
+      "guion": "NORTE",
+      "pagina": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "tumbas",
+   "nombre": "Valle de las Tumbas",
+   "orden": 4,
+   "altitud": {
+    "m": 4460,
+    "citas": [
+     {
+      "guion": "UTON2024",
+      "pagina": 9
+     },
+     {
+      "guion": "NORTE",
+      "pagina": 3
+     }
+    ]
+   }
+  }
+ ],
+ "fichas": [
+  {
+   "id": "norte-brisas-introduccion",
+   "estacion": "brisas",
+   "tema": "agua",
+   "tipo": "ciencia",
+   "titulo": "Brisas, puerta de entrada al parque",
+   "texto": "Introducción: Sector Brisas (Puerta de Entrada). Concepto clave: ubicación geográfica e importancia hídrica. \"Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios. Nos encontramos en el flanco norte del Complejo Volcánico Nevado del Ruiz (CVNR), una estructura compuesta por cuatro domos principales: Nereidas, Olleta, Piraña y el cráter activo Arenas. Este ecosistema de páramo es un 'regulador hídrico' vital para el Eje Cafetero\".",
+   "breve": "Estamos ingresando al Parque Nacional Natural Los Nevados, un área protegida de 62,142 hectáreas que abastece de agua a más de 37 municipios.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 5
+    }
+   ],
+   "preguntas": [
+    "¿dónde estamos?",
+    "¿qué es Brisas?",
+    "¿qué es este parque?",
+    "¿cuánto mide el parque?",
+    "¿de qué volcán es este flanco?",
+    "¿por qué es importante este parque?",
+    "where are we?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-kumanday",
+   "estacion": null,
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "Kumanday, el nombre indígena (zona norte)",
+   "texto": "La Identidad Ancestral: Del Kumanday al Ruiz. Iniciamos con el origen del nombre indígena. Mucho antes de las expediciones coloniales, este territorio era la morada de comunidades que guardaban un respeto profundo por la montaña. Lo llamaban Kumanday. En la cosmogonía indígena, este nombre se traduce como 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'. Para ellos, el volcán era un ser vivo, un centinela sagrado que marcaba la conexión entre la tierra y el cielo. Al llamarlo 'Blanco', no solo describían su cima nevada, sino que reconocían su pureza como fuente de vida.",
+   "breve": "En la cosmogonía indígena, este nombre se traduce como 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 1
+    }
+   ],
+   "preguntas": [
+    "¿qué significa Kumanday?",
+    "¿cómo llamaban los indígenas al volcán?",
+    "¿de dónde viene el nombre Kumanday?",
+    "¿cuál era el nombre indígena del Ruiz?",
+    "¿qué quiere decir Kumanday?",
+    "what does Kumanday mean?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-glaciar-cumbre",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "El glaciar de cumbre, reserva de agua",
+   "texto": "La Ciencia del Hielo: Aspectos Glaciológicos. Ese blanco que definía su nombre es lo que técnicamente conocemos como un glaciar de cumbre. Según los fundamentos glaciológicos, un glaciar es una masa de hielo de origen terrestre que se forma mediante un proceso de cientos de años: la nieve se acumula, se compacta bajo su propio peso, expulsa el aire y se recristaliza hasta convertirse en hielo glaciar denso y azulado. La importancia del glaciar de la cumbre es absoluta; no es solo un adorno paisajístico, es una infraestructura hídrica natural. Actúa como un regulador de caudales: en las épocas secas, cuando las lluvias desaparecen, el glaciar libera agua gradualmente, garantizando que los ríos que abastecen a nuestras ciudades nunca se sequen. Es, literalmente, nuestra cuenta de ahorros de agua sólida.",
+   "breve": "Actúa como un regulador de caudales: en las épocas secas, cuando las lluvias desaparecen, el glaciar libera agua gradualmente, garantizando que los ríos que abastecen a nuestras ciudades nunca se sequen.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 1
+    }
+   ],
+   "preguntas": [
+    "¿qué es un glaciar?",
+    "¿cómo se forma un glaciar?",
+    "¿para qué sirve el glaciar?",
+    "¿por qué es importante el glaciar?",
+    "¿de dónde sale el hielo del nevado?",
+    "¿qué es un glaciar de cumbre?",
+    "what is a glacier?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-retirada-glaciar",
+   "estacion": null,
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "La retirada glaciar actual",
+   "texto": "Una Realidad Inevitable: La Retirada Glaciar Actual. Sin embargo, este gigante es frágil. La retirada glaciar actual es el testimonio más crudo del cambio climático en Colombia. Lo que antes eran campos de nieve perpetua, hoy son morrenas y rocas desnudas. El retroceso es acelerado; estamos perdiendo masa glaciar a un ritmo que desafía la capacidad de adaptación del ecosistema. Al subir, verán cicatrices en la roca que nos muestran dónde estaba el hielo hace apenas diez años, recordándonos que somos testigos de la etapa final de estos glaciares tropicales.",
+   "breve": "La retirada glaciar actual es el testimonio más crudo del cambio climático en Colombia. Lo que antes eran campos de nieve perpetua, hoy son morrenas y rocas desnudas.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 1
+    },
+    {
+     "guion": "NORTE",
+     "pagina": 2
+    }
+   ],
+   "preguntas": [
+    "¿el glaciar se está derritiendo?",
+    "¿por qué hay menos nieve?",
+    "¿qué pasa con el glaciar?",
+    "¿el cambio climático afecta el nevado?",
+    "¿va a desaparecer el glaciar?",
+    "¿qué son esas marcas en la roca?",
+    "is the glacier melting?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-clima-bimodal-suelo",
+   "estacion": null,
+   "tema": "clima",
+   "tipo": "ciencia",
+   "titulo": "Clima bimodal y suelo esponja",
+   "texto": "El Motor Climático y la Fábrica de Agua (Gran Libro de los Páramos). Este fenómeno se enmarca en los aspectos climáticos de la región, definidos por un régimen bimodal. Tenemos dos periodos de lluvia y dos de sequía que dictan el ritmo de la montaña. Según las definiciones del Gran Libro de los Páramos, nos encontramos en un 'ecosistema estratégico'. El páramo no solo es frío; es una 'isla biogeográfica' de alta montaña tropical donde la presión atmosférica baja y la radiación solar es extrema. Aquí el suelo es el protagonista: gracias a su origen volcánico, funciona como una esponja que retiene hasta 40 veces su peso en agua. Es una fábrica natural donde la niebla se transforma en líquido vital.",
+   "breve": "Tenemos dos periodos de lluvia y dos de sequía que dictan el ritmo de la montaña.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 2
+    }
+   ],
+   "preguntas": [
+    "¿cómo es el clima aquí?",
+    "¿cuándo llueve en el páramo?",
+    "¿qué es un régimen bimodal?",
+    "¿por qué el suelo es una esponja?",
+    "¿cuánta agua retiene el suelo?",
+    "¿qué es una isla biogeográfica?",
+    "¿hay temporadas de lluvia?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-frailejon-necromasa",
+   "estacion": null,
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "El frailejón, ingeniero del páramo (zona norte)",
+   "texto": "La Vida en el Límite: Biomasa y Fauna. Finalmente, observen la biomasa que nos rodea. El frailejón (Espeletia) es el ingeniero de este lugar. Su estructura está diseñada para la guerra climática: sus hojas peludas atrapan la humedad y su 'necromasa' (hojas muertas que cubren el tallo) actúa como un aislante térmico para que el agua en su interior no se congele.",
+   "breve": "El frailejón (Espeletia) es el ingeniero de este lugar. Su estructura está diseñada para la guerra climática: sus hojas peludas atrapan la humedad y su 'necromasa' (hojas muertas que cubren el tallo) actúa como un aislante térmico para que el agua en su interior no se congele.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 2
+    }
+   ],
+   "preguntas": [
+    "¿qué papel cumple el frailejón?",
+    "¿por qué el frailejón tiene pelos?",
+    "¿qué es la necromasa?",
+    "¿por qué el frailejón tiene hojas secas pegadas?",
+    "¿cómo sobrevive el frailejón al frío?",
+    "¿para qué sirve el frailejón?",
+    "what does the frailejón do?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-fauna-condor-danta",
+   "estacion": null,
+   "tema": "fauna",
+   "tipo": "ciencia",
+   "titulo": "Cóndor, danta y colibríes",
+   "texto": "Y donde hay plantas, hay fauna extraordinaria. Somos el territorio del Cóndor de los Andes, el ave que utiliza las corrientes térmicas generadas por el calor del volcán para planear sin esfuerzo. Compartimos este espacio con la danta de montaña, un mamífero lanudo que es el principal dispersor de semillas, y con colibríes que entran en estado de hibernación nocturna para sobrevivir. En este entorno, la fauna ha tenido que adaptarse de formas asombrosas: desde el majestuoso Cóndor de los Andes, que planea sobre las térmicas, hasta la danta de montaña, nuestra 'jardinera' lanuda que dispersa vida entre las rocas.",
+   "breve": "Somos el territorio del Cóndor de los Andes, el ave que utiliza las corrientes térmicas generadas por el calor del volcán para planear sin esfuerzo.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 2
+    },
+    {
+     "guion": "NORTE",
+     "pagina": 3
+    }
+   ],
+   "preguntas": [
+    "¿qué animales hay?",
+    "¿hay cóndores?",
+    "¿qué es la danta de montaña?",
+    "¿cómo sobreviven los colibríes al frío?",
+    "¿cómo vuela el cóndor?",
+    "¿qué animales viven en el páramo?",
+    "what animals live here?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-discurso-kumanday",
+   "estacion": "brisas",
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "Kumanday, el centinela del agua (discurso)",
+   "texto": "Discurso: \"Kumanday, el Centinela del Agua\". \"¡Bienvenidos a una de las aulas ambientales más importantes de los Andes colombianos! Antes de comenzar nuestro ascenso por el sector norte, es fundamental entender el territorio que estamos pisando. Este gigante que nos observa no siempre se llamó 'Ruiz'. Mucho antes, las comunidades indígenas lo bautizaron como Kumanday, que en su lengua significa 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'. Para ellos, la montaña no era solo roca, sino una deidad blanca que marcaba el límite de lo sagrado.",
+   "breve": "Este gigante que nos observa no siempre se llamó 'Ruiz'. Mucho antes, las comunidades indígenas lo bautizaron como Kumanday, que en su lengua significa 'Cerro Blanco', 'El de la Nariz Humeante' o 'Padre Blanco'.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 2
+    }
+   ],
+   "preguntas": [
+    "¿siempre se llamó Ruiz?",
+    "¿cómo se llamaba antes el volcán?",
+    "¿qué era la montaña para los indígenas?",
+    "¿qué significa Kumanday en lengua indígena?",
+    "¿por qué le dicen Kumanday?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-discurso-paramo",
+   "estacion": "brisas",
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "Caminaremos por el páramo (discurso)",
+   "texto": "Hoy, ese blanco que le da su nombre es un glaciar de cumbre. Su importancia es incalculable: funciona como una 'reserva de agua sólida' que regula los caudales de los ríos que bañan el Eje Cafetero. Sin embargo, no podemos ignorar la retirada glaciar actual; debido al calentamiento global, nuestro glaciar está retrocediendo aceleradamente, dejando al descubierto la roca volcánica y cambiando para siempre este paisaje. Caminaremos por un ecosistema único: el Páramo. Según el Gran Libro de los Páramos, este es un sistema de alta montaña tropical que actúa como una esponja natural. Aquí, la biomasa más relevante es el frailejón, una planta diseñada para capturar la humedad de la niebla. A medida que subamos, notarán los aspectos climáticos extremos. Pasaremos de la humedad de los bosques altos a una zona de alta radiación solar y vientos helados, con un clima bimodal que dicta las reglas de supervivencia.",
+   "breve": "Caminaremos por un ecosistema único: el Páramo. Según el Gran Libro de los Páramos, este es un sistema de alta montaña tropical que actúa como una esponja natural.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 2
+    },
+    {
+     "guion": "NORTE",
+     "pagina": 3
+    }
+   ],
+   "preguntas": [
+    "¿qué es el páramo?",
+    "¿qué vamos a ver en el recorrido?",
+    "¿cómo cambia el clima al subir?",
+    "¿por qué el páramo es una esponja?",
+    "¿qué es lo más importante del páramo?",
+    "what is a páramo?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-ficha-tecnica",
+   "estacion": null,
+   "tema": "agua",
+   "tipo": "ciencia",
+   "titulo": "Ficha técnica del PNN Los Nevados",
+   "texto": "Ficha Técnica General del PNN Los Nevados. Extensión total: 62,142 hectáreas. Área de páramos protegida: 53,532 hectáreas (86% del total). Importancia hídrica: Abastece a 37 municipios y beneficia a cerca de 3 millones de personas en el Eje Cafetero. Geología base: El Complejo Volcánico Nevado del Ruiz (CVNR) está compuesto por cuatro estructuras: Nereidas, Olleta, Piraña y Arenas. Roca predominante: Andesita (roca volcánica común de los Andes).",
+   "breve": "Extensión total: 62,142 hectáreas. Área de páramos protegida: 53,532 hectáreas (86% del total).",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 3
+    }
+   ],
+   "preguntas": [
+    "¿qué tan grande es el parque?",
+    "¿cuántas hectáreas tiene el parque?",
+    "¿cuánto páramo protege el parque?",
+    "¿a cuántos municipios les da agua?",
+    "¿cuántas personas reciben agua del parque?",
+    "¿qué roca hay aquí?",
+    "how big is the park?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-estaciones",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Las estaciones de la zona norte",
+   "texto": "Estructura de Estaciones (Zona Norte). Aguacerales, 4,160 msnm: páramo propiamente dicho; captación de agua por condensación, frailejones (Espeletia hartwegiana). Arenales, 4,290 msnm: transición páramo a superpáramo; dunas de arena (patrimonio geológico intangible), historia del esquí y Chalet Arenales. Lunares, 4,350 msnm: superpáramo; procesos de gelifracción (fractura por hielo) y oxidación (tonalidades rojizas). Valle de las Tumbas, 4,460 msnm: superpáramo a zona nival; significado espiritual indígena (Kumanday), riesgo de lahares y límite de ascenso.",
+   "breve": "Aguacerales, 4,160 msnm: páramo propiamente dicho; captación de agua por condensación, frailejones (Espeletia hartwegiana).",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 3
+    },
+    {
+     "guion": "NORTE",
+     "pagina": 4
+    }
+   ],
+   "preguntas": [
+    "¿cuáles son las estaciones?",
+    "¿qué paradas tiene el recorrido?",
+    "¿a qué altura está cada estación?",
+    "¿qué se ve en cada parada?",
+    "¿cuál es la estación más alta?",
+    "what are the stops?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-nodos",
+   "estacion": null,
+   "tema": "normas",
+   "tipo": "norma",
+   "titulo": "Conceptos centrales de cada parada",
+   "texto": "Cada parada es un \"nodo\" que debe contener tres iconos rápidos para el guía. Nodo 1: Aguacerales (4.160 msnm). Icono: una gota de agua sobre un frailejón. Concepto central: Génesis Hídrica. Nodo 2: Arenales (4.290 msnm). Icono: un termómetro bajando o un reloj de arena. Concepto central: Memoria y Cambio Climático. Nodo 3: Valle Lunar (4.350 msnm). Icono: una roca fracturada (martillo geológico). Concepto central: Fuerzas Geológicas. Nodo 4: Valle de las Tumbas (4.460 msnm). Icono: un pictograma indígena y un triángulo de advertencia volcánica. Concepto central: Respeto y Riesgo. Cierre: \"El límite del hombre frente al volcán\".",
+   "breve": "Nodo 1: Aguacerales (4.160 msnm). Icono: una gota de agua sobre un frailejón. Concepto central: Génesis Hídrica.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 4
+    }
+   ],
+   "preguntas": [
+    "¿cuál es el tema de cada estación?",
+    "¿qué concepto se explica en cada parada?",
+    "¿de qué trata cada nodo?",
+    "¿cuál es la idea central del recorrido?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-aguacerales-importancia",
+   "estacion": "aguacerales",
+   "tema": "agua",
+   "tipo": "ciencia",
+   "titulo": "Aguacerales, el filtro de la montaña",
+   "texto": "Parada: Aguacerales (El \"Filtro\" de la Montaña). Concepto clave: captación hídrica y flora pionera. Importancia: Es el punto de transición donde el turista comprende que el páramo no es un desierto frío, sino una \"esponja\" hídrica. Aquí se justifica la existencia de las ciudades en el valle. Características únicas: presencia masiva de Espeletia hartwegiana y musgos de turbera.",
+   "breve": "Es el punto de transición donde el turista comprende que el páramo no es un desierto frío, sino una \"esponja\" hídrica.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 5
+    }
+   ],
+   "preguntas": [
+    "¿qué tiene de especial Aguacerales?",
+    "¿por qué paramos en Aguacerales?",
+    "¿qué se aprende en Aguacerales?",
+    "¿qué plantas hay en Aguacerales?",
+    "¿por qué le dicen el filtro de la montaña?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-aguacerales-niebla",
+   "estacion": "aguacerales",
+   "tema": "agua",
+   "tipo": "ciencia",
+   "titulo": "La niebla se atrapa: condensación por contacto",
+   "texto": "\"Bienvenidos a Aguacerales. Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'. Observen los frailejones: su importancia radica en que son ingenieros hídricos. Sus hojas están cubiertas de pubescencia (pelos blancos), es una adaptación evolutiva para protegerse de la alta radiación UV y retener calor. Este es el inicio del ciclo que alimenta los ríos que vemos en las zonas bajas: rompen la gota de niebla, la condensan y la dirigen al suelo. Ese suelo, compuesto por ceniza volcánica y materia orgánica, funciona como una esponja que libera el agua lentamente hacia las cuencas de los ríos Chinchiná y Gualí. Sin este proceso microscópico que ocurre aquí, no habría agua potable en las ciudades de abajo\".",
+   "breve": "Este punto es vital porque aquí presenciamos la intercepción de niebla o condensación por contacto. A diferencia de una selva donde llueve, aquí el agua 'se atrapa'.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 5
+    }
+   ],
+   "preguntas": [
+    "¿qué papel cumple el frailejón en este lugar?",
+    "¿cómo atrapan agua los frailejones?",
+    "¿qué es la condensación por contacto?",
+    "¿de dónde sale el agua de los ríos?",
+    "¿por qué los frailejones tienen pelos blancos?",
+    "¿a qué ríos va el agua?",
+    "how do plants catch water from fog?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-arenales-importancia",
+   "estacion": "arenales",
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "Arenales: geología y memoria",
+   "texto": "Parada: Sector Arenales (Geología y Memoria). Concepto clave: patrimonio geológico y retroceso glaciar. Importancia: Es el lugar para hablar del Cambio Climático y la dinámica volcánica. Es el punto donde el paisaje cambia drásticamente de verde a gris. Características únicas: depósitos de arena volcánica y vestigios del retroceso glaciar del siglo XX.",
+   "breve": "Es el lugar para hablar del Cambio Climático y la dinámica volcánica. Es el punto donde el paisaje cambia drásticamente de verde a gris.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 5
+    }
+   ],
+   "preguntas": [
+    "¿qué tiene de especial Arenales?",
+    "¿por qué el paisaje cambia de verde a gris?",
+    "¿qué se aprende en Arenales?",
+    "¿qué es Arenales?",
+    "¿por qué paramos en Arenales?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-arenales-discurso",
+   "estacion": "arenales",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Arenales, ventana al pasado geológico",
+   "texto": "\"Este sector es una ventana al pasado geológico. Las arenas que ven son producto de erupciones milenarias y procesos de erosión. Aquí funcionó el antiguo Chalet Arenales, un recordatorio del retroceso glaciar; donde antes hubo nieve permanente para el esquí, hoy queda un desierto de altura. Las rocas predominantes son andesitas, típicas de volcanes de zona de subducción como el nuestro. Hoy, lo que ven es el resultado del retroceso glaciar acelerado. La arena no es solo polvo; es material piroclástico y ceniza de erupciones históricas que ha sido retrabajada por el viento. Aquí deben notar la vegetación pionera: plantas muy pequeñas que intentan colonizar un suelo extremadamente pobre y ácido, demostrando la resiliencia de la vida en el límite de la supervivencia\".",
+   "breve": "Las arenas que ven son producto de erupciones milenarias y procesos de erosión.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 5
+    },
+    {
+     "guion": "NORTE",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿de dónde viene la arena?",
+    "¿qué es esta arena?",
+    "¿por qué hay arena en la montaña?",
+    "¿qué es la vegetación pionera?",
+    "¿había nieve aquí antes?",
+    "¿qué rocas hay en Arenales?",
+    "where does the sand come from?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-lunar-importancia",
+   "estacion": "lunares",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Valle Lunar: la fuerza de los elementos",
+   "texto": "Parada: Valle Lunar (La Fuerza de los Elementos). Concepto clave: gelifracción y oxidación. Importancia: Es la estación técnica por excelencia. Aquí se explica cómo se \"descompone\" la montaña. Características únicas: formaciones rocosas angulares, ausencia casi total de vegetación y colores minerales intensos. \"Este es el Valle Lunar, llamado así por su aspecto estéril y desolado. La importancia de este punto es entender la fuerza física del clima.",
+   "breve": "Este es el Valle Lunar, llamado así por su aspecto estéril y desolado.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿por qué se llama Valle Lunar?",
+    "¿por qué le dicen Lunares?",
+    "¿qué tiene de especial Lunares?",
+    "¿por qué casi no hay plantas en Lunares?",
+    "¿qué se aprende en el Valle Lunar?",
+    "why is it called Lunar Valley?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-lunar-gelifraccion-oxidacion",
+   "estacion": "lunares",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Gelifracción y oxidación en el Valle Lunar",
+   "texto": "El paisaje aquí se torna 'lunar' debido a la gelifracción. El agua se filtra en las grietas de la roca, se congela por la noche aumentando su volumen y las estalla desde adentro: actúa como una cuña que rompe las rocas andesíticas en pedazos angulares. Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos: es oxidación de hierro y azufre presentes en la lava vieja al entrar en contacto con el oxígeno y la humedad ambiental. Estamos caminando sobre flujos de lava antiguos que están siendo transformados por la atmósfera.",
+   "breve": "El paisaje aquí se torna 'lunar' debido a la gelifracción. Los tonos rojizos que observan son el resultado de la oxidación de minerales ferrosos",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿qué proceso explica las fracturas y cuál explica el color?",
+    "¿por qué se fracturan las rocas en Lunares?",
+    "¿por qué las rocas son rojas?",
+    "¿qué es la gelifracción?",
+    "¿por qué las rocas tienen grietas?",
+    "¿por qué las piedras son angulares?",
+    "why are the rocks red?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-tumbas-importancia",
+   "estacion": "tumbas",
+   "tema": "cultura",
+   "tipo": "ciencia",
+   "titulo": "Valle de las Tumbas: espiritualidad y riesgo",
+   "texto": "Parada Final: Valle de las Tumbas (Espiritualidad y Riesgo). Concepto clave: geografía sagrada y seguridad volcánica. Importancia: Es el cierre del recorrido. Combina la cosmovisión indígena, la gestión del riesgo volcánico y la ecología del superpáramo. Características únicas: límite de ascenso permitido, vista al cráter (si el clima lo permite) y significancia antropológica.",
+   "breve": "Es el cierre del recorrido. Combina la cosmovisión indígena, la gestión del riesgo volcánico y la ecología del superpáramo.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿qué tiene de especial el Valle de las Tumbas?",
+    "¿cuál es la última parada?",
+    "¿se ve el cráter desde aquí?",
+    "¿hasta dónde llega el recorrido?",
+    "¿qué se aprende en el Valle de las Tumbas?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-tumbas-sagrado",
+   "estacion": "tumbas",
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "Lugar sagrado de pagamentos",
+   "texto": "\"Llegamos a los 4,460 msnm. Este lugar era sagrado para los pueblos indígenas, quienes lo llamaban Kumanday ('cerro blanco'); para las comunidades precolombinas, este era un lugar de pagamentos y respeto, no de conquista.",
+   "breve": "Este lugar era sagrado para los pueblos indígenas, quienes lo llamaban Kumanday ('cerro blanco'); para las comunidades precolombinas, este era un lugar de pagamentos y respeto, no de conquista.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿este lugar era sagrado?",
+    "¿qué hacían aquí los indígenas?",
+    "¿qué es un pagamento?",
+    "¿qué significaba este lugar para los indígenas?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-tumbas-lahares",
+   "estacion": "tumbas",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Zona de lahares y límite de ascenso",
+   "texto": "Técnicamente, estamos en la zona de influencia directa de lahares (flujos de lodo volcánico). La importancia de terminar aquí es entender que el volcán está vivo; el cráter Arenas está cerca y emite gases constantemente. El ascenso más allá de este punto está restringido no solo por la actividad del volcán, sino por la fragilidad del ecosistema de superpáramo, donde la vida lucha por colonizar la roca desnuda tras el retiro del glaciar. Aquí, en el ecosistema de superpáramo, la temperatura fluctúa tanto que las plantas han desarrollado estrategias extremas para no morir congeladas cada noche. Es el límite entre la vida y la roca pura\".",
+   "breve": "El ascenso más allá de este punto está restringido no solo por la actividad del volcán, sino por la fragilidad del ecosistema de superpáramo, donde la vida lucha por colonizar la roca desnuda tras el retiro del glaciar.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿por qué no podemos subir más?",
+    "¿puedo subir hasta el cráter?",
+    "¿qué es un lahar?",
+    "¿por qué termina aquí el recorrido?",
+    "¿el cráter echa gases?",
+    "¿cómo sobreviven las plantas al frío de la noche?",
+    "can we go to the summit?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-recomendaciones-guia",
+   "estacion": null,
+   "tema": "normas",
+   "tipo": "norma",
+   "titulo": "Rigor técnico y compromiso ambiental",
+   "texto": "Recomendaciones para el Discurso del Guía. Rigor técnico: evite el uso de mitos o información no comprobada. Este documento es la base de su autoridad frente al grupo. Hilo conductor: Conecte siempre la desaparición del hielo (glaciología) con la importancia de la vegetación (biomasa) para retener la poca agua que el glaciar ya no puede suministrar. Sensibilización: utilice la información de la retirada glaciar actual para generar un compromiso ambiental real en el turista, alejándose del discurso meramente contemplativo.",
+   "breve": "Conecte siempre la desaparición del hielo (glaciología) con la importancia de la vegetación (biomasa) para retener la poca agua que el glaciar ya no puede suministrar.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 6
+    },
+    {
+     "guion": "NORTE",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿por qué importa la vegetación si se acaba el glaciar?",
+    "¿qué relación hay entre el hielo y las plantas?",
+    "¿qué puedo hacer por el páramo?",
+    "¿los guías cuentan mitos?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-volcan-activo",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "El Ruiz es un volcán activo, nunca «apagado»",
+   "texto": "Verdades: El Nevado del Ruiz es un volcán activo. Decir que está \"apagado\" genera una falsa sensación de seguridad. Si ocurriera una emisión de ceniza o un evento sísmico, el turista no estaría preparado psicológicamente para seguir los protocolos de emergencia, lo que aumenta el pánico y el riesgo. Detalle para el guía: se debe hablar de \"periodos de reposo\" o \"actividad constante\", pero nunca de extinción. El guía debe explicar que la vigilancia del Servicio Geológico Colombiano es 24/7 precisamente porque es un sistema vivo.",
+   "breve": "El Nevado del Ruiz es un volcán activo. Decir que está \"apagado\" genera una falsa sensación de seguridad.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿el volcán está apagado?",
+    "¿el Ruiz está activo?",
+    "¿el volcán puede hacer erupción?",
+    "¿quién vigila el volcán?",
+    "¿el volcán está dormido?",
+    "¿el volcán está extinto?",
+    "is the volcano active?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-volcan-nivel-alerta",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Nivel de alerta del volcán (bloqueada)",
+   "texto": "Verdades: El Nevado del Ruiz es un volcán activo (actualmente en Nivel de Estado de Alerta Amarilla).",
+   "breve": "El Nevado del Ruiz es un volcán activo (actualmente en Nivel de Estado de Alerta Amarilla).",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿en qué alerta está el volcán?",
+    "¿cuál es el nivel de alerta?"
+   ],
+   "bloqueada": true,
+   "motivo": "Afirma el nivel de alerta actual del volcán; es información cambiante: la confirma el personal del parque y el Servicio Geológico Colombiano.",
+   "estado": "validado"
+  },
+  {
+   "id": "norte-ceniza-nieve",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Lo gris es ceniza, no nieve",
+   "texto": "Confundir ceniza con nieve: muchos turistas llegan esperando ver nieve blanca y, al ver la montaña gris, los guías a veces intentan \"suavizar\" la realidad diciendo que \"la nieve está debajo\" o que \"eso blanco es hielo\". Detalle para el guía: es un error técnico. Lo que cubre gran parte del sector norte es ceniza volcánica reciente y depósitos piroclásticos. Decir la verdad permite explicar el dinamismo del volcán. La nieve y el glaciar están en franco retroceso; ocultar esto es ignorar la crisis climática que el guion busca visibilizar.",
+   "breve": "Lo que cubre gran parte del sector norte es ceniza volcánica reciente y depósitos piroclásticos.",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿por qué la montaña está gris?",
+    "¿dónde está la nieve?",
+    "¿la nieve está debajo de la ceniza?",
+    "¿eso gris es nieve sucia?",
+    "¿por qué no hay nieve?",
+    "why is the mountain grey?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-antropomorfizacion",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "norma",
+   "titulo": "El volcán no está «enojado»: SO2 y sismicidad",
+   "texto": "La antropomorfización de la naturaleza: utilizar términos emocionales para describir fenómenos geológicos resta profesionalismo y rigor científico al guía. El PNN Los Nevados es un aula ambiental, no un escenario de leyendas sin sustento. Detalle para el guía: En lugar de decir \"el volcán está enojado\", se debe explicar que hay un \"aumento en el flujo de dióxido de azufre (SO2) o actividad sísmica interna\". Esto eleva el nivel de la guianza y educa al visitante con términos reales.",
+   "breve": "En lugar de decir \"el volcán está enojado\", se debe explicar que hay un \"aumento en el flujo de dióxido de azufre (SO2) o actividad sísmica interna\".",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿el volcán está enojado?",
+    "¿por qué el volcán se pone bravo?",
+    "¿qué pasa cuando el volcán se activa?",
+    "¿qué es el SO2?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "norte-palabras-gancho",
+   "estacion": null,
+   "tema": "normas",
+   "tipo": "norma",
+   "titulo": "Palabras gancho del recorrido",
+   "texto": "Técnica de Memorización Rápida (Palabras Gancho). Para no olvidar los puntos, deben asociar cada tema con una parte de su propio cuerpo: 1. Cabeza (Nombre): Kumanday (el pensamiento y la historia). 2. Hombros (Glaciar): el peso y la importancia del hielo que sostiene la vida. 3. Pulmones (Clima/Oxígeno): el aire frío y los ciclos de lluvia. 4. Piel (Biomasa/Frailejón): los pelos de la planta y la protección (necromasa). 5. Pies (Suelo/Libro de los Páramos): la esponja de agua que pisamos.",
+   "breve": "Para no olvidar los puntos, deben asociar cada tema con una parte de su propio cuerpo",
+   "citas": [
+    {
+     "guion": "NORTE",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿cómo recordar los temas del recorrido?",
+    "¿cuáles son las ideas principales?",
+    "resumen del recorrido",
+    "¿qué debo recordar del páramo?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-aguacerales-ficha",
+   "estacion": "aguacerales",
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "Aguacerales: altura, ecosistema, fauna y plantas",
+   "texto": "1. Aguacerales. Altura: 4.160 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 5.2 km aproximadamente del Cráter Arenas. Ecosistema o bioma: páramo propiamente dicho. Fauna característica: conejo, águila, cusumbos, taira, venados, colibríes, dantas, comadreja, guagua, zorro, puma, patos. Plantas características: pajonal, romeros, frailejón, valeriana, senecios, mortiños, musgo. Estructuras geológicas/geomorfológicas: lavas con relieve invertido, depósitos de caída piroclástica, valle en U, paleosuelos.",
+   "breve": "Altura: 4.160 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 5.2 km aproximadamente del Cráter Arenas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 5
+    }
+   ],
+   "preguntas": [
+    "¿a qué altura está Aguacerales?",
+    "¿qué animales hay en Aguacerales?",
+    "¿qué plantas hay en Aguacerales?",
+    "¿qué tan lejos estamos del cráter?",
+    "¿qué ecosistema es Aguacerales?",
+    "how high is Aguacerales?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-pnn-agua",
+   "estacion": "aguacerales",
+   "tema": "agua",
+   "tipo": "ciencia",
+   "titulo": "El parque abastece de agua a 37 municipios",
+   "texto": "El Parque Nacional Natural Los Nevados tiene cerca de 62.000 (62.142) hectáreas de las cuales protege aproximadamente 53,532 hectáreas de páramos, lo que corresponde al 86% del área protegida, abastece de agua a 37 municipios y beneficia a cerca de 3 millones de personas en la región del eje cafetero. Los páramos son ecosistemas únicos y vitales para Colombia y el planeta. Actúan como esponjas gigantes, regulando el suministro de agua y capturando carbono, lo que ayuda a mitigar el cambio climático. El agua del parque abastece a 37 municipios de la región cafetera, beneficiando a cerca de 3 millones de personas en los departamentos de Tolima, Risaralda, Caldas, Quindío y norte del Valle del Cauca.",
+   "breve": "Los páramos son ecosistemas únicos y vitales para Colombia y el planeta. Actúan como esponjas gigantes, regulando el suministro de agua y capturando carbono, lo que ayuda a mitigar el cambio climático.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 5
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿por qué son importantes los páramos?",
+    "¿a quién le da agua el parque?",
+    "¿qué departamentos reciben agua del parque?",
+    "¿cuántas hectáreas de páramo hay?",
+    "¿los páramos ayudan contra el cambio climático?",
+    "why are páramos important?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-aguacerales-nombre",
+   "estacion": "aguacerales",
+   "tema": "agua",
+   "tipo": "ciencia",
+   "titulo": "Por qué se llama Aguacerales",
+   "texto": "En el sitio \"Aguacerales\" encontramos diversa vegetación. Estas plantas desempeñan un papel crucial en la captación y regulación del agua. Las gotas que precipitan se unen para formar riachuelos que alimentan la cuenca del río Chinchiná. La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales. Aquí se puede apreciar cómo el agua contenida en las nubes es capturada por la vegetación (condensación) y pasa a formar pequeñas gotas que descienden y llegan a los musgos que crecen sobre la roca; estas gotas se juntan formando hilos de agua que al caer van formando un riachuelo que irá a la quebrada. Este fenómeno de condensación se da durante las 24 horas del día, todos los días del año. Durante las noches frías, los hilos de agua se congelan y forman carámbanos (habitualmente ocurre en temporada seca).",
+   "breve": "La caída de agua que observamos y escuchamos no para, de allí el nombre de Aguacerales.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 5
+    }
+   ],
+   "preguntas": [
+    "¿por qué se llama Aguacerales?",
+    "¿de dónde sale el agua que cae?",
+    "¿a dónde va esta agua?",
+    "¿qué son los carámbanos?",
+    "¿el agua cae todo el tiempo?",
+    "¿cómo capturan las plantas el agua de las nubes?",
+    "why is it called Aguacerales?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-frailejon-adaptaciones",
+   "estacion": "aguacerales",
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "Adaptaciones del frailejón",
+   "texto": "Los frailejones, como muchas plantas de páramo, han desarrollado adaptaciones, como hojas gruesas y vellosidades (pubescencia), para sobrevivir en este clima extremo, forman una \"chaqueta\" de materia muerta (necromasa) que les ayuda a protegerse de las inclementes condiciones del clima.",
+   "breve": "Los frailejones, como muchas plantas de páramo, han desarrollado adaptaciones, como hojas gruesas y vellosidades (pubescencia), para sobrevivir en este clima extremo",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 5
+    }
+   ],
+   "preguntas": [
+    "¿cómo se adapta el frailejón?",
+    "¿por qué el frailejón es peludo?",
+    "¿para qué le sirven las hojas muertas al frailejón?",
+    "¿qué es la pubescencia?",
+    "¿por qué el frailejón tiene una chaqueta?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-frailejon-especies",
+   "estacion": "aguacerales",
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "Especies de frailejón y origen del nombre Espeletia",
+   "texto": "Existen más de 100 especies de frailejones, en Colombia se tienen cerca de 60 de estas especies y para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana. El nombre genérico \"Espeletia\" fue nombrado en honor a José Manuel de Ezpeleta, el virrey del Nuevo Reino de Granada.",
+   "breve": "para el PNNN se encuentra reportada únicamente la especie de Frailejón Espeletia hartwegiana.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 5
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿cuántas especies de frailejón hay?",
+    "¿qué especie de frailejón hay aquí?",
+    "¿por qué se llama Espeletia?",
+    "¿cuántos frailejones hay en Colombia?",
+    "¿cómo se llama científicamente el frailejón?",
+    "what species is the frailejón?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-aguacerales-geologia",
+   "estacion": "aguacerales",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Aguacerales sobre el sustrato del retroceso glaciar",
+   "texto": "Todo el ecosistema de la estación creció sobre el sustrato dejado por el retroceso glaciar, depósitos eólicos y depósitos de caída; estos a su vez están sobre las lavas del volcán. El glaciar en su retroceso fue modelando las rocas formando valles y \"cortando\" las lavas como si fuera un \"cuchillo gigante\", dándole la forma a los escarpes que rodean la estación de Aguacerales y dejando un Valle en U al occidente de la estación.",
+   "breve": "El glaciar en su retroceso fue modelando las rocas formando valles y \"cortando\" las lavas como si fuera un \"cuchillo gigante\",",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿cómo se formó este valle?",
+    "¿qué es un valle en U?",
+    "¿por qué hay paredes de roca alrededor?",
+    "¿sobre qué crece la vegetación?",
+    "¿el glaciar llegaba hasta aquí?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-aguacerales-nevadas",
+   "estacion": "aguacerales",
+   "tema": "clima",
+   "tipo": "ciencia",
+   "titulo": "Nevadas y granizadas en Aguacerales",
+   "texto": "Datos curiosos: En esta estación se han tenido nevadas y granizadas, en ocasiones tan abundantes imposibilitando continuar hacia la parte alta en los vehículos.",
+   "breve": "En esta estación se han tenido nevadas y granizadas, en ocasiones tan abundantes imposibilitando continuar hacia la parte alta en los vehículos.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿aquí nieva?",
+    "¿cae granizo?",
+    "¿ha nevado en Aguacerales?",
+    "¿la nieve puede cerrar el camino?",
+    "does it snow here?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-andesitas-edad",
+   "estacion": "aguacerales",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Andesitas de 100 mil años y el Pre Ruiz",
+   "texto": "Las rocas que rodean la estación tienen cerca de 100 mil años, y se llaman Andesitas (la roca más común de los Andes). Mirando hacia el Noroccidente (Cerro Gualí, Cerro la Teta, Indígena acostado) se aprecian las rocas \"más antiguas del Ruiz\", de 1.8 millones de años, pero estas realmente son de otra \"versión\" del Ruiz llamado Pre Ruiz.",
+   "breve": "Las rocas que rodean la estación tienen cerca de 100 mil años, y se llaman Andesitas (la roca más común de los Andes).",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿qué edad tienen las rocas?",
+    "¿qué es la andesita?",
+    "¿cuáles son las rocas más antiguas?",
+    "¿qué es el Pre Ruiz?",
+    "¿qué es el Indígena acostado?",
+    "how old are the rocks?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-convergencia-evolutiva",
+   "estacion": "aguacerales",
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "Ecosistemas parecidos en otros continentes",
+   "texto": "En otras regiones como África, Asia y Oceanía existen ecosistemas con características equivalentes, debido a condiciones similares de altitud y clima; esto se da por convergencia evolutiva.",
+   "breve": "En otras regiones como África, Asia y Oceanía existen ecosistemas con características equivalentes, debido a condiciones similares de altitud y clima; esto se da por convergencia evolutiva.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿hay páramos en otros países?",
+    "¿existen páramos en África?",
+    "¿qué es la convergencia evolutiva?",
+    "are there páramos elsewhere?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-paramo-historia-palabra",
+   "estacion": "aguacerales",
+   "tema": "cultura",
+   "tipo": "ciencia",
+   "titulo": "Los páramos habitados y la palabra páramo",
+   "texto": "Los páramos han sido habitados por comunidades humanas desde hace unos 10.000 años aproximadamente. La palabra páramo proviene del latín paramus, existía en España hasta antes de la llegada de los romanos. Básicamente el páramo es un lugar yermo, desértico y árido. La forma de relacionarse con los páramos ha variado durante la historia humana: indígenas, españoles, instituciones y visitantes tienen miradas que le dan sentido al páramo. En España existe un paisaje similar conocido como la paramera de Castilla.",
+   "breve": "La palabra páramo proviene del latín paramus, existía en España hasta antes de la llegada de los romanos.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 6
+    }
+   ],
+   "preguntas": [
+    "¿de dónde viene la palabra páramo?",
+    "¿desde cuándo hay gente en los páramos?",
+    "¿qué significa páramo?",
+    "¿hay páramos en España?",
+    "where does the word páramo come from?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-arenales-ficha",
+   "estacion": "arenales",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Arenales: altura, ecosistema, fauna y plantas",
+   "texto": "2. Arenales. Altura: 4.290 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 4.7 km aproximadamente del Cráter Arenas. Ecosistema o bioma: transición páramo a superpáramo. Fauna: conejos, huellas de tigrillo, águilas. Plantas características: pajonal, loricarias, colchones de agua. Estructuras geológicas/geomorfológicas: dunas, flujos granulares, depósitos eólicos y lavas, till, estrías, lavas con relieve invertido. El paisaje es típico de superpáramo; más a la parte baja del sector de Arenales, cerca al paso de la quebrada Arenales sobre la carretera, todavía se aprecia el páramo propiamente dicho.",
+   "breve": "Altura: 4.290 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 4.7 km aproximadamente del Cráter Arenas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 6
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿a qué altura está Arenales?",
+    "¿qué animales hay en Arenales?",
+    "¿qué plantas hay en Arenales?",
+    "¿qué ecosistema es Arenales?",
+    "¿Arenales es páramo o superpáramo?",
+    "how high is Arenales?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-arenales-dunas",
+   "estacion": "arenales",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Las dunas de Arenales",
+   "texto": "En esta estación hay una abundante acumulación de arena, conocida como dunas de arena; estas son moldeadas y modeladas por el viento. Las dunas están sobre Andesitas (lavas del viejo Ruiz / older Ruiz) que tienen una edad aproximada de 100 mil años; se estima que estas dunas deben de tener alrededor de unos 200 o 400 años aproximadamente, puesto que se forman posterior al retroceso glaciar en esta locación (se requieren estudios).",
+   "breve": "En esta estación hay una abundante acumulación de arena, conocida como dunas de arena; estas son moldeadas y modeladas por el viento.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿qué son las dunas?",
+    "¿cuántos años tienen las dunas?",
+    "¿cómo se forman las dunas?",
+    "¿hay dunas en la montaña?",
+    "¿sobre qué están las dunas?",
+    "how old are the dunes?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-arenales-origen-arena",
+   "estacion": "arenales",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "¿De dónde sale todo este material arenoso?",
+   "texto": "¿De dónde sale todo este material arenoso? 1. El viento funciona como agente erosivo sobre las rocas (fricción por el viento cargado de partículas) generando otras pequeñas partículas de polvo y arena. 2. El viento transporta partículas de otros lugares hacia el edificio volcánico y viceversa. 3. Hay formación de material particulado por la meteorización tanto química como mecánica que se encarga de destruir la roca en material más fino. 4. Sumado a la abundante ceniza generada en el complejo volcánico. Todo este material es transportado por el viento, siendo llevado en suspensión o arrastrado hasta toparse con la barrera de rocas que hay detrás de la cabaña de Arenales, acumulándose allí, dando paso a la formación de estas dunas.",
+   "breve": "Todo este material es transportado por el viento, siendo llevado en suspensión o arrastrado hasta toparse con la barrera de rocas que hay detrás de la cabaña de Arenales, acumulándose allí, dando paso a la formación de estas dunas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿de dónde sale la arena?",
+    "¿cómo llegó la arena aquí?",
+    "¿por qué se acumula la arena detrás de la cabaña?",
+    "¿la arena es ceniza del volcán?",
+    "¿qué forma la arena?",
+    "where does the sand come from?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-arenales-historia-esqui",
+   "estacion": "arenales",
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "Historia de Arenales: chalet y esquí",
+   "texto": "El sector Arenales ha sido históricamente una zona de camping con varias construcciones para los visitantes, desde una bodega de papa en 1937 hasta el Chalet Arenales, diseñado por el arquitecto Simón Vélez, que se incendió en 2010. La actual cabaña exhibe pendones sobre la historia del esquí en el nevado del Ruiz en los años 50 y 60, cuando se realizaron campeonatos sudamericanos que llevaron a la creación del Club de Ski de Manizales. La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones.",
+   "breve": "La actividad de esquí se detuvo debido al deshielo que afectó las instalaciones.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿se esquiaba en el Ruiz?",
+    "¿qué pasó con el Chalet Arenales?",
+    "¿quién diseñó el chalet?",
+    "¿por qué ya no se esquía?",
+    "¿qué historia tiene esta cabaña?",
+    "¿cuándo se quemó el chalet?",
+    "did people ski here?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-arenales-camping-gazaperas",
+   "estacion": "arenales",
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "Camping, Gazaperas y Nelson Cardona",
+   "texto": "El área también cuenta con un camping en proceso de reglamentación y una zona de escalada llamada Gazaperas. Aquí ocurrió un accidente en 2006 con el montañista Nelson Cardona, el primer latinoamericano en escalar el Everest con una prótesis, quien sufrió una caída en este sector.",
+   "breve": "El área también cuenta con un camping en proceso de reglamentación y una zona de escalada llamada Gazaperas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿se puede acampar aquí?",
+    "¿dónde se escala?",
+    "¿qué es Gazaperas?",
+    "¿quién es Nelson Cardona?",
+    "¿hay camping en Arenales?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-arenales-viento-rocas",
+   "estacion": "arenales",
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "Viento fuerte y rocas dejadas por el glaciar",
+   "texto": "Datos curiosos: El viento es tan fuerte en algunas ocasiones que arrancó las escaleras de la cabaña; actualmente se encuentran en otra posición. Hay unas rocas enormes detrás de la cabaña cerca a la quebrada; estas rocas no fueron arrojadas por el volcán, estas fueron dejadas allá por el retroceso glaciar.",
+   "breve": "estas rocas no fueron arrojadas por el volcán, estas fueron dejadas allá por el retroceso glaciar.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿esas rocas grandes las tiró el volcán?",
+    "¿de dónde salieron las rocas enormes?",
+    "¿qué tan fuerte es el viento?",
+    "¿por qué las escaleras están en otro lugar?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-piroclastos-1989",
+   "estacion": "arenales",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Piroclastos de la erupción del 89",
+   "texto": "En el suelo se pueden apreciar piroclastos de la erupción del 89; esta se desplazó principalmente al Noroccidente del cráter, es común verlas en Arenales, Lunares y Tumbas.",
+   "breve": "En el suelo se pueden apreciar piroclastos de la erupción del 89",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿qué son esas piedritas del suelo?",
+    "¿hay restos de erupciones?",
+    "¿qué pasó en 1989?",
+    "¿qué son los piroclastos del suelo?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-dunas-no-pisar",
+   "estacion": "arenales",
+   "tema": "normas",
+   "tipo": "norma",
+   "titulo": "Por qué no se deben pisar las dunas",
+   "texto": "Las dunas entran en las zonas de carácter intangible del PNNN, es parte del patrimonio geológico, debido a que estas dunas en algunas ocasiones tienen una alta carga de humedad; si son pisadas, las huellas pueden perdurar meses. Por esta razón y por la particularidad de su formación no deben ser intervenidas.",
+   "breve": "si son pisadas, las huellas pueden perdurar meses. Por esta razón y por la particularidad de su formación no deben ser intervenidas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿por qué debemos evitar pisar las dunas?",
+    "¿puedo caminar sobre las dunas?",
+    "¿puedo subirme a la duna?",
+    "¿por qué no se tocan las dunas?",
+    "¿qué pasa si piso la arena?",
+    "can I walk on the dunes?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-nina-fantasma",
+   "estacion": "arenales",
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "La niña fantasma de Arenales",
+   "texto": "Hay un mito que viene desde los 80's sobre una niña fantasma; se dice que ella mora en este sector, y que diversos guías, guardaparques, montañistas y rescatistas la han visto.",
+   "breve": "Hay un mito que viene desde los 80's sobre una niña fantasma; se dice que ella mora en este sector",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 7
+    }
+   ],
+   "preguntas": [
+    "¿hay fantasmas aquí?",
+    "¿es verdad lo de la niña fantasma?",
+    "¿qué leyendas hay en Arenales?",
+    "¿espantan en Arenales?",
+    "cuéntame una historia de miedo",
+    "is there a ghost here?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-lunares-ficha",
+   "estacion": "lunares",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Lunares: altura, ecosistema, fauna y plantas",
+   "texto": "3. Lunares. Altura: 4.350 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 4.8 km aproximadamente del Cráter Arenas. Ecosistema o bioma: superpáramo. Fauna característica: cóndor, águila (zona de paso). Plantas características: pajonales, \"coral de páramo\". Estructuras geológicas/geomorfológicas: similares a la anterior estación; meteorización (gelifracción y oxidación), borbotones de lava. \"Vegetación pionera, erosión y meteorización, modelado glaciar\".",
+   "breve": "Altura: 4.350 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 4.8 km aproximadamente del Cráter Arenas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 8
+    }
+   ],
+   "preguntas": [
+    "¿a qué altura está Lunares?",
+    "¿qué animales hay en Lunares?",
+    "¿qué plantas hay en Lunares?",
+    "¿qué ecosistema es Lunares?",
+    "how high is Lunares?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-lunares-paisaje",
+   "estacion": "lunares",
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "Paisaje lunar y la loricaria",
+   "texto": "Ofrece un paisaje único y desértico que evoca la superficie de otros planetas. Sus características geológicas, producto de la erosión glaciar y la meteorización, han esculpido rocas de tonalidades rojizas y fracturas profundas. La escasez de vegetación, salvo por especies resistentes como la loricaria, resalta la dureza de las condiciones ambientales. Este lugar no solo es un espectáculo visual, sino también un laboratorio natural para estudiar los efectos del cambio climático y la importancia de la conservación. La loricaria, una especie restringida a estas condiciones, es un ejemplo de la adaptación de la vida a entornos extremos.",
+   "breve": "Ofrece un paisaje único y desértico que evoca la superficie de otros planetas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 8
+    }
+   ],
+   "preguntas": [
+    "¿por qué parece la luna?",
+    "¿qué es la loricaria?",
+    "¿por qué hay tan pocas plantas?",
+    "¿qué planta crece en Lunares?",
+    "¿por qué Lunares parece otro planeta?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-lunares-gelifraccion",
+   "estacion": "lunares",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Gelifracción: por qué las rocas se fracturan",
+   "texto": "Los visitantes pueden observar de cerca los procesos geológicos que han dado forma al paisaje, como las grietas producidas por el congelamiento y descongelamiento del agua en las rocas; este proceso es conocido como gelifracción, que es un tipo de meteorización. Ocurre cuando el agua se congela: el agua tiene la propiedad de aumentar su volumen al congelarse; si el agua está confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen; por esta razón las rocas están llenas de grietas. Estas fracturas contribuyen a la formación de suelo arenoso y la llegada de vegetación pionera.",
+   "breve": "el agua tiene la propiedad de aumentar su volumen al congelarse; si el agua está confinada a los poros o grietas previas de la roca, al congelarse va a someter a un desgaste o fracturamiento por el aumento en su volumen; por esta razón las rocas están llenas de grietas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 8
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 9
+    }
+   ],
+   "preguntas": [
+    "¿por qué se fracturan las rocas en Lunares?",
+    "¿qué es la gelifracción?",
+    "¿por qué las rocas tienen grietas?",
+    "¿cómo rompe el hielo una roca?",
+    "¿qué proceso explica las fracturas?",
+    "why do the rocks crack?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-lunares-estrias",
+   "estacion": "lunares",
+   "tema": "glaciar",
+   "tipo": "ciencia",
+   "titulo": "Estrías glaciares: los «arañazos» en la roca",
+   "texto": "También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares y son el resultado del movimiento del mismo; su acción abrasiva sobre la roca deja como evidencia estas marcas que sirven como herramienta para determinar la dirección del movimiento del glaciar.",
+   "breve": "También es común ver las rocas con marcas en superficies que parecen \"arañazos\"; estas son llamadas estrías glaciares",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 8
+    }
+   ],
+   "preguntas": [
+    "¿qué son esos rayones en la roca?",
+    "¿qué son las estrías glaciares?",
+    "¿por qué la roca tiene arañazos?",
+    "¿cómo se sabe hacia dónde se movía el glaciar?",
+    "what are those scratches on the rock?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-lunares-oxidacion",
+   "estacion": "lunares",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Oxidación: por qué las rocas son rojizas",
+   "texto": "Por último, el color rojizo obedece a otro tipo de meteorización; esta es de origen químico. Acontece que las rocas están formadas por minerales, y a su vez los minerales están formados por elementos químicos; algunos de estos elementos son susceptibles a reaccionar con el oxígeno. En este caso la oxidación del hierro (almacenado en minerales como las Hornblendas) deja en evidencia tonalidades rojizas sobre la roca.",
+   "breve": "En este caso la oxidación del hierro (almacenado en minerales como las Hornblendas) deja en evidencia tonalidades rojizas sobre la roca.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 8
+    }
+   ],
+   "preguntas": [
+    "¿por qué las rocas son rojas?",
+    "¿qué proceso explica el color?",
+    "¿qué es la oxidación?",
+    "¿por qué hay piedras rojizas?",
+    "¿la roca tiene hierro?",
+    "why are the rocks red?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-lunares-minerales",
+   "estacion": "lunares",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Plagioclasas y hornblendas en la andesita",
+   "texto": "Las andesitas del Ruiz dejan en evidencia dos minerales fáciles de identificar: los claros/incoloros son plagioclasas y los negros son Hornblendas; el resto de minerales es difícil de apreciar en muestra de mano, hay que usar microscopio.",
+   "breve": "los claros/incoloros son plagioclasas y los negros son Hornblendas",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 9
+    }
+   ],
+   "preguntas": [
+    "¿qué son los puntos blancos de la roca?",
+    "¿qué son los cristales negros de la piedra?",
+    "¿qué minerales tiene la andesita?",
+    "¿qué es una hornblenda?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-lunares-vegetacion-tiempo",
+   "estacion": "lunares",
+   "tema": "flora",
+   "tipo": "ciencia",
+   "titulo": "Cacho de venado y la vegetación que avanza",
+   "texto": "Las loricarias son llamadas cacho de venado, o coral de páramo. Si pudiésemos viajar en el tiempo, unos 100 años atrás en esta estación no habría vegetación, y si pudiéramos ir en el futuro, en unos 100 años seguramente esta estación tendría mucha más vegetación. A partir de esta estación las rocas están en buena parte cubiertas por dunas hasta el Valle de las Tumbas.",
+   "breve": "Si pudiésemos viajar en el tiempo, unos 100 años atrás en esta estación no habría vegetación",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 9
+    }
+   ],
+   "preguntas": [
+    "¿qué es el cacho de venado?",
+    "¿qué es el coral de páramo?",
+    "¿siempre hubo plantas aquí?",
+    "¿va a haber más plantas en el futuro?",
+    "¿cómo llaman a la loricaria?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-tumbas-ficha",
+   "estacion": "tumbas",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Valle de las Tumbas: altura, ecosistema, fauna y plantas",
+   "texto": "4. Valle de las Tumbas. Altura: 4.460 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 4.1 km aproximadamente del Cráter Arenas, a un costado del Cañón del río Molinos. Ecosistema o bioma: superpáramo con transición a zona nival. Fauna característica: cóndor, águila (zona de paso). Plantas características: algunas especies de pastos colonizadores y musgo (líquenes). Estructuras geológicas/geomorfológicas: pequeños abanicos, lavas superpuestas, estrías, lavas con relieve invertido, circo glaciar.",
+   "breve": "Altura: 4.460 msnm aproximadamente. Ubicación: flanco occidental del edificio volcánico, a 4.1 km aproximadamente del Cráter Arenas, a un costado del Cañón del río Molinos.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 9
+    }
+   ],
+   "preguntas": [
+    "¿a qué altura está el Valle de las Tumbas?",
+    "¿qué tan lejos está el cráter?",
+    "¿qué plantas hay en el Valle de las Tumbas?",
+    "¿qué animales hay arriba?",
+    "¿qué ecosistema es el Valle de las Tumbas?",
+    "how high are we?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-tumbas-nombre",
+   "estacion": "tumbas",
+   "tema": "cultura",
+   "tipo": "ciencia",
+   "titulo": "Por qué se llama Valle de las Tumbas",
+   "texto": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes. Algunas comunidades cercanas al PNNN usaban rocas con esta forma para construir tumbas de cancel (esto no quiere decir que fueran extraídas del Ruiz, es solo una similitud); estas rocas están hoy cubiertas por arena. El nombre de Valle de las Tumbas, así como el de las anteriores estaciones, es heredado por tradición oral, y hay registros de que en los 80's ya recibía este nombre. El sitio también es conocido como \"Desierto de la Soledad\", nombres que reflejan tanto el tranquilo paisaje del lugar como su significado místico y cultural.",
+   "breve": "El sitio conocido como el \"Valle de las Tumbas\" recibe su nombre por la presencia de rocas largas y planas (lajas) que se asemejan a ataúdes.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 9
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 10
+    }
+   ],
+   "preguntas": [
+    "¿por qué se llama Valle de las Tumbas?",
+    "¿hay tumbas aquí?",
+    "¿hay muertos enterrados aquí?",
+    "¿qué es el Desierto de la Soledad?",
+    "¿de dónde vienen los nombres de las estaciones?",
+    "why is it called Valley of the Tombs?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-tumbas-peregrinaciones",
+   "estacion": "tumbas",
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "Peregrinaciones indígenas al Kumanday",
+   "texto": "En la época precolombina, el área era un lugar sagrado para los indígenas Quimbayas, Carrapas, Gualíes, Panches, Ansermas y Pijaos, quienes realizaban peregrinaciones religiosas para rendir tributo a la montaña sagrada conocida como Kumanday. Hoy en día, algunas comunidades indígenas continúan realizando rituales en este lugar, que consideran sagrado.",
+   "breve": "En la época precolombina, el área era un lugar sagrado para los indígenas Quimbayas, Carrapas, Gualíes, Panches, Ansermas y Pijaos, quienes realizaban peregrinaciones religiosas para rendir tributo a la montaña sagrada conocida como Kumanday.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 10
+    }
+   ],
+   "preguntas": [
+    "¿qué indígenas vivían aquí?",
+    "¿qué pueblos indígenas venían al volcán?",
+    "¿todavía hacen rituales aquí?",
+    "¿quiénes eran los Quimbayas?",
+    "¿este lugar era sagrado?",
+    "which indigenous peoples lived here?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-bachue-lugares-sagrados",
+   "estacion": "tumbas",
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "Lagunas, glaciares y volcanes sagrados: Bachué",
+   "texto": "Para las comunidades indígenas las lagunas, glaciares y volcanes son lugares sagrados; un ejemplo de ello es el mito de la diosa Bachué del altiplano cundiboyacense o la balsa muisca. Lastimosamente el conocimiento más cercano que se tiene de las comunidades indígenas que habitaron la región se encuentra ligado a las crónicas de indias y algunas investigaciones arqueológicas que no han lanzado muchas luces en relación con las prácticas rituales de las comunidades prehispánicas que habitaron la región.",
+   "breve": "Para las comunidades indígenas las lagunas, glaciares y volcanes son lugares sagrados; un ejemplo de ello es el mito de la diosa Bachué del altiplano cundiboyacense o la balsa muisca.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 10
+    }
+   ],
+   "preguntas": [
+    "¿quién es Bachué?",
+    "¿por qué las lagunas son sagradas?",
+    "¿qué se sabe de los rituales indígenas?",
+    "¿qué es la balsa muisca?",
+    "¿hay mitos indígenas del volcán?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-tumbas-restriccion",
+   "estacion": "tumbas",
+   "tema": "geologia",
+   "tipo": "norma",
+   "titulo": "Por qué no se sube más allá del Valle de las Tumbas",
+   "texto": "Por seguridad, el ascenso a la parte alta del Nevado del Ruiz está restringido debido al alto riesgo de lahares, flujos de lodo y escombros volcánicos que podrían dificultar la evacuación en caso de erupción. La razón de la restricción de continuar del Valle de las Tumbas es principalmente el riesgo de los lahares.",
+   "breve": "La razón de la restricción de continuar del Valle de las Tumbas es principalmente el riesgo de los lahares.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 10
+    }
+   ],
+   "preguntas": [
+    "¿por qué no podemos subir al nevado?",
+    "¿se puede subir a la cumbre?",
+    "¿por qué está prohibido seguir?",
+    "¿qué es un lahar?",
+    "¿hasta dónde se puede subir?",
+    "can we climb to the top?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-complejo-volcanico",
+   "estacion": "tumbas",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "El Ruiz es un complejo volcánico de cuatro estructuras",
+   "texto": "Es importante recordar que el Nevado del Ruiz es un complejo volcánico compuesto por cuatro estructuras (Nereidas, Olleta, Piraña y Arenas), aunque comúnmente se le conoce como Nevado del Ruiz al edificio que alberga el cráter Arenas. El Nevado del Ruiz está compuesto por varios volcanes; por esta razón se le llama edificio volcánico compuesto o complejo volcánico.",
+   "breve": "el Nevado del Ruiz es un complejo volcánico compuesto por cuatro estructuras (Nereidas, Olleta, Piraña y Arenas)",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 10
+    }
+   ],
+   "preguntas": [
+    "¿el Ruiz es un solo volcán?",
+    "¿qué es un complejo volcánico?",
+    "¿cuántos volcanes forman el Ruiz?",
+    "¿qué es Nereidas?",
+    "¿cuál es el cráter Arenas?",
+    "is the Ruiz a single volcano?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-nereidas-olleta",
+   "estacion": "tumbas",
+   "tema": "geologia",
+   "tipo": "ciencia",
+   "titulo": "Nereidas y La Olleta",
+   "texto": "Las Andesitas que se encuentran en el Valle de las Tumbas son principalmente del volcán Nereidas. Las lavas de La Olleta y de Nereidas son mayores a los 80 mil años. Nereidas no tiene cráter visible como sí lo tiene La Olleta.",
+   "breve": "Las Andesitas que se encuentran en el Valle de las Tumbas son principalmente del volcán Nereidas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 10
+    }
+   ],
+   "preguntas": [
+    "¿de dónde vienen las rocas del Valle de las Tumbas?",
+    "¿qué es La Olleta?",
+    "¿Nereidas tiene cráter?",
+    "¿qué edad tienen las lavas?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-crater-arenas-nombre",
+   "estacion": "tumbas",
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "El nombre del cráter Arenas y el Volcán de Cartago",
+   "texto": "El nombre del cráter Arenas se dio en honor al geógrafo que lo \"descubrió\" en 1950. Otro nombre que recibió el volcán fue Volcán de Cartago (crónicas de Indias).",
+   "breve": "El nombre del cráter Arenas se dio en honor al geógrafo que lo \"descubrió\" en 1950.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 10
+    }
+   ],
+   "preguntas": [
+    "¿por qué se llama cráter Arenas?",
+    "¿qué otros nombres tuvo el volcán?",
+    "¿qué es el Volcán de Cartago?",
+    "¿quién descubrió el cráter?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-armero-1985",
+   "estacion": "tumbas",
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "La erupción de 1985 y la tragedia de Armero",
+   "texto": "Erupción del Nevado del Ruiz: el 13 de noviembre de 1985, el volcán Nevado del Ruiz entró en erupción, provocando uno de los desastres volcánicos más catastróficos del siglo XX. El calor de la erupción derritió el glaciar del volcán, generando lahares (flujos de lodo volcánico) que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos (Poa y Nereidas). Estos flujos devastaron las poblaciones de Armero, Tolima, Villamaría y Chinchiná, causando la muerte de más de 23,000 personas.",
+   "breve": "El calor de la erupción derritió el glaciar del volcán, generando lahares (flujos de lodo volcánico) que descendieron rápidamente por los cañones de los ríos Gualí, Azufrado, Lagunillas y Molinos (Poa y Nereidas).",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 10
+    }
+   ],
+   "preguntas": [
+    "¿qué pasó en Armero?",
+    "¿cuándo fue la erupción del Ruiz?",
+    "¿cuántas personas murieron en Armero?",
+    "¿qué pasó en 1985?",
+    "¿cómo se destruyó Armero?",
+    "what happened in Armero?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "uton-armero-datos",
+   "estacion": "tumbas",
+   "tema": "historia",
+   "tipo": "ciencia",
+   "titulo": "Armero: datos de la tragedia",
+   "texto": "En Armero falleció el 94% de la población y en los dos municipios de Caldas, el 6% de la misma. Esta fue la segunda erupción volcánica más mortífera del siglo XX, apenas superada por la del monte Pelée en 1902, en la isla de Martinica, y el cuarto evento volcánico más mortífero desde el año 1500.",
+   "breve": "Esta fue la segunda erupción volcánica más mortífera del siglo XX, apenas superada por la del monte Pelée en 1902",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 10
+    }
+   ],
+   "preguntas": [
+    "¿qué porcentaje de Armero murió?",
+    "¿fue la peor erupción de la historia?",
+    "¿qué erupción fue peor que la del Ruiz?",
+    "¿cuántos murieron en Caldas?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-paramo",
+   "estacion": null,
+   "tema": "glosario",
+   "tipo": "glosario",
+   "titulo": "Páramo (glosario)",
+   "texto": "Páramo: según el diccionario de la Real Lengua Española, la palabra páramo proviene del latín paramus, es una voz que existía en España, antes de la llegada de los romanos. Básicamente el páramo es un terreno pedregoso y desierto, una llanura árida.",
+   "breve": "Páramo: según el diccionario de la Real Lengua Española, la palabra páramo proviene del latín paramus, es una voz que existía en España, antes de la llegada de los romanos. Básicamente el páramo es un terreno pedregoso y desierto, una llanura árida.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 12
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 13
+    }
+   ],
+   "preguntas": [
+    "¿qué significa la palabra páramo?",
+    "definición de páramo",
+    "¿qué dice el diccionario de páramo?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-glaciar",
+   "estacion": null,
+   "tema": "glosario",
+   "tipo": "glosario",
+   "titulo": "Glaciar, glaciación y glacial",
+   "texto": "Glaciar: masa de hielo en movimiento, formada por la acumulación y compactación de nieve. Glaciación: período geológico durante el cual grandes extensiones de la superficie terrestre están cubiertas por glaciares. Glacial: relativo a los glaciares.",
+   "breve": "Glaciar: masa de hielo en movimiento, formada por la acumulación y compactación de nieve.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 12
+    }
+   ],
+   "preguntas": [
+    "¿qué es un glaciar?",
+    "¿qué es una glaciación?",
+    "¿qué diferencia hay entre glaciar y glacial?",
+    "definición de glaciar"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-nieve-granizo-carambano",
+   "estacion": null,
+   "tema": "clima",
+   "tipo": "glosario",
+   "titulo": "Nieve, granizo y carámbano",
+   "texto": "Nieve: precipitación atmosférica en forma de cristales de hielo. Granizo: precipitación atmosférica sólida en forma de bolas o pedazos de hielo. Carámbano: cono de hielo que se forma por congelación del agua que gotea de un objeto.",
+   "breve": "Nieve: precipitación atmosférica en forma de cristales de hielo. Granizo: precipitación atmosférica sólida en forma de bolas o pedazos de hielo. Carámbano: cono de hielo que se forma por congelación del agua que gotea de un objeto.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 12
+    }
+   ],
+   "preguntas": [
+    "¿qué es un carámbano?",
+    "¿qué diferencia hay entre nieve y granizo?",
+    "¿qué es el granizo?",
+    "¿qué es la nieve?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-duna",
+   "estacion": null,
+   "tema": "glosario",
+   "tipo": "glosario",
+   "titulo": "Duna",
+   "texto": "Duna: elevación de arena producida por el viento.",
+   "breve": "Duna: elevación de arena producida por el viento.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    }
+   ],
+   "preguntas": [
+    "¿qué es una duna?",
+    "definición de duna",
+    "what is a dune?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-ecosistema-ecotono",
+   "estacion": null,
+   "tema": "glosario",
+   "tipo": "glosario",
+   "titulo": "Ecosistema, ecotono y socioecosistema",
+   "texto": "Ecosistema: conjunto de seres vivos y el medio físico en el que se relacionan. Ecotono: zona de transición entre dos ecosistemas diferentes. Socioecosistema: el ser humano, la sociedad y su cultura tienen base en los ecosistemas que les brindan recursos de varios tipos; así mismo, son protagonistas de los cambios, a veces perjudiciales, de casi todos los ecosistemas.",
+   "breve": "Ecotono: zona de transición entre dos ecosistemas diferentes.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 13
+    }
+   ],
+   "preguntas": [
+    "¿qué es un ecotono?",
+    "¿qué es un ecosistema?",
+    "¿qué es un socioecosistema?",
+    "¿qué es una zona de transición?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-endemico",
+   "estacion": null,
+   "tema": "glosario",
+   "tipo": "glosario",
+   "titulo": "Endémico",
+   "texto": "Endémico: especie propia y exclusiva de un lugar determinado.",
+   "breve": "Endémico: especie propia y exclusiva de un lugar determinado.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    }
+   ],
+   "preguntas": [
+    "¿qué significa endémico?",
+    "¿qué es una especie endémica?",
+    "what does endemic mean?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-biodiversidad",
+   "estacion": null,
+   "tema": "glosario",
+   "tipo": "glosario",
+   "titulo": "Biodiversidad, fauna y flora",
+   "texto": "Biodiversidad: variedad de vida en la Tierra, incluyendo todas las especies de plantas, animales, hongos y microorganismos, así como los ecosistemas de los que forman parte. Fauna: conjunto de especies animales de una región geográfica, de un período geológico o de un ecosistema determinado. Flora: conjunto de especies vegetales de una región geográfica, de un período geológico o de un ecosistema determinado.",
+   "breve": "Biodiversidad: variedad de vida en la Tierra, incluyendo todas las especies de plantas, animales, hongos y microorganismos, así como los ecosistemas de los que forman parte.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 12
+    }
+   ],
+   "preguntas": [
+    "¿qué es la biodiversidad?",
+    "¿qué diferencia hay entre fauna y flora?",
+    "¿qué es la fauna?",
+    "¿qué es la flora?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-erosion-meteorizacion",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "glosario",
+   "titulo": "Erosión, meteorización y transporte",
+   "texto": "Erosión: proceso de desgaste y modelado de la superficie terrestre producido por agentes externos como el agua, el viento y el hielo. Meteorización: desintegración y descomposición de las rocas en la superficie terrestre. Transporte: proceso mediante el cual los materiales erosionados son trasladados de un lugar a otro.",
+   "breve": "Meteorización: desintegración y descomposición de las rocas en la superficie terrestre.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 12
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 13
+    }
+   ],
+   "preguntas": [
+    "¿qué es la meteorización?",
+    "¿qué es la erosión?",
+    "¿qué diferencia hay entre erosión y meteorización?",
+    "definición de meteorización"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-volcan-erupcion",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "glosario",
+   "titulo": "Volcán, erupción y volcán monogenético",
+   "texto": "Volcán: abertura en la corteza terrestre por la que salen al exterior materiales fundidos (lava) y gases. Erupción: expulsión violenta de materiales del interior de un volcán. Volcán monogenético: volcán que entra en erupción una sola vez.",
+   "breve": "Volcán: abertura en la corteza terrestre por la que salen al exterior materiales fundidos (lava) y gases.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 13
+    }
+   ],
+   "preguntas": [
+    "¿qué es un volcán?",
+    "¿qué es una erupción?",
+    "¿qué es un volcán monogenético?",
+    "what is a volcano?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-fumarola-piroclasto",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "glosario",
+   "titulo": "Fumarola y piroclasto",
+   "texto": "Fumarola: abertura en la superficie terrestre por la que se escapan gases volcánicos. Piroclasto: fragmento de roca volcánica expulsado durante una erupción.",
+   "breve": "Fumarola: abertura en la superficie terrestre por la que se escapan gases volcánicos. Piroclasto: fragmento de roca volcánica expulsado durante una erupción.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 12
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 13
+    }
+   ],
+   "preguntas": [
+    "¿qué es una fumarola?",
+    "¿qué es un piroclasto?",
+    "¿qué es ese humo del volcán?",
+    "what is a fumarole?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-roca-mineral-basalto",
+   "estacion": null,
+   "tema": "geologia",
+   "tipo": "glosario",
+   "titulo": "Roca, mineral y basalto",
+   "texto": "Roca: material sólido compuesto por uno o más minerales. Mineral: elemento o compuesto químico natural, de origen inorgánico, de composición química definida y, normalmente, de estructura cristalina. Basaltos: rocas volcánicas de color oscuro, ricas en hierro y magnesio.",
+   "breve": "Roca: material sólido compuesto por uno o más minerales.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 12
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 13
+    }
+   ],
+   "preguntas": [
+    "¿qué es una roca?",
+    "¿qué es un mineral?",
+    "¿qué es el basalto?",
+    "¿qué diferencia hay entre roca y mineral?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-ciencias",
+   "estacion": null,
+   "tema": "glosario",
+   "tipo": "glosario",
+   "titulo": "Geología, geomorfología, biología y antropología",
+   "texto": "Geología: ciencia que estudia la Tierra, su composición, estructura, historia y los procesos que la han formado (del griego geo: Tierra, y logos: estudio). Geomorfología: parte de la geología que estudia las formas de la superficie terrestre y los procesos que las originan. Biología: ciencia que estudia la vida y los seres vivos (del griego bios: vida, y logos: estudio). Antropología: del griego antiguo anthropos (\"hombre\") y logos (\"conocimiento\"); a rasgos muy amplios, estudio o conocimiento del ser humano desde una mirada histórica y actual.",
+   "breve": "Geomorfología: parte de la geología que estudia las formas de la superficie terrestre y los procesos que las originan.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 12
+    }
+   ],
+   "preguntas": [
+    "¿qué es la geología?",
+    "¿qué es la geomorfología?",
+    "¿qué estudia la antropología?",
+    "¿qué es la biología?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-hipoxia-mam",
+   "estacion": null,
+   "tema": "clima",
+   "tipo": "glosario",
+   "titulo": "Hipoxia, hipoxia hipobárica y MAM",
+   "texto": "Hipoxia: disminución del suministro de oxígeno a los tejidos del cuerpo. Hipoxia hipobárica es un fenómeno que se define como el descenso en el aporte de oxígeno a los tejidos debido a una caída en la presión parcial de este gas causada por la exposición a una atmósfera de bajas presiones. MAM: mal agudo de montaña. Presión atmosférica: fuerza ejercida por el peso del aire sobre la superficie terrestre.",
+   "breve": "Hipoxia: disminución del suministro de oxígeno a los tejidos del cuerpo.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 12
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 13
+    }
+   ],
+   "preguntas": [
+    "¿qué es la hipoxia?",
+    "¿qué significa MAM?",
+    "¿qué es la presión atmosférica?",
+    "¿qué es la hipoxia hipobárica?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-agua",
+   "estacion": null,
+   "tema": "agua",
+   "tipo": "glosario",
+   "titulo": "Laguna, río y aguas duras",
+   "texto": "Laguna: depresión del terreno en la que se acumula agua de lluvia o procedente de otros cuerpos de agua. Río: corriente natural de agua que fluye por un cauce. Aguas duras: aguas que contienen una cantidad significativa de minerales disueltos, principalmente calcio y magnesio.",
+   "breve": "Laguna: depresión del terreno en la que se acumula agua de lluvia o procedente de otros cuerpos de agua.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 12
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 13
+    }
+   ],
+   "preguntas": [
+    "¿qué es una laguna?",
+    "¿qué son aguas duras?",
+    "¿qué es un río?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-guaca",
+   "estacion": null,
+   "tema": "cultura",
+   "tipo": "relato",
+   "titulo": "Guaca",
+   "texto": "Guaca: también huaca, es un entierro indígena; por lo general las guacas contienen oro, pero son difíciles de encontrar. Son acumulaciones de oro indígena, incluso romano o español.",
+   "breve": "Guaca: también huaca, es un entierro indígena",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 12
+    }
+   ],
+   "preguntas": [
+    "¿qué es una guaca?",
+    "¿hay guacas aquí?",
+    "¿hay oro enterrado?",
+    "¿qué es una huaca?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-cronicas-resguardo",
+   "estacion": null,
+   "tema": "cultura",
+   "tipo": "glosario",
+   "titulo": "Crónicas de Indias y resguardo indígena",
+   "texto": "Crónicas de Indias: es el nombre dado a las narraciones históricas sobre el descubrimiento de América realizadas por los colonizadores españoles. Incluyen relatos sobre los primeros años de conquista y colonización del territorio. Resguardo indígena: son territorios reconocidos con títulos de propiedad, colectiva o comunitaria. Se rigen por un estatuto especial autónomo y poseen pautas y tradiciones culturales propias.",
+   "breve": "Crónicas de Indias: es el nombre dado a las narraciones históricas sobre el descubrimiento de América realizadas por los colonizadores españoles.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 13
+    }
+   ],
+   "preguntas": [
+    "¿qué son las crónicas de Indias?",
+    "¿qué es un resguardo indígena?",
+    "definición de resguardo"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-cultura",
+   "estacion": null,
+   "tema": "cultura",
+   "tipo": "glosario",
+   "titulo": "Cultura y cultura popular",
+   "texto": "Cultura Popular: conjunto de manifestaciones en las que se expresa la vida tradicional de un pueblo (RAE). Cultura: según el diccionario de la Real Academia Española (RAE): conjunto de modos de vida y costumbres, conocimientos y grado de desarrollo artístico, científico, industrial, en una época o grupo social.",
+   "breve": "Cultura Popular: conjunto de manifestaciones en las que se expresa la vida tradicional de un pueblo (RAE).",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    }
+   ],
+   "preguntas": [
+    "¿qué es la cultura popular?",
+    "¿qué es cultura?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  },
+  {
+   "id": "glosario-siglas",
+   "estacion": null,
+   "tema": "glosario",
+   "tipo": "glosario",
+   "titulo": "Siglas: COP16, PMA, POE, POMCA y pacificación",
+   "texto": "COP16: Conferencia de las Partes 16 de la Convención Marco de las Naciones Unidas sobre el Cambio Climático. PMA: Plan de Manejo Ambiental. POE: Plan de Ordenamiento Territorial (puede variar según la entidad). POMCA: Plan de Manejo y Conservación de cuencas hidrográficas. Pacificación: proceso de pacificar o poner fin a un conflicto bélico, social o de otro tipo.",
+   "breve": "POMCA: Plan de Manejo y Conservación de cuencas hidrográficas.",
+   "citas": [
+    {
+     "guion": "UTON2024",
+     "pagina": 11
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 12
+    },
+    {
+     "guion": "UTON2024",
+     "pagina": 13
+    }
+   ],
+   "preguntas": [
+    "¿qué es la COP16?",
+    "¿qué significa POMCA?",
+    "¿qué es el PMA?",
+    "¿qué significa POE?"
+   ],
+   "bloqueada": false,
+   "motivo": null,
+   "estado": "validado"
+  }
+ ],
+ "conflictos": []
+}

@@ -10,3 +10,4 @@ venv/
 .DS_Store
 build/
 .dart_tool/
+.cache_emb.npz
