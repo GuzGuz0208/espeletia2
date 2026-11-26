@@ -243,7 +243,7 @@ class Embebedor:
             self.cache = dict(zip(z['k'].tolist(), z['v']))
         self.nuevos = 0
 
-    def __call__(self, textos, lote=16):
+    def __call__(self, textos, lote=1):
         np = self.np
         faltan = [t for t in dict.fromkeys(textos) if t not in self.cache]
         enc = {t: self.tok.encode(t).ids for t in faltan}

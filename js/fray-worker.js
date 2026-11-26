@@ -8,7 +8,7 @@ import { preparar, decidir, PARAMS_DEFECTO, ESQUEMA } from './nucleo.js';
 
 const R = (u) => new URL(u, import.meta.url).href;
 const MODELO = 'models/e5_small_latino.onnx';
-const LOTE = 16, MAXTOK = 128, DIM = 384, PAD = 1;
+const LOTE = 1, MAXTOK = 128, DIM = 384, PAD = 1;
 
 let ort = null, ses = null, tok = null, modeloSha = null, cargaModelo = null;
 let idx = null, P = { ...PARAMS_DEFECTO }, modo = 'sin-cargar';

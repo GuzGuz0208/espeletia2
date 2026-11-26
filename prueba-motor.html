@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prueba del motor Fray</title>
+</head>
+<body>
+<h1>Prueba del motor Fray</h1>
+<p>Página mínima para probar js/fray.js sin red. Sirve la carpeta con <code>python -m http.server 8000 --bind 127.0.0.1</code> y abre
+<code>http://127.0.0.1:8000/prueba-motor.html</code>. Parámetros: <code>?paquete=contenido/paquete.ejemplo.json</code>, <code>?auto=1</code> (mide tiempos).</p>
+<p id="estado">Cargando…</p>
+<form id="f">
+  <input id="q" size="60" placeholder="Escribe una pregunta" autocomplete="off">
+  <select id="est"><option value="">(sin estación)</option></select>
+  <button>Preguntar</button>
+</form>
+<pre id="out"></pre>
+<h2>Sin respuesta</h2>
+<button id="ver">Ver</button> <button id="limpiar">Limpiar</button>
+<pre id="sr"></pre>
+<pre id="salida"></pre>
+<script type="module">
+import * as fray from './js/fray.js';
+const $ = (id) => document.getElementById(id);
+const url = new URL(location.href);
+const ruta = url.searchParams.get('paquete') || 'contenido/paquete.json';
+const paquete = await (await fetch(ruta)).json();
+for (const e of paquete.estaciones || []) $('est').add(new Option(e.nombre, e.id));
+const t0 = performance.now();
+const info = await fray.cargar(paquete, { alAvance: (a) => { $('estado').textContent = a.fase === 'indice' ? `Construyendo índice ${a.hechos}/${a.total}…` : 'Cargando modelo…'; } });
+const msCargar = Math.round(performance.now() - t0);
+$('estado').textContent = `Listo (${ruta}, versión ${paquete.version}): modo ${info.modo}, ${info.fichas} fichas, ${info.vectores} vectores, cargar ${msCargar} ms ` + JSON.stringify(info.tiempos);
+$('f').onsubmit = async (e) => {
+  e.preventDefault();
+  const t = performance.now();
+  const r = await fray.preguntar($('q').value, { estacion: $('est').value || null });
+  $('out').textContent = `${Math.round(performance.now() - t)} ms\n` + JSON.stringify(r, null, 1);
+};
+$('ver').onclick = () => { $('sr').textContent = JSON.stringify(fray.sinRespuesta(), null, 1); };
+$('limpiar').onclick = () => { fray.limpiarSinRespuesta(); $('sr').textContent = '[]'; };
+if (url.searchParams.get('auto')) {
+  const qs = (url.searchParams.get('q') || '¿por qué se rompen las rocas?|¿qué significa Kumanday?|¿quién ganó el mundial?|me siento mareado|¿qué es el frailejón?|¿cuánto mide el parque?').split('|');
+  const res = [];
+  for (const q of qs) {
+    const t = performance.now();
+    const r = await fray.preguntar(q, { estacion: url.searchParams.get('estacion') });
+    res.push({ q, ms: Math.round(performance.now() - t), tipo: r.tipo, fichas: r.fichas, breve: r.breve.slice(0, 90), diag: r._diag });
+  }
+  // segunda carga: debe salir de la caché de IndexedDB
+  const t1 = performance.now();
+  const info2 = await fray.cargar(paquete);
+  $('salida').textContent = 'RESULTADO ' + JSON.stringify({ msCargar, info, msCargar2: Math.round(performance.now() - t1), info2, res });
+}
+</script>
+</body>
+</html>
