@@ -16,11 +16,25 @@ export function alturaTxt(r) {
 }
 export const num = (n) => String(n).padStart(2, '0');
 
+// Fotos reales de los cromos (Eduardo, PR #20): img/cromos/<id>.jpg de Wikimedia Commons, autor y licencia en
+// img/cromos/creditos.json. Su id es el del cromo de la demo (`guion.cromo` en paquete.json). Si el visitante tomó su
+// propia foto, manda la suya; si no hay foto, queda la ilustración.
+const FOTO_DE = { e3: 'arenales-dunas' }; // cromos del álbum sin `guion.cromo` pero con foto
+let creditosP = null;
+const creditos = () => (creditosP ??= fetch(new URL('../img/cromos/creditos.json', import.meta.url))
+  .then((r) => (r.ok ? r.json() : {})).then((j) => j.fotos || {}).catch(() => ({})));
+export async function fotoParque(c) {
+  const id = c?.guion?.cromo || FOTO_DE[c?.id];
+  const f = id ? (await creditos())[id] : null;
+  return f ? { src: new URL(`../img/cromos/${id}.jpg`, import.meta.url).href, autor: f.autor, licencia: f.licencia } : null;
+}
+
 export async function cromoEl(id, { tapado = false, mini = false } = {}) {
   const c = getCromo(id);
   const r = E.album[id];
   const tx = texto(c);
   const foto = r?.foto ? await fotoURL(id, { mini }) : null;
+  const fp = foto ? null : await fotoParque(c);
   const est = r?.estacion ? estacion(r.estacion) : null;
   const cap = capitulos().find((k) => k.id === c.capitulo);
   const fuente = c.fuente ? E.paquete.fuentes[c.fuente] : null;
@@ -28,7 +42,7 @@ export async function cromoEl(id, { tapado = false, mini = false } = {}) {
     <article class="cromo cap-${c.capitulo}${c.brillante ? ' brillante' : ''}${tapado ? ' tapado' : ''}" data-id="${c.id}">
       <div class="cromo-giro">
         <div class="cara frente">
-          <div class="cromo-imagen">${foto ? `<img src="${foto}" alt="" decoding="async">` : ilustracion(c.id)}</div>
+          <div class="cromo-imagen${fp ? ' con-foto' : ''}">${foto ? `<img src="${foto}" alt="" decoding="async">` : fp ? `<img src="${fp.src}" alt="" decoding="async" loading="lazy">` : ilustracion(c.id)}</div>
           <span class="cromo-num">${num(c.n)}</span>
           <span class="cromo-nombre">${esc(tx.nombre)}</span>
           ${r ? `<span class="cromo-sello"><b>${esc(alturaTxt(r))}</b><i>${esc(fecha(r.fecha))}</i></span>` : ''}
@@ -42,6 +56,7 @@ export async function cromoEl(id, { tapado = false, mini = false } = {}) {
             ${tx.dato ? `<p class="dorso-et">${esc(c.relato ? t('det.relato') : t('det.datoOficial'))}</p>
             <p class="dorso-dato">${esc(tx.dato)}</p>` : `<p class="dorso-et">${esc(t('det.sinDato'))}</p>`}
             ${fuente ? `<p class="dorso-fuente">${esc(citar(fuente, c.pagina))}${insigniaPaquete()}</p>` : ''}
+            ${fp ? `<p class="dorso-foto">${esc(t('det.fotoDe', { autor: fp.autor, licencia: fp.licencia }))}</p>` : ''}
             <p class="dorso-meta">${esc([est?.nombre, r ? fecha(r.fecha) : null, E.nombre ? t('de', { nombre: E.nombre }) : null].filter(Boolean).join(' — '))}</p>
           </div>
         </div>
